@@ -108,7 +108,7 @@ function Account() {
         </div>
       </main>
 
-      <div className="container  custom-account-container account-container" style={{borderBottom:"1px solid #E2E2E2",marginBottom:"0px",paddingBottom:"5.6rem"}} >
+      <div className="container  custom-account-container account-container" style={{borderBottom:"1px solid #E2E2E2",marginBottom:"0px",paddingBottom:"3.6rem"}} >
         <Tabs
           selectedTabClassName="active"
           selectedTabPanelClassName="active show"

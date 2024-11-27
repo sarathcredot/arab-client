@@ -110,8 +110,8 @@ export default function ProductMediaOne(props) {
                             <OwlCarousel adClass="prod-thumbnail owl-theme owl-dots" options={prodThumbSlider} >
                                 {
                                     product.images.map((item, index) => (
-                                        <div className="owl-dot media-with-lazy" key={`owl-dot-${index}`} onClick={(e) => changeMediaIndex(index, e)}  >
-                                            <figure className="mb-0" style={{ paddingTop: "0px" }}>
+                                        <div className="owl-dot media-with-lazy" key={`owl-dot-${index}`} onClick={(e) => changeMediaIndex(index, e)} >
+                                            <figure className="mb-0" style={{ paddingTop: "0px"}}>
                                                 <LazyLoadImage src={item.fileURL}
                                                     alt="Thumbnail"
                                                     width="100%"
