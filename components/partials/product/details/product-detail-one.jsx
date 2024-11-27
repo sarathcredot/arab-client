@@ -137,12 +137,6 @@ function ProductDetailOne(props) {
   });
 
 
-
-
-
-
-
-
   // console.log("dfgfff",variData);
 
   const getUniqueVariants = (data) => {
@@ -622,16 +616,16 @@ function ProductDetailOne(props) {
 
           {/* <hr className="short-divider" /> */}
 
-          <div className="price-box pt-5 ">
+          <div style={{display:"flex"}} className="price-box pt-5 ">
             {product?.price == product.price ? (
               <>
                 <span
                   style={{
                     fontFamily: "Plus Jakarta Sans",
                     fontWeight: "600px",
-                    fontSize: "12px",
+                    fontSize: "14px",
                     lineHeight: "15px",
-                    marginTop: "10px",
+                    // marginTop: "5px",
                     marginRight: "8px",
                     color: "#606060",
                   }}
@@ -648,7 +642,7 @@ function ProductDetailOne(props) {
                     color: "black",
                   }}
                 >
-                  {" "}
+                  
                   {product?.sellingPrice?.toFixed(2)}
                 </span>
                 <span

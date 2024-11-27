@@ -32,6 +32,7 @@ body {
 	overflow-y: scroll !important;
 }
 
+
 ::-moz-selection {
 	background-color: $primary-color;
 	color: #fff;
@@ -84,7 +85,7 @@ sub {
 }
 
 img {
-	display: block;
+	// display: block;
 	max-width: 100%;
 	height: auto;
 }
@@ -333,3 +334,20 @@ input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
 		overflow-x: hidden;
 	}
 }
+
+
+@media(max-width:769px){
+
+	.skeleton-body{
+
+		   margin-top: 0px !important; 
+	}
+
+	.banner-2img-main{
+
+		  margin-right: 0px !important;
+	}
+}
+
+
+

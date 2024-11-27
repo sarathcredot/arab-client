@@ -171,6 +171,7 @@ i.wishlist-empty {
 	}
 }
 
+
 //custom alert
 .success-alert {
 	padding-top: 48px;
@@ -275,5 +276,11 @@ i.wishlist-empty {
         .btn-shop {
             width: 100%;
         }
+	}
+}
+
+@media (max-width:768px) {
+	.success-alert{
+		padding-top: 10px;
 	}
 }

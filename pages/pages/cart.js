@@ -234,7 +234,7 @@ function Cart(props) {
             </li>
           </ul>
         </div>
-        <div className="container" style={{ marginTop: "70px" }}>
+        <div className=" cart-container container" style={{ marginTop: "70px" }}>
           {cartList?.length === 0 ? (
             <div className="cart-table-container">
               <div className="table table-cart">
@@ -252,12 +252,12 @@ function Cart(props) {
             </div>
           ) : (
             <div className="row">
-              <div className="col-lg-7 mr-5">
+              <div className="col-lg-7 ">
                 <div className="cart-table-container">
                   <table className="table table-cart">
                     <thead>
                       <tr>
-                        <th className="thumbnail-col">Product</th>
+                        <th style={{paddingLeft:"0px"}} className="thumbnail-col">Product</th>
                         <th className="product-col pl-0"></th>
                         {/* <th className="price-col"></th> */}
                         <th className="price-col">Price</th>
@@ -337,7 +337,7 @@ function Cart(props) {
                 </div>
               </div>
 
-              <div className="col-lg-4">
+              <div className=" cart-price-box col-lg-4">
                 <div className="cart-summary">
                   <h3>Cart Totals</h3>
 

@@ -217,6 +217,7 @@ function CheckOut() {
       <Helmet>
         <title>Checkout | Arab Deals</title>
       </Helmet>
+      <div style={{marginTop:"50px"}}></div>
       <ul className="checkout-progress-bar d-flex justify-content-center flex-wrap">
         <li>
           <ALink href="/pages/cart">Shopping Cart</ALink>
@@ -228,6 +229,7 @@ function CheckOut() {
           <ALink href="#">Order Complete</ALink>
         </li>
       </ul>
+
       <main className="main main-test">
         {isShipping ? (
           <>
@@ -362,7 +364,7 @@ function CheckOut() {
                   )}
                 </SlideToggle>
               </div> */}
-                <div className="row" style={{ marginTop: "62px" }}>
+                <div className="row" >
                   <div className="col-lg-7">
                     <div>
                       <h2 className="step-title">Select a shipping address</h2>

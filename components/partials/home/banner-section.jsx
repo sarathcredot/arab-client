@@ -22,9 +22,9 @@ function BannerSection({ offer, sectionTwoData, sectionThreeData }) {
         </>
       ) : ( */}
       <>
-        <div className="row ">
-          <div className="col-md-8  pr-4 custom-web-banner2">
-            <img
+        <div className="row banner-2img-main ">
+          <div className="col-md-8  pr-4 custom-web-banner2"  >
+            <img 
               src={sectionTwoData?.images && sectionTwoData?.images[0]?.fileURL}
               onClick={() => {
                 if (sectionTwoData?.buttons && sectionTwoData?.buttons.length > 0 && sectionTwoData?.buttons[0]?.redirectionURL) {
@@ -32,7 +32,7 @@ function BannerSection({ offer, sectionTwoData, sectionThreeData }) {
                 }
               }}
               className="bannerimg"
-              style={{ width: "100%", height: "470px", objectFit: "cover", cursor: "pointer" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", cursor: "pointer" }}
             />
           </div>
           <div className="col-md-8 custom-responsive-banner2">
@@ -46,7 +46,7 @@ function BannerSection({ offer, sectionTwoData, sectionThreeData }) {
             <img
               src={sectionThreeData?.images && sectionThreeData?.images[0]?.fileURL}
               className="bannerimg"
-              style={{ width: "100%", height: "470px", objectFit: "cover", cursor: "pointer" }}
+              style={{ width: "100%", height: "100%", objectFit: "cover", cursor: "pointer" }}
               onClick={() => {
                 if (sectionThreeData?.buttons && sectionThreeData?.buttons.length > 0 && sectionThreeData?.buttons[0]?.redirectionURL) {
                   router.push(sectionThreeData?.buttons[0]?.redirectionURL);
@@ -67,6 +67,8 @@ function BannerSection({ offer, sectionTwoData, sectionThreeData }) {
             />
           </div>
         </div>
+
+
         <div className="row pt-4">
           <div className="col-md-12">
             <img
@@ -74,7 +76,7 @@ function BannerSection({ offer, sectionTwoData, sectionThreeData }) {
               className="home_banner3"
               style={{
                 width: "100%",
-                height: "272px",
+                height: "100%",
                 objectFit: "cover",
                 position: "relative",
                 cursor: "pointer",

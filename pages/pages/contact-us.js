@@ -17,13 +17,15 @@ export default function ContactUs () {
                                 </ALink>
                         </li>
                         <li className="breadcrumb-item active" aria-current="page">
-                            Contact Us
+                            <ALink className="activeitem" href="/pages/contact-us">
+                               Contact Us
+                            </ALink>
 						</li>
                     </ol>
                 </div>
             </nav>
 
-            <div id="map">
+            <div id="map" style={{marginTop:"16px"}}>
                 <GoogleMapReact
                     bootstrapURLKeys={ { key: 'your-api-key' } }
                     defaultCenter={ { lat: 59.95, lng: 30.33 } }
@@ -42,7 +44,7 @@ export default function ContactUs () {
                         <h2 className="font1 font-weight-light ls-n-10"><strong>Contact</strong> Us</h2>
 
                         <form action="#">
-                            <div className="row">
+                            <div style={{marginLeft:"-9px",marginRight:"-10px"}} className="row">
                                 <div className="col-md-6">
                                     <div className="form-group required-field mb-2">
                                         <label htmlFor="contact-name">Your name</label>

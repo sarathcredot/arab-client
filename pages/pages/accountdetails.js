@@ -111,11 +111,8 @@ function accountdetails() {
 
   return (
     <main className="main main-test">
-      <div
-        className=" d-flex flex-column align-items-center"
-        style={{ backgroundColor: "#F9F9F9" }}
-      >
-        <ul className="checkout-progress-bar d-flex justify-content-center flex-wrap">
+        <div style={{marginTop:"50px"}}></div>
+        <ul className="checkout-progress-bar d-flex justify-content-center flex-wrap" style={{marginBottom:"0px"}}>
           <li>
             <ALink href="/pages/account">My Account</ALink>
           </li>
@@ -123,11 +120,11 @@ function accountdetails() {
             <ALink href="/pages/accountdetails">Account Details</ALink>
           </li>
         </ul>
-      </div>
+      
       <div className=" container checkout-container">
         <div className="row">
           <div className="col-lg-12">
-            <ul className="checkout-steps">
+            <ul style={{paddingLeft:"0px"}} className="checkout-steps">
               <li>
                 <div
                   className=""
@@ -141,7 +138,7 @@ function accountdetails() {
                   <h2 className="step-title">Account Details</h2>
                 </div>
 
-                <div className=" mx-5">
+                <div className="">
                   <form onSubmit={handleSubmit(onSubmit)} id="checkout-form">
                     <div className="row">
                       <div className="col-md-6 mb-2">
@@ -252,7 +249,7 @@ function accountdetails() {
                           </div>
                         ) : null}
                       </div>
-  <div className="col-md-12 mt-4">
+                      <div className="col-md-12 mt-4">
     
                       <p
                         style={{
@@ -279,9 +276,7 @@ function accountdetails() {
                             *
                           </ab>
                         </label>
-  </div>
-                      </div>
-                      <Controller
+                        <Controller
                         control={control}
                         name="email"
                         render={({ field: { onChange, value } }) => (
@@ -295,11 +290,15 @@ function accountdetails() {
                         )}
                         rules={fieldRules.email}
                       />
+                          </div>
+                    
                       {errors?.email ? (
                         <div style={{ color: "red", marginTop: "10px" }}>
                           {errors?.email?.message}
                         </div>
                       ) : null}
+                      </div>
+                     
                     </div>
   
                     <div
@@ -308,7 +307,7 @@ function accountdetails() {
                     >
                       <div className="mt-3">
                         {" "}
-                        <button type="submit" className="btn btn-dark mr-0">
+                        <button type="submit" className="btn btn-dark btn-acc mr-0">
                           Save changes
                         </button>
                       </div>

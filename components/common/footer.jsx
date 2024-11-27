@@ -138,7 +138,7 @@ function Footer() {
                         <ALink href={token ? "/pages/account" : "/pages/login"}>My Profile</ALink>
                       </li>
                       <li>
-                        <ALink href={token ? "/pages/wishlist" : "/pages/login"}>whislist</ALink>
+                        <ALink href={token ? "/pages/wishlist" : "/pages/login"}>wishlist</ALink>
                       </li>
                       <li>
                         <ALink href="/pages/cart">Cart</ALink>
@@ -216,7 +216,7 @@ function Footer() {
               <div className="footer-sub">
                 <h6 style={{ letterSpacing: "0.75px" }}>More Information</h6>
                 <ALink href={token ? "/pages/account" : "/pages/login"}><span>My Profile</span></ALink>
-                <ALink href={token ? "/pages/whislist" : "/pages/login"}><span>whislist</span></ALink>
+                <ALink href={token ? "/pages/whislist" : "/pages/login"}><span>wishlist</span></ALink>
                 <ALink href= "/pages/cart"><span>Cart</span></ALink>
                 <ALink href="/pages/offers"><span>OfferZone</span></ALink>
               
@@ -282,10 +282,10 @@ function Footer() {
       </footer>
       <footer className="footer font2" style={{ background: "#F4F4F4", marginTop: "5.5rem" }}>
         <div className="">
-          <div className="footer-middle container">
+          <div style={{marginBottom:"16px"}} className="footer-middle container">
             <div className="row">
               <div className="col-md-12 col-lg-8 mb-3 mb-lg-0">
-                <ul className="footer-category-list mb-0">
+                <ul style={{paddingLeft:"25px"}} className="footer-category-list mb-0">
                   <li>
                     <h4 className="d-inline-block">Categories:</h4>{" "}
                     {categories.map((value, index) => (
@@ -607,8 +607,8 @@ function Footer() {
                 </ul>
               </div>
 
-              <div className="col-md-12 offset-lg-1 col-lg-3 custom_userborder-dev  custom-helplineweb" >
-                <div>
+              <div   className="col-md-12 offset-lg-1 col-lg-3 custom_userborder-dev  custom-helplineweb  " >
+                <div  className="new-footer" >
 
                 <img src="images/helpline.svg" style={{ width: "30px" }} />
                 <p className="dev-helpline-p"style={{ color: "rgba(27, 27, 27, 1)" }}>Helpline</p>

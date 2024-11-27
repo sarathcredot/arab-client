@@ -1,4 +1,4 @@
-// Checkout
+// Checkout 
 .checkout-progress-bar {
 	padding: 4.7rem 0 4.7rem;
 	font-size: 0;
@@ -703,6 +703,15 @@
 	background: #F9F9F9;
 }
 
+
+@media(max-width:500px){
+	.checkout-progress-bar {
+		margin-bottom:0px;
+		
+	}
+	 
+}
+
 .checkout-discount h4 {
     margin-bottom: 1.4rem;
 }
@@ -765,7 +774,10 @@ input[type="radio"]{
 	border-color: red;
 	background-color: red;
 }
-@media(max-width:700px){
+.checkout-steps{
+	padding-left: 0;
+}
+@media(max-width:768px){
 .shipingBox{
 	margin-bottom: 25px;
 }
@@ -775,10 +787,44 @@ input[type="radio"]{
 .order-box{
 	margin-left: 0;
 }
+// .checkout-steps{
+// 	padding-left: 10px; 
+// 	padding-right: 10px;
+// }
 }
 @media(max-width: 576px) {
 	.checkout-container .order-summary {
 		padding-left: 2rem;
 		padding-right: 2rem;
+	}
+
+.form-group {
+ 
+	   margin-right: 0px !important;
+  }
+
+  
+}
+@media (max-width:768px) {
+	.checkout-progress-bar {
+		margin-bottom: 3.4rem;  
+		
+	}
+}
+
+
+@media (max-width:480px) {
+	.checkout-progress-bar {
+		margin-bottom: 1.4rem; 
+		// margin-top: 6.4rem;
+	}
+}
+
+
+@media(max-width:769px){
+
+	.step-title{
+
+		padding-left:15px;
 	}
 }
