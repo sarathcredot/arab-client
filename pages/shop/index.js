@@ -208,8 +208,8 @@ function Shop() {
           {/* <div
             className="col-lg-9 main-content" style={{borderLeft: "1px solid #B9B9B9" }}
           > */}
-           <div className="col-lg-9 main-content" style={{borderLeft: "1px solid #B9B9B9",padding:"0px" }}>
-            <nav className="toolbox sticky-header mobile-sticky" style={{ margin: "0" }}>
+           <div className="col-lg-9 main-content" style={{borderLeft: "1px solid #B9B9B9" }}>
+            <nav className="no-margin toolbox sticky-header mobile-sticky">
               <div className="toolbox-left">
                 <a href="#" className="sidebar-toggle" onClick={(e) => sidebarToggle(e)}>
                   <svg
