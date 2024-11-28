@@ -124,7 +124,7 @@ function accountdetails() {
       <div className=" container checkout-container">
         <div className="row">
           <div className="col-lg-12">
-            <ul style={{paddingLeft:"0px"}} className="checkout-steps">
+            <ul style={{paddingLeft:"0px",listStyle:"none"}} className="checkout-steps" >
               <li>
                 <div
                   className=""
@@ -135,11 +135,11 @@ function accountdetails() {
                     padding: "2px",
                   }}
                 >
-                  <h2 className="step-title">Account Details</h2>
+                  <h2 className="step-title" style={{paddingBottom:"10px",paddingLeft:"0px"}}>Account Details</h2>
                 </div>
 
                 <div className="">
-                  <form onSubmit={handleSubmit(onSubmit)} id="checkout-form">
+                  <form onSubmit={handleSubmit(onSubmit)} id="checkout-form" style={{marginTop:"6.5rem"}}>
                     <div className="row">
                       <div className="col-md-6 mb-2">
                         <div className="form-group mr-5 mb-0">
