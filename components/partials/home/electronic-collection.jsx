@@ -5,7 +5,7 @@ import Reveal from "react-awesome-reveal";
 import ALink from "../../common/ALink";
 import ProductOne from "../../features/products/product-one";
 import OwlCarousel from "../../features/owl-carousel";
-import { IoMdArrowDropright } from "react-icons/io";
+import { IoIosArrowForward  } from "react-icons/io";
 
 
 // Import Settigns
@@ -91,12 +91,12 @@ function ElectronicCollection() {
             className="heading shop-list   mb-0 pl-0 pr-0 "
             style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" }}
           >
-            <div className="pt-3 pb-4  d-flex align-items-center justify-content-between flex-wrap"style={{ borderBottom: "1px solid #EEE", marginBottom: "40px" }}>
+            <div className="pt-3 pb-4  d-flex align-items-center justify-content-between flex-wrap"style={{ borderBottom: "1px solid #EEE", marginBottom: "8x" }}>
               <h4 className="section-title text-transform-none mb-0 mr-0 " >
                 Best Selling
               </h4>
               <ALink href="/shop?bestSeller=true" style={{ color: "black", fontWeight: "600" }}>
-              View All <IoMdArrowDropright style={{fontSize:"20px"}}/> 
+              View All <IoIosArrowForward style={{fontSize:"20px"}}/> 
               </ALink>
             </div>
 

@@ -581,8 +581,8 @@ function ProductDetailOne(props) {
             className="product-title"
             style={{
               fontWeight: "500",
-              fontSize: "28px",
-              lineHeight: "33.43px",
+             
+             
             }}
           >
             {product?.productName}

@@ -33,10 +33,10 @@ function BrandSection() {
     const { data: brndData } = useQuery(GET_ALL_BRANDS);
     return (
         <div className="brands-section mt-2 mb-2 ">
-            <Reveal keyframes={fadeIn} delay={200} duration={500} triggerOnce>
+            <Reveal  keyframes={fadeIn} delay={200} duration={500} triggerOnce>
                 <h4 className="section-title text-transform-none"style={{ borderBottom: "1px solid #EEE", paddingBottom: "20px" }}>Top Brands</h4>
 
-                <OwlCarousel adClass="  nav-circle  " options={brandSlider} >
+                <OwlCarousel  adClass="  nav-circle  " options={brandSlider} >
                     {brndData && brndData.getAllTopBrandRecords.records.map((brand, index) => (
                         <figure key={index} className="circular-image" style={{
                             justifyContent: "center", display: "flex", alignItems: "center", cursor: "pointer"
