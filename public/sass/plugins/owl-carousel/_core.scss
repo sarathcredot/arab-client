@@ -16,14 +16,14 @@
 		-moz-backface-visibility: hidden; /* fix firefox animation glitch */
 	}
 
-	.owl-stage:after {
-		content: ".";
-		display: block;
-		clear: both;
-		visibility: hidden;
-		line-height: 0;
-		height: auto !important;
-	}
+	// .owl-stage:after {
+	// 	content: ".";
+	// 	display: block;
+	// 	clear: both;
+	// 	visibility: hidden;
+	// 	line-height: 0;
+	// 	height: auto !important;
+	// }
 
 	.owl-stage-outer {
 		position: relative;
