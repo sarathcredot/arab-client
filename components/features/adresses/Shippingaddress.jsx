@@ -145,7 +145,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, onIsShipping }) {
 
                 <div className="row">
                     <div className="col-lg-12">
-                        <ul className="checkout-steps">
+                        <ul style={{listStyleType:"none"}}  className="checkout-steps">
                             <li>
                                 <div
                                     className="container custom-formspace"

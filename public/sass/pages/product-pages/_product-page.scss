@@ -250,9 +250,10 @@ border-color: #e02b27;
 	.product-title {
 		margin-bottom: 1.1rem;
 		color: $primary-color-dark;
-		font-size: 3rem;
+		font-size:28px;
 		font-weight: 700;
 		letter-spacing: -.01em;
+		line-height: 33.43px;
 		width: calc( 100% - 63px );
 		@if ($second-font-family != $shop-second-font-family) {
 			font-family: $shop-second-font-family;
@@ -2020,6 +2021,17 @@ line-height: 2.375rem;
 	.product-single-share{
 
 		margin-top: 3.7rem;
+	}
+}
+
+
+
+@media(max-width:500px){
+
+	.product-title{
+
+		 font-size: 20px !important;
+		 line-height: 22.43px !important;
 	}
 }
 

@@ -72,14 +72,14 @@ function Account() {
         <title>Account | Arab Deals</title>
       </Helmet>
       <main className="main main-test">
-        {/* ... Breadcrumb and Checkout Progress Bar ... */}
+       
         <nav aria-label="breadcrumb" className="breadcrumb-nav">
           <div className="container">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <ALink href="/">
                   <IoMdHome style={{ fontSize: "16px" }} />
-                  {/* <i className="icon-home"></i> */}
+                  
                 </ALink>
               </li>
 
@@ -91,6 +91,9 @@ function Account() {
             </ol>
           </div>
         </nav>
+
+
+
         <div className=" d-flex flex-column align-items-center">
           {/* <h1>orders</h1>*/}
 

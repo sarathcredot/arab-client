@@ -962,17 +962,36 @@
 .customdeal-border {
     border: 1px solid #B9B9B9;
     border-right: none;
-
+    border-right: 1px solid rgba(185, 185, 185, 1);
+    // border-bottom: none;
 
 }
 
 .customdeal-border:nth-child(-n+3) {
     border-bottom: none;
     /* Remove border-bottom for first 3 items */
+    
+    // border-right: 1px solid rgba(185, 185, 185, 1);
+   
 }
+
+@media(max-width:500px){
+
+    .customdeal-border:nth-child(-n+4) {
+        border-bottom: none;
+        /* Remove border-bottom for first 3 items */
+        
+        // border-right: 1px solid rgba(185, 185, 185, 1);
+       
+    }
+    
+}
+
+
 
 .customdeal-border:nth-child(3n+3) {
     border-right: 1px solid rgba(185, 185, 185, 1);
+   
 }
 
 .live-search-list {

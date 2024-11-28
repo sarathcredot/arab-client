@@ -5,7 +5,7 @@ import Reveal from "react-awesome-reveal";
 import ProductOne from "../../features/products/product-one";
 import ProductFour from "../../features/products/product-four";
 import { useQuery, gql, useLazyQuery } from "@apollo/react-hooks";
-import { IoMdArrowDropright } from "react-icons/io";
+import { IoIosArrowForward  } from "react-icons/io";
 
 // Import Settigns
 import { fadeInUpShorter } from "../../../utils/data/keyframes";
@@ -74,8 +74,13 @@ function DealSection() {
         </h2>
        
         <ALink href="/shop?discount=10"> 
+<<<<<<< HEAD
         <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "600" }}>
           View All <IoMdArrowDropright style={{fontSize:"20px"}}/> 
+=======
+        <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
+          View All <IoIosArrowForward style={{fontSize:"20px"}}/> 
+>>>>>>> 393e5483dbb76a019cd186da609f4c535d75c70b
           </p></ALink>
 
       </div>
