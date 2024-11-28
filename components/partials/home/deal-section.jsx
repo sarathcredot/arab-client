@@ -72,8 +72,9 @@ function DealSection() {
         <h2 className="section-title d-flex align-items-center text-transform-none">
           Deals of the day
         </h2>
+       
         <ALink href="/shop?discount=10"> 
-        <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
+        <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "600" }}>
           View All <IoMdArrowDropright style={{fontSize:"20px"}}/> 
           </p></ALink>
 

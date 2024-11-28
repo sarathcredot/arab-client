@@ -36,6 +36,12 @@
  {
     border: 1px solid #f4f4f4;
 }
+.deal-section-head{
+    a:not(.view-all):hover {
+        text-decoration: underline;
+        text-decoration-color: black;
+    }
+}
 
 .heading {
     position: relative;
