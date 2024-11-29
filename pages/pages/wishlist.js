@@ -267,6 +267,7 @@ function Wishlist(props) {
                               threshold={500}
                               width="80"
                               height="80"
+                              className="order-image"
                             />
                           </ALink>
                           <a

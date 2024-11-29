@@ -68,7 +68,7 @@ function addresses() {
     refetch();
   };
   const handleRemove = async (id) => {
-    // console.log("this is id",id)
+    console.log("this is id",id)
     const response = await RemoveUserShippingAddress({
       variables: {
         input: {
@@ -76,8 +76,11 @@ function addresses() {
         }
       }
     })
-    console.log("remove response", response)
-    refetch();
+    if(response){
+
+      console.log("remove response", response)
+      refetch();
+    }
   }
 
   // const handleRemove = async (id) => {

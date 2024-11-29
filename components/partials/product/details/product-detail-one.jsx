@@ -578,7 +578,7 @@ function ProductDetailOne(props) {
             {product.categoryNamePath ? product.categoryNamePath.split(' ').pop() : ""}
           </p>
           <h1
-            className="product-title"
+            className="product-title  product-title-new"
             style={{
               fontWeight: "500",
              
