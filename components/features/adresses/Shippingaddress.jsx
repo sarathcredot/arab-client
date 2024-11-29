@@ -156,7 +156,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, onIsShipping }) {
                                 //     padding: "2px"
                                 // }}
                                 >
-                                    <h4 className="step-title" style={
+                                    <h4 className="step-title step-title-new  " style={
                                         { display: "flex", alignItems: "center", gap: "10px" }
                                     }>
                                         <div onClick={() => onIsShipping(!isShipping)} className={{ "width": "40px", "height": "40px", "backgroundColor": "rgba(232, 232, 232, 0.29)", "borderRadius": "50%", "display": "flex", "justifyContent": "center", "alignItems": "center" }}>

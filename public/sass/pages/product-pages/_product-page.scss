@@ -90,7 +90,7 @@ $product-single-thumbnail-gutter: 3px !default;
     display: inline-flex;
 	align-items: center;
 	justify-content: center;
-    padding: 17px 8px;
+    padding: 17px 8px ;
 	color: $primary-color-dark;
 	font-size: 1.2rem;
 	font-weight: 500;
@@ -109,6 +109,13 @@ $product-single-thumbnail-gutter: 3px !default;
 	}
 }
 
+@media(max-width:500PX){
+
+	.add-wishlist{
+
+		 padding-bottom: 0px !important;
+	}
+}
 .added-wishlist {
 	i::before {
 		content: '\e88a';
@@ -2032,6 +2039,11 @@ line-height: 2.375rem;
 
 		 font-size: 20px !important;
 		 line-height: 22.43px !important;
+	}
+
+	.product-single-details{
+
+		margin-bottom: -0.9rem !important;
 	}
 }
 

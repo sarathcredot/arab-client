@@ -234,7 +234,7 @@ function Cart(props) {
             </li>
           </ul>
         </div>
-        <div className=" cart-container container" style={{ marginTop: "70px" }}>
+        <div className=" cart-container container" >
           {cartList?.length === 0 ? (
             <div className="cart-table-container">
               <div className="table table-cart">

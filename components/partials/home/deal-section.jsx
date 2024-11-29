@@ -87,7 +87,7 @@ function DealSection() {
       // style={{ border: "1px solid rgba(185, 185, 185, 1)" }}
       > */}
         <div className="row">
-          <div className="col-lg-4 col-md-5 mb-2 mb-md-0">
+          <div style={{marginBottom:"-0.1rem"}} className="col-lg-4 col-md-5 ">
             {products
               ? products
                 .slice(0, 15)
