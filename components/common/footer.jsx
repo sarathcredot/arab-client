@@ -196,7 +196,7 @@ function Footer() {
           </div>
 
           {/* mobile footer */}
-          <div className="responsive-footer" style={{ marginTop: "56px" }}>
+          <div className="responsive-footer" style={{ marginTop: "20px" }}>
             <div className="col-md-12 offset-lg-1 col-lg-3 custom-helpline">
 
               <img src="images/helpline.svg" style={{ width: "30px" }} />

@@ -1707,6 +1707,12 @@ body {
 }
 
 
+.container-elctro{
+
+    padding-bottom: 20px;
+}
+
+
 
 @media(max-width:769px) {
 
@@ -1716,6 +1722,13 @@ body {
         width: 80%;
 
     }
+
+    .container-elctro{
+
+        padding-bottom: 0px;
+    }
+    
+    
 }
 
 @media(max-width:500px) {
@@ -1730,3 +1743,8 @@ body {
         margin-top: 0px;
     }
 }
+
+
+
+
+
