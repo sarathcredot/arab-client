@@ -836,3 +836,18 @@ input[type="radio"]{
 
 	
 }
+
+
+.cart-price-box{
+
+	 margin-left: 30px;
+}
+
+@media(max-width:769px){
+
+	.cart-price-box{
+
+		margin-left: 0px;
+   }
+}
+
