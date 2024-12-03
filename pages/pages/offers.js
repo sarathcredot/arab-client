@@ -465,6 +465,8 @@ function offers() {
               </div>
             </div>
           </div>
+
+          
         </div>
         <div className={`bg-gray skeleton-body skel-shop-products`}>
           <div
