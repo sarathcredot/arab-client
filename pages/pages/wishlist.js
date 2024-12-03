@@ -181,10 +181,6 @@ function Wishlist(props) {
                     {/* <i className="icon-home" ></i> */}
                   </ALink>
                 </li>
-                {/* <li className="breadcrumb-item active" aria-current="page">
-                  <ALink href="/pages/account">My account</ALink>
-                </li> */}
-
                 <li className="breadcrumb-item active" aria-current="page">
                   <ALink className="activeitem" href="/pages/orders">
                   Wishlist
