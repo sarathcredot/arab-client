@@ -69,7 +69,7 @@ function BannerSection({ offer, sectionTwoData, sectionThreeData }) {
         </div>
 
 
-        <div className="row pt-4">
+        <div className="row home-banner-pt">
           <div className="col-md-12">
             <img
               src="images/home/banners/homeimage4.svg"

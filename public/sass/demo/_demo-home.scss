@@ -7,6 +7,8 @@
     overflow: hidden;
 }
 
+
+
 .newsletter-popup-content {
     max-width: 357px;
 }
@@ -179,6 +181,9 @@ hr {
 //     background-image: url("images/home/banners/applebanner.svg");
 
 // }
+.home-banner-pt{
+    padding-top: 3rem;
+}
 .text-animate {
     position: absolute;
     white-space: nowrap;
@@ -2136,7 +2141,7 @@ color:red
         object-fit: contain;
         width: 100%;
         height: 100%;
-        padding-bottom: 20px;
+        padding-bottom: 12px;
         // margin-top: -33px;
         // margin-bottom: 66px;
     }
@@ -2160,6 +2165,9 @@ color:red
     }
     .custom-brandouter-container{
         padding: 0 10px;
+    }
+    .home-banner-pt{
+        padding-top: 1.5rem;
     }
 }
 
