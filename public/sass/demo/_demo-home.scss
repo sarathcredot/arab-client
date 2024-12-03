@@ -1775,6 +1775,16 @@ hr {
     }
 }
 
+@media (max-width:768px) {
+    .recent-products-section {
+        // padding-bottom: 5.9rem;
+    
+        .heading {
+    
+          display: none;
+        }
+    } 
+}
 .category-filter-section {
     .tab-content > .tab-pane {
         &.active {

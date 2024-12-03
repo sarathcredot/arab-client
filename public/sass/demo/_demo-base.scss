@@ -1280,6 +1280,9 @@ body {
 .recommendmob {
     display: none
 }
+.recommendmob-recent {
+    display: none !important
+}
 
 // apple products
 .custom-apple-title {
@@ -1612,6 +1615,11 @@ body {
         font-weight: 600;
         margin-top: 20px;
     }
+    .recommendmob-recent{
+        display: flex !important;
+        font-weight: 600;
+        margin-top: 32px;
+    }
 
     .custom-helpline {
         margin-bottom: 20px;
@@ -1742,6 +1750,10 @@ body {
         
         margin-top: 0px;
     }
+    // .recommendmob-recent{
+        
+    //     margin-top: 0px;
+    // }
 }
 
 

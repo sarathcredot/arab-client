@@ -63,7 +63,7 @@ function DealSection() {
       }
     })
   }, [])
-
+ 
   const products = data?.getProducts?.records
   return (
     <section className="deal-products-section">
