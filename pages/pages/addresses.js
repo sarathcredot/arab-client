@@ -67,6 +67,8 @@ function addresses() {
     setIsshipping(false);
     refetch();
   };
+  
+  
   const handleRemove = async (id) => {
     console.log("this is id",id)
     const response = await RemoveUserShippingAddress({
@@ -76,11 +78,10 @@ function addresses() {
         }
       }
     })
-    if(response){
 
-      console.log("remove response", response)
-      refetch();
-    }
+    console.log("addres removed")
+    refetch()
+    
   }
 
   // const handleRemove = async (id) => {
