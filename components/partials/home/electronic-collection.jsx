@@ -79,7 +79,7 @@ function ElectronicCollection() {
   // const bestSelling = data && data?.specialProducts?.bestSelling;
   // const electronic = data && data?.electronic?.data;
   return (
-    <div className="container" style={{ paddingBottom: "40px" }}>
+    <div className="container container-elctro" >
       <section className="recent-products-section" >
         <Reveal
           keyframes={fadeIn}

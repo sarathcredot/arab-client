@@ -2299,4 +2299,41 @@ color:red
 
         right: 11px;
    }
+
+   .owl-carousel.nav-blackcircle .owl-nav {
+    font-size: 1rem;
+
+    i:before {
+        font-weight: 800;
+    }
+
+    [class*='owl-']:not(.disabled):hover {
+        background: black;
+        color: white;
+    }
+
+    .owl-next,
+    .owl-prev {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 50%;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: black;
+        color: white;
+    }
+
+    .owl-next {
+        right: 1px;
+    }
+
+    .owl-prev {
+        left: 1px;
+    }
+}
+
+
+   
 }

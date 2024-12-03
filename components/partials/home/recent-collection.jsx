@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Reveal from "react-awesome-reveal";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { IoIosArrowForward  } from "react-icons/io";
+
 
 // Import Custom Component
 import ALink from "../../common/ALink";
@@ -96,8 +98,8 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
             <h4 className="section-title text-transform-none mb-0 mr-0">
              50% OFF
             </h4>
-            <ALink className="view-all ml-auto" href='/shop?discount=50'>
-              View All Products
+            <ALink className="view-all ml-auto" href='/shop?discount=10'>
+              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
             </ALink>
           </div>
 
@@ -165,8 +167,8 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
             <h4 className="section-title text-transform-none mb-0 mr-0">
             30% OFF
             </h4>
-            <ALink className="view-all ml-auto" href="/shop?discount=30">
-              View All Products
+            <ALink className="view-all ml-auto" href='/shop?discount=10'>
+              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
             </ALink>
           </div>
 
@@ -234,7 +236,7 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
               10% OFF
             </h4>
             <ALink className="view-all ml-auto" href='/shop?discount=10'>
-              View All Products
+              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
             </ALink>
           </div>
 
