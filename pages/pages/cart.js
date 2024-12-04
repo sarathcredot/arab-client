@@ -307,7 +307,7 @@ function Cart(props) {
                             </figure>
                           </td>
                           <td className="product-col">
-                            <h5 className="product-title">
+                            <h5 className="product-title" style={{fontWeight:"700"}}>
                               <ALink href={`/product/default/${item?.productId}`}>
                                 {item.name}
                               </ALink>
