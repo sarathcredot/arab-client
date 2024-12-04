@@ -74,8 +74,8 @@ function DealSection() {
         </h2>
         
         <ALink href="/shop?discount=10"> 
-        <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
-          View All <IoIosArrowForward style={{fontSize:"20px"}}/>
+        <p  style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "600",}}>
+        <span > View All </span>  <span>  <IoIosArrowForward c style={{fontSize:"20px"}}/> </span>
           </p></ALink>
       </div>
       <h4 className="recommendmob">Deals of the day</h4>

@@ -70,7 +70,7 @@ function Login({ mutate }) {
       if (response) {
         toast.success(<div style={{ padding: "10px" }}>OTP sent successfully</div>);
       }
-    } catch (error) {
+    } catch (error){
       toast.error(<div style={{ padding: "10px" }}>{error?.message}</div>);
       console.log("error", error);
     }
