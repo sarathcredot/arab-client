@@ -155,7 +155,7 @@ function Account() {
                   </p>
                   <div className="container p-md-5 p-sm-0">
                     <div className="row">
-                      <div className="col-12 col-md-4 mb-3">
+                      <div className="col-12 col-md-4 card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center content-box mr-sm-0 w-sm-100"
                         >
@@ -204,7 +204,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4 mb-3">
+                      <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100 "
                         >
@@ -298,7 +298,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div> */}
-                      <div className="col-12 col-md-4 mb-3">
+                      <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
                           
@@ -348,7 +348,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4 mb-3">
+                      <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
                          
@@ -396,7 +396,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4 mb-3">
+                      <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
                           onClick={handleLogout}

@@ -274,7 +274,7 @@ function Wishlist(props) {
                         </figure>
                       </td>
                       <td>
-                        <h5 className="product-title">
+                        <h5 className="product-title" style={{fontWeight:"700"}}>
                           <ALink href={`/product/default/${item.productId}`}>
                     
 
