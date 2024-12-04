@@ -783,7 +783,7 @@ hr {
     }
 
     .product-details {
-        margin-top: 53px;
+        margin-top: 52px;
     }
 
     .product-title {
@@ -2342,4 +2342,20 @@ color:red
 
 
    
+}
+
+
+
+.offer-mobile-app{
+
+    max-width: 99.3%;
+}
+
+
+@media(max-width:769px){
+
+   .offer-mobile-app{
+
+       max-width: 1000px;
+  }
 }
