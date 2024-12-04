@@ -137,7 +137,7 @@ function offers() {
 
   const firstImage = filteredImages?.images[0];
 
-  
+
 
 
   useEffect(() => {
@@ -149,9 +149,9 @@ function offers() {
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>Offers | Arab Deals</title>
-    </Helmet>
+      </Helmet>
       <main className="home" style={{ marginTop: "-20" }}>
         <div className="header-bottom d-flex">
           <div className="container">
@@ -180,38 +180,21 @@ function offers() {
           // }
           />
 
-          <div className="row pt-4">
-            <div className="col-md-12">
+          <div style={{marginTop:"20px"}}  className="row pt-4">
+            <div className="col-md-12 offer-mobile-app">
               <img
-                className="home_banner3"
                 src="images/home/banners/homeimage4.svg"
+                className="home_banner3"
                 style={{
                   width: "100%",
-                  height: "272px",
+                  height: "100%",
                   objectFit: "cover",
                   position: "relative",
+                  // cursor: "pointer",
                 }}
               />
-              <div
-                className="app-downloadbtn"
-                // style={{
-                //   position: "absolute",
-                //   top: 0,
-                //   right: 0,
-                //   bottom: 0,
-                //   background: "black",
-                //  display:"flex",
-                //   gap: "24px",
-                //   padding: "30px 57px 30px 30px",
-                //   height: "100%",
-                //   flexDirection:"column",
-                //   alignItems:"flex-start",
-                //   justifyContent:"center"
-                // }}
-              >
-                <div>
-                  <img src="/images/bannerlogo.svg" />
-                </div>
+              <div className="app-downloadbtn"            >
+                <div><img src="/images/bannerlogo.svg" /></div>
                 <div style={{ display: "flex", gap: "24px" }}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -242,8 +225,6 @@ function offers() {
                       fill="#010202"
                     />
                   </svg>
-                  {/* <button>App Store</button> */}
-                  {/* <button>Google Play</button> */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="139"
@@ -349,7 +330,10 @@ function offers() {
                       stroke="#010202"
                       stroke-width="0.2"
                     />
-                    <path d="M109.467 18.5314H107.55V31.3767H109.467V18.5314Z" fill="black" />
+                    <path
+                      d="M109.467 18.5314H107.55V31.3767H109.467V18.5314Z"
+                      fill="black"
+                    />
                     <path
                       fill-rule="evenodd"
                       clip-rule="evenodd"
@@ -475,7 +459,7 @@ function offers() {
               height: "auto",
               maxWidth: "100%",
               backgroundColor: "white",
-              marginTop: "67px",
+              marginTop: "40px",
             }}
           >
             <img
