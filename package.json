@@ -3,9 +3,9 @@
   "version": "2.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && next export",
-    "prod-build": "next build",
+    "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider next dev --port 3003",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider next build && next export",
+    "prod-build": "NODE_OPTIONS=--openssl-legacy-provider next build",
     "start": "next start",
     "prod-start": "next start --port 3003"
   },
@@ -16,6 +16,7 @@
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.4.1",
     "@reduxjs/toolkit": "^2.2.2",
+    "apollo-upload-client": "17.0.0",
     "dayjs": "^1.11.10",
     "fbemitter": "^3.0.0",
     "google-map-react": "^2.1.10",
@@ -54,8 +55,5 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "file-loader": "^6.2.0"
-  },
-  "engines": {
-    "node": "16.18.0"
   }
 }

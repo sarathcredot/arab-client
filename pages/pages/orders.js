@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import ALink from "../../components/common/ALink";
@@ -14,6 +14,10 @@ import dayjs from "dayjs";
 import { Helmet } from "react-helmet";
 import Pagination from "../../components/features/pagination";
 import { useRouter } from "next/router";
+import Dropdown from "../../components/features/dropdown/Dropdown";
+import ReturnRequestFormModal from "../../components/features/modals/ReturnRequestFormModal";
+import CustomModal from "../../components/features/modals/CustomModal";
+import ReturnPolicyModal from "../../components/features/modals/ReturnPolicyModal";
 
 const GET_ORDERS = gql`
   query GetUserOrderProducts($input: GetUserOrderProductsInput!) {
@@ -75,6 +79,17 @@ const CANCEL_ORDER = gql`
   }
 `;
 
+const RETURN_ORDER = gql`
+  mutation ReturnUserOrderProduct(
+    $input: ReturnUserOrderProductInput!
+    $image: [Upload]
+  ) {
+    returnUserOrderProduct(input: $input, image: $image) {
+      _id
+    }
+  }
+`;
+
 const DOWNLOAD_INVOICE = gql`
   mutation GetUserIvoiceSignedUrl($input: GetUserIvoiceUrlInput!) {
     getUserIvoiceSignedUrl(input: $input) {
@@ -122,8 +137,24 @@ function Orders(props) {
     }
   };
 
+  const getReturnStatusColor = (status) => {
+    switch (status) {
+      case "PENDING":
+        return "#FFC107";
+      case "APPROVED":
+        return "#28A745";
+      case "REJECTED":
+        return "#DC3545";
+      case "COLLECTED":
+        return "#17A2B8";
+      default:
+        return "#17A2B8";
+    }
+  };
+
   const [cancelUserOrderProduct] = useMutation(CANCEL_ORDER);
   const [downloadInvoice] = useMutation(DOWNLOAD_INVOICE);
+  const [returnOrder] = useMutation(RETURN_ORDER);
 
   const { data, loading, error, refetch } = useQuery(GET_ORDERS, {
     variables: { input: { page: page || 0, size: perPage } },
@@ -132,7 +163,7 @@ function Orders(props) {
   const totalPage = data
     ? parseInt(data?.getUserOrderProducts?.maxRecords / perPage) +
       (data?.getUserOrderProducts?.maxRecords % perPage ? 1 : 0)
-    : 0; 
+    : 0;
 
   useEffect(() => {
     if (error) {
@@ -144,6 +175,8 @@ function Orders(props) {
 
   const orderCancel = async (id) => {
     try {
+      if (!window.confirm("Are you sure you want to cancel this order?"))
+        return;
       const response = await cancelUserOrderProduct({
         variables: {
           input: {
@@ -152,7 +185,9 @@ function Orders(props) {
         },
       });
       refetch();
-      toast.success(<div style={{ padding: "10px" }}>Your order has been canceled.</div>);
+      toast.success(
+        <div style={{ padding: "10px" }}>Your order has been canceled.</div>
+      );
     } catch (error) {
       console.log(error);
     }
@@ -177,6 +212,76 @@ function Orders(props) {
       // link.click();
       // document.body.removeChild(link);
       window.open(url, "_blank");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  //=========================RETURN ORDER============================\\
+  //Drop Down
+  const [isOpen, setIsOpen] = useState("");
+  const toggleDropdown = (e, itemId) => {
+    setIsOpen((prev) => (itemId === prev ? "" : itemId));
+  };
+
+  //Return order
+  const [showReturnFormModal, setShowReturnFormModal] = useState(false);
+  const [orderProductIdForReturn, setOrderProductIdForReturn] = useState("");
+  const [orderIdForReturn, setOrderIdForReturn] = useState("");
+  const [isShippingAddress, setIsShippingAddress] = useState(false);
+
+  //return policy
+  const [isAcceptPolicy, setIsAcceptPolicy] = useState(false);
+  const [showPolicyModal, setShowPolicyModal] = useState(false);
+
+  function closeModal() {
+    setShowReturnFormModal(false);
+  }
+
+  const handleOrderReturn = async (formData) => {
+    try {
+      const { bankDetails, returnAddress, returnUserReason, image } = formData;
+
+      console.log(bankDetails, "BANK DETAILS");
+      console.log(returnAddress, "RETURN ADDRESS");
+      console.log(returnUserReason, "RETURN USER REASON");
+      console.log(image, " = IMAGES");
+
+      if (!bankDetails) {
+        throw new Error("Bank Details are required!");
+      }
+      if (!returnAddress) {
+        throw new Error("Return address is required!");
+      }
+      if (!returnUserReason) {
+        throw new Error("Reason is required!");
+      }
+
+      const variables = {
+        input: {
+          _id: orderProductIdForReturn,
+          bankDetails,
+          returnAddress,
+          returnUserReason,
+        },
+        image,
+      };
+
+      console.log(variables, "VARIABLES");
+
+      const { data, errors } = await returnOrder({
+        variables,
+      });
+
+      if (errors) console.log(errors, "ERRORS");
+
+      console.log(data, 'RESPONSE RETURN SUBMIT')
+
+      if (data?.returnUserOrderProduct?._id) {
+        toast.success(
+          "Your order return request has been submitted successfully."
+        );
+      }
     } catch (error) {
       toast.error(error.message);
     }
@@ -264,7 +369,7 @@ function Orders(props) {
         >
           <h4>Orders</h4>
         </div>
-        <div className="container" >
+        <div className="container">
           <div className="success-alert">
             {flag === 1 ? <p>Product successfully removed.</p> : ""}
             {flag === 2 ? <p>Product added to cart successfully.</p> : ""}
@@ -292,13 +397,18 @@ function Orders(props) {
               <table className="table table-wishlist mb-0">
                 <thead>
                   <tr>
-                    <th className="thumbnail-col" style={{paddingLeft:"0px"}}>Product</th>
+                    <th
+                      className="thumbnail-col"
+                      style={{ paddingLeft: "0px" }}
+                    >
+                      Product
+                    </th>
                     <th className="status-col"></th>
                     <th className="status-col">Order Id</th>
                     <th className="status-col">Date</th>
                     <th className="status-col">Status</th>
                     <th className="price-col">Total Price</th>
-                    <th className="action-col">Actions</th>
+                    <th className="action-col"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -327,19 +437,24 @@ function Orders(props) {
                             {item.productName}
                           </ALink>
                         </h5> */}
-                        <h5 className="product-title" style={{ fontWeight: "700" }}>
-                            <ALink href={`/product/default/${item.productId}`}>
-                              {item.productName.split(" ").slice(0, 4).join(" ")}...
-                            </ALink>
-                          </h5>
-
+                        <h5
+                          className="product-title"
+                          style={{ fontWeight: "700" }}
+                        >
+                          <ALink href={`/product/default/${item.productId}`}>
+                            {item.productName.split(" ").slice(0, 4).join(" ")}
+                            ...
+                          </ALink>
+                        </h5>
                       </td>
                       <td style={{ color: "black" }}>{item.orderId}</td>
                       <td style={{ color: "black" }}>
                         {dayjs(item.orderDate).format("YYYY/MM/DD")}
                       </td>
-                      <td style={{ color: getStatusColor(item?.shippingStatus) }}>
-                        {item?.shippingStatus}
+                      <td
+                        style={{ color: item?.returnStatus !== "NA" ? getReturnStatusColor(item?.returnStatus): getStatusColor(item?.shippingStatus) }}
+                      >
+                        {item?.returnStatus !== "NA" ? `${item?.returnStatus}-(Return)`: item?.shippingStatus }
                       </td>
 
                       <td style={{ color: "black" }}>
@@ -349,85 +464,160 @@ function Orders(props) {
                             <span className="product-price">
                               OMR{" "}
                               {parseFloat(
-                                Number(item.sellingPrice) + Number(item?.shippingCharge)
+                                Number(item.sellingPrice) +
+                                  Number(item?.shippingCharge)
                               ).toFixed(2)}
                             </span>
                           </>
                         </div>
                       </td>
 
-                      {
-                        item?.shippingStatus !== "DELIVERED" &&
-                        item?.shippingStatus !== "SHIPPED" &&
-                        item?.shippingStatus !== "CANCELED" ? (
-                          <td className="action">
-                            <button
-                              className="btn btn-quickview mt-1 mt-md-0"
-                              title="Quick View"
-                              style={{ border: "1px solid" }}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                orderCancel(item._id);
-                              }}
-                            >
-                              Cancel
-                            </button>
-                          </td>
-                        ) : (
-                          <>
-                            {!item?.invoice ? (
-                              <td className="action">
-                                <button
-                                  className="btn btn-quickview mt-1 mt-md-0"
-                                  title="Quick View"
-                                  style={{ border: "1px solid", display: "none" }}
-                                  disabled
-                                >
-                                  Cancel
-                                </button>
-                              </td>
+                      <td>
+                        <Dropdown
+                          toggleDropdown={toggleDropdown}
+                          itemId={item?.itemId}
+                          isOpen={isOpen}
+                          setIsOpen={setIsOpen}
+                        >
+                          <div className="order_update_menu_container">
+                            {item?.shippingStatus !== "DELIVERED" &&
+                            item?.shippingStatus !== "CANCELED" ? (
+                              <div
+                                className="order_update_menu_item"
+                                title="Quick View"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  orderCancel(item._id);
+                                }}
+                              >
+                                Cancel
+                              </div>
                             ) : (
-                              <td className="action">
-                                <button
-                                  className="btn btn-dark "
-                                  title="Quick View"
-                                  style={{ border: "1px solid" }}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    handleDownload(item._id);
-                                  }}
-                                >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="1em"
-                                    height="1em"
-                                    viewBox="0 0 24 24"
-                                    style={{
-                                      marginRight: "5px",
+                              <>
+                                {/* {item?.shippingStatus !== "PENDING" &&
+                                  item?.invoice && (
+                                    <div
+                                      className="order_update_menu_item "
+                                      title="Quick View"
+                                      style={{ border: "1px solid" }}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        handleDownload(item._id);
+                                        setIsOpen(false)
+                                      }}
+                                    >
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="1em"
+                                        height="1em"
+                                        viewBox="0 0 24 24"
+                                        style={{
+                                          marginRight: "5px",
+                                        }}
+                                      >
+                                        <path
+                                          fill="white"
+                                          d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z"
+                                        />
+                                      </svg>
+                                      Invoice
+                                    </div>
+                                  )} */}
+                                {item?.shippingStatus === "DELIVERED" && item?.returnStatus === "NA" &&  (
+                                  <div
+                                    className="order_update_menu_item"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      setShowPolicyModal(true);
+                                      setOrderProductIdForReturn(item?._id);
+                                      setOrderIdForReturn(item?.orderId);
+                                      setIsOpen(false);
                                     }}
                                   >
-                                    <path fill="white" d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z" />
-                                  </svg>
-                                  Invoice
-                                </button>
-                              </td>
+                                    Return
+                                  </div>
+                                )}
+                                {/* {!item?.invoice ? (
+                                  <div
+                                    className="order_update_menu_item"
+                                    disabled
+                                  >
+                                    Cancel
+                                  </div>
+                                ) : (
+                                  <div
+                                    className="order_update_menu_item "
+                                    title="Quick View"
+                                    style={{ border: "1px solid" }}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      handleDownload(item._id);
+                                    }}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="1em"
+                                      height="1em"
+                                      viewBox="0 0 24 24"
+                                      style={{
+                                        marginRight: "5px",
+                                      }}
+                                    >
+                                      <path
+                                        fill="white"
+                                        d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z"
+                                      />
+                                    </svg>
+                                    Invoice
+                                  </div>
+                                )} */}
+                              </>
                             )}
-                          </>
-                        )
+                            <button
+                              className="order_update_menu_item "
+                              title="Quick View"
+                              style={
+                                item?.invoice
+                                  ? { border: "none" }
+                                  : {
+                                      color: "grey",
+                                      border: "none",
+                                      cursor: "not-allowed",
+                                    }
+                              }
+                              onClick={(e) => {
+                                e.preventDefault();
+                                if (item?.invoice) {
+                                  handleDownload(item._id);
+                                  setIsOpen(false);
+                                }
+                              }}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 24 24"
+                                style={{
+                                  marginRight: "5px",
+                                }}
+                              >
+                                <path
+                                  fill={item?.invoice ? "black" : "grey"}
+                                  d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z"
+                                />
+                              </svg>
+                              Invoice
+                            </button>
 
-                        // <>
-                        //   <td>
-                        //     <a
-                        //       href={`/product/default/${item.productId}`}
-                        //       className="btn btn-quickview mt-1 mt-md-0"
-                        //       title="Quick View"
-                        //       style={{ border: "1px solid" }}
-                        //     >
-                        //       view
-                        //     </a>
-                        //   </td>
-                        // </>
-                      }
+                            {/* <div className="order_update_menu_item">Cancel</div>
+                            <div className="order_update_menu_item">Return</div>
+                            <div className="order_update_menu_item">
+                              Invoice
+                            </div> */}
+                          </div>
+                        </Dropdown>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -444,6 +634,28 @@ function Orders(props) {
           )}
         </div>
       </main>
+
+      {/* Return submit modal */}
+      {showReturnFormModal && (
+        <ReturnRequestFormModal
+          isOpen={showReturnFormModal}
+          setIsOpen={setShowReturnFormModal}
+          handleSubmit={handleOrderReturn}
+          orderId={orderIdForReturn}
+        />
+      )}
+      {/* Policy modal */}
+      {showPolicyModal && (
+        <ReturnPolicyModal
+          isOpen={showPolicyModal}
+          setIsOpen={setShowPolicyModal}
+          handleSubmit={() => {
+            setIsAcceptPolicy(true);
+            setShowReturnFormModal(true);
+            setShowPolicyModal(false);
+          }}
+        />
+      )}
     </>
   );
 }
