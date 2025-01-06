@@ -18,6 +18,12 @@ $p-pagination-color: #706f6c !default;
 $p-pagination-font-size: 15px !default;
 $p-pagination-font-weight: 700 !default;
 
+
+.toolbox.no-margin {
+	margin-bottom: 0px !important; /* Higher specificity by adding the parent class */
+  }
+  
+
 // 1. Toolbox
 
 // 1.1) Toolbox Base

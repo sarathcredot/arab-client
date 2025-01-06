@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider next dev --port 3003",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider next build && next export",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider next build && next export",
     "prod-build": "NODE_OPTIONS=--openssl-legacy-provider next build",
     "start": "next start",
     "prod-start": "next start --port 3003"
