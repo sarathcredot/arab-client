@@ -962,17 +962,36 @@
 .customdeal-border {
     border: 1px solid #B9B9B9;
     border-right: none;
-
+    border-right: 1px solid rgba(185, 185, 185, 1);
+    // border-bottom: none;
 
 }
 
 .customdeal-border:nth-child(-n+3) {
     border-bottom: none;
     /* Remove border-bottom for first 3 items */
+    
+    // border-right: 1px solid rgba(185, 185, 185, 1);
+   
 }
+
+@media(max-width:500px){
+
+    .customdeal-border:nth-child(-n+4) {
+        border-bottom: none;
+        /* Remove border-bottom for first 3 items */
+        
+        // border-right: 1px solid rgba(185, 185, 185, 1);
+       
+    }
+    
+}
+
+
 
 .customdeal-border:nth-child(3n+3) {
     border-right: 1px solid rgba(185, 185, 185, 1);
+   
 }
 
 .live-search-list {
@@ -1260,6 +1279,9 @@ body {
 
 .recommendmob {
     display: none
+}
+.recommendmob-recent {
+    display: none !important
 }
 
 // apple products
@@ -1593,6 +1615,11 @@ body {
         font-weight: 600;
         margin-top: 20px;
     }
+    .recommendmob-recent{
+        display: flex !important;
+        font-weight: 600;
+        margin-top: 32px;
+    }
 
     .custom-helpline {
         margin-bottom: 20px;
@@ -1688,6 +1715,12 @@ body {
 }
 
 
+.container-elctro{
+
+    padding-bottom: 20px;
+}
+
+
 
 @media(max-width:769px) {
 
@@ -1697,6 +1730,13 @@ body {
         width: 80%;
 
     }
+
+    .container-elctro{
+
+        padding-bottom: 0px;
+    }
+    
+    
 }
 
 @media(max-width:500px) {
@@ -1710,4 +1750,13 @@ body {
         
         margin-top: 0px;
     }
+    // .recommendmob-recent{
+        
+    //     margin-top: 0px;
+    // }
 }
+
+
+
+
+

@@ -1,4 +1,8 @@
 // My orders 
+
+$dropdown-hover-bg: #eeeeee;
+
+
 .order-table-container,
 .order-detail-container,
 .download-table-container {
@@ -194,5 +198,28 @@
             top: 12px;
             right: 0;
         }
+    }
+}
+
+.order_update_menu_container {
+    display: flex; 
+    flex-direction: column; 
+
+    .order_update_menu_item {
+        display: flex;
+        padding: 10px 10px; 
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+            background-color: $dropdown-hover-bg;
+            // color: $hover-text-color;
+          }
+    }
+}
+
+@media (max-width:600px) {
+    .order-image{
+        margin-top: -10px;
     }
 }

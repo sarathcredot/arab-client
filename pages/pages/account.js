@@ -72,14 +72,14 @@ function Account() {
         <title>Account | Arab Deals</title>
       </Helmet>
       <main className="main main-test">
-        {/* ... Breadcrumb and Checkout Progress Bar ... */}
+       
         <nav aria-label="breadcrumb" className="breadcrumb-nav">
           <div className="container">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <ALink href="/">
                   <IoMdHome style={{ fontSize: "16px" }} />
-                  {/* <i className="icon-home"></i> */}
+                  
                 </ALink>
               </li>
 
@@ -91,6 +91,9 @@ function Account() {
             </ol>
           </div>
         </nav>
+
+
+
         <div className=" d-flex flex-column align-items-center">
           {/* <h1>orders</h1>*/}
 
@@ -108,7 +111,7 @@ function Account() {
         </div>
       </main>
 
-      <div className="container  custom-account-container account-container" style={{borderBottom:"1px solid #E2E2E2",marginBottom:"0px",paddingBottom:"5.6rem"}} >
+      <div className="container  custom-account-container account-container " style={{marginBottom:"0px"}} >
         <Tabs
           selectedTabClassName="active"
           selectedTabPanelClassName="active show"
@@ -152,7 +155,7 @@ function Account() {
                   </p>
                   <div className="container p-md-5 p-sm-0">
                     <div className="row">
-                      <div className="col-12 col-md-4 mb-3">
+                      <div className="col-12 col-md-4 card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center content-box mr-sm-0 w-sm-100"
                         >
@@ -201,7 +204,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4 mb-3">
+                      <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100 "
                         >
@@ -295,7 +298,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div> */}
-                      <div className="col-12 col-md-4 mb-3">
+                      <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
                           
@@ -345,7 +348,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4 mb-3">
+                      <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
                          
@@ -393,7 +396,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4 mb-3">
+                      <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
                           onClick={handleLogout}

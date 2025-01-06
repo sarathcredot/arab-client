@@ -272,6 +272,8 @@ function MainMenu({ router }) {
   };
   const mainNav = (data?.getActiveCategoryTree?.records || []);
 
+  console.log("this is data",mainNav)
+
   const child1 = level2Data?.getActiveChildCategories?.records;
 
   const child2 = level3Data?.getActiveChildCategories?.records;
@@ -351,7 +353,7 @@ function MainMenu({ router }) {
         </ul>
 
         {/* mobile responsive menu */}
-        <ul className="custom__mobilemenu w-100">
+        <ul className="custom__mobilemenu w-100" style={{listStyle:"none"}}>
           {mainNav?.map((item) => (
             <li
               className={`custom__mobile__item px-2 ${item._id === parentcategory.cat1 ? "activate" : ""

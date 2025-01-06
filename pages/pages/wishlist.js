@@ -181,10 +181,6 @@ function Wishlist(props) {
                     {/* <i className="icon-home" ></i> */}
                   </ALink>
                 </li>
-                {/* <li className="breadcrumb-item active" aria-current="page">
-                  <ALink href="/pages/account">My account</ALink>
-                </li> */}
-
                 <li className="breadcrumb-item active" aria-current="page">
                   <ALink className="activeitem" href="/pages/orders">
                   Wishlist
@@ -267,6 +263,7 @@ function Wishlist(props) {
                               threshold={500}
                               width="80"
                               height="80"
+                              className="order-image"
                             />
                           </ALink>
                           <a
@@ -277,7 +274,7 @@ function Wishlist(props) {
                         </figure>
                       </td>
                       <td>
-                        <h5 className="product-title">
+                        <h5 className="product-title" style={{fontWeight:"700"}}>
                           <ALink href={`/product/default/${item.productId}`}>
                     
 

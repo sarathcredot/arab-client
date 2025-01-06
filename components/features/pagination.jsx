@@ -29,14 +29,14 @@ function Pagination ( { totalPage } ) {
                     {
                         page > 0 &&
                         <li className="page-item">
-                            <ALink className="page-link page-link-btn" href={ { query: { ...query, page: page - 1 } } } scroll={ false }><i className="icon-angle-left"></i></ALink>
+                            <ALink className="page-link page-link-btn" style={{zIndex: 0}} href={ { query: { ...query, page: page - 1 } } } scroll={ false }><i className="icon-angle-left"></i></ALink>
                         </li>
                     }
 
                     {
                         indexsToShow.map( item => (
                             <li className={ `page-item ${ page === item-1 ? 'active' : '' }` } key={ `page-${ item }` }>
-                                <ALink className="page-link" href={ { query: { ...query, page: item-1 } } } scroll={ false }>
+                                <ALink className="page-link" style={{zIndex: 0}} href={ { query: { ...query, page: item-1 } } } scroll={ false }>
                                     { item }{ page === item-1 && <span className="sr-only">(current)</span> }
                                 </ALink>
                             </li>
@@ -47,7 +47,7 @@ function Pagination ( { totalPage } ) {
                     {
                         page < totalPage-1 &&
                         <li className="page-item">
-                            <ALink className="page-link page-link-btn" href={ { query: { ...query, page: page + 1 } } } scroll={ false }><i className="icon-angle-right"></i></ALink>
+                            <ALink className="page-link page-link-btn" style={{zIndex: 0}} href={ { query: { ...query, page: page + 1 } } } scroll={ false }><i className="icon-angle-right"></i></ALink>
                         </li>
                     }
                 </ul>

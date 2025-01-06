@@ -106,7 +106,7 @@ function Footer() {
                 <div className="widget">
                   <h3 className="widget-title">IMPORTANT LINKS</h3>
                   <div className="widget-content">
-                    <ul>
+                    <ul style={{listStyleType:"none",paddingLeft:"0px"}} >
                       <li>
                         <ALink href="#">Privacy& Policy</ALink>
                       </li>
@@ -133,7 +133,7 @@ function Footer() {
               <div className="col-md-6 col-lg-3">
               <h3 className="widget-title">More Information</h3>
                   <div className="widget-content">
-                    <ul>
+                    <ul style={{listStyleType:"none",paddingLeft:"0px"}} >
                 <li>
                         <ALink href={token ? "/pages/account" : "/pages/login"}>My Profile</ALink>
                       </li>
@@ -196,7 +196,7 @@ function Footer() {
           </div>
 
           {/* mobile footer */}
-          <div className="responsive-footer" style={{ marginTop: "56px" }}>
+          <div className="responsive-footer" style={{ marginTop: "20px" }}>
             <div className="col-md-12 offset-lg-1 col-lg-3 custom-helpline">
 
               <img src="images/helpline.svg" style={{ width: "30px" }} />
@@ -285,7 +285,7 @@ function Footer() {
           <div style={{marginBottom:"16px"}} className="footer-middle container">
             <div className="row">
               <div className="col-md-12 col-lg-8 mb-3 mb-lg-0">
-                <ul style={{paddingLeft:"25px"}} className="footer-category-list mb-0">
+                <ul style={{listStyleType:"none"}} className="footer-category-list mb-0">
                   <li>
                     <h4 className="d-inline-block">Categories:</h4>{" "}
                     {categories.map((value, index) => (

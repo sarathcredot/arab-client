@@ -23,8 +23,8 @@ export default function SingleTabOne(props) {
             <div className="skel-pro-tabs"></div>
             {
                 product &&
-                <Tabs className={`product-single-tabs ${adClass}`} selectedTabClassName="active" selectedTabPanelClassName="show">
-                    <TabList className="nav nav-tabs">
+                <Tabs   className={`product-single-tabs  ${adClass}`} selectedTabClassName="active" selectedTabPanelClassName="show" >
+                    <TabList  className="nav nav-tabs">
                         <Tab className="nav-item">
                             <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>OverView</ALink>
                         </Tab>

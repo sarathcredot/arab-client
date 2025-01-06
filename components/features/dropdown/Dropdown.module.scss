@@ -1,0 +1,53 @@
+// SCSS Variables
+$dropdown-bg: #f8f8f8;
+$dropdown-hover-bg: #eeeeee;
+$text-color: rgb(86, 86, 86);
+$hover-text-color: #525252;
+$border-radius: 4px;
+$transition-speed: 0.3s;
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  // Style the button
+  .dropdownButton {
+    background-color: $dropdown-bg;
+    color: $text-color;
+    border: none;
+    padding: 5px 5px;
+    // font-size: 16px;
+    cursor: pointer;
+    border-radius: $border-radius;
+    transition: background-color $transition-speed ease;
+    
+    &:hover {
+      background-color: $dropdown-hover-bg;
+    }
+  }
+  
+  // Dropdown content (hidden by default)
+  .dropdownContent {
+    position: absolute;
+    top: 10;
+    right: 10;
+    background-color: $dropdown-bg;
+    min-width: 100px;
+    z-index: 1;
+    border-radius: $border-radius;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  
+    // Dropdown items
+    a {
+      color: $text-color;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color $transition-speed ease, color $transition-speed ease;
+      
+      &:hover {
+        background-color: $dropdown-hover-bg;
+        color: $hover-text-color;
+      }
+    }
+  }
+}

@@ -73,3 +73,12 @@
         }
     }
 }
+
+
+@media (max-width:768px) {
+    .http-error{
+        h2 {
+            font-size: 90px;
+        } 
+    }
+}

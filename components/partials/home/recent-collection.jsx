@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Reveal from "react-awesome-reveal";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { IoIosArrowForward  } from "react-icons/io";
+
 
 // Import Custom Component
 import ALink from "../../common/ALink";
@@ -94,11 +96,15 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
             style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" }}
           >
             <h4 className="section-title text-transform-none mb-0 mr-0">
-             50% OFF
+             50% Off
             </h4>
-            <ALink className="view-all ml-auto" href='/shop?discount=50'>
-              View All Products
-            </ALink>
+            {/* <ALink className="view-all ml-auto" href='/shop?discount=10'>
+              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
+            </ALink> */}
+             <ALink href="/shop?discount=10" className="ml-auto offer-view"> 
+            <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
+              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
+              </p></ALink>
           </div>
 
           <OwlCarousel
@@ -163,11 +169,12 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
             style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" }}
           >
             <h4 className="section-title text-transform-none mb-0 mr-0">
-            30% OFF
+            30% Off
             </h4>
-            <ALink className="view-all ml-auto" href="/shop?discount=30">
-              View All Products
-            </ALink>
+            <ALink href="/shop?discount=10" className="ml-auto offer-view"> 
+            <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
+              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
+              </p></ALink>
           </div>
 
           <OwlCarousel
@@ -231,11 +238,12 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
             style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" }}
           >
             <h4 className="section-title text-transform-none mb-0 mr-0">
-              10% OFF
+              10% Off
             </h4>
-            <ALink className="view-all ml-auto" href='/shop?discount=10'>
-              View All Products
-            </ALink>
+            <ALink href="/shop?discount=10" className="ml-auto offer-view"> 
+            <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
+              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
+              </p></ALink>
           </div>
 
           <OwlCarousel

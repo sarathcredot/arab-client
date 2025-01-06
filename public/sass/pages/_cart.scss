@@ -581,6 +581,26 @@ i.cart-empty {
 	}
 }
 
+.cart-container{
+
+     margin-top: 3rem;
+}
+
+
+@media(max-width:768px){
+
+	.cart-container{
+
+	   // padding-left:40px;
+	   margin-top: 5rem !important;
+	}
+
+   //  .cart-price-box{
+
+   // 	   margin-right: 30px;
+   //  }
+}
+
 
 
 

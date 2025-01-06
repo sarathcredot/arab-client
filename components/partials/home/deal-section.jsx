@@ -5,7 +5,7 @@ import Reveal from "react-awesome-reveal";
 import ProductOne from "../../features/products/product-one";
 import ProductFour from "../../features/products/product-four";
 import { useQuery, gql, useLazyQuery } from "@apollo/react-hooks";
-import { IoMdArrowDropright } from "react-icons/io";
+import { IoIosArrowForward  } from "react-icons/io";
 
 // Import Settigns
 import { fadeInUpShorter } from "../../../utils/data/keyframes";
@@ -63,7 +63,7 @@ function DealSection() {
       }
     })
   }, [])
-
+ 
   const products = data?.getProducts?.records
   return (
     <section className="deal-products-section">
@@ -72,11 +72,11 @@ function DealSection() {
         <h2 className="section-title d-flex align-items-center text-transform-none">
           Deals of the day
         </h2>
+        
         <ALink href="/shop?discount=10"> 
-        <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
-          View All <IoMdArrowDropright style={{fontSize:"20px"}}/> 
+        <p  style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "600",}}>
+        <span > View All </span>  <span>  <IoIosArrowForward c style={{fontSize:"20px"}}/> </span>
           </p></ALink>
-
       </div>
       <h4 className="recommendmob">Deals of the day</h4>
       {/* <Reveal
@@ -87,7 +87,7 @@ function DealSection() {
       // style={{ border: "1px solid rgba(185, 185, 185, 1)" }}
       > */}
         <div className="row">
-          <div className="col-lg-4 col-md-5 mb-2 mb-md-0">
+          <div style={{marginBottom:"-0.1rem"}} className="col-lg-4 col-md-5 ">
             {products
               ? products
                 .slice(0, 15)

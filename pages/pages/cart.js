@@ -234,7 +234,7 @@ function Cart(props) {
             </li>
           </ul>
         </div>
-        <div className=" cart-container container" style={{ marginTop: "70px" }}>
+        <div className=" cart-container container" >
           {cartList?.length === 0 ? (
             <div className="cart-table-container">
               <div className="table table-cart">
@@ -307,7 +307,7 @@ function Cart(props) {
                             </figure>
                           </td>
                           <td className="product-col">
-                            <h5 className="product-title">
+                            <h5 className="product-title" style={{fontWeight:"700"}}>
                               <ALink href={`/product/default/${item?.productId}`}>
                                 {item.name}
                               </ALink>

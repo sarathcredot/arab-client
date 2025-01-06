@@ -827,4 +827,27 @@ input[type="radio"]{
 
 		padding-left:15px;
 	}
+
+	.step-title-new{
+
+		padding-left:0px ;
+	}
+
+
+	
 }
+
+
+.cart-price-box{
+
+	 margin-left: 30px;
+}
+
+@media(max-width:769px){
+
+	.cart-price-box{
+
+		margin-left: 0px;
+   }
+}
+

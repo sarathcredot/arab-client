@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 // Request Interceptor
 export const requestInterceptor = new ApolloLink(
   (operation, forward) => {
+    console.log("request interceptor")
     // Modify the operation before it is sent
     operation.setContext({
       headers: {
@@ -19,6 +20,7 @@ export const requestInterceptor = new ApolloLink(
 // Response Interceptor
 export const responseInterceptor = new ApolloLink(
   (operation, forward) => {
+    console.log("responce interceptor")
     return new Observable((observer) => {
       const handleNext = (result) => {
 
@@ -27,7 +29,8 @@ export const responseInterceptor = new ApolloLink(
           // localStorage.removeItem("arabtoken");
           // window.location.href="/pages/login";
         } else {
-          observer?.next(result);
+          console.log("err",observer , "result is ",result)
+          observer.next(result);
         }
       };
 

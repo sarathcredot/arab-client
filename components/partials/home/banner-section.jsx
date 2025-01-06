@@ -58,7 +58,7 @@ function BannerSection({ offer, sectionTwoData, sectionThreeData }) {
             <img
               src={sectionThreeData?.images && sectionThreeData?.images[0]?.fileURL}
               className="bannerimg"
-              style={{ width: "100%", objectFit: "contain", cursor: "pointer" }}
+              style={{ width: "100%", objectFit: "contain",  }}
               onClick={() => {
                 if (sectionThreeData?.buttons && sectionThreeData?.buttons.length > 0 && sectionThreeData?.buttons[0]?.redirectionURL) {
                   router.push(sectionThreeData?.buttons[0]?.redirectionURL);
@@ -69,7 +69,7 @@ function BannerSection({ offer, sectionTwoData, sectionThreeData }) {
         </div>
 
 
-        <div className="row pt-4">
+        <div className="row home-banner-pt">
           <div className="col-md-12">
             <img
               src="images/home/banners/homeimage4.svg"
@@ -79,7 +79,7 @@ function BannerSection({ offer, sectionTwoData, sectionThreeData }) {
                 height: "100%",
                 objectFit: "cover",
                 position: "relative",
-                cursor: "pointer",
+                // cursor: "pointer",
               }}
             />
             <div className="app-downloadbtn"            >
