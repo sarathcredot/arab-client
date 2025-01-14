@@ -110,6 +110,7 @@ function DealSection() {
       </a>
      </Link>
 
+      
       </div>
       <h4 className="recommendmob">Deals of the day</h4>
       {/* <Reveal

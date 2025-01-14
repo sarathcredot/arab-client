@@ -163,7 +163,8 @@ function SearchForm(props) {
           <div className="header-search-wrapper" style={{display:"flex",
             
           justifyContent:"center",
-          maxWidth:"570px"
+          maxWidth:"570px",
+          zIndex: 0
           }}>
             
             <input
