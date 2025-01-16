@@ -228,7 +228,6 @@ function Orders(props) {
   const [showReturnFormModal, setShowReturnFormModal] = useState(false);
   const [orderProductIdForReturn, setOrderProductIdForReturn] = useState("");
   const [orderIdForReturn, setOrderIdForReturn] = useState("");
-  const [isShippingAddress, setIsShippingAddress] = useState(false);
 
   //return policy
   const [isAcceptPolicy, setIsAcceptPolicy] = useState(false);
@@ -278,9 +277,12 @@ function Orders(props) {
       console.log(data, 'RESPONSE RETURN SUBMIT')
 
       if (data?.returnUserOrderProduct?._id) {
+        setShowReturnFormModal(false);
+        refetch();
         toast.success(
           "Your order return request has been submitted successfully."
         );
+
       }
     } catch (error) {
       toast.error(error.message);

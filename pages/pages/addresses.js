@@ -187,7 +187,7 @@ function addresses() {
           <Addresses />
         </>
 
-      ) : isShipping ? (<><Shipping isEdit={isEdit} addressId={selectedAddressId} onClose={handleCloseShipping} /></>) : (
+      ) : isShipping ? (<><Shipping isEdit={isEdit} addressId={selectedAddressId} onClose={handleCloseShipping} setIsshipping={setIsshipping} isShipping={isShipping} /></>) : (
         <>
           <div
             className="container d-flex justify-content-between flex-column flex-sm-row w-sm-100"

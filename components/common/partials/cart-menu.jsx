@@ -205,7 +205,7 @@ function CartMenu({ props }) {
           <img src="/images/icon/cart.svg" alt="cart" />
         </div>
         {/* <i className="icon-cart-thick"></i> */}
-        {cartItems?.length > 0 && <span className="cart-count badge-circle">
+        {cartItems?.length > 0 && <span className=" badge-circle">
           {cartItems && cartItems?.length}
         </span>}
       </a>

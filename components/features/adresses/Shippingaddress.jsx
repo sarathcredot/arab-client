@@ -59,13 +59,14 @@ const GET_LOCATION = gql`
   }
 `;
 
-function Addresses({ isEdit, addressId, onClose, isShipping, onIsShipping }) {
+function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
   const router = useRouter();
 
   const {
     data: getAddress,
     loading: getAddressLoading,
     error: getAddressError,
+    refetch: refetchAddress
   } = useQuery(GET_ADDRESSES, { variables: { input: { _id: addressId } } });
   const {
     data: getLocation,
@@ -101,6 +102,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, onIsShipping }) {
   });
 
   useEffect(() => {
+    console.log(getAddress,' = GET ADDRESS')
     if (isEdit && getAddress && !getAddressLoading) {
       setValue("firstname", getAddress?.getUserShippingAddress?.firstname);
       setValue("country", getAddress?.getUserShippingAddress?.country);
@@ -156,10 +158,17 @@ function Addresses({ isEdit, addressId, onClose, isShipping, onIsShipping }) {
             input: { _id: getAddress?.getUserShippingAddress?._id, ...values },
           },
         });
+        console.log("variables = ", {
+          input: { _id: getAddress?.getUserShippingAddress?._id, ...values },
+        });
+        
+        
         if (response) {
           toast.success(
             <div style={{ padding: "10px" }}>Shipping address updated</div>
           );
+          refetchAddress();
+          reset();
           onClose();
         }
       } else {
@@ -237,7 +246,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, onIsShipping }) {
                     }}
                   >
                     <div
-                      onClick={() => onIsShipping(!isShipping)}
+                      onClick={() => setIsshipping(!isShipping)}
                       className={{
                         width: "40px",
                         height: "40px",
