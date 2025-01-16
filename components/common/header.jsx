@@ -338,18 +338,7 @@ function Header({ adClass = "", wishlist }) {
                           {/* </div> */}
                         </ALink>
                       </li>
-                      <li >
-                        <ALink href="/pages/coupons" >
-                          {/* <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
-                        <div style={{width:"35px",height:"35px",borderRadius:"50%",overflow:"hidden"}}> */}
-
-                          <img src="images/icon/vuesax/bold/coupon.svg" className={styles.flagimg}></img>
-                          {/* </div> */}
-                          Coupons
-                          {/* </div> */}
-                        </ALink>
-                      </li>
-
+                    
 
                     </ul>
                   </div>
