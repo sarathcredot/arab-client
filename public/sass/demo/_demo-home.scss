@@ -7,7 +7,13 @@
     overflow: hidden;
 }
 
-
+a:hover .view-all-text {
+    transform: translateX(-5px);
+  }
+  
+a:hover .arrow-icon {
+    transform: translateX(5px); 
+}
 
 .newsletter-popup-content {
     max-width: 357px;

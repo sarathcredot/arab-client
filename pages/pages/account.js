@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ALink from "../../components/common/ALink";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { useRouter } from "next/router";
@@ -6,6 +6,7 @@ import { IoMdHome } from "react-icons/io";
 import { gql, useMutation, useLazyQuery } from "@apollo/client";
 import withApollo from "../../server/apollo";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
 
 
 export const USER_DETAIL = gql`
@@ -31,12 +32,52 @@ const LOG_OUT_USER = gql`
   }
 `;
 
+const DELETE_USER=gql `
+    mutation AccountDeleteByUser($input: accountDeleteByUserInput!) {
+      accountDeleteByUser(input: $input) {
+        success
+        message
+      }
+    }
+`;
+
+
+
+
+
+
 function Account() {
   const id = localStorage?.getItem("userId");
   const token = localStorage.getItem("arabtoken");
   const [userdetail, { loading: userloading, error: usererror, data: userData, refetch }] = useLazyQuery(USER_DETAIL);
+  const [showPopup, setShowPopup] = useState(false);
 
     const [logout, { loading, error }] = useMutation(LOG_OUT_USER);
+
+    const [updateAccountStatus] = useMutation(DELETE_USER);
+
+        const handleDeleteAccount = async () => {
+          try {
+            const response = await updateAccountStatus({
+              variables: {
+                input: {
+                  isDeleted: true
+                },
+              },
+            });
+            console.log("RESPONSE AVAILABLE = ", response);
+            if (response?.data?.accountDeleteByUser) {
+              toast.success(response?.data?.accountDeleteByUser.message);
+              setShowPopup(false)
+              localStorage.clear();
+              router.push("/pages/login");
+            }
+          } catch (error) {
+            console.log("ERROR = ", error);
+            toast.error(error);
+          }
+        };
+    
 
   // console.log("this is userdata",userData)
     
@@ -396,6 +437,9 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
+                      
+                        {/* //logout */}
+
                       <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
@@ -438,6 +482,75 @@ function Account() {
                           {/* </ALink> */}
                         </div>
                       </div>
+
+                      {/* //delete acoount */}
+
+                      <div className="col-12 col-md-4  card-bottom">
+                        <div
+                          className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
+                         onClick={()=>setShowPopup(true)}
+                        >
+                          <div >
+                            <div
+                              style={{
+                                // width: "321.46px",
+                                // height: "276.71p",
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <div
+                                className="iconwrapper-dash"
+                                style={{
+                                  width: "103.59px",
+                                  height: "103.59px",
+                                  // backgroundColor: "red",
+                                  borderRadius: "50%",
+                                  // backgroundColor: "#FAFAFA",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="42"
+                                  height="43"
+                                  viewBox="0 0 42 43"
+                                  fill="black"
+                                  className="iconhover"
+                                >
+                                  <path d="M20.8436 4.38672C16.2966 4.38672 12.6001 8.08326 12.6001 12.6302C12.6001 17.0903 16.0884 20.7001 20.6353 20.8563C20.7741 20.8389 20.913 20.8389 21.0171 20.8563C21.0518 20.8563 21.0692 20.8563 21.1039 20.8563C21.1212 20.8563 21.1212 20.8563 21.1386 20.8563C25.5814 20.7001 29.0697 17.0903 29.087 12.6302C29.087 8.08326 25.3905 4.38672 20.8436 4.38672Z" />
+                                  <path d="M29.6598 25.4737C24.8179 22.2457 16.9215 22.2457 12.0448 25.4737C9.8408 26.9489 8.62598 28.9446 8.62598 31.0793C8.62598 33.2139 9.8408 35.1923 12.0275 36.6501C14.4571 38.2814 17.6504 39.0971 20.8436 39.0971C24.0369 39.0971 27.2302 38.2814 29.6598 36.6501C31.8465 35.175 33.0613 33.1965 33.0613 31.0446C33.044 28.9099 31.8465 26.9315 29.6598 25.4737Z" />
+                                </svg>
+                                {/* <img src="images\icon\vuesax\bold\frame.svg" alt="Account Details" style={{ maxWidth: '100%' }} /> */}
+                              </div>
+                            </div>
+
+                            <div className="feature-box-content" style={{ marginTop: "20px" }}>
+                              <h3>Delete Account</h3>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      {showPopup && (
+                          <div className="popup-overlay">
+                            <div className="popup-content">
+                              <h4 className="popup-head-content">Are you sure you want to delete your account?</h4>
+                              <div className="popup-actions">
+                                <button onClick={handleDeleteAccount} className="btn btn-dark">
+                                  OK
+                                </button>
+                                <button onClick={() => setShowPopup(false)} className="btn btn-gray">
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
                     </div>
                   </div>
                 </div>

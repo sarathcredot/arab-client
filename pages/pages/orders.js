@@ -177,6 +177,7 @@ function Orders(props) {
     try {
       if (!window.confirm("Are you sure you want to cancel this order?"))
         return;
+      console.log("confirmed")
       const response = await cancelUserOrderProduct({
         variables: {
           input: {
@@ -184,12 +185,14 @@ function Orders(props) {
           },
         },
       });
+      console.log(response);
       refetch();
       toast.success(
         <div style={{ padding: "10px" }}>Your order has been canceled.</div>
       );
     } catch (error) {
       console.log(error);
+      toast.error(<div style={{ padding: "10px" }}>{error?.message}</div>);
     }
   };
 
