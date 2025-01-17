@@ -32,7 +32,7 @@ const LOG_OUT_USER = gql`
   }
 `;
 
-const DELETE_USER=gql `
+const DELETE_USER = gql`
     mutation AccountDeleteByUser($input: accountDeleteByUserInput!) {
       accountDeleteByUser(input: $input) {
         success
@@ -52,35 +52,35 @@ function Account() {
   const [userdetail, { loading: userloading, error: usererror, data: userData, refetch }] = useLazyQuery(USER_DETAIL);
   const [showPopup, setShowPopup] = useState(false);
 
-    const [logout, { loading, error }] = useMutation(LOG_OUT_USER);
+  const [logout, { loading, error }] = useMutation(LOG_OUT_USER);
 
-    const [updateAccountStatus] = useMutation(DELETE_USER);
+  const [updateAccountStatus] = useMutation(DELETE_USER);
 
-        const handleDeleteAccount = async () => {
-          try {
-            const response = await updateAccountStatus({
-              variables: {
-                input: {
-                  isDeleted: true
-                },
-              },
-            });
-            console.log("RESPONSE AVAILABLE = ", response);
-            if (response?.data?.accountDeleteByUser) {
-              toast.success(response?.data?.accountDeleteByUser.message);
-              setShowPopup(false)
-              localStorage.clear();
-              router.push("/pages/login");
-            }
-          } catch (error) {
-            console.log("ERROR = ", error);
-            toast.error(error);
-          }
-        };
-    
+  const handleDeleteAccount = async () => {
+    try {
+      const response = await updateAccountStatus({
+        variables: {
+          input: {
+            isDeleted: true
+          },
+        },
+      });
+      console.log("RESPONSE AVAILABLE = ", response);
+      if (response?.data?.accountDeleteByUser) {
+        toast.success(response?.data?.accountDeleteByUser.message);
+        setShowPopup(false)
+        localStorage.clear();
+        router.push("/pages/login");
+      }
+    } catch (error) {
+      console.log("ERROR = ", error);
+      toast.error(error);
+    }
+  };
+
 
   // console.log("this is userdata",userData)
-    
+
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -108,19 +108,19 @@ function Account() {
   }, [id, userdetail, token]);
 
   return (
-    <div> 
+    <div>
       <Helmet>
         <title>Account | Arab Deals</title>
       </Helmet>
       <main className="main main-test">
-       
+
         <nav aria-label="breadcrumb" className="breadcrumb-nav">
           <div className="container">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <ALink href="/">
                   <IoMdHome style={{ fontSize: "16px" }} />
-                  
+
                 </ALink>
               </li>
 
@@ -152,14 +152,14 @@ function Account() {
         </div>
       </main>
 
-      <div className="container  custom-account-container account-container " style={{marginBottom:"0px"}} >
+      <div className="container  custom-account-container account-container " style={{ marginBottom: "0px" }} >
         <Tabs
           selectedTabClassName="active"
           selectedTabPanelClassName="active show"
           defaultIndex={0}
           className="tab"
         >
-          <div className="row" style={{marginLeft:"0px", marginRight:"0px"}}>
+          <div className="row" style={{ marginLeft: "0px", marginRight: "0px" }}>
             <div className="col-12 order-0">
               {/* StickyBox and Tab navigation code */}
               {/* Uncomment and use this code if needed */}
@@ -170,7 +170,7 @@ function Account() {
                 <div className="dashboard-content">
                   {/* Dashboard content */}
                   <p
-                   className="dashboard-hello"
+                    className="dashboard-hello"
                   >
                     Hello
                     {userData?.getUserRecord?.record?.displayName ? (
@@ -291,6 +291,60 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
+
+
+
+                      <div className="col-12 col-md-4  card-bottom">
+                        <div
+                          className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
+
+                        >
+                          <ALink href="/pages/coupons">
+                            <div
+                              style={{
+                                // width: "321.46px",
+                                // height: "276.71p",
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <div
+                                className="iconwrapper-dash"
+                                style={{
+                                  width: "103.59px",
+                                  height: "103.59px",
+                                  // backgroundColor: "red",
+                                  borderRadius: "50%",
+                                  // backgroundColor: "#FAFAFA",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <svg
+                                  width="42"
+                                  height="43"
+                                  viewBox="0 0 42 43"
+                                  fill="black"
+                                  className="iconhover"
+                                  id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" >
+                                  {/* <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  --> */}
+                                  <path d="M39.4,15v-5.6c0-.5-.5-1-1-1.1H3.9c-.6,0-1.1.5-1.2,1.1v5.6c3.7.7,6,4.4,5,8.1-.9,3.7-2.7,4.4-5,4.8,0,1.7-.2,3.7,0,5.4.2,1.7.5,1.2,1.2,1.2h34.3c.6,0,1.1-.5,1.2-1.1v-5.6c-2.4-.4-4.4-2.4-5-4.7-.9-3.7,1.3-7.4,5-8.1ZM12.3,17.1c0-1.5,1.2-2.7,2.7-2.7s2.7,1.2,2.7,2.7-1.2,2.7-2.7,2.7-2.7-1.2-2.7-2.7ZM18.3,32.5l-2.4-.9,7.9-21.1,2.5.9-7.9,21h0ZM27.8,28.5c-1.5,0-2.7-1.2-2.7-2.7s1.2-2.7,2.7-2.7,2.7,1.2,2.7,2.7-1.2,2.7-2.7,2.7Z" />
+                                </svg>
+                                {/* <img src="images\icon\vuesax\bold\frame.svg" alt="Account Details" style={{ maxWidth: '100%' }} /> */}
+                              </div>
+                            </div>
+
+                            <div className="feature-box-content" style={{ marginTop: "20px" }}>
+                              <h3>Coupons</h3>
+                            </div>
+                          </ALink>
+                        </div>
+                      </div>
+
+
+
+
                       {/* <div className="col-12 col-md-4 mb-5">
                         <div
                           className="feature-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
@@ -342,7 +396,7 @@ function Account() {
                       <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
-                          
+
                         >
                           <ALink href="/pages/addresses">
                             <div
@@ -392,7 +446,7 @@ function Account() {
                       <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
-                         
+
                         >
                           <ALink href="/pages/accountdetails">
                             <div
@@ -437,8 +491,8 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      
-                        {/* //logout */}
+
+                      {/* //logout */}
 
                       <div className="col-12 col-md-4  card-bottom">
                         <div
@@ -488,7 +542,7 @@ function Account() {
                       <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
-                         onClick={()=>setShowPopup(true)}
+                          onClick={() => setShowPopup(true)}
                         >
                           <div >
                             <div
@@ -535,21 +589,33 @@ function Account() {
                         </div>
                       </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
                       {showPopup && (
-                          <div className="popup-overlay">
-                            <div className="popup-content">
-                              <h4 className="popup-head-content">Are you sure you want to delete your account?</h4>
-                              <div className="popup-actions">
-                                <button onClick={handleDeleteAccount} className="btn btn-dark">
-                                  OK
-                                </button>
-                                <button onClick={() => setShowPopup(false)} className="btn btn-gray">
-                                  Cancel
-                                </button>
-                              </div>
+                        <div className="popup-overlay">
+                          <div className="popup-content">
+                            <h4 className="popup-head-content">Are you sure you want to delete your account?</h4>
+                            <div className="popup-actions">
+                              <button onClick={handleDeleteAccount} className="btn btn-dark">
+                                OK
+                              </button>
+                              <button onClick={() => setShowPopup(false)} className="btn btn-gray">
+                                Cancel
+                              </button>
                             </div>
                           </div>
-                        )}
+                        </div>
+                      )}
 
                     </div>
                   </div>
