@@ -172,7 +172,7 @@ function Account() {
 
             <div className="coupon-box-main" key={index} >
               <div style={{ display: "flex", justifyContent: "space-between" }} className="" >
-                <h5> Get {data.name} </h5>
+                <h5> {data.name} </h5>
 
                 {/* {
                   copycode === index ? <span style={{ cursor: "pointer", }} ><IoIosCheckmark style={{ fontSize: "15px" }} /> copied </span>
@@ -180,16 +180,26 @@ function Account() {
                     : <span onClick={() => { codeCopy(index) }} style={{ cursor: "pointer", }} > code: {data.code}<IoIosCopy style={{ fontSize: "15px" }} /></span>
 
                 } */}
-                <button className="coupon-btn"  > Apply </button>
+               
+
+              </div>
+              <div style={{display:"flex",justifyContent:"space-between"}} >
+
+              <p>{data.description}  </p>
+
+              <button className="coupon-btn"  > Apply </button>
 
 
               </div>
 
-              <p>{data.description}  </p>
+            
 
 
 
-              <span > <FaCalendarDays style={{ color: "orange", font: "15px" }} /> Expires on:{" "}
+              <span style={{fontSize:"12px"}}  > 
+                {/* <FaCalendarDays style={{ color: "orange", font: "15px" }} />  */}
+                <img style={{width:"20px",height:"20px"}} src="images/icon/vuesax/bold/calendar.svg" alt="" />
+                Expires on:{" "}
                 {new Date(data.expiryDate).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",

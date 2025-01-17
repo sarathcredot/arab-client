@@ -294,6 +294,7 @@ function Account() {
 
 
 
+
                       <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
