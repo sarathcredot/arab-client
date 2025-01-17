@@ -67,12 +67,22 @@
     margin: 10px;
     border-radius: 6px;
     text-align: center;
+    width:50% ;
   }
-
+    .popup-input{
+        width: 80%;
+        height: 60px;
+    }
   
   
   .popup-actions button {
     margin: 10px;
+  }
+
+  @media (max-width: 600px) {
+    .popup-content{
+        width: 100%;
+    }
   }
   
 
