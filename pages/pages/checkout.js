@@ -23,23 +23,49 @@ const countryOptions = [
 
 const GET_CART = gql`
   query GetCart {
-    getCart {
-      products {
-        _id
-        productId
-        quantity
-        name
-        stock
-        sellingPrice
-        price
-        image
-      }
-      grandTotal
-      subTotal
-      deliveryCharge
+  getCart {
+    products {
+      _id
+      productId
+      quantity
+      name
+      shortDescription
+      stock
+      color
+      size
+      price
+      image
+      sellingPrice
+      mrp
     }
+    grandTotal
+    subTotal
+    deliveryCharge
+    discount
+    isCouponApplied
+    appliedCoupon
+    code
   }
+}
 `;
+
+const APPLY_COUPON = gql`
+mutation ApplyCouponByUser($input: applyCouponByUserInput!) {
+  applyCouponByUser(input: $input) {
+    success
+    message
+  }
+}
+`
+const REMOVE_COUPON = gql`
+mutation RemoveCoupon {
+  removeCoupon {
+    success
+    message
+  }
+}
+`
+
 export const GET_ADDRESSES = gql`
   query GetUserShippingAddresses {
     getUserShippingAddresses {
@@ -91,6 +117,9 @@ function CheckOut() {
   const { data, loading, error, refetch } = useQuery(GET_ADDRESSES);
   const [RemoveUserShippingAddress] = useMutation(REMOVE_ADDRESS);
   const [CreateUserOrder] = useMutation(PLACE_ORDER);
+  const [coupon,setCoupon] = useState("")
+  const [ApplyCoupon] = useMutation(APPLY_COUPON);
+  const [RemoveCoupon] = useMutation(REMOVE_COUPON);
   const router = useRouter();
   const customStyles = {
     control: (provided, state) => ({
@@ -207,6 +236,47 @@ function CheckOut() {
     }
   };
 
+  const handleApplyCoupon = async (e)=>{
+    e.preventDefault()
+    if(coupon){
+      try {
+        
+        const response = await ApplyCoupon({
+          variables:{
+          input:{
+            code:coupon
+          }
+        }
+      })
+      console.log("RESPONSE = ",response)
+      if(response?.data?.applyCouponByUser?.success){
+        toast.success(<div style={{padding:"10px"}}>{response?.data?.applyCouponByUser?.message}</div>)
+        cartRefetch()
+      }
+    } catch (error) {
+      console.log("ERROR = ",error)
+      toast.error(<div style={{padding:"10px"}}>{error?.message}</div>)
+      
+    }
+    }
+
+  }
+  const handleRemoveCoupon=async ()=>{
+    try {
+      const response = await RemoveCoupon()
+      if(response?.data?.removeCoupon?.success){
+        toast.success(<div style={{padding:"10px"}}>{response?.data?.removeCoupon?.message}</div>)
+        cartRefetch()
+      }
+    } catch (error) {
+      console.log("ERROR = ",error)
+      toast.error(<div style={{padding:"10px"}}>{error?.message}</div>)
+    }
+  }
+
+
+
+
   useEffect(() => {
     if (!arabtoken) {
       router.push("/pages/login");
@@ -260,7 +330,7 @@ function CheckOut() {
             ) : (
               <>
                 {/* discount coupon */}
-                {/* <div className="checkout-discount">
+                <div className="checkout-discount">
                 <SlideToggle
                   duration={200}
                   collapsed
@@ -334,28 +404,52 @@ function CheckOut() {
                             If you have a coupon code, please apply it below.
                           </p>
 
-                          <form action="#" ref={setCollapsibleElement}>
+                          <form onSubmit={handleApplyCoupon} ref={setCollapsibleElement}>
                             <div className="input-group">
-                              <input
+                              {cartData?.getCart?.isCouponApplied && cartData?.getCart?.code?(
+                                <input
+                                type="text"
+                                className="form-control htmlForm-control-sm w-auto"
+                                value={cartData?.getCart?.code}
+                                disabled={true}
+                                
+                                />
+                              ):(
+
+                                <input
                                 type="text"
                                 className="form-control htmlForm-control-sm w-auto"
                                 placeholder="Coupon code"
                                 required
-                              />
+                                value={coupon}
+                                onChange={(e)=>setCoupon(e.target.value)}
+                                />
+                              )}
                               <div className="input-group-append">
-                                <button
+                                {cartData?.getCart?.isCouponApplied?(
+                                  <button
+                                  className="btn btn-sm mt-0 "
+                                  type="button"
+                                  onClick={()=>handleRemoveCoupon()}
+                                >
+                                  Remove Coupon
+                                </button>
+                                ):(
+
+                                  <button
                                   className="btn btn-sm mt-0"
                                   type="submit"
                                 >
                                   Apply Coupon
                                 </button>
-                              </div>
-                            </div>
+                              )}
+                                </div>
+                                </div>
                             <div
                               className="row pl-3"
                               style={{ color: "#E30613", fontWeight: "500" }}
                             >
-                              <p> Get available coupon codes</p>
+                              <ALink href={"/pages/coupons"} >Get available coupon codes</ALink>
                             </div>
                           </form>
                         </div>
@@ -363,7 +457,7 @@ function CheckOut() {
                     </div>
                   )}
                 </SlideToggle>
-              </div> */}
+              </div>
                 <div className="row" >
                   <div className="col-lg-7">
                     <div>
