@@ -17,26 +17,30 @@ import { Helmet } from "react-helmet";
 
 const GET_CART = gql`
   query GetCart {
-    getCart {
-      products {
-        _id
-        productId
-        quantity
-        name
-        shortDescription
-        stock
-        color
-        size
-        price
-        image
-        sellingPrice
-        mrp
-      }
-      grandTotal
-      subTotal
-      deliveryCharge
+  getCart {
+    products {
+      _id
+      productId
+      quantity
+      name
+      shortDescription
+      stock
+      color
+      size
+      price
+      image
+      sellingPrice
+      mrp
     }
+    grandTotal
+    subTotal
+    deliveryCharge
+    discount
+    isCouponApplied
+    appliedCoupon
+    code
   }
+}
 `;
 
 const PUT_CART = gql`
