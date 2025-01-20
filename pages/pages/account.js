@@ -51,7 +51,6 @@ function Account() {
   const token = localStorage.getItem("arabtoken");
   const [userdetail, { loading: userloading, error: usererror, data: userData, refetch }] = useLazyQuery(USER_DETAIL);
   const [showPopup, setShowPopup] = useState(false);
-  const [deletedReason, setDeletedReason] = useState("");
 
   const [logout, { loading, error }] = useMutation(LOG_OUT_USER);
 
@@ -62,8 +61,7 @@ function Account() {
       const response = await updateAccountStatus({
         variables: {
           input: {
-            isDeleted: true,
-            deleteReason: deletedReason
+            isDeleted: true
           },
         },
       });
@@ -71,7 +69,6 @@ function Account() {
       if (response?.data?.accountDeleteByUser) {
         toast.success(response?.data?.accountDeleteByUser.message);
         setShowPopup(false)
-        setDeletedReason("")
         localStorage.clear();
         router.push("/pages/login");
       }
@@ -294,7 +291,6 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-
 
 
 
@@ -594,14 +590,21 @@ function Account() {
                       </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
                       {showPopup && (
                         <div className="popup-overlay">
                           <div className="popup-content">
                             <h4 className="popup-head-content">Are you sure you want to delete your account?</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, quibusdam. Accusantium quibusdam consectetur adipisicing elit it amet consectetur adipisicing elit. Accusantium, quibusdam. Accusantium quibusdam cons</p>
-                            <input 
-                              className="popup-input" type="text" placeholder=" Your happy feedback😁"
-                              onChange={(e) => setDeletedReason(e.target.value)} />
                             <div className="popup-actions">
                               <button onClick={handleDeleteAccount} className="btn btn-dark">
                                 OK

@@ -427,7 +427,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Apartment, suite, unit, etc. (optional)"
+                          placeholder="Apartment, suite, unit, etc."
                           value={value}
                           onChange={onChange}
                         />
@@ -443,7 +443,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
 
                   <div className="form-group">
                     <label>
-                      Twon/City <span className="required">*</span>
+                      Town/City <span className="required">*</span>
                     </label>
                     <Controller
                       control={control}

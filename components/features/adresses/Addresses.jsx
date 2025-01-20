@@ -224,7 +224,7 @@ function Addresses() {
 
                                     <div className="form-group">
                                         <label>
-                                            Twon/City <span className="required">*</span>
+                                            Town/City <span className="required">*</span>
                                         </label>
                                         <Controller
                           control={control}
