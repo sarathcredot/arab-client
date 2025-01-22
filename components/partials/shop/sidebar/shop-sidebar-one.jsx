@@ -572,6 +572,7 @@ function ShopSidebarOne(props) {
                               style={{
                                 color: query.discount === "10" ? "red" : "inherit", // Apply red color if selected, otherwise use default color
                                 fontWeight: "500",
+                                cursor:"pointer"
                               }}
                             >
                               10% off or more
@@ -583,6 +584,7 @@ function ShopSidebarOne(props) {
                               style={{
                                 color: query.discount === "25" ? "red" : "inherit",
                                 fontWeight: "500",
+                                cursor:"pointer"
                               }}
                             >
                               25% off or more
@@ -594,6 +596,7 @@ function ShopSidebarOne(props) {
                               style={{
                                 color: query.discount === "50" ? "red" : "inherit",
                                 fontWeight: "500",
+                                cursor:"pointer"
                               }}
                             >
                               {" "}
@@ -606,6 +609,7 @@ function ShopSidebarOne(props) {
                               style={{
                                 color: query.discount === "75" ? "red" : "inherit",
                                 fontWeight: "500",
+                                cursor:"pointer"
                               }}
                             >
                               75% off or more

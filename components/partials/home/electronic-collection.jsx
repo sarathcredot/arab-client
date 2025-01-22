@@ -95,8 +95,8 @@ function ElectronicCollection() {
               <h4 className="section-title text-transform-none mb-0 mr-0 " >
                 Best Selling
               </h4>
-              <ALink href="/shop?bestSeller=true" style={{ color: "black", fontWeight: "600" }}>
-              View All <IoIosArrowForward style={{fontSize:"20px"}}/> 
+              <ALink href="/shop?bestSeller=true" className="view-all-text " style={{ color: "black", fontWeight: "600" }}>
+              View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/> 
               </ALink>
             </div>
             
@@ -107,7 +107,7 @@ function ElectronicCollection() {
           >
           <h4 style={{fontWeight:"600"}}> Best Selling</h4>
           <ALink href="/shop?bestSeller=true" style={{ color: "black", fontWeight: "600" }}>
-              View All <IoIosArrowForward style={{fontSize:"20px"}}/> 
+              View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/> 
               </ALink>
           </div>
 

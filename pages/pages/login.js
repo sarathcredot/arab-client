@@ -221,6 +221,7 @@ function Login({ mutate }) {
                           renderInput={(props) => (
                             <input
                               {...props}
+                              type="number"
                               className="otpbox"
                               // style={{
                               //   width: "60px",
