@@ -164,7 +164,8 @@ function SearchForm(props) {
             
           justifyContent:"center",
           maxWidth:"570px",
-          zIndex: 0
+          zIndex: 0,
+         
           }}>
             
             <input

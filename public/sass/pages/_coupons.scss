@@ -1,10 +1,12 @@
 .coupon-container-main {
 
-      height: 400px;
+      // height: 400px;
       display: flex;
       flex-direction: row;
       gap: 20px;
       flex-wrap: wrap;
+      // background: #00000022;
+      margin-bottom: 10px;
 
 
 
@@ -14,10 +16,10 @@
 
       .coupon-container-main {
 
-            height: 700px;
+            // height: 700px;
             display: flex;
             flex-direction: row;
-            gap: 20px;
+            // gap: 50px;
             flex-wrap: wrap;
             padding-top: 30px;
 
@@ -37,12 +39,13 @@
        border: none;
        background-color: rgb(6, 6, 6);
        color: white;
-       border-radius: 10px;
+      //  border-radius: 10px;
        font-size: 14px;
        display: flex;
        justify-content: center;
        align-items: center;
        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+      //  font-weight: bold;
 
 }
 
@@ -59,7 +62,8 @@
 
 }
 
-.coupon-box-main h5 {
+.coupon-box-main h2 {
 
       font-size: 18px;
+      font-family:"Poppins" ;
 }

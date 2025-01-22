@@ -119,15 +119,15 @@ function Home() {
       <Helmet>
         <title>Home | Arab Deals</title>
       </Helmet>
-      <main className="home">
+      <main className="home" >
         <div style={{ position: "relative" }}>
           <div
             className="header-bottom d-flex"
-            style={{ position: "relative", width: "100%", marginBottom:"-50px"}}
+            style={{ position: "relative", width: "100%", marginBottom:"-50px",}}
           >
             <div className="container" >  
               <div>
-                <MainMenu />
+              <MainMenu />
               </div>
             </div>
           </div>
