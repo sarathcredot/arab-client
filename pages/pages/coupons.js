@@ -244,7 +244,8 @@ function Account() {
 
             <div className="coupon-box-main" key={index} >
               <div style={{ display: "flex", justifyContent: "space-between" }} className="" >
-                <h5> {data?.name} </h5>
+                <h2> {data.name} </h2>
+
                 {/* {
                   copycode === index ? <span style={{ cursor: "pointer", }} ><IoIosCheckmark style={{ fontSize: "15px" }} /> copied </span>
 
@@ -258,12 +259,17 @@ function Account() {
                     <button onClick={()=>handleRemoveCoupon()}  className="coupon-btn-red"  > Remove </button>
                   ):(
 
-                    <button onClick={()=>handleApplyCoupon(data?.code)}  className="coupon-btn btn btn-sm m-0"  > Apply </button>
+              // <p>{data.description}  </p>
+
+              <button onClick={()=>handleApplyCoupon(data?.code)}  style={{width: "70px",height: "30px", display:"flex",marginLeft:"5px", justifyContent:"center", alignItems:"center"}} className="btn btn-block btn-dark "  > Apply </button>
+
+
+                    // <button onClick={()=>handleApplyCoupon(data?.code)}  className="coupon-btn btn btn-sm m-0"  > Apply </button>
                   )}
               </div>
               <span style={{fontSize:"12px"}}  > 
                 {/* <FaCalendarDays style={{ color: "orange", font: "15px" }} />  */}
-                <img style={{width:"20px",height:"20px"}} src="images/icon/vuesax/bold/calendar.svg" alt="" />
+                <img style={{width:"20px",height:"20px", marginRight:"10px"}} src="images/icon/vuesax/bold/calendar.svg" alt="" />
                 Expires on:{" "}
                 {new Date(data?.expiryDate).toLocaleDateString("en-US", {
                   year: "numeric",
