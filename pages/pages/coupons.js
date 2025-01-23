@@ -253,7 +253,7 @@ function Account() {
 
                 } */}
               </div>
-              <div style={{display:"flex",justifyContent:"space-between"}} >
+            <div style={{display:"flex",justifyContent:"space-between"}} >
               <p>{data?.description}  </p>
                   {cartData&&cartData?.getCart?.isCouponApplied &&cartData?.getCart?.appliedCoupon===data?._id?(
                     <button onClick={()=>handleRemoveCoupon()}  className="coupon-btn-red"  > Remove </button>
