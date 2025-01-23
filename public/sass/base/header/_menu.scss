@@ -772,6 +772,7 @@
   gap: 10px;
   padding-bottom: 14px;
   color: black;
+  padding-left: 0px;
   &__item {
     border: 1px solid rgba(240, 240, 240, 1);
     height: 45px;
@@ -870,7 +871,7 @@
 }
 @media (max-width:600px) {
   .custom__mobilemenu {
-    padding: 5rem 0 0 0;
+    padding: 0 0 0 0;
   }
 }
 

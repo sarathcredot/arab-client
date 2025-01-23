@@ -101,9 +101,9 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
             {/* <ALink className="view-all ml-auto" href='/shop?discount=10'>
               View All <IoIosArrowForward style={{fontSize:"20px"}}/>
             </ALink> */}
-             <ALink href="/shop?discount=10" className="ml-auto offer-view"> 
+             <ALink href="/shop?discount=10" className="ml-auto offer-view view-all-text"> 
             <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
-              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
+              View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/>
               </p></ALink>
           </div>
 
@@ -171,9 +171,9 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
             <h4 className="section-title text-transform-none mb-0 mr-0">
             30% Off
             </h4>
-            <ALink href="/shop?discount=10" className="ml-auto offer-view"> 
+            <ALink href="/shop?discount=10" className="ml-auto offer-view text-transform-none"> 
             <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
-              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
+              View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/>
               </p></ALink>
           </div>
 
@@ -242,7 +242,7 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
             </h4>
             <ALink href="/shop?discount=10" className="ml-auto offer-view"> 
             <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
-              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
+              View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/>
               </p></ALink>
           </div>
 

@@ -9,6 +9,8 @@ import { Helmet } from "react-helmet";
 import { toast } from "react-toastify";
 
 
+
+
 export const USER_DETAIL = gql`
   query GetUserRecord($input: userInput!) {
     getUserRecord(input: $input) {
@@ -52,6 +54,7 @@ function Account() {
   const [userdetail, { loading: userloading, error: usererror, data: userData, refetch }] = useLazyQuery(USER_DETAIL);
   const [showPopup, setShowPopup] = useState(false);
   const [deletedReason, setDeletedReason] = useState("");
+ 
 
  
   const [updateAccountStatus] = useMutation(DELETE_USER);
@@ -61,8 +64,7 @@ function Account() {
       const response = await updateAccountStatus({
         variables: {
           input: {
-            isDeleted: true,
-            deleteReason: deletedReason
+            isDeleted: true
           },
         },
       });
@@ -70,7 +72,6 @@ function Account() {
       if (response?.data?.accountDeleteByUser) {
         toast.success(response?.data?.accountDeleteByUser.message);
         setShowPopup(false)
-        setDeletedReason("")
         localStorage.clear();
         router.push("/pages/login");
       }
@@ -201,7 +202,7 @@ function Account() {
                   </p>
                   <div className="container p-md-5 p-sm-0">
                     <div className="row">
-                      <div className="col-12 col-md-4 card-bottom">
+                      <div onClick={()=>{router.push("/pages/orders")}}  className="col-12 col-md-4 card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center content-box mr-sm-0 w-sm-100"
                         >
@@ -250,7 +251,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4  card-bottom">
+                      <div onClick={()=>{router.push("/pages/wishlist")}}  className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100 "
                         >
@@ -300,7 +301,7 @@ function Account() {
 
 
 
-                      <div className="col-12 col-md-4  card-bottom">
+                      <div onClick={()=>{router.push("/pages/coupons")}} className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
 
@@ -399,7 +400,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div> */}
-                      <div className="col-12 col-md-4  card-bottom">
+                      <div onClick={()=>{router.push("/pages/addresses")}} className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
 
@@ -449,7 +450,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4  card-bottom">
+                      <div onClick={()=>{router.push("/pages/accountdetails")}}  className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
 
@@ -500,7 +501,7 @@ function Account() {
 
                       {/* //logout */}
 
-                      <div className="col-12 col-md-4  card-bottom">
+                      <div   className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
                           onClick={handleLogout}
@@ -596,14 +597,21 @@ function Account() {
                       </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
                       {showPopup && (
                         <div className="popup-overlay">
                           <div className="popup-content">
                             <h4 className="popup-head-content">Are you sure you want to delete your account?</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, quibusdam. Accusantium quibusdam consectetur adipisicing elit it amet consectetur adipisicing elit. Accusantium, quibusdam. Accusantium quibusdam cons</p>
-                            <input 
-                              className="popup-input" type="text" placeholder=" Your happy feedback😁"
-                              onChange={(e) => setDeletedReason(e.target.value)} />
                             <div className="popup-actions">
                               <button onClick={handleDeleteAccount} className="btn btn-dark">
                                 OK

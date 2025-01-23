@@ -6,10 +6,16 @@
 .home {
     overflow: hidden;
 }
+.arrow-icon{
+    transition: .3s ease-in-out;
+}
+.view-all-text{
+    text-decoration: none !important;
 
-a:hover .view-all-text {
-    transform: translateX(-5px);
-  }
+}
+// a:hover .view-all-text {
+//     transform: translateX(-5px);
+//   }
   
 a:hover .arrow-icon {
     transform: translateX(5px); 
@@ -53,7 +59,7 @@ a:hover .arrow-icon {
 
 .offer-view{
   p:hover {
-    text-decoration: underline;
+    text-decoration: none;
     text-decoration-color: black;
   }
 }

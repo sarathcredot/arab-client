@@ -50,21 +50,21 @@ const GET_CART = gql`
 `;
 
 const APPLY_COUPON = gql`
-mutation ApplyCouponByUser($input: applyCouponByUserInput!) {
-  applyCouponByUser(input: $input) {
-    success
-    message
+  mutation ApplyCouponByUser($input: applyCouponByUserInput!) {
+    applyCouponByUser(input: $input) {
+      success
+      message
+    }
   }
-}
-`
+`;
 const REMOVE_COUPON = gql`
-mutation RemoveCoupon {
-  removeCoupon {
-    success
-    message
+  mutation RemoveCoupon {
+    removeCoupon {
+      success
+      message
+    }
   }
-}
-`
+`;
 
 export const GET_ADDRESSES = gql`
   query GetUserShippingAddresses {
@@ -427,7 +427,9 @@ function CheckOut() {
                               )}
                               <div className="input-group-append">
                                 {cartData?.getCart?.isCouponApplied?(
-                                  <button
+                                  <button style={{
+                                    background:"#f91926"
+                                  }}
                                   className="btn btn-sm mt-0 "
                                   type="button"
                                   onClick={()=>handleRemoveCoupon()}
@@ -996,6 +998,17 @@ function CheckOut() {
                                 <span>OMR {cartData?.getCart?.subTotal}</span>
                               </td>
                             </tr>
+                            {cartData?.getCart?.isCouponApplied&&
+                            <tr className="cart-subtotal">
+                              <td>
+                                <h4>Coupon Discount</h4>
+                              </td>
+
+                              <td className="price-col">
+                                <span>OMR {cartData?.getCart?.discount}</span>
+                              </td>
+                            </tr>
+                            }
                             <tr className="cart-subtotal">
                               <td>
                                 <h4>Shipping Charge</h4>

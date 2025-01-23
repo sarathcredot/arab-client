@@ -144,9 +144,9 @@ function Shop() {
 
   return (
     <main className="main">
-      <nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
+      <nav aria-label="breadcrumb" className="breadcrumb-nav ">
         <div className="container">
-          <ol className="breadcrumb">
+          <ol className="breadcrumb mt-1">
             <li className="breadcrumb-item">
               <ALink href="/">
                 <IoMdHome style={{ fontSize: "16px" }} />
@@ -189,7 +189,7 @@ function Shop() {
           style={{
             width: "228px",
             height: "26px",
-            marginTop: "60px",
+            marginTop: "30px",
             marginBottom: "33px",
           }}
         >
