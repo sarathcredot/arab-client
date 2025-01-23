@@ -53,8 +53,7 @@ function Account() {
   const [showPopup, setShowPopup] = useState(false);
   const [deletedReason, setDeletedReason] = useState("");
 
-  const [logout, { loading, error }] = useMutation(LOG_OUT_USER);
-
+ 
   const [updateAccountStatus] = useMutation(DELETE_USER);
 
   const handleDeleteAccount = async () => {
@@ -80,6 +79,9 @@ function Account() {
       toast.error(error);
     }
   };
+
+  
+  const [logout, { loading, error }] = useMutation(LOG_OUT_USER);
 
 
   // console.log("this is userdata",userData)
