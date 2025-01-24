@@ -67,7 +67,7 @@ export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit }) {
   }, [isOpen]);
 
   if (!isOpen) return null;
-  
+
   return (
     <>
       {isOpen && (
@@ -79,20 +79,20 @@ export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit }) {
           contentLabel="Return Order"
         >
           <div className={styles.modalOverlay} onClick={closeModal}></div>
-      {isOpen && (
-        <>
-          <div className={styles.modalContent} style={{ zIndex: 9999999 }}>
-            <div className="container">
-              <h2 className="title">Return Policy</h2>
+          {isOpen && (
+            <>
+              <div className={styles.modalContent} style={{ zIndex: 9999999 }}>
+                <div className="container">
+                  <h2 className="title">Return Policy</h2>
 
-              <div className={styles.container}>
-                <p>
-                  Our return policy allows returns within 15 days of purchase.
-                  Items must be in original condition and packaging.
-                  {isExpanded && (
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: `
+                  <div className={styles.container}>
+                    <p>
+                      Our return policy allows returns within 15 days of purchase.
+                      Items must be in original condition and packaging.
+                      {isExpanded && (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: `
   <ul>
     <li>
       If the product arrives <strong>defective</strong> or is
@@ -155,44 +155,44 @@ export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit }) {
     <li><strong>Phone</strong>: +1-800-123-4567</li>
     <li><strong>Hours</strong>: Monday to Friday, 9:00 AM – 6:00 PM (Local Time)</li>
   </ul>`,
-                      }}
-                    ></div>
-                  )}
-                </p>
-                <span className={styles.btn} onClick={toggleViewMore}>
-                  {isExpanded ? "View Less" : "View More"}
-                </span>
-              </div>
+                          }}
+                        ></div>
+                      )}
+                    </p>
+                    <span className={styles.btn} onClick={toggleViewMore}>
+                      {isExpanded ? "View Less" : "View More"}
+                    </span>
+                  </div>
 
-              <div className="text-right">
-                <a
-                  href="#"
-                  className="btn btn-regist mr-2 text-dark bg-transparent text-transform-none p-0"
+                  <div className="text-right">
+                    <a
+                      href="#"
+                      className="btn btn-regist mr-2 text-dark bg-transparent text-transform-none p-0"
+                      onClick={closeModal}
+                    >
+                      Cancel
+                    </a>
+                    <button
+                      type="submit"
+                      className="btn btn-dark btn-md"
+                      onClick={handleSubmit}
+                    >
+                      Accept
+                    </button>
+                  </div>
+                </div>
+
+                <button
+                  title="Close (Esc)"
+                  type="button"
+                  className="mfp-close"
                   onClick={closeModal}
                 >
-                  Cancel
-                </a>
-                <button
-                  type="submit"
-                  className="btn btn-dark btn-md"
-                  onClick={handleSubmit}
-                >
-                  Accept
+                  ×
                 </button>
               </div>
-            </div>
-
-            <button
-              title="Close (Esc)"
-              type="button"
-              className="mfp-close"
-              onClick={closeModal}
-            >
-              ×
-            </button>
-          </div>
-        </>
-      )}
+            </>
+          )}
         </Modal>
       )}
     </>

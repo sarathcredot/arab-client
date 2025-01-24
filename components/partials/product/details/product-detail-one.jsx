@@ -24,6 +24,11 @@ import { toast } from "react-toastify";
 import withApollo from "../../../../server/apollo.js";
 
 function ProductDetailOne(props) {
+
+  console.log("propdate",props)
+
+  console.log("prodata",props?.product?.attributes[1].attributeValue)
+
   const router = useRouter();
   const {
     product,
@@ -37,7 +42,7 @@ function ProductDetailOne(props) {
   const [attrs, setAttrs] = useState({});
   const [variant, setVariant] = useState(null);
   const [size, setSize] = useState(null);
-  const [color, setColor] = useState(null);
+  const [color, setColor] = useState("sfdsdf");
   const [qty, setQty] = useState(1);
   const [selectedcolor, setSelectedColor] = useState();
   const [selectedAttributes, setSelectedAttributes] = useState({});
@@ -157,6 +162,7 @@ function ProductDetailOne(props) {
   };
 
   useEffect(() => {
+    setColor(props?.product?.attributes[1].attributeValue)
     if (variantError) {
       console.error("Error fetching variant data:", variantError);
     } else {
@@ -452,6 +458,8 @@ function ProductDetailOne(props) {
 
   function changeSelection(item) {
 
+    console.log("color change",item)
+
     let variants = {};
 
 
@@ -746,11 +754,13 @@ function ProductDetailOne(props) {
               {colorVariants?.length > 0 ? (
                 <>
                   <label>
-                    COLOR:&nbsp;{""}
+                    COLOR:&nbsp;<span style={{ fontWeight: "500" }} > {color} </span>
                     <span style={{ fontWeight: "500" }}>
                       {selectedAttributes &&
                         // selectedAttributes.charAt(0).toUpperCase() +
-                        selectedAttributes?.color}
+                        selectedAttributes?.color
+                        
+                        }
                     </span>
                   </label>
                 </>
