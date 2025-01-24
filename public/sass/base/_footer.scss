@@ -151,7 +151,7 @@ footer {
 	&-middle {
 		@include css( color, footer, middle, color );
 		@include css( background, footer, middle, background );
-		@include css( border-top, footer, middle, border-top );
+		// @include css( border-top, footer, middle, border-top );
 		@include css( padding-top, footer, middle, padding-top );
 		@include css( padding-bottom, footer, middle, padding-bottom );
 	}
