@@ -18,6 +18,7 @@ import Dropdown from "../../components/features/dropdown/Dropdown";
 import ReturnRequestFormModal from "../../components/features/modals/ReturnRequestFormModal";
 import CustomModal from "../../components/features/modals/CustomModal";
 import ReturnPolicyModal from "../../components/features/modals/ReturnPolicyModal";
+import { set } from "react-hook-form";
 
 const GET_ORDERS = gql`
   query GetUserOrderProducts($input: GetUserOrderProductsInput!) {
@@ -173,22 +174,29 @@ function Orders(props) {
     }
   }, [data, error]);
 
-  const orderCancel = async (id) => {
+   //=========================CANCEL ORDER============================\\
+
+   const [showCancelPopup,setshowCancelPopup]=useState(false)
+   const [cancelId,setCancelId]=useState(null)
+
+  const orderCancel = async (cancelId) => {
     try {
-      if (!window.confirm("Are you sure you want to cancel this order?"))
-        return;
-      console.log("confirmed")
+      // if (!window.confirm("Are you sure you want to cancel this order?"))
+      //   return;
+      // console.log("confirmed")
       const response = await cancelUserOrderProduct({
         variables: {
           input: {
-            _id: id,
+            _id: cancelId,
           },
         },
       });
       console.log(response);
+      setshowCancelPopup(false)
+      setCancelId(null)
       refetch();
       toast.success(
-        <div style={{ padding: "10px" }}>Your order has been canceled.</div>
+        <div style={{ padding: "10px" }}>Your order has been canceled. </div>
       );
     } catch (error) {
       console.log(error);
@@ -491,8 +499,10 @@ function Orders(props) {
                                 className="order_update_menu_item"
                                 title="Quick View"
                                 onClick={(e) => {
+                                  console.log("Item ID:", item._id);
                                   e.preventDefault();
-                                  orderCancel(item._id);
+                                  setshowCancelPopup(true);
+                                  setCancelId(item._id);
                                 }}
                               >
                                 Cancel
@@ -625,6 +635,36 @@ function Orders(props) {
                       </td>
                     </tr>
                   ))}
+
+                    {showCancelPopup && (
+                      <div className="popup-overlay">
+                        <div className="popup-content">
+                          <h4 className="popup-head-content">Cancel Order</h4>
+                          <hr class="custom-line" />
+                          <p className="popup-body-content" style={{lineHeight:"18px"}}>Canceling this order means it will no longer be processed or delivered.
+                          If this was unintentional, you can close this popup and continue shopping.<br/>
+                          Please note that refunds, if applicable, will be processed as per our refund policy</p>
+                          <div className="popup-actions">
+                          <button
+                            onClick={() => {
+                              setshowCancelPopup(false);
+                              setCancelId(null);
+                            }}
+                            className="btn btn-outline-dark"
+                          >
+                            CANCEL
+                          </button>
+                          <button
+                            className="btn btn-dark"
+                            onClick={() => orderCancel(cancelId)} 
+                          >
+                            CONFIRM
+                          </button>
+                          </div>
+                        </div>
+                      </div>
+                    )} 
+
                 </tbody>
               </table>
               {loading ||

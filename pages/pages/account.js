@@ -494,54 +494,9 @@ function Account() {
                         </div>
                       </div>
 
-                      {/* //logout */}
+                        {/* //delete acoount */}
 
-                      <div   className="col-12 col-md-4  card-bottom">
-                        <div
-                          className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
-                          onClick={handleLogout}
-                        >
-                          <div>
-                            {/* <ALink href="/pages"> */}
-                            <div>
-                              <div
-                                className="iconwrapper-dash"
-                                style={{
-                                  width: "103.59px",
-                                  height: "103.59px",
-                                  // backgroundColor: "red",
-                                  borderRadius: "50%",
-                                  // backgroundColor: "#FAFAFA",
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                }}
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="42"
-                                  height="43"
-                                  viewBox="0 0 42 43"
-                                  fill="black"
-                                  className="iconhover"
-                                >
-                                  <path d="M34.5435 7.7655C29.4065 2.64588 21.0762 2.64588 15.974 7.7655C12.3816 11.3232 11.3056 16.4428 12.6939 20.955L4.53726 29.1117C3.96456 29.7018 3.5654 30.8645 3.68688 31.6976L4.20752 35.4809C4.39843 36.7304 5.56119 37.9105 6.81072 38.0841L10.594 38.6047C11.4271 38.7262 12.5898 38.3444 13.1799 37.737L14.603 36.3139C14.9501 35.9842 14.9501 35.4288 14.603 35.0817L11.2362 31.7149C10.7329 31.2116 10.7329 30.3786 11.2362 29.8753C11.7394 29.372 12.5725 29.372 13.0758 29.8753L16.4599 33.2595C16.7896 33.5892 17.345 33.5892 17.6747 33.2595L21.3539 29.5976C25.8488 31.0034 30.9684 29.91 34.5435 26.3523C39.6631 21.2327 39.6631 12.8851 34.5435 7.7655ZM25.3628 21.2674C22.9679 21.2674 21.0242 19.3237 21.0242 16.9288C21.0242 14.5338 22.9679 12.5901 25.3628 12.5901C27.7578 12.5901 29.7015 14.5338 29.7015 16.9288C29.7015 19.3237 27.7578 21.2674 25.3628 21.2674Z" />
-                                </svg>
-                                {/* <img src="images\icon\vuesax\bold\key.svg" alt="Logout" style={{ maxWidth: '100%' }} /> */}
-                              </div>
-                            </div>
-
-                            <div className="feature-box-content" style={{ marginTop: "20px" }}>
-                              <h3>Logout</h3>
-                            </div>
-                          </div>
-                          {/* </ALink> */}
-                        </div>
-                      </div>
-
-                      {/* //delete acoount */}
-
-                      <div className="col-12 col-md-4  card-bottom">
+                        <div className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
                           onClick={() => setShowPopup(true)}
@@ -599,13 +554,62 @@ function Account() {
                           </div>
                         </div>
                       </div>
+
+                      {/* //logout */}
+
+                      <div   className="col-12 col-md-4  card-bottom">
+                        <div
+                          className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
+                          onClick={handleLogout}
+                        >
+                          <div>
+                            {/* <ALink href="/pages"> */}
+                            <div>
+                              <div
+                                className="iconwrapper-dash"
+                                style={{
+                                  width: "103.59px",
+                                  height: "103.59px",
+                                  // backgroundColor: "red",
+                                  borderRadius: "50%",
+                                  // backgroundColor: "#FAFAFA",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="42"
+                                  height="43"
+                                  viewBox="0 0 42 43"
+                                  fill="black"
+                                  className="iconhover"
+                                >
+                                  <path d="M34.5435 7.7655C29.4065 2.64588 21.0762 2.64588 15.974 7.7655C12.3816 11.3232 11.3056 16.4428 12.6939 20.955L4.53726 29.1117C3.96456 29.7018 3.5654 30.8645 3.68688 31.6976L4.20752 35.4809C4.39843 36.7304 5.56119 37.9105 6.81072 38.0841L10.594 38.6047C11.4271 38.7262 12.5898 38.3444 13.1799 37.737L14.603 36.3139C14.9501 35.9842 14.9501 35.4288 14.603 35.0817L11.2362 31.7149C10.7329 31.2116 10.7329 30.3786 11.2362 29.8753C11.7394 29.372 12.5725 29.372 13.0758 29.8753L16.4599 33.2595C16.7896 33.5892 17.345 33.5892 17.6747 33.2595L21.3539 29.5976C25.8488 31.0034 30.9684 29.91 34.5435 26.3523C39.6631 21.2327 39.6631 12.8851 34.5435 7.7655ZM25.3628 21.2674C22.9679 21.2674 21.0242 19.3237 21.0242 16.9288C21.0242 14.5338 22.9679 12.5901 25.3628 12.5901C27.7578 12.5901 29.7015 14.5338 29.7015 16.9288C29.7015 19.3237 27.7578 21.2674 25.3628 21.2674Z" />
+                                </svg>
+                                {/* <img src="images\icon\vuesax\bold\key.svg" alt="Logout" style={{ maxWidth: '100%' }} /> */}
+                              </div>
+                            </div>
+
+                            <div className="feature-box-content" style={{ marginTop: "20px" }}>
+                              <h3>Logout</h3>
+                            </div>
+                          </div>
+                          {/* </ALink> */}
+                        </div>
+                      </div>
+
+                    
                       
                       {showPopup && (
                         <div className="popup-overlay">
                           <div className="popup-content">
                             <h4 className="popup-head-content">Delete Account</h4>
                             <hr class="custom-line" />
-                            <p className="popup-body-content" style={{lineHeight:"18px"}}>Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace.  Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor sit amet consectetur.</p>
+                            <p className="popup-body-content" style={{lineHeight:"18px"}}>Are you sure you want to delete your account? This action is irreversible and will permanently remove your profile, order history, and saved preferences.
+
+<br/>If you're facing issues, consider reaching out to our support team before proceeding. Otherwise, click 'Confirm' to delete your account.</p>
                             <p className="popup-label-content">Share your haptic feedback about us</p>
                             <textarea
                                 className="popup-input"

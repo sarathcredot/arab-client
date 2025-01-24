@@ -103,7 +103,7 @@
     padding: 8px;           
     box-sizing: border-box; 
     resize: none;            
-    font-size: 14px;       
+    font-size: 12px;       
     line-height: 1.5;       
   }
 
@@ -122,9 +122,8 @@
   
   .popup-actions button {
      padding: 0px;
-     width: 200px;
-     height: 40px;
-     
+     width: 200px !important;
+     height: 40px;   
   }
 
 
