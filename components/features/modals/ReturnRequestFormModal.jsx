@@ -334,6 +334,7 @@ export default function ReturnRequestFormModal({
       };
 
       handleSubmit(data);
+   
     } catch (error) {
       toast.error(error.message);
     }
@@ -402,6 +403,7 @@ export default function ReturnRequestFormModal({
       {isOpen && (
         <Modal
           isOpen={isOpen}
+          
           // onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles}
@@ -912,8 +914,8 @@ export default function ReturnRequestFormModal({
               ×
             </button>
           </div>
-        </Modal>
-      )}
+         </Modal>
+      )} 
     </>
   );
 }
