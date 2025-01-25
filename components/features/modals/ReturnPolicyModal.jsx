@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import styles from "./ReturnModal.module.scss";
+import { useRouter } from "next/router";
+
+
 
 /**
  * 
@@ -39,16 +42,18 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     maxHeight: "90vh", // Allow modal to take up 90% of viewport height
     overflowY: "auto",
+    border: "none"
   },
 };
 
-export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit }) {
+export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit ,orderId}) {
   function closeModal() {
     setIsOpen(false);
     setIsExpanded(false);
   }
 
   const [isExpanded, setIsExpanded] = useState(false);
+  console.log("modal page order is ",orderId)
 
   const toggleViewMore = () => {
     setIsExpanded(!isExpanded);
@@ -67,6 +72,7 @@ export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit }) {
   }, [isOpen]);
 
   if (!isOpen) return null;
+  const router=useRouter()
 
   return (
     <>
@@ -76,16 +82,56 @@ export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit }) {
           // onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles}
-          contentLabel="Return Order"
+        // contentLabel="Return Order"
         >
-          <div className={styles.modalOverlay} onClick={closeModal}></div>
+          {/* <div className={styles.modalOverlay  } onClick={closeModal}></div> */}
           {isOpen && (
             <>
               <div className={styles.modalContent} style={{ zIndex: 9999999 }}>
                 <div className="container">
-                  <h2 className="title">Return Policy</h2>
 
-                  <div className={styles.container}>
+                  <h1 className={styles.retuenTitle} > Return Policy  </h1>
+                  <div style={{ borderTop: '1px solid #E2E2E2', marginTop: '10px' }} > </div>
+
+
+                  <p className={styles.policyContent} > Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace.
+                    Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor
+                    sit amet consectetur. Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor sit amet consectetur.
+                    Sapien ut libero sed lacinia egestas pace.  Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed
+                    lacinia egestas pace. Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace.
+                    Lorem ipsum dolor sit amet consectetur.
+                    Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor sit amet consectetur. </p>
+
+                  <p className={styles.bottomContent} > Know more about <span className={styles.bottomContentSpan} > Privacy & Policy  </span> </p>
+
+                  <div className={styles.flexactions}  style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "10px" ,marginTop:"20px"}} >
+
+                    <div
+                      href="/pages/cart"
+                      className="btn btn-block view-cart "
+                      style={{ border: "1px solid #000", background: "white", width: "231px", height: "52px" }}
+                      onClick={closeModal}
+                    >
+                      Cancel
+                    </div>
+                   
+
+                    <div
+                     
+                      className="btn btn-block view-cart "
+                      style={{ border: "1px solid #000", background: "black", color:"white", width: "231px", height: "52px" }}
+                      // onClick={()=>{router.push({pathname:"/pages/orderReturnForm",query:{id:orderId}})}}
+                      onClick={handleSubmit}
+                    >
+                      Accept
+                    </div>
+
+
+                  </div>
+
+
+
+                  {/* <div className={styles.container}>
                     <p>
                       Our return policy allows returns within 15 days of purchase.
                       Items must be in original condition and packaging.
@@ -164,7 +210,7 @@ export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit }) {
                     </span>
                   </div>
 
-                  <div className="text-right">
+                  <div className="text-right">  
                     <a
                       href="#"
                       className="btn btn-regist mr-2 text-dark bg-transparent text-transform-none p-0"
@@ -179,17 +225,18 @@ export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit }) {
                     >
                       Accept
                     </button>
-                  </div>
-                </div>
+                  </div> */}
 
-                <button
+
+                </div>
+                {/* <button
                   title="Close (Esc)"
                   type="button"
                   className="mfp-close"
                   onClick={closeModal}
                 >
                   ×
-                </button>
+                </button> */}
               </div>
             </>
           )}

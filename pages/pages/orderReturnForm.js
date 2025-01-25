@@ -1,8 +1,13 @@
+
+
+
+
 import { gql, useQuery } from "@apollo/client";
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import Modal, { setAppElement } from "react-modal";
-import sytles from "./ReturnModal.module.scss";
+import sytles from "../.././components/features/modals/ReturnModal.module.scss";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const customStyles = {
   content: {
@@ -16,14 +21,14 @@ const customStyles = {
   },
 };
 
-export default function ReturnRequestFormModal({
-  isOpen,
-  setIsOpen,
-  handleSubmit,
-  orderId,
-}) {
+export default function orderReturnForm() {
+  
+ const router=useRouter()
 
-  console.log("order id",orderId)
+ const {id}=router.query
+
+ console.log("order id test",id)
+ 
   //QUERIES
   const GET_ORDER_DETAILS = gql`
     query GetAdminOrderDetails($input: GetAdminOrderDetailsInput!) {
@@ -72,7 +77,7 @@ export default function ReturnRequestFormModal({
     fetchPolicy: "network-only",
     variables: {
       input: {
-        orderId: orderId,
+        orderId:id,
       },
     },
   });
@@ -287,13 +292,13 @@ export default function ReturnRequestFormModal({
   const [isShippingAddress, setIsShippingAddress] = useState(false);
 
   //HANDLERS
-  function openModal() {
-    setIsOpen(true);
-  }
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  // function closeModal() {
+  //   setIsOpen(false);
+  // }
 
   const handleOnSubmit = (e) => {
     try {
@@ -333,7 +338,7 @@ export default function ReturnRequestFormModal({
         image: formState?.data?.image?.value,
       };
 
-      handleSubmit(data);
+      // handleSubmit(data);
     } catch (error) {
       toast.error(error.message);
     }
@@ -341,6 +346,11 @@ export default function ReturnRequestFormModal({
 
   //USE EFFECT
   useEffect(() => {
+
+    if(ordersError){
+
+        console.log("order api error ",ordersError)
+    }
     console.log(
       ordersDataResponse?.getAdminOrderDetails?.shippingAddress,
       "= SHIPPING ADDRESS"
@@ -399,11 +409,11 @@ export default function ReturnRequestFormModal({
 
   return (
     <>
-      {isOpen && (
+      {/* {isOpen && ( */}
         <Modal
-          isOpen={isOpen}
+          // isOpen={isOpen}
           // onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
+          // onRequestClose={closeModal}
           style={customStyles}
           contentLabel="Return Order"
         >
@@ -913,7 +923,7 @@ export default function ReturnRequestFormModal({
             </button>
           </div>
         </Modal>
-      )}
+      {/* )} */}
     </>
   );
 }

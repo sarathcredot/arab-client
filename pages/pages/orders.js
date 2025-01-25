@@ -654,10 +654,12 @@ function Orders(props) {
         <ReturnPolicyModal
           isOpen={showPolicyModal}
           setIsOpen={setShowPolicyModal}
+          orderId={orderIdForReturn}
           handleSubmit={() => {
             setIsAcceptPolicy(true);
             setShowReturnFormModal(true);
             setShowPolicyModal(false);
+
           }}
         />
       )}
