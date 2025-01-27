@@ -110,11 +110,11 @@ function Footer() {
                       <li>
                         <ALink href="#">Privacy& Policy</ALink>
                       </li>
-                      <li>
+                      {/* <li>
                         <ALink href={token ? "/pages/orders" : "#"}>Orders</ALink>
-                      </li>
+                      </li> */}
                       <li>
-                        <ALink href="#">Become a seller</ALink>
+                        <ALink href="#">Become a Seller</ALink>
                       </li>
                       {/* <li>
                       <ALink href="#">Orders History</ALink>
@@ -122,9 +122,9 @@ function Footer() {
                     <li>
                       <ALink href="#">Advanced Search</ALink>
                     </li> */}
-                      <li>
+                      {/* <li>
                         <ALink href="/pages/login">Login</ALink>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 </div>
@@ -144,7 +144,7 @@ function Footer() {
                         <ALink href="/pages/cart">Cart</ALink>
                       </li>
                       <li>
-                        <ALink href="/pages/offers">OfferZone</ALink>
+                        <ALink href="/pages/offers">Offerzone</ALink>
                       </li>
                     </ul>
                   </div>
@@ -208,7 +208,7 @@ function Footer() {
                 <h6 style={{ letterSpacing: "0.75px" }}>IMPORTANT LINKS</h6>
                 <span>Privacy & Policy</span>
                 <span>Become a Seller</span>
-                <span>Orders</span>
+                {/* <span>Orders</span> */}
                 {/* <span>Orders History</span>
   <span>Rhoncus</span> */}
 
@@ -218,7 +218,7 @@ function Footer() {
                 <ALink href={token ? "/pages/account" : "/pages/login"}><span>My Profile</span></ALink>
                 <ALink href={token ? "/pages/whislist" : "/pages/login"}><span>wishlist</span></ALink>
                 <ALink href= "/pages/cart"><span>Cart</span></ALink>
-                <ALink href="/pages/offers"><span>OfferZone</span></ALink>
+                <ALink href="/pages/offers"><span>Offerzone</span></ALink>
               
 
               </div>

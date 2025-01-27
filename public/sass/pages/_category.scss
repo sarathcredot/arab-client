@@ -130,8 +130,21 @@
 		font-weight: normal;
 		line-height: 1.5;
 		text-transform: none;
+		background-color: #000;
+		
 	}
+
+	
 }
+
+.reset-filter:hover {
+
+	 background-color:red;
+}
+
+
+
+
 
 .widget-featured-products {
 	.product-widget {

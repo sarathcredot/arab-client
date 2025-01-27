@@ -22,6 +22,8 @@ export default function ReturnRequestFormModal({
   handleSubmit,
   orderId,
 }) {
+
+  console.log("order id",orderId)
   //QUERIES
   const GET_ORDER_DETAILS = gql`
     query GetAdminOrderDetails($input: GetAdminOrderDetailsInput!) {
@@ -332,6 +334,7 @@ export default function ReturnRequestFormModal({
       };
 
       handleSubmit(data);
+   
     } catch (error) {
       toast.error(error.message);
     }
@@ -400,6 +403,7 @@ export default function ReturnRequestFormModal({
       {isOpen && (
         <Modal
           isOpen={isOpen}
+          
           // onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles}
@@ -910,8 +914,8 @@ export default function ReturnRequestFormModal({
               ×
             </button>
           </div>
-        </Modal>
-      )}
+         </Modal>
+      )} 
     </>
   );
 }

@@ -246,14 +246,14 @@ function Account() {
               <div style={{ display: "flex", justifyContent: "space-between" }} className="" >
                 <h2> {data.name} </h2>
 
-                {/* {
+                {
                   copycode === index ? <span style={{ cursor: "pointer", }} ><IoIosCheckmark style={{ fontSize: "15px" }} /> copied </span>
 
                     : <span onClick={() => { codeCopy(index) }} style={{ cursor: "pointer", }} > code: {data?.code}<IoIosCopy style={{ fontSize: "15px" }} /></span>
 
-                } */}
+                }
               </div>
-              <div style={{display:"flex",justifyContent:"space-between"}} >
+            <div style={{display:"flex",justifyContent:"space-between"}} >
               <p>{data?.description}  </p>
                   {cartData&&cartData?.getCart?.isCouponApplied &&cartData?.getCart?.appliedCoupon===data?._id?(
                     <button onClick={()=>handleRemoveCoupon()}  className="coupon-btn-red"  > Remove </button>

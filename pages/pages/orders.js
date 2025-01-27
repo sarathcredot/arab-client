@@ -18,6 +18,7 @@ import Dropdown from "../../components/features/dropdown/Dropdown";
 import ReturnRequestFormModal from "../../components/features/modals/ReturnRequestFormModal";
 import CustomModal from "../../components/features/modals/CustomModal";
 import ReturnPolicyModal from "../../components/features/modals/ReturnPolicyModal";
+import ReturnForm from "../../components/features/adresses/ReturnForm";
 
 const GET_ORDERS = gql`
   query GetUserOrderProducts($input: GetUserOrderProductsInput!) {
@@ -162,7 +163,7 @@ function Orders(props) {
 
   const totalPage = data
     ? parseInt(data?.getUserOrderProducts?.maxRecords / perPage) +
-      (data?.getUserOrderProducts?.maxRecords % perPage ? 1 : 0)
+    (data?.getUserOrderProducts?.maxRecords % perPage ? 1 : 0)
     : 0;
 
   useEffect(() => {
@@ -173,22 +174,29 @@ function Orders(props) {
     }
   }, [data, error]);
 
-  const orderCancel = async (id) => {
+  //=========================CANCEL ORDER============================\\
+
+  const [showCancelPopup, setshowCancelPopup] = useState(false)
+  const [cancelId, setCancelId] = useState(null)
+
+  const orderCancel = async (cancelId) => {
     try {
-      if (!window.confirm("Are you sure you want to cancel this order?"))
-        return;
-      console.log("confirmed")
+      // if (!window.confirm("Are you sure you want to cancel this order?"))
+      //   return;
+      // console.log("confirmed")
       const response = await cancelUserOrderProduct({
         variables: {
           input: {
-            _id: id,
+            _id: cancelId,
           },
         },
       });
       console.log(response);
+      setshowCancelPopup(false)
+      setCancelId(null)
       refetch();
       toast.success(
-        <div style={{ padding: "10px" }}>Your order has been canceled.</div>
+        <div style={{ padding: "10px" }}>Your order has been canceled. </div>
       );
     } catch (error) {
       console.log(error);
@@ -321,34 +329,6 @@ function Orders(props) {
             </div>
           </nav>
         </div>
-        {/* <div className="page-header"> */}
-
-        {/* <div className="container d-flex flex-column align-items-center"> */}
-        {/* <nav aria-label="breadcrumb" className="breadcrumb-nav">
-                        <div className="container">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><ALink href="/">Home</ALink></li>
-                                <li className="breadcrumb-item active" aria-current="page">
-                                    Orders
-                                </li>
-                            </ol>
-                        </div>
-                    </nav> */}
-
-        {/* <h1>orders</h1>
-         */}
-
-        {/* <ul className="checkout-progress-bar d-flex justify-content-center flex-wrap">
-          <li className="">
-              <ALink href="/pages/account">My Account</ALink>
-            </li>
-            <li className="active">
-              <ALink href="/pages/orders">Orders</ALink>
-            </li>
-           
-          </ul>
-        </div>
-      </div> */}
 
         <div className=" d-flex flex-column align-items-center">
           <ul
@@ -364,142 +344,156 @@ function Orders(props) {
           </ul>
         </div>
 
-        <div
-          className="container"
-          style={{
-            marginTop: "2rem",
-            borderBottom: "1px solid",
-            borderColor: "#E2E2E2",
-          }}
-        >
-          <h4>Orders</h4>
-        </div>
-        <div className="container">
-          <div className="success-alert">
-            {flag === 1 ? <p>Product successfully removed.</p> : ""}
-            {flag === 2 ? <p>Product added to cart successfully.</p> : ""}
-          </div>
-          {/* <div className="wishlist-title">
+        {
+          showReturnFormModal ?
+
+            <ReturnForm
+              orderId={orderIdForReturn}
+              setIsOpen={setShowReturnFormModal}
+              handleSubmit={handleOrderReturn}
+
+            />
+            :
+
+            <>
+
+              <div
+                className="container"
+                style={{
+                  marginTop: "2rem",
+                  borderBottom: "1px solid",
+                  borderColor: "#E2E2E2",
+                }}
+              >
+                <h4>Orders</h4>
+              </div>
+              <div className="container">
+                <div className="success-alert">
+                  {flag === 1 ? <p>Product successfully removed.</p> : ""}
+                  {flag === 2 ? <p>Product added to cart successfully.</p> : ""}
+                </div>
+
+                {/* <div className="wishlist-title">
                     <h2>My wishlist on Porto Shop 36</h2>
                 </div> */}
-          {orders.length === 0 ? (
-            <div className="wishlist-table-container">
-              <div className="table table-wishlist mb-0">
-                <div className="wishlist-empty-page text-center">
-                  <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                  <p>No products Ordered</p>
-                  <ALink
-                    href="/shop"
-                    className="btn btn-dark btn-add-cart product-type-simple btn-shop font1 w-auto"
-                  >
-                    go shop{" "}
-                  </ALink>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="wishlist-table-container">
-              <table className="table table-wishlist mb-0">
-                <thead>
-                  <tr>
-                    <th
-                      className="thumbnail-col"
-                      style={{ paddingLeft: "0px" }}
-                    >
-                      Product
-                    </th>
-                    <th className="status-col"></th>
-                    <th className="status-col">Order Id</th>
-                    <th className="status-col">Date</th>
-                    <th className="status-col">Status</th>
-                    <th className="price-col">Total Price</th>
-                    <th className="action-col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {orders.map((item, index) => (
-                    <tr key={"wishlist-item" + index} className="product-row">
-                      <td className="media-with-lazy">
-                        <figure className="product-image-container">
-                          <ALink
-                            href={`/product/default/${item.productId}`}
-                            className="product-image"
+                {orders.length === 0 ? (
+                  <div className="wishlist-table-container">
+                    <div className="table table-wishlist mb-0">
+                      <div className="wishlist-empty-page text-center">
+                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                        <p>No products Ordered</p>
+                        <ALink
+                          href="/shop"
+                          className="btn btn-dark btn-add-cart product-type-simple btn-shop font1 w-auto"
+                        >
+                          go shop{" "}
+                        </ALink>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="wishlist-table-container">
+                    <table className="table table-wishlist mb-0">
+                      <thead>
+                        <tr>
+                          <th
+                            className="thumbnail-col"
+                            style={{ paddingLeft: "0px" }}
                           >
-                            <LazyLoadImage
-                              alt="product"
-                              src={item.image.fileURL}
-                              threshold={500}
-                              width="80"
-                              height="80"
-                              className="order-image"
-                            />
-                          </ALink>
-                        </figure>
-                      </td>
-                      <td>
-                        {/* <h5 className="product-title" style={{fontWeight:"700"}}>
+                            Product
+                          </th>
+                          <th className="status-col"></th>
+                          <th className="status-col">Order Id</th>
+                          <th className="status-col">Date</th>
+                          <th className="status-col">Status</th>
+                          <th className="price-col">Total Price</th>
+                          <th className="action-col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {orders.map((item, index) => (
+                          <tr key={"wishlist-item" + index} className="product-row">
+                            <td className="media-with-lazy">
+                              <figure className="product-image-container">
+                                <ALink
+                                  href={`/product/default/${item.productId}`}
+                                  className="product-image"
+                                >
+                                  <LazyLoadImage
+                                    alt="product"
+                                    src={item.image.fileURL}
+                                    threshold={500}
+                                    width="80"
+                                    height="80"
+                                    className="order-image"
+                                  />
+                                </ALink>
+                              </figure>
+                            </td>
+                            <td>
+                              {/* <h5 className="product-title" style={{fontWeight:"700"}}>
                           <ALink href={`/product/default/${item.productId}`}>
                             {item.productName}
                           </ALink>
                         </h5> */}
-                        <h5
-                          className="product-title"
-                          style={{ fontWeight: "700" }}
-                        >
-                          <ALink href={`/product/default/${item.productId}`}>
-                            {item.productName.split(" ").slice(0, 4).join(" ")}
-                            ...
-                          </ALink>
-                        </h5>
-                      </td>
-                      <td style={{ color: "black" }}>{item.orderId}</td>
-                      <td style={{ color: "black" }}>
-                        {dayjs(item.orderDate).format("YYYY/MM/DD")}
-                      </td>
-                      <td
-                        style={{ color: item?.returnStatus !== "NA" ? getReturnStatusColor(item?.returnStatus): getStatusColor(item?.shippingStatus) }}
-                      >
-                        {item?.returnStatus !== "NA" ? `${item?.returnStatus}-(Return)`: item?.shippingStatus }
-                      </td>
-
-                      <td style={{ color: "black" }}>
-                        <div className="price-box">
-                          <>
-                            {/* <span className="old-price">{'OMR ' + item.price[ 1 ].toFixed( 2 ) }</span> */}
-                            <span className="product-price">
-                              OMR{" "}
-                              {parseFloat(
-                                Number(item.sellingPrice) +
-                                  Number(item?.shippingCharge)
-                              ).toFixed(2)}
-                            </span>
-                          </>
-                        </div>
-                      </td>
-
-                      <td>
-                        <Dropdown
-                          toggleDropdown={toggleDropdown}
-                          itemId={item?.itemId}
-                          isOpen={isOpen}
-                          setIsOpen={setIsOpen}
-                        >
-                          <div className="order_update_menu_container">
-                            {item?.shippingStatus !== "DELIVERED" &&
-                            item?.shippingStatus !== "CANCELED" ? (
-                              <div
-                                className="order_update_menu_item"
-                                title="Quick View"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  orderCancel(item._id);
-                                }}
+                              <h5
+                                className="product-title"
+                                style={{ fontWeight: "700" }}
                               >
-                                Cancel
+                                <ALink href={`/product/default/${item.productId}`}>
+                                  {item.productName.split(" ").slice(0, 4).join(" ")}
+                                  ...
+                                </ALink>
+                              </h5>
+                            </td>
+                            <td style={{ color: "black" }}>{item.orderId}</td>
+                            <td style={{ color: "black" }}>
+                              {dayjs(item.orderDate).format("YYYY/MM/DD")}
+                            </td>
+                            <td
+                              style={{ color: item?.returnStatus !== "NA" ? getReturnStatusColor(item?.returnStatus) : getStatusColor(item?.shippingStatus) }}
+                            >
+                              {item?.returnStatus !== "NA" ? `${item?.returnStatus}-(Return)` : item?.shippingStatus}
+                            </td>
+                            <td style={{ color: "black" }}>
+                              <div className="price-box">
+                                <>
+                                  {/* <span className="old-price">{'OMR ' + item.price[ 1 ].toFixed( 2 ) }</span> */}
+                                  <span className="product-price">
+                                    OMR{" "}
+                                    {parseFloat(
+                                      Number(item.sellingPrice) +
+                                      Number(item?.shippingCharge)
+                                    ).toFixed(2)}
+                                  </span>
+                                </>
                               </div>
-                            ) : (
-                              <>
-                                {/* {item?.shippingStatus !== "PENDING" &&
+                            </td>
+                            <td>
+                              <Dropdown
+                                toggleDropdown={toggleDropdown}
+                                itemId={item?.itemId}
+                                isOpen={isOpen}
+                                setIsOpen={setIsOpen}
+                              >
+                                <div className="order_update_menu_container">
+                                  {item?.shippingStatus !== "DELIVERED" &&
+                                    item?.shippingStatus !== "CANCELED" ? (
+                                    <div
+                                      className="order_update_menu_item"
+                                      title="Quick View"
+                                      onClick={(e) => {
+                                        console.log("Item ID:", item._id);
+                                        e.preventDefault();
+                                        setshowCancelPopup(true);
+                                        setCancelId(item._id);
+                                      }}
+                                    >
+                                      Cancel
+                                    </div>
+                                  ) : (
+                                    <>
+                                      {/* {item?.shippingStatus !== "PENDING" &&
                                   item?.invoice && (
                                     <div
                                       className="order_update_menu_item "
@@ -528,21 +522,21 @@ function Orders(props) {
                                       Invoice
                                     </div>
                                   )} */}
-                                {item?.shippingStatus === "DELIVERED" && item?.returnStatus === "NA" &&  (
-                                  <div
-                                    className="order_update_menu_item"
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      setShowPolicyModal(true);
-                                      setOrderProductIdForReturn(item?._id);
-                                      setOrderIdForReturn(item?.orderId);
-                                      setIsOpen(false);
-                                    }}
-                                  >
-                                    Return
-                                  </div>
-                                )}
-                                {/* {!item?.invoice ? (
+                                      {item?.shippingStatus === "DELIVERED" && item?.returnStatus === "NA" && (
+                                        <div
+                                          className="order_update_menu_item"
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            setShowPolicyModal(true);
+                                            setOrderProductIdForReturn(item?._id);
+                                            setOrderIdForReturn(item?.orderId);
+                                            setIsOpen(false);
+                                          }}
+                                        >
+                                          Return
+                                        </div>
+                                      )}
+                                      {/* {!item?.invoice ? (
                                   <div
                                     className="order_update_menu_item"
                                     disabled
@@ -576,88 +570,128 @@ function Orders(props) {
                                     Invoice
                                   </div>
                                 )} */}
-                              </>
-                            )}
-                            <button
-                              className="order_update_menu_item "
-                              title="Quick View"
-                              style={
-                                item?.invoice
-                                  ? { border: "none" }
-                                  : {
-                                      color: "grey",
-                                      border: "none",
-                                      cursor: "not-allowed",
+                                    </>
+                                  )}
+                                  <button
+                                    className="order_update_menu_item "
+                                    title="Quick View"
+                                    style={
+                                      item?.invoice
+                                        ? { border: "none" }
+                                        : {
+                                          color: "grey",
+                                          border: "none",
+                                          cursor: "not-allowed",
+                                        }
                                     }
-                              }
-                              onClick={(e) => {
-                                e.preventDefault();
-                                if (item?.invoice) {
-                                  handleDownload(item._id);
-                                  setIsOpen(false);
-                                }
-                              }}
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="1em"
-                                height="1em"
-                                viewBox="0 0 24 24"
-                                style={{
-                                  marginRight: "5px",
-                                }}
-                              >
-                                <path
-                                  fill={item?.invoice ? "black" : "grey"}
-                                  d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z"
-                                />
-                              </svg>
-                              Invoice
-                            </button>
-
-                            {/* <div className="order_update_menu_item">Cancel</div>
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      if (item?.invoice) {
+                                        handleDownload(item._id);
+                                        setIsOpen(false);
+                                      }
+                                    }}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="1em"
+                                      height="1em"
+                                      viewBox="0 0 24 24"
+                                      style={{
+                                        marginRight: "5px",
+                                      }}
+                                    >
+                                      <path
+                                        fill={item?.invoice ? "black" : "grey"}
+                                        d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z"
+                                      />
+                                    </svg>
+                                    Invoice
+                                  </button>
+                                  {/* <div className="order_update_menu_item">Cancel</div>
                             <div className="order_update_menu_item">Return</div>
                             <div className="order_update_menu_item">
                               Invoice
                             </div> */}
+                                </div>
+                              </Dropdown>
+                            </td>
+                          </tr>
+                        ))}
+                        {showCancelPopup && (
+                          <div className="popup-overlay">
+                            <div className="popup-content">
+                              <h4 className="popup-head-content">Cancel Order</h4>
+                              <hr class="custom-line" />
+                              <p className="popup-body-content" style={{ lineHeight: "18px" }}>Canceling this order means it will no longer be processed or delivered.
+                                If this was unintentional, you can close this popup and continue shopping.<br />
+                                Please note that refunds, if applicable, will be processed as per our refund policy</p>
+                              <div className="popup-actions">
+                                <button
+                                  onClick={() => {
+                                    setshowCancelPopup(false);
+                                    setCancelId(null);
+                                  }}
+                                  className="btn btn-outline-dark"
+                                >
+                                  CANCEL
+                                </button>
+                                <button
+                                  className="btn btn-dark"
+                                  onClick={() => orderCancel(cancelId)}
+                                >
+                                  CONFIRM
+                                </button>
+                              </div>
+                            </div>
                           </div>
-                        </Dropdown>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {loading ||
-                (orders && orders.length && (
-                  <div className="container">
-                    <nav className="toolbox toolbox-pagination border-0">
-                      <Pagination totalPage={totalPage} />
-                    </nav>
+                        )}
+                      </tbody>
+                    </table>
+                    {loading ||
+                      (orders && orders.length && (
+                        <div className="container">
+                          <nav className="toolbox toolbox-pagination border-0">
+                            <Pagination totalPage={totalPage} />
+                          </nav>
+                        </div>
+                      ))}
                   </div>
-                ))}
-            </div>
-          )}
-        </div>
+                )}
+              </div>
+
+            </>
+
+        }
+
+
       </main>
 
       {/* Return submit modal */}
-      {showReturnFormModal && (
+
+
+      {/* {showReturnFormModal && (
         <ReturnRequestFormModal
           isOpen={showReturnFormModal}
           setIsOpen={setShowReturnFormModal}
           handleSubmit={handleOrderReturn}
           orderId={orderIdForReturn}
         />
-      )}
+      )} */}
+
+
+
       {/* Policy modal */}
       {showPolicyModal && (
         <ReturnPolicyModal
           isOpen={showPolicyModal}
           setIsOpen={setShowPolicyModal}
+          orderId={orderIdForReturn}
           handleSubmit={() => {
             setIsAcceptPolicy(true);
             setShowReturnFormModal(true);
             setShowPolicyModal(false);
+
           }}
         />
       )}

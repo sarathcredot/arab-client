@@ -309,13 +309,14 @@ i.cart-empty {
 	tr {
 		th,
 		td {
-			padding: 1rem;
+			padding: 1rem 1rem 1rem 0rem ;
 			border: 0;
 			letter-spacing: -.01em;
 			font-size: 14px;
 			font-weight: 600;
 			color: #222529;
 			font-family: "poppins";
+			// padding-left: 0px;
 
 			&:last-child {
 				color: #777;
@@ -336,11 +337,12 @@ i.cart-empty {
 		font-weight: 600;
 
 		tr td {
-			padding-top: 1.3rem;
+			padding-top: 3.3rem;
 			padding-bottom: 1.6rem;
 			vertical-align: middle;
 			font-size: 1.4rem;
-			padding-left: 1.2rem;
+			// padding-left: 1.2rem;
+			// margin-top: 23px;
 		}
 
 		tr td:last-child {

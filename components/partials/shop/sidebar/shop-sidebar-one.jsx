@@ -97,7 +97,7 @@ function ShopSidebarOne(props) {
     loading: priceLoading,
     priceError,
   } = useQuery(MAX_PRICE, { variables: { input: { categories: catId ? [catId] : [] } } });
-  
+
   const maxpricevalue = maxPriceData?.getProductsMaxPrice?.maxPrice
     ? maxPriceData?.getProductsMaxPrice?.maxPrice
     : 1000;
@@ -259,7 +259,7 @@ function ShopSidebarOne(props) {
         style={{
           maxHeight: "944px",
           overflowY: "scroll",
-          overflowX:"hidden"
+          overflowX: "hidden"
         }}
       >
         <StickyBox className="sidebar-wrapper" offsetTop={0}>
@@ -278,6 +278,7 @@ function ShopSidebarOne(props) {
                           borderColor: "#DDDDDD",
                           marginLeft: "0px",
                           paddingBottom: "20px",
+                          display: "flex"
                         }}
                       >
                         <a
@@ -290,7 +291,38 @@ function ShopSidebarOne(props) {
                         >
                           Categories
                         </a>
+
+
+                        {query.category ||
+                          query.page ||
+                          query.sizes ||
+                          query.colors ||
+                          query.min_price ||
+                          query.max_price ||
+                          query.discount ? (
+                          <div className="widget" style={{ paddingTop: "2.5rem" , paddingLeft:"1rem", color:"white"  }}>
+                            <ALink
+                           
+                              href={{ query: { cat_id: query.cat_id } }}
+                              //  href={{ query: { grid: query.grid } }}
+                              scroll={false}
+                              className="btn btn-primary reset-filter"
+                              
+                            >
+                              Reset All Filters
+                            </ALink>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
                       </h3>
+
+
+
+
+
+
                       <div className="overflow-hidden widget" ref={setCollapsibleElement}>
                         <div className="widget-body pb-0">
                           <ul className="cat-list">
@@ -309,7 +341,7 @@ function ShopSidebarOne(props) {
                                     scroll={false}
                                     style={
                                       containsAttrInUrl("category", category?._id)
-                                        ? { color: "red"}
+                                        ? { color: "red" }
                                         : {}
                                     }
                                   >
@@ -330,26 +362,12 @@ function ShopSidebarOne(props) {
             </div>
           )}
 
-          {query.category ||
-            query.page ||
-            query.sizes ||
-            query.colors ||
-            query.min_price ||
-            query.max_price ||
-            query.discount ? (
-            <div className="widget" style={{ padding: "2rem" }}>
-              <ALink
-                href={{ query: { cat_id: query.cat_id } }}
-                //  href={{ query: { grid: query.grid } }}
-                scroll={false}
-                className="btn btn-primary reset-filter"
-              >
-                Reset All Filters
-              </ALink>
-            </div>
-          ) : (
-            ""
-          )}
+
+
+
+
+
+
           {/* )} */}
           {brandData && catId && brandData?.getBrandDetailsWithCategory?.records.length > 0 && (
             <div className=" widget-brand">
@@ -572,7 +590,7 @@ function ShopSidebarOne(props) {
                               style={{
                                 color: query.discount === "10" ? "red" : "inherit", // Apply red color if selected, otherwise use default color
                                 fontWeight: "500",
-                                cursor:"pointer"
+                                cursor: "pointer"
                               }}
                             >
                               10% off or more
@@ -584,7 +602,7 @@ function ShopSidebarOne(props) {
                               style={{
                                 color: query.discount === "25" ? "red" : "inherit",
                                 fontWeight: "500",
-                                cursor:"pointer"
+                                cursor: "pointer"
                               }}
                             >
                               25% off or more
@@ -596,7 +614,7 @@ function ShopSidebarOne(props) {
                               style={{
                                 color: query.discount === "50" ? "red" : "inherit",
                                 fontWeight: "500",
-                                cursor:"pointer"
+                                cursor: "pointer"
                               }}
                             >
                               {" "}
@@ -609,7 +627,7 @@ function ShopSidebarOne(props) {
                               style={{
                                 color: query.discount === "75" ? "red" : "inherit",
                                 fontWeight: "500",
-                                cursor:"pointer"
+                                cursor: "pointer"
                               }}
                             >
                               75% off or more
@@ -695,8 +713,11 @@ function ShopSidebarOne(props) {
                               style={{
                                 backgroundColor: "black",
                                 color: "white",
+                                
                               }}
                               onClick={(e) => filterByPrice(e)}
+                              onMouseEnter={(e) => (e.target.style.backgroundColor = "red")}
+                              onMouseLeave={(e) => (e.target.style.backgroundColor = "black")}
                             >
                               Filter
                             </button>
@@ -853,7 +874,7 @@ function ShopSidebarOne(props) {
                                       display: "flex",
                                       flexWrap: "wrap",
                                       maxWidth: "286px",
-                                      rowGap:"10px"
+                                      rowGap: "10px"
                                     }}
                                   >
                                     {attri?.attributeValues.length > 0 &&
