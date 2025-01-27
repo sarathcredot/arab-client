@@ -510,7 +510,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                         </div>
                     </div>
 
-                    <div className='re-address-form-main' >
+                    <div   className='re-address-form-main' >
 
 
 
@@ -518,7 +518,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
 
 
-                        <div>
+                        <div  >
 
                             <label className='re-input-label' htmlFor=""> First Name <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
