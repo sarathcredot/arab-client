@@ -61,7 +61,7 @@ function CartMenu({ props }) {
     }
   }, [token, toggle]);
 
-
+  // console.log("CART = ",cartItems)
   useEffect(() => {
     router.events.on("routeChangeStart", cartClose);
 
@@ -205,7 +205,7 @@ function CartMenu({ props }) {
           <img src="/images/icon/cart.svg" alt="cart" />
         </div>
         {/* <i className="icon-cart-thick"></i> */}
-        {cartItems?.length > 0 && <span className=" badge-circle">
+        {cartItems?.length > 0 && <span className="cart-count badge-circle1">
           {cartItems && cartItems?.length}
         </span>}
       </a>
@@ -250,19 +250,19 @@ function CartMenu({ props }) {
                       <h2 className="product-title">
                         {cart.index > -1 ? (
                           !cart.variants[cart.index].color ? (
-                            <ALink href={`/product/default/${cart.slug}`}>
+                            <ALink href={`/product/default/${cart.productId}`}>
                               {cart.name +
                                 " - " +
                                 cart.variants[cart.index].size.name}
                             </ALink>
                           ) : !cart.variants[cart.index].size ? (
-                            <ALink href={`/product/default/${cart.slug}`}>
+                            <ALink href={`/product/default/${cart.productId}`}>
                               {cart.name +
                                 " - " +
                                 cart.variants[cart.index].color.name}
                             </ALink>
                           ) : (
-                            <ALink href={`/product/default/${cart.slug}`} >
+                            <ALink href={`/product/default/${cart.productId}`} >
                               {cart.name +
                                 " - " +
                                 cart.variants[cart.index].color.name +
@@ -271,7 +271,7 @@ function CartMenu({ props }) {
                             </ALink>
                           )
                         ) : (
-                          <ALink href={`/product/default/${cart._id}`}>
+                          <ALink href={`/product/default/${cart.productId}`}>
                             {cart.name}
                           </ALink>
                         )}
@@ -285,7 +285,7 @@ function CartMenu({ props }) {
 
                     <figure className="product-image-container">
                       <ALink
-                        href={`/product/default/${cart.slug}`}
+                        href={`/product/default/${cart.productId}`}
                         className="product-image"
                       >
                         <img
@@ -293,6 +293,7 @@ function CartMenu({ props }) {
                           width="78"
                           height="78"
                           alt="product"
+                          style={{padding:5}}
                         />
                       </ALink>
                       <div
@@ -333,7 +334,7 @@ function CartMenu({ props }) {
               </div>
 
               <div className="dropdown-cart-total">
-                <span>SUBTOTAL:</span>
+                <span>Subtotal</span>
 
                 <span className="cart-total-price float-right">
                   OMR {getCartTotal(cartItems).toFixed(2)}

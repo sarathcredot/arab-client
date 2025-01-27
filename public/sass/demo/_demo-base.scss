@@ -182,6 +182,11 @@
     right: -9px;
     top: 0;
 }
+.cart-count {
+    right: -9px;
+    top: 0;
+    z-index: inherit;
+}
 
 // Header Menu
 .main-nav>.menu:not(.menu-vertical) {

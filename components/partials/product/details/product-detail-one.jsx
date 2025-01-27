@@ -616,25 +616,26 @@ function ProductDetailOne(props) {
 
           {/* <hr className="short-divider" /> */}
 
-          <div style={{display:"flex"}} className="price-box pt-5 ">
+          <div style={{fontFamily: "Plus Jakarta Sans",}} className=" pt-5 ">
             {product?.price == product.price ? (
               <>
                 <span
                   style={{
                     fontFamily: "Plus Jakarta Sans",
                     fontWeight: "600px",
-                    fontSize: "14px",
+                    fontSize: "12px",
                     lineHeight: "15px",
                     // marginTop: "5px",
                     marginRight: "8px",
                     color: "#606060",
                   }}
-                >
+                  >
                   OMR
                 </span>
                 <span
                   className="product-price"
                   style={{
+                    fontFamily: "Plus Jakarta Sans",
                     fontWeight: "600px",
                     fontSize: "18px",
                     lineHeight: "15px",
@@ -649,7 +650,7 @@ function ProductDetailOne(props) {
                   className="old-price"
                   style={{
                     fontWeight: "600px",
-                    fontSize: "16px",
+                    fontSize: "12px",
                     lineHeight: "15px",
                     letterSpacing: "-0.1px",
                     marginLeft: "10px",
@@ -800,7 +801,8 @@ function ProductDetailOne(props) {
                               borderRadius: "50%",
                             }}
                           >
-                            <a
+                            <div
+                              // href="#"
                               className="filter-color border-0"
                               style={{
                                 backgroundColor: item?.colorCode,
@@ -819,7 +821,7 @@ function ProductDetailOne(props) {
                                 //   item?.attributeValue
                                 // );
                               }}
-                            ></a>
+                            ></div>
                           </div>
                         )}
                       </li>

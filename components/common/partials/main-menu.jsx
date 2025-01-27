@@ -361,6 +361,7 @@ function MainMenu({ router }) {
         <ul className="custom__mobilemenu w-100" style={{listStyle:"none"}}>
           {mainNav?.map((item) => (
             <li
+              key={item?._id}
               className={`custom__mobile__item px-2 ${item._id === parentcategory.cat1 ? "activate" : ""
                 }`}
               onClick={() => {

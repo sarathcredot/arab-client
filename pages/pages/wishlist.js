@@ -261,10 +261,11 @@ function Wishlist(props) {
                               alt="product"
                               src={item.image}
                               threshold={500}
-                              width="80"
-                              height="80"
+                              // width="80"
+                              // height="50"
                               effect="blur"
                               className="order-image"
+                              style={{border: "1px solid #f4f4f4"}}
                             />
                           </ALink>
                           <a

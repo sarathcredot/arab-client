@@ -13,6 +13,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { Helmet } from "react-helmet";
+import { IoMdHome } from "react-icons/io";
 
 const countryOptions = [
   { value: "uae", label: "+971", flag: "/images/uae.svg" },
@@ -287,7 +288,31 @@ function CheckOut() {
       <Helmet>
         <title>Checkout | Arab Deals</title>
       </Helmet>
-      <div style={{marginTop:"50px"}}></div>
+      {/* <div style={{marginTop:"50px"}}></div> */}
+      <div className="container">
+          <nav aria-label="breadcrumb" className="breadcrumb-nav">
+            <div className="container">
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                  <ALink href="/">
+                    <IoMdHome style={{ fontSize: "16px" }} />
+                    {/* <i className="icon-home" ></i> */}
+                  </ALink>
+                </li>
+                <li className="breadcrumb-item">
+                  <ALink className="" href="/pages/cart">
+                  Shopping Cart
+                  </ALink>
+                </li>
+                <li className="breadcrumb-item active" aria-current="page">
+                  <ALink className="activeitem" href="/pages/checkout">
+                  Checkout
+                  </ALink>
+                </li>
+              </ol>
+            </div>
+          </nav>
+        </div>
       <ul className="checkout-progress-bar d-flex justify-content-center flex-wrap">
         <li>
           <ALink href="/pages/cart">Shopping Cart</ALink>
@@ -405,11 +430,11 @@ function CheckOut() {
                           </p>
 
                           <form onSubmit={handleApplyCoupon} ref={setCollapsibleElement}>
-                            <div className="input-group">
+                            <div className=" apply_coupon_div">
                               {cartData?.getCart?.isCouponApplied && cartData?.getCart?.code?(
                                 <input
                                 type="text"
-                                className="form-control htmlForm-control-sm w-auto"
+                                className=" "
                                 value={cartData?.getCart?.code}
                                 disabled={true}
                                 
@@ -418,19 +443,19 @@ function CheckOut() {
 
                                 <input
                                 type="text"
-                                className="form-control htmlForm-control-sm w-auto"
+                                className=" "
                                 placeholder="Coupon code"
                                 required
                                 value={coupon}
                                 onChange={(e)=>setCoupon(e.target.value)}
                                 />
                               )}
-                              <div className="input-group-append">
+                              <div className="input-group-append apply_coupon_btn_div">
                                 {cartData?.getCart?.isCouponApplied?(
                                   <button style={{
                                     background:"#f91926"
                                   }}
-                                  className="btn btn-sm mt-0 "
+                                  className="apply_coupon_btn btn btn-sm mt-0 "
                                   type="button"
                                   onClick={()=>handleRemoveCoupon()}
                                 >
@@ -438,8 +463,8 @@ function CheckOut() {
                                 </button>
                                 ):(
 
-                                  <button
-                                  className="btn btn-sm mt-0"
+                                <button
+                                  className="apply_coupon_btn btn btn-sm mt-0"
                                   type="submit"
                                 >
                                   Apply Coupon

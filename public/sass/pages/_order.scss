@@ -217,9 +217,14 @@ $dropdown-hover-bg: #eeeeee;
           }
     }
 }
+.order-image{
+    padding: 5px;
+    width: 95%;
+    height: 95%;
+}
 
 @media (max-width:600px) {
-    .order-image{
-        margin-top: -10px;
-    }
+    // .order-image{
+        // margin-top: -10px;
+    // }
 }

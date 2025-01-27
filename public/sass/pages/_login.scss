@@ -174,6 +174,52 @@ gap: 20px
 .countrycodeinput{
     height:5rem;
 }
+.login_page{
+    background-image: url("/images/login_bg_svg.svg");
+    background-size: 100% 100%;
+    background-position-y: 90px;
+    background-repeat: no-repeat;
+    
+    .login_container{
+        height:105vh;
+    }
+    .login_content{
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        justify-content: center;
+    }
+    .login_content:first-child{
+        align-items: center;
+
+    }
+    .login_img_div{
+        display: flex;
+        margin-top: 8%;
+        justify-content: center;
+    }
+    .login_watch_img{
+        animation: zoomAnim .8s ease-in-out;
+        pointer-events: none;
+    }
+}
+
+
+@keyframes zoomAnim {
+    0%{
+        // transform: translateX(2000px) translateY(-800px);
+        opacity:0;
+        scale:.1;
+    }
+    80%{
+        // transform: translateX(0px) translateY(0px);
+        opacity:1;
+        scale:1.1;
+    }
+    100%{
+        scale:1;
+    }
+}
 @media (max-width: 768px)
     {
         .custom_login_space{
@@ -184,7 +230,7 @@ gap: 20px
             height: 5.3rem;
         }
         .custom_loginresp{
-            padding: 0 25px;
+            padding: 10px 25px;
         }
         .custom_headlog{
             margin-top: 15px
@@ -198,10 +244,10 @@ gap: 20px
             height: 45px !important;
         }
         .otpcontainer{
-margin-top: 0;
+            margin-top: 0;
         }
         .left-login-section {
-margin-top: 15px;
+            margin-top: 15px;
         }
         .googlebtn{
             width: 100%;
@@ -214,11 +260,36 @@ margin-top: 15px;
             width: 100%;
             justify-content: center;
         }
-    //     .buttonwrapper{
-    //         display: flex;
-    // flex-direction: column;
-    // gap: 10px
-    //     }
+        .login_page{
+            animation: bgAnim 1.3s ease-in-out;
+            background-position-y: 90px;
+            .login_container{
+                height: 100%;
+            }
+            .login_content{
+                justify-content: start;
+                align-items: center;
+            }
+        }
+        
+    .login_otp_section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: auto !important;
+        .otp_boxes{
+            width: 100%;
+            margin-left:-17% ;
+            text-align: center !important;
+            display: flex;
+        }
+    }
+    .login_content{
+        h2,p{
+            text-align: center;
+        }
+    }
 }
 @include mq(md) {
     .login-container {
@@ -237,3 +308,14 @@ margin-top: 15px;
         margin-bottom: 50px;
     }
 }
+
+@keyframes bgAnim {
+    0%{
+        background-position-y: 150px;
+    }
+    100%{
+        background-position-y: 90px;
+        
+    }
+}
+

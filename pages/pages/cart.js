@@ -277,12 +277,13 @@ function Cart(props) {
                           style={{ color: "black" }}
                         >
                           <td className="pl-0">
-                            <figure className="product-image-container">
+                            <figure className="product-image-container"style={{border:"1px solid #e0e0e0",padding:5}}>
                               <ALink
                                 href={`/product/default/${item.productId}`}
                                 className="product-image"
+                                  
                               >
-                                <img src={item?.image} alt="product" />
+                                <img src={item?.image} alt="product"/>
                               </ALink>
                               <div
                                 title="Remove Product"
@@ -290,11 +291,11 @@ function Cart(props) {
                                   width: "20px",
                                   height: "20px",
                                   position: "absolute",
-                                  top: "-7px",
+                                  top: "-10px",
                                   display: "flex",
                                   justifyContent: "center",
                                   alignItems: "center",
-                                  right: "-5px",
+                                  right: "-10px",
                                   borderRadius: "50%",
                                   // background: "white",
                                   filter: "drop-shadow(1px 1px 6px rgba(0, 0, 0, 0.11))",
