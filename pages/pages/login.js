@@ -141,6 +141,7 @@ function Login({ mutate }) {
         <title>Login | Arab Deals</title>
       </Helmet>
       <main className="main login_page">
+          <img className="login_bg_image" src="/images/login_bg_svg.svg" alt="" />
         <div
           className=" login-container container"
           style={{ marginTop: "0", position: "relative" }}

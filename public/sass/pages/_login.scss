@@ -175,19 +175,25 @@ gap: 20px
     height:5rem;
 }
 .login_page{
-    background-image: url("/images/login_bg_svg.svg");
-    background-size: 100% 100%;
-    background-position-y: 90px;
-    background-repeat: no-repeat;
-    
+    // background-image: url("/images/login_bg_svg.svg");
+    // background-size: 100% 100%;
+    // background-position-y: 90px;
+    // background-repeat: no-repeat;
+    position: relative;
+    .login_bg_image{
+        position: absolute;
+        width: 100vw;
+        top: 220px;
+    }
     .login_container{
-        height:105vh;
+        height:600px;
     }
     .login_content{
         display: flex;
         flex-direction: column;
         align-items: end;
         justify-content: center;
+        // margin-top: 12%;
     }
     .login_content:first-child{
         align-items: center;
@@ -195,7 +201,8 @@ gap: 20px
     }
     .login_img_div{
         display: flex;
-        margin-top: 8%;
+        // margin-top: 8%;
+        align-items: center;
         justify-content: center;
     }
     .login_watch_img{
@@ -269,6 +276,9 @@ gap: 20px
             .login_content{
                 justify-content: start;
                 align-items: center;
+            }
+            .login_bg_image{
+                top: 350px;
             }
         }
         
