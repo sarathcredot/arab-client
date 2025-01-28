@@ -188,7 +188,7 @@ function Login({ mutate }) {
             <div className="col-lg-12 mx-auto login_container custom_headlog">
               {isOtp ? (
                 <div className="row h-100 custom-loginleft">
-                <div className="col-md-6 login_content">
+                <div className="col login_content">
                   <div>
 
                   <div className="heading">
@@ -281,7 +281,7 @@ function Login({ mutate }) {
                     </form>
                   </div>
                   </div>
-                  <div className="col-md-6 d-none d-md-flex login_img_div">
+                  <div className="col d-flex login_img_div">
                     <div className="" style={{width:"60%"}}>
                       <img className="login_watch_img" src="images\watch_svg_login.svg" />
                     </div>
