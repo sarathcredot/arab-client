@@ -15,6 +15,7 @@ import GardenCollection from "./garden-collection";
 import BestSelling from "./recent-collection";
 import { useQuery, gql } from "@apollo/react-hooks";
 import { GET_HOME_DATA } from "../../../server/queries";
+import Link from "next/link";
 const GET_PRODUCTS = gql`
 query GetProducts($input: ProductFilters) {
   getProducts(input: $input) {
@@ -95,9 +96,44 @@ function ElectronicCollection() {
               <h4 className="section-title text-transform-none mb-0 mr-0 " >
                 Best Selling
               </h4>
-              <ALink href="/shop?bestSeller=true" style={{ color: "black", fontWeight: "600" }}>
+              {/* <ALink href="/shop?bestSeller=true" style={{ color: "black", fontWeight: "600" }}>
               View All <IoIosArrowForward style={{fontSize:"20px"}}/> 
-              </ALink>
+              </ALink> */
+              
+     <Link href="/shop?discount=10">
+     <a
+       style={{
+         display: "inline-flex",
+         alignItems: "center",
+         textDecoration: "none",
+       }}
+     >
+       <span
+         style={{
+           display: "inline-block",
+           color: "rgba(0, 0, 0, 1)",
+           fontWeight: "500",
+           transition: "transform 0.3s ease",
+         }}
+         className="view-all-text"
+       >
+         View All
+       </span>
+       <IoIosArrowForward
+         style={{
+           color:"black",
+           fontSize: "20px",
+           marginLeft: "5px",
+           transition: "transform 0.3s ease",
+         }}
+         className="arrow-icon"
+       />
+     </a>
+    </Link>
+
+              
+              }
+
             </div>
             
           </div>
@@ -107,7 +143,7 @@ function ElectronicCollection() {
           >
           <h4 style={{fontWeight:"600"}}> Best Selling</h4>
           <ALink href="/shop?bestSeller=true" style={{ color: "black", fontWeight: "600" }}>
-              View All <IoIosArrowForward style={{fontSize:"20px"}}/> 
+              View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/> 
               </ALink>
           </div>
 

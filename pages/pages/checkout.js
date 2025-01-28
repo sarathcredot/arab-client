@@ -13,6 +13,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { Helmet } from "react-helmet";
+import { IoMdHome } from "react-icons/io";
 
 const countryOptions = [
   { value: "uae", label: "+971", flag: "/images/uae.svg" },
@@ -23,23 +24,49 @@ const countryOptions = [
 
 const GET_CART = gql`
   query GetCart {
-    getCart {
-      products {
-        _id
-        productId
-        quantity
-        name
-        stock
-        sellingPrice
-        price
-        image
-      }
-      grandTotal
-      subTotal
-      deliveryCharge
+  getCart {
+    products {
+      _id
+      productId
+      quantity
+      name
+      shortDescription
+      stock
+      color
+      size
+      price
+      image
+      sellingPrice
+      mrp
+    }
+    grandTotal
+    subTotal
+    deliveryCharge
+    discount
+    isCouponApplied
+    appliedCoupon
+    code
+  }
+}
+`;
+
+const APPLY_COUPON = gql`
+  mutation ApplyCouponByUser($input: applyCouponByUserInput!) {
+    applyCouponByUser(input: $input) {
+      success
+      message
     }
   }
 `;
+const REMOVE_COUPON = gql`
+  mutation RemoveCoupon {
+    removeCoupon {
+      success
+      message
+    }
+  }
+`;
+
 export const GET_ADDRESSES = gql`
   query GetUserShippingAddresses {
     getUserShippingAddresses {
@@ -91,6 +118,9 @@ function CheckOut() {
   const { data, loading, error, refetch } = useQuery(GET_ADDRESSES);
   const [RemoveUserShippingAddress] = useMutation(REMOVE_ADDRESS);
   const [CreateUserOrder] = useMutation(PLACE_ORDER);
+  const [coupon,setCoupon] = useState("")
+  const [ApplyCoupon] = useMutation(APPLY_COUPON);
+  const [RemoveCoupon] = useMutation(REMOVE_COUPON);
   const router = useRouter();
   const customStyles = {
     control: (provided, state) => ({
@@ -207,6 +237,47 @@ function CheckOut() {
     }
   };
 
+  const handleApplyCoupon = async (e)=>{
+    e.preventDefault()
+    if(coupon){
+      try {
+        
+        const response = await ApplyCoupon({
+          variables:{
+          input:{
+            code:coupon
+          }
+        }
+      })
+      console.log("RESPONSE = ",response)
+      if(response?.data?.applyCouponByUser?.success){
+        toast.success(<div style={{padding:"10px"}}>{response?.data?.applyCouponByUser?.message}</div>)
+        cartRefetch()
+      }
+    } catch (error) {
+      console.log("ERROR = ",error)
+      toast.error(<div style={{padding:"10px"}}>{error?.message}</div>)
+      
+    }
+    }
+
+  }
+  const handleRemoveCoupon=async ()=>{
+    try {
+      const response = await RemoveCoupon()
+      if(response?.data?.removeCoupon?.success){
+        toast.success(<div style={{padding:"10px"}}>{response?.data?.removeCoupon?.message}</div>)
+        cartRefetch()
+      }
+    } catch (error) {
+      console.log("ERROR = ",error)
+      toast.error(<div style={{padding:"10px"}}>{error?.message}</div>)
+    }
+  }
+
+
+
+
   useEffect(() => {
     if (!arabtoken) {
       router.push("/pages/login");
@@ -217,7 +288,31 @@ function CheckOut() {
       <Helmet>
         <title>Checkout | Arab Deals</title>
       </Helmet>
-      <div style={{marginTop:"50px"}}></div>
+      {/* <div style={{marginTop:"50px"}}></div> */}
+      <div className="container">
+          <nav aria-label="breadcrumb" className="breadcrumb-nav">
+            <div className="container">
+              <ol className="breadcrumb">
+                <li className="breadcrumb-item">
+                  <ALink href="/">
+                    <IoMdHome style={{ fontSize: "16px" }} />
+                    {/* <i className="icon-home" ></i> */}
+                  </ALink>
+                </li>
+                <li className="breadcrumb-item">
+                  <ALink className="" href="/pages/cart">
+                  Shopping Cart
+                  </ALink>
+                </li>
+                <li className="breadcrumb-item active" aria-current="page">
+                  <ALink className="activeitem" href="/pages/checkout">
+                  Checkout
+                  </ALink>
+                </li>
+              </ol>
+            </div>
+          </nav>
+        </div>
       <ul className="checkout-progress-bar d-flex justify-content-center flex-wrap">
         <li>
           <ALink href="/pages/cart">Shopping Cart</ALink>
@@ -260,7 +355,7 @@ function CheckOut() {
             ) : (
               <>
                 {/* discount coupon */}
-                {/* <div className="checkout-discount">
+                <div className="checkout-discount">
                 <SlideToggle
                   duration={200}
                   collapsed
@@ -334,28 +429,54 @@ function CheckOut() {
                             If you have a coupon code, please apply it below.
                           </p>
 
-                          <form action="#" ref={setCollapsibleElement}>
-                            <div className="input-group">
-                              <input
+                          <form onSubmit={handleApplyCoupon} ref={setCollapsibleElement}>
+                            <div className=" apply_coupon_div">
+                              {cartData?.getCart?.isCouponApplied && cartData?.getCart?.code?(
+                                <input
                                 type="text"
-                                className="form-control htmlForm-control-sm w-auto"
+                                className=" "
+                                value={cartData?.getCart?.code}
+                                disabled={true}
+                                
+                                />
+                              ):(
+
+                                <input
+                                type="text"
+                                className=" "
                                 placeholder="Coupon code"
                                 required
-                              />
-                              <div className="input-group-append">
+                                value={coupon}
+                                onChange={(e)=>setCoupon(e.target.value)}
+                                />
+                              )}
+                              <div className="input-group-append apply_coupon_btn_div">
+                                {cartData?.getCart?.isCouponApplied?(
+                                  <button style={{
+                                    background:"#f91926"
+                                  }}
+                                  className="apply_coupon_btn btn btn-sm mt-0 "
+                                  type="button"
+                                  onClick={()=>handleRemoveCoupon()}
+                                >
+                                  Remove Coupon
+                                </button>
+                                ):(
+
                                 <button
-                                  className="btn btn-sm mt-0"
+                                  className="apply_coupon_btn btn btn-sm mt-0"
                                   type="submit"
                                 >
                                   Apply Coupon
                                 </button>
-                              </div>
-                            </div>
+                              )}
+                                </div>
+                                </div>
                             <div
                               className="row pl-3"
                               style={{ color: "#E30613", fontWeight: "500" }}
                             >
-                              <p> Get available coupon codes</p>
+                              <ALink href={"/pages/coupons"} >Get available coupon codes</ALink>
                             </div>
                           </form>
                         </div>
@@ -363,7 +484,7 @@ function CheckOut() {
                     </div>
                   )}
                 </SlideToggle>
-              </div> */}
+              </div>
                 <div className="row" >
                   <div className="col-lg-7">
                     <div>
@@ -902,6 +1023,17 @@ function CheckOut() {
                                 <span>OMR {cartData?.getCart?.subTotal}</span>
                               </td>
                             </tr>
+                            {cartData?.getCart?.isCouponApplied&&
+                            <tr className="cart-subtotal">
+                              <td>
+                                <h4>Coupon Discount</h4>
+                              </td>
+
+                              <td className="price-col">
+                                <span>OMR {cartData?.getCart?.discount}</span>
+                              </td>
+                            </tr>
+                            }
                             <tr className="cart-subtotal">
                               <td>
                                 <h4>Shipping Charge</h4>

@@ -6,8 +6,24 @@
 .home {
     overflow: hidden;
 }
+.arrow-icon{
+    transition: .3s ease-in-out;
+}
+.view-all-text{
+    text-decoration: none !important;
+}
+.view-all-text:hover{
+    transform: translateX(-5px);
+    
 
-
+}
+// a:hover .view-all-text {
+//     transform: translateX(-5px);
+//   }
+  
+a:hover .arrow-icon {
+    transform: translateX(5px); 
+}
 
 .newsletter-popup-content {
     max-width: 357px;
@@ -36,7 +52,9 @@
 .product-image-container
 // .product-default figure
  {
-    border: 1px solid #f4f4f4;
+    // border: 1px solid #f4f4f4;
+    width: 100px;
+    height: 80px;
 }
 .deal-section-head{
     a:not(.view-all):hover {
@@ -46,9 +64,13 @@
 }
 
 .offer-view{
+  p{
+    transition: .3s ease-in-out;
+  }
+}
+.offer-view{
   p:hover {
-    text-decoration: underline;
-    text-decoration-color: black;
+    transform: translateX(-5px);
   }
 }
 .heading {
@@ -210,10 +232,6 @@ hr {
         transform: translateX(-100%);
         left: 0;
     }
-}
-
-.btn {
-    // border-radius: 1px;
 }
 
 // Plugin 

@@ -10,6 +10,7 @@ import { IoIosArrowForward  } from "react-icons/io";
 // Import Settigns
 import { fadeInUpShorter } from "../../../utils/data/keyframes";
 import ALink from "../../common/ALink";
+import Link from "next/link";
 const GET_PRODUCTS = gql`query GetProducts($input: ProductFilters) {
   getProducts(input: $input) {
     maxRecords
@@ -73,10 +74,43 @@ function DealSection() {
           Deals of the day
         </h2>
         
-        <ALink href="/shop?discount=10"> 
-        <p  style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "600",}}>
-        <span > View All </span>  <span>  <IoIosArrowForward c style={{fontSize:"20px"}}/> </span>
-          </p></ALink>
+        {/* <ALink href="/shop?discount=10"> 
+        <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
+          View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/>
+          </p></ALink> */}
+
+     <Link href="/shop?discount=10">
+      <a
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          textDecoration: "none",
+        }}
+      >
+        <span
+          style={{
+            display: "inline-block",
+            color: "rgba(0, 0, 0, 1)",
+            fontWeight: "500",
+            transition: "transform 0.3s ease",
+          }}
+          className="view-all-text"
+        >
+          View All
+        </span>
+        <IoIosArrowForward
+          style={{
+            color:"black",
+            fontSize: "20px",
+            marginLeft: "5px",
+            transition: "transform 0.3s ease",
+          }}
+          className="arrow-icon"
+        />
+      </a>
+     </Link>
+
+      
       </div>
       <h4 className="recommendmob">Deals of the day</h4>
       {/* <Reveal

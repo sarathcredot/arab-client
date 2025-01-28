@@ -57,6 +57,9 @@ form {
 select.form-control:not([size]):not([multiple]) {
 	height: 6rem;
 }
+select.form-control.form-control-md:not([size]):not([multiple]) {
+	height: 3.8rem;
+}
 
 select.form-control-sm:not([size]):not([multiple]) {
 	padding: 0;

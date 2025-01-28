@@ -127,9 +127,12 @@ function Login({ mutate }) {
         } else {
           return router.push("/");
         }
+      }else{
+        setOtperror("Please Enter Correct OTP")
       }
     } catch (error) {
       console.log("error", error);
+      setOtperror("Please Enter Correct OTP")
     }
   };
   return (
@@ -137,7 +140,8 @@ function Login({ mutate }) {
       <Helmet>
         <title>Login | Arab Deals</title>
       </Helmet>
-      <main className="main">
+      <main className="main login_page">
+          <img className="login_bg_image" src="/images/login_bg_svg.svg" alt="" />
         <div
           className=" login-container container"
           style={{ marginTop: "0", position: "relative" }}
@@ -149,7 +153,7 @@ function Login({ mutate }) {
               width: "100%",
               left: "0",
               right: "0",
-              background: "white",
+              background: "#fff",
             }}
             className="custom_loginresp"
           >
@@ -161,7 +165,7 @@ function Login({ mutate }) {
             <nav
               aria-label="breadcrumb"
               className="breadcrumb-nav mb-0"
-              style={{ paddingBottom: "15px"}}
+              style={{ paddingBottom: "0px"}}
             >
               {/* <div className="container">
                 <ol className="breadcrumb">
@@ -180,25 +184,23 @@ function Login({ mutate }) {
               </div> */}
             </nav>
           </div>
-          <div className="row">
-            <div className="col-lg-12 mx-auto custom_headlog">
+          <div className="row login_row">
+            <div className="col-lg-12 mx-auto login_container custom_headlog">
               {isOtp ? (
-                <div
-                  className="row custom-loginleft"
-                  // style={{ marginLeft: "115px" }}
-                >
-                  <div className="col-md-6">
-                    <div className="heading mb-1 otpcontainer">
-                      <h2 className="title">Verify Phone Number</h2>
-                      <div className="">
+                <div className="row h-100 custom-loginleft">
+                <div className="col-md-6 login_content">
+                  <div>
+
+                  <div className="heading">
+                    <h2 style={{fontSize:"25px",fontWeight:"600"}}>Verify Phone Number</h2>
+                    <div className="">
                         <p
                           className=""
                           style={{
-                            marginTop: "20px",
-                            paddingBottom: "20px",
                             fontSize: "12px",
                             color: "#777777",
                             fontWeight: "400",
+                            marginTop:"20px"
                           }}
                         >
                           Secure Your Account, Shop With Confidence.
@@ -206,11 +208,16 @@ function Login({ mutate }) {
                       </div>
                     </div>
 
-                    <form style={{ marginTop: "70px" }}>
-                      <div className="mt-3">
+                    <form style={{ marginTop: "30px" }}>
+                      <div className="login_otp_section">
+                        <div className="otp_boxes">
+
                         <OTPInput
                           value={otp}
-                          onChange={setOtp}
+                          onChange={(value)=>{
+                            setOtp(value);
+                            setOtperror("");
+                          }}
                           numInputs={5}
                           containerStyle={{
                             textAlign: "center",
@@ -221,6 +228,7 @@ function Login({ mutate }) {
                           renderInput={(props) => (
                             <input
                               {...props}
+                              type="number"
                               className="otpbox"
                               // style={{
                               //   width: "60px",
@@ -235,16 +243,17 @@ function Login({ mutate }) {
                               // }}
                             />
                           )}
-                        />
+                          />
+                          </div>
+                          {otperror && <div style={{ color: "red",marginTop:10 }}>{otperror}</div>}
                         <button
                           type="submit"
                           className="btn btn-dark btn-md "
-                          style={{ marginTop: "48px", fontWeight: "600" }}
+                          style={{ marginTop: "20px", fontWeight: "normal" }}
                           onClick={handleVerifyOTP}
                         >
                           Verify OTP
                         </button>
-                        {otperror && <div style={{ color: "red" }}>{otperror}</div>}
                         <div className="resend-action" style={{ marginTop: "33px" }}>
                           <p
                             style={{
@@ -271,40 +280,49 @@ function Login({ mutate }) {
                       </div>
                     </form>
                   </div>
-                  <div className="col-md-6">
-                    <div>
-                      <img class="google-icon" src="images\brands\loginBanner.svg" />
+                  </div>
+                  <div className="col-md-6 d-none d-md-flex login_img_div">
+                    <div className="" style={{width:"60%"}}>
+                      <img className="login_watch_img" src="images\watch_svg_login.svg" />
                     </div>
                   </div>
+
                 </div>
               ) : (
-                <div className="row custom-loginleft">
-                  <div className="col-md-6 left-login-section">
-                    <div className="heading mb-1">
-                      <h2 className="title">Login/ Register to your account</h2>
+                <div className="row h-100 custom-loginleft">
+                  <div className="col-md-6 login_content">
+                    <div>
+
+                    <div className="heading">
+                      <h2 style={{fontSize:"25px",fontWeight:"600"}}>Login/ Register to your account</h2>
                       <div className="">
                         <p
                           className=""
                           style={{
-                            marginTop: "20px",
-
                             fontSize: "12px",
                             color: "#777777",
                             fontWeight: "400",
+                            marginTop:"20px"
                           }}
                         >
-                          Access Exclusive Offer Now.
+                          Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace.
                         </p>
                       </div>
                     </div>
 
                     <div></div>
 
-                    <form style={{ marginTop: "70px" }}>
+                    <form style={{ marginTop: "30px" }}>
                       <div className="container">
                         <div className="input-group" style={{ position: "relative" }}>
                           <div className="input-group-prepend" style={{ position: "absolute" }}>
                             <span
+                              className=""
+                              style={{display:"block", padding: "17px",margin:"auto 0",fontWeight:"normal" }}
+                            >
+                              +968
+                            </span>
+                            {/* <span
                               className="input-group-text countrycodeinput"
                               style={{ padding: "10px" }}
                             >
@@ -315,16 +333,19 @@ function Login({ mutate }) {
                                 height="20"
                               />
                               +968
-                            </span>
+                            </span> */}
                           </div>
                           <input
                             type="number"
                             placeholder="Enter Mobile Number"
                             className="form-input form-wide"
                             value={mobileNumber}
-                            onChange={(e) => setMobileNumber(e.target.value)}
-                            style={{ outline: "none", paddingLeft: "80px" }}
-                          />
+                            onChange={(e) => {
+                              setMobileNumber(e.target.value);
+                              setError("");
+                            }}
+                            style={{ outline: "none", paddingLeft: "53px" }}
+                            />
                         </div>
                       </div>
 
@@ -332,10 +353,10 @@ function Login({ mutate }) {
 
                       {/* <div
                       className="orcontainer"
-                     
-                    >
+                      
+                      >
                       <div className="orcircle"
-                        // style={{
+                      // style={{
                         //   backgroundColor: "#F8F8F8",
                         //   borderRadius: "50%",
                         //   width: "46px",
@@ -345,7 +366,7 @@ function Login({ mutate }) {
                         //   justifyContent: "center",
                         //   marginTop: "14px",
                         // }}
-                      >
+                        >
                         <div style={{ fontSize: "14px", fontWeight: "500" }}>
                           <p
                             style={{ fontFamily: "Poppins", marginBottom: "0" }}
@@ -359,22 +380,22 @@ function Login({ mutate }) {
                       {/* <div className="mt-3 buttonwrapper"> */}
                       {/* <div
                         class="google-btn googlebtn"
-                       
+                        
                       >
                         <div class="google-icon-wrapper ">
                           <img
                             class="google-icon"
                             src="images\brands\googel.svg"
                           />
-                        </div>
+                          </div>
                         <p
                           class="btn-text mt-3 "
                           style={{ paddingLeft: "20px" }}
                         >
-                          <p
-                            style={{
-                              fontSize: "12px",
-                              fontWeight: "600",
+                        <p
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: "600",
                               color: "#000000",cursor:"pointer"
                             }}
                           >
@@ -391,8 +412,8 @@ function Login({ mutate }) {
                             class="google-icon"
                             src="images\brands\apple.svg"
                           />
-                        </div>
-                        <p
+                          </div>
+                          <p
                           class="btn-text mt-3"
                           style={{ paddingLeft: "20px" }}
                         >
@@ -402,9 +423,9 @@ function Login({ mutate }) {
                               fontWeight: "600",
                               color: "#000000",
                               cursor:"pointer"
-                            }}
+                              }}
                           >
-                            Sign in wIth Apple
+                          Sign in wIth Apple
                           </p>
                         </p>
                       </div> */}
@@ -412,18 +433,19 @@ function Login({ mutate }) {
 
                       <button
                         type="submit"
-                        className="btn btn-dark btn-md "
-                        style={{ marginTop: "36px", fontWeight: "600" }}
+                        className="btn btn-dark btn-md"
+                        style={{ marginTop: "10px", fontWeight: "400",paddingInline:"50px" }}
                         onClick={handleOtpChange}
                       >
                         GET OTP
                       </button>
                     </form>
                   </div>
-                  <div className="col-md-6" style={{ paddingRight: "0" }}>
-                    <div>
-                      <img class="google-icon" src="images\brands\loginBanner.svg" />
-                    </div>
+                </div>
+                <div className="col-md-6 d-none d-md-flex login_img_div">
+                  <div className="" style={{width:"60%"}}>
+                    <img className="login_watch_img" src="images\watch_svg_login.svg" />
+                  </div>
                   </div>
                 </div>
               )}

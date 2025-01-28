@@ -153,6 +153,7 @@ function MainMenu({ router }) {
     cat7: "",
   });
   const [isLeaf, setIsLeaf] = useState("");
+  const [showhide,setshowhide]=useState(false)
 
   const [brands, setBrands] = useState([]);
   const [brandFetchToggle, setBrandFetchToggle] = useState(false);
@@ -324,6 +325,7 @@ function MainMenu({ router }) {
               className={`custom__menu__item px-2 ${item._id === parentcategory.cat1 ? "activate" : ""
                 }`}
               onClick={() => {
+                console.log("click",showhide)
                 setSelectedCategory(item?._id);
                 setParentcategory((e) => ({
                   cat1: item._id,
@@ -333,12 +335,15 @@ function MainMenu({ router }) {
                   cat5: "",
                 }));
                 setIsLeaf(item.isLeaf ? item?._id : "");
+                setshowhide(!showhide)
                 if (item.isLeaf) {
                   handleBrandList(item?._id);
                 } else {
                   handleLevel2category(item?._id);
                   setBrands([]);
                 }
+
+                console.log("click",showhide)
 
               }}
             >
@@ -356,10 +361,12 @@ function MainMenu({ router }) {
         <ul className="custom__mobilemenu w-100" style={{listStyle:"none"}}>
           {mainNav?.map((item) => (
             <li
+              key={item?._id}
               className={`custom__mobile__item px-2 ${item._id === parentcategory.cat1 ? "activate" : ""
                 }`}
               onClick={() => {
                 setIsLeaf(item.isLeaf ? item?._id : "");
+                setshowhide(!showhide)
                 setSelectedCategory(item?._id);
                 setParentcategory((e) => ({
                   cat1: item._id,
@@ -398,7 +405,7 @@ function MainMenu({ router }) {
           <BackArrow movebackward={movebackward} />
         ) : null}
 
-        {parentcategory?.cat1 && parentcategory?.cat1 !== isLeaf ? (
+        {parentcategory?.cat1 && parentcategory?.cat1 !== isLeaf && showhide ? (
           <ul
             className={`custom__menufirstchild w-100 ${parentcategory.cat2 ? "active_container_hidden" : ""
               }`}
@@ -410,6 +417,7 @@ function MainMenu({ router }) {
                   }`}
                 onClick={() => {
                   setIsLeaf(item.isLeaf ? item?._id : "");
+                 
                   setSelectedCategory(item?._id);
                   setParentcategory((e) => ({
                     ...e,
@@ -439,7 +447,7 @@ function MainMenu({ router }) {
             }
           </ul>
         ) : null}
-        {parentcategory?.cat2 && parentcategory?.cat2 !== isLeaf ? (
+        {parentcategory?.cat2 && parentcategory?.cat2 !== isLeaf && showhide ? (
           (<>
             <p
               className={`customheading ${parentcategory.cat3 ? "active_container_hidden" : ""
@@ -459,6 +467,7 @@ function MainMenu({ router }) {
                   onClick={() => {
                     setSelectedCategory(item?._id);
                     setIsLeaf(item.isLeaf ? item?._id : "");
+                   
                     console.log(item.isLeaf, 'isLeaf');
                     setParentcategory((e) => ({
                       ...e,
@@ -489,7 +498,7 @@ function MainMenu({ router }) {
         ) : null}
 
         {
-          parentcategory?.cat3 && parentcategory?.cat3 !== isLeaf ? (
+          parentcategory?.cat3 && parentcategory?.cat3 !== isLeaf && showhide ? (
             <>
               <p
                 className={`customheading ${parentcategory.cat4 ? "active_container_hidden" : ""
@@ -509,6 +518,7 @@ function MainMenu({ router }) {
                     onClick={() => {
                       setSelectedCategory(item?._id);
                       setIsLeaf(item.isLeaf ? item?._id : "");
+                     
                       setParentcategory((e) => ({
                         ...e,
                         cat4: item._id,
@@ -537,7 +547,7 @@ function MainMenu({ router }) {
           ) : null
         }
         {
-          parentcategory?.cat4 && parentcategory?.cat4 !== isLeaf ? (
+          parentcategory?.cat4 && parentcategory?.cat4 !== isLeaf && showhide ? (
             <>
               <p
                 className={`customheading ${parentcategory.cat5 ? "active_container_hidden" : ""
@@ -557,6 +567,7 @@ function MainMenu({ router }) {
                     onClick={() => {
                       setSelectedCategory(item?._id);
                       setIsLeaf(item.isLeaf ? item?._id : "");
+                      
                       setParentcategory((e) => ({
                         ...e,
                         cat5: item._id,
@@ -586,7 +597,7 @@ function MainMenu({ router }) {
         }
 
         {
-          parentcategory?.cat5 && parentcategory?.cat5 !== isLeaf ? (
+          parentcategory?.cat5 && parentcategory?.cat5 !== isLeaf && showhide ? (
             <>
               <p
                 className={`customheading ${parentcategory.cat6 ? "active_container_hidden" : ""
@@ -611,6 +622,7 @@ function MainMenu({ router }) {
                         cat7: "",
                       }));
                       setIsLeaf(item.isLeaf ? item?._id : "");
+                     
                       if (item.isLeaf) {
                         handleBrandList(item?._id);
                       } else {
@@ -633,7 +645,7 @@ function MainMenu({ router }) {
         }
 
         {
-          parentcategory?.cat6 && parentcategory?.cat6 !== isLeaf ? (
+          parentcategory?.cat6 && parentcategory?.cat6 !== isLeaf && showhide ? (
             <>
               <p
                 className={`customheading ${parentcategory.cat7 ? "active_container_hidden" : ""
@@ -653,6 +665,7 @@ function MainMenu({ router }) {
                     onClick={() => {
                       setSelectedCategory(item?._id);
                       setIsLeaf(item.isLeaf ? item?._id : "");
+                      
                       setParentcategory((e) => ({
                         ...e,
                         cat7: item._id,
@@ -676,7 +689,7 @@ function MainMenu({ router }) {
           ) : null
         }
 
-        {isLeaf ? (
+        {isLeaf && showhide ? (
           <>
             <p className="pb-4 customheading">SELECT BRAND</p>
             <ul className="custom__menulastchild w-100">

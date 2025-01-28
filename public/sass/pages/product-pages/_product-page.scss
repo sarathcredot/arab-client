@@ -1050,6 +1050,7 @@ margin-bottom: -119px;
 		flex: 0 0 25%;
 		max-width: 25%;
 		padding: 4px;
+		border: none !important;
 
 	}
 
@@ -1066,10 +1067,25 @@ margin-bottom: -119px;
 	}
 
 	.owl-dot.active img, img:hover {
-		border: 2px solid #21293c;
+		border: 1px solid #21293c;
 		transition: border-color 0.2s;
 	}
 }
+
+@media(max-width:768px){
+	.owl-dot{
+		img{
+			width: 80% !important;
+			height: 100% !important;
+		}
+		figure{
+			border: none;
+			margin-right: 5px;
+		}
+	}
+	
+}
+
 
 // 3.3) Transparent Dots
 // Only used in product-full-width.html

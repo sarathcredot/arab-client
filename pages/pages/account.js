@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ALink from "../../components/common/ALink";
 import { Tabs, Tab, TabList, TabPanel } from "react-tabs";
 import { useRouter } from "next/router";
@@ -6,6 +6,9 @@ import { IoMdHome } from "react-icons/io";
 import { gql, useMutation, useLazyQuery } from "@apollo/client";
 import withApollo from "../../server/apollo";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
+
+
 
 
 export const USER_DETAIL = gql`
@@ -31,15 +34,54 @@ const LOG_OUT_USER = gql`
   }
 `;
 
+const DELETE_USER = gql`
+    mutation AccountDeleteByUser($input: accountDeleteByUserInput!) {
+      accountDeleteByUser(input: $input) {
+        success
+        message
+      }
+    }
+`;
+
 function Account() {
   const id = localStorage?.getItem("userId");
   const token = localStorage.getItem("arabtoken");
   const [userdetail, { loading: userloading, error: usererror, data: userData, refetch }] = useLazyQuery(USER_DETAIL);
 
-    const [logout, { loading, error }] = useMutation(LOG_OUT_USER);
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [deletedReason, setDeletedReason] = useState("");
+  const [updateAccountStatus] = useMutation(DELETE_USER);
+  const handleDeleteAccount = async () => {
+    try {
+      const response = await updateAccountStatus({
+        variables: {
+          input: {
+            isDeleted: true,
+            deleteReason: deletedReason
+          },
+        },
+      });
+      console.log("RESPONSE AVAILABLE = ", response);
+      if (response?.data?.accountDeleteByUser) {
+        toast.success(response?.data?.accountDeleteByUser.message);
+        setShowPopup(false)
+        setDeletedReason("")
+        localStorage.clear();
+        router.push("/pages/login");
+      }
+    } catch (error) {
+      console.log("ERROR = ", error);
+      toast.error(error);
+    }
+  };
+
+  
+  const [logout, { loading, error }] = useMutation(LOG_OUT_USER);
+
 
   // console.log("this is userdata",userData)
-    
+
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -67,19 +109,19 @@ function Account() {
   }, [id, userdetail, token]);
 
   return (
-    <div> 
+    <div>
       <Helmet>
         <title>Account | Arab Deals</title>
       </Helmet>
       <main className="main main-test">
-       
+
         <nav aria-label="breadcrumb" className="breadcrumb-nav">
           <div className="container">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <ALink href="/">
                   <IoMdHome style={{ fontSize: "16px" }} />
-                  
+
                 </ALink>
               </li>
 
@@ -111,14 +153,14 @@ function Account() {
         </div>
       </main>
 
-      <div className="container  custom-account-container account-container " style={{marginBottom:"0px"}} >
+      <div className="container  custom-account-container account-container " style={{ marginBottom: "0px" }} >
         <Tabs
           selectedTabClassName="active"
           selectedTabPanelClassName="active show"
           defaultIndex={0}
           className="tab"
         >
-          <div className="row" style={{marginLeft:"0px", marginRight:"0px"}}>
+          <div className="row" style={{ marginLeft: "0px", marginRight: "0px" }}>
             <div className="col-12 order-0">
               {/* StickyBox and Tab navigation code */}
               {/* Uncomment and use this code if needed */}
@@ -129,7 +171,7 @@ function Account() {
                 <div className="dashboard-content">
                   {/* Dashboard content */}
                   <p
-                   className="dashboard-hello"
+                    className="dashboard-hello"
                   >
                     Hello
                     {userData?.getUserRecord?.record?.displayName ? (
@@ -155,7 +197,7 @@ function Account() {
                   </p>
                   <div className="container p-md-5 p-sm-0">
                     <div className="row">
-                      <div className="col-12 col-md-4 card-bottom">
+                      <div onClick={()=>{router.push("/pages/orders")}}  className="col-12 col-md-4 card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center content-box mr-sm-0 w-sm-100"
                         >
@@ -204,7 +246,7 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4  card-bottom">
+                      <div onClick={()=>{router.push("/pages/wishlist")}}  className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100 "
                         >
@@ -250,6 +292,61 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
+
+
+
+
+                      <div onClick={()=>{router.push("/pages/coupons")}} className="col-12 col-md-4  card-bottom">
+                        <div
+                          className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
+
+                        >
+                          <ALink href="/pages/coupons">
+                            <div
+                              style={{
+                                // width: "321.46px",
+                                // height: "276.71p",
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <div
+                                className="iconwrapper-dash"
+                                style={{
+                                  width: "103.59px",
+                                  height: "103.59px",
+                                  // backgroundColor: "red",
+                                  borderRadius: "50%",
+                                  // backgroundColor: "#FAFAFA",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <svg
+                                  width="42"
+                                  height="43"
+                                  viewBox="0 0 42 43"
+                                  fill="black"
+                                  className="iconhover"
+                                  id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" >
+                                  {/* <!-- Generator: Adobe Illustrator 29.0.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 186)  --> */}
+                                  <path d="M39.4,15v-5.6c0-.5-.5-1-1-1.1H3.9c-.6,0-1.1.5-1.2,1.1v5.6c3.7.7,6,4.4,5,8.1-.9,3.7-2.7,4.4-5,4.8,0,1.7-.2,3.7,0,5.4.2,1.7.5,1.2,1.2,1.2h34.3c.6,0,1.1-.5,1.2-1.1v-5.6c-2.4-.4-4.4-2.4-5-4.7-.9-3.7,1.3-7.4,5-8.1ZM12.3,17.1c0-1.5,1.2-2.7,2.7-2.7s2.7,1.2,2.7,2.7-1.2,2.7-2.7,2.7-2.7-1.2-2.7-2.7ZM18.3,32.5l-2.4-.9,7.9-21.1,2.5.9-7.9,21h0ZM27.8,28.5c-1.5,0-2.7-1.2-2.7-2.7s1.2-2.7,2.7-2.7,2.7,1.2,2.7,2.7-1.2,2.7-2.7,2.7Z" />
+                                </svg>
+                                {/* <img src="images\icon\vuesax\bold\frame.svg" alt="Account Details" style={{ maxWidth: '100%' }} /> */}
+                              </div>
+                            </div>
+
+                            <div className="feature-box-content" style={{ marginTop: "20px" }}>
+                              <h3>Coupons</h3>
+                            </div>
+                          </ALink>
+                        </div>
+                      </div>
+
+
+
+
                       {/* <div className="col-12 col-md-4 mb-5">
                         <div
                           className="feature-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
@@ -298,10 +395,10 @@ function Account() {
                           </ALink>
                         </div>
                       </div> */}
-                      <div className="col-12 col-md-4  card-bottom">
+                      <div onClick={()=>{router.push("/pages/addresses")}} className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
-                          
+
                         >
                           <ALink href="/pages/addresses">
                             <div
@@ -348,10 +445,10 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4  card-bottom">
+                      <div onClick={()=>{router.push("/pages/accountdetails")}}  className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
-                         
+
                         >
                           <ALink href="/pages/accountdetails">
                             <div
@@ -396,7 +493,71 @@ function Account() {
                           </ALink>
                         </div>
                       </div>
-                      <div className="col-12 col-md-4  card-bottom">
+
+                        {/* //delete acoount */}
+
+                        <div className="col-12 col-md-4  card-bottom">
+                        <div
+                          className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
+                          onClick={() => setShowPopup(true)}
+                        >
+                          <div >
+                            <div
+                              style={{
+                                // width: "321.46px",
+                                // height: "276.71p",
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <div
+                                className="iconwrapper-dash"
+                                style={{
+                                  width: "103.59px",
+                                  height: "103.59px",
+                                  // backgroundColor: "red",
+                                  borderRadius: "50%",
+                                  // backgroundColor: "#FAFAFA",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+
+                                <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1"  
+                                  width="42"
+                                  height="43"
+                                  viewBox="0 0 42 43"
+                                  fill="black"
+                                  className="iconhover">
+                                  <path d="M35.4,27.2c0,3.7-2.8,6.2-6.3,7.7,0-4.5-3.7-8.2-8.2-8.2s-8.2,3.7-8.2,8.2v.2c-10.7-4.5-7.1-16.3,6-17.4,5.9-.5,16.8,1.9,16.7,9.5Z"/>
+                                  <path d="M21,28.6c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5ZM23,38.1l-1.9-1.8-1.8,1.9-1.2-1.1,1.8-1.9-1.9-1.9,1.1-1.2,1.9,1.8,1.8-1.9,1.2,1.1-1.8,1.9,1.9,1.8-1.1,1.2Z"/>
+                                  <path d="M28.6,9c0,4.2-3.4,7.6-7.6,7.6s-7.6-3.4-7.6-7.6,3.4-7.6,7.6-7.6,7.6,3.4,7.6,7.6Z"/>
+                                </svg>
+                                {/* <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="42"
+                                  height="43"
+                                  viewBox="0 0 42 43"
+                                  fill="black"
+                                  className="iconhover"
+                                >
+                                  <path d="M20.8436 4.38672C16.2966 4.38672 12.6001 8.08326 12.6001 12.6302C12.6001 17.0903 16.0884 20.7001 20.6353 20.8563C20.7741 20.8389 20.913 20.8389 21.0171 20.8563C21.0518 20.8563 21.0692 20.8563 21.1039 20.8563C21.1212 20.8563 21.1212 20.8563 21.1386 20.8563C25.5814 20.7001 29.0697 17.0903 29.087 12.6302C29.087 8.08326 25.3905 4.38672 20.8436 4.38672Z" />
+                                  <path d="M29.6598 25.4737C24.8179 22.2457 16.9215 22.2457 12.0448 25.4737C9.8408 26.9489 8.62598 28.9446 8.62598 31.0793C8.62598 33.2139 9.8408 35.1923 12.0275 36.6501C14.4571 38.2814 17.6504 39.0971 20.8436 39.0971C24.0369 39.0971 27.2302 38.2814 29.6598 36.6501C31.8465 35.175 33.0613 33.1965 33.0613 31.0446C33.044 28.9099 31.8465 26.9315 29.6598 25.4737Z" />
+                                </svg> */}
+                                {/* <img src="images\icon\vuesax\bold\frame.svg" alt="Account Details" style={{ maxWidth: '100%' }} /> */}
+                              </div>
+                            </div>
+                            <div className="feature-box-content" style={{ marginTop: "20px" }}>
+                              <h3>Delete Account</h3>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* //logout */}
+
+                      <div   className="col-12 col-md-4  card-bottom">
                         <div
                           className="feature-box dashboard-box text-center justify-content-center  content-box mr-sm-0 w-sm-100"
                           onClick={handleLogout}
@@ -438,6 +599,35 @@ function Account() {
                           {/* </ALink> */}
                         </div>
                       </div>
+
+                    
+                      
+                      {showPopup && (
+                        <div className="popup-overlay">
+                          <div className="popup-content">
+                            <h4 className="popup-head-content">Delete Account</h4>
+                            <hr class="custom-line" />
+                            <p className="popup-body-content" style={{lineHeight:"18px"}}>Are you sure you want to delete your account? This action is irreversible and will permanently remove your profile, order history, and saved preferences.
+
+<br/>If you're facing issues, consider reaching out to our support team before proceeding. Otherwise, click 'Confirm' to delete your account.</p>
+                            <p className="popup-label-content">Share your haptic feedback about us</p>
+                            <textarea
+                                className="popup-input"
+                                onChange={(e) => setDeletedReason(e.target.value)}
+                              ></textarea>
+                            <div className="popup-actions">
+        
+                              <button onClick={() => setShowPopup(false)} className="btn btn-outline-dark">
+                                CANCEL
+                              </button>
+                              <button onClick={handleDeleteAccount} className="btn btn-dark">
+                                CONFIRM
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
                     </div>
                   </div>
                 </div>

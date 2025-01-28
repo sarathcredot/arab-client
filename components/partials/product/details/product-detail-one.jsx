@@ -24,6 +24,11 @@ import { toast } from "react-toastify";
 import withApollo from "../../../../server/apollo.js";
 
 function ProductDetailOne(props) {
+
+  console.log("propdate",props)
+
+  console.log("prodata",props?.product?.attributes[1].attributeValue)
+
   const router = useRouter();
   const {
     product,
@@ -37,7 +42,7 @@ function ProductDetailOne(props) {
   const [attrs, setAttrs] = useState({});
   const [variant, setVariant] = useState(null);
   const [size, setSize] = useState(null);
-  const [color, setColor] = useState(null);
+  const [color, setColor] = useState("sfdsdf");
   const [qty, setQty] = useState(1);
   const [selectedcolor, setSelectedColor] = useState();
   const [selectedAttributes, setSelectedAttributes] = useState({});
@@ -157,6 +162,7 @@ function ProductDetailOne(props) {
   };
 
   useEffect(() => {
+    setColor(props?.product?.attributes[1].attributeValue)
     if (variantError) {
       console.error("Error fetching variant data:", variantError);
     } else {
@@ -452,6 +458,8 @@ function ProductDetailOne(props) {
 
   function changeSelection(item) {
 
+    console.log("color change",item)
+
     let variants = {};
 
 
@@ -616,25 +624,26 @@ function ProductDetailOne(props) {
 
           {/* <hr className="short-divider" /> */}
 
-          <div style={{display:"flex"}} className="price-box pt-5 ">
+          <div style={{fontFamily: "Plus Jakarta Sans",}} className=" pt-5 ">
             {product?.price == product.price ? (
               <>
                 <span
                   style={{
                     fontFamily: "Plus Jakarta Sans",
                     fontWeight: "600px",
-                    fontSize: "14px",
+                    fontSize: "12px",
                     lineHeight: "15px",
                     // marginTop: "5px",
                     marginRight: "8px",
                     color: "#606060",
                   }}
-                >
+                  >
                   OMR
                 </span>
                 <span
                   className="product-price"
                   style={{
+                    fontFamily: "Plus Jakarta Sans",
                     fontWeight: "600px",
                     fontSize: "18px",
                     lineHeight: "15px",
@@ -649,7 +658,7 @@ function ProductDetailOne(props) {
                   className="old-price"
                   style={{
                     fontWeight: "600px",
-                    fontSize: "16px",
+                    fontSize: "12px",
                     lineHeight: "15px",
                     letterSpacing: "-0.1px",
                     marginLeft: "10px",
@@ -746,11 +755,13 @@ function ProductDetailOne(props) {
               {colorVariants?.length > 0 ? (
                 <>
                   <label>
-                    COLOR:&nbsp;{""}
+                    COLOR:&nbsp;<span style={{ fontWeight: "500" }} > {color} </span>
                     <span style={{ fontWeight: "500" }}>
                       {selectedAttributes &&
                         // selectedAttributes.charAt(0).toUpperCase() +
-                        selectedAttributes?.color}
+                        selectedAttributes?.color
+                        
+                        }
                     </span>
                   </label>
                 </>
@@ -800,7 +811,8 @@ function ProductDetailOne(props) {
                               borderRadius: "50%",
                             }}
                           >
-                            <a
+                            <div
+                              // href="#"
                               className="filter-color border-0"
                               style={{
                                 backgroundColor: item?.colorCode,
@@ -819,7 +831,7 @@ function ProductDetailOne(props) {
                                 //   item?.attributeValue
                                 // );
                               }}
-                            ></a>
+                            ></div>
                           </div>
                         )}
                       </li>

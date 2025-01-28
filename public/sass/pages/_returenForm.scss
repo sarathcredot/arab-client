@@ -1,0 +1,151 @@
+.re-form-main {
+
+      width: 100%;
+      min-height: 1100px;
+      // background-color: red;
+}
+
+.re-form-title {
+
+      font-size: 26px;
+      font-family: "Poppins";
+      font-weight: 600;
+}
+
+.re-inpt-ureson {
+
+
+      height: 60px;
+      width: 100%;
+      border: 1px solid #CDCDCD;
+      margin-bottom: 20px;
+}
+
+.re-input-label {
+
+      font-size: 14px;
+      font-weight: 200px;
+      font-family: "Poppins";
+      color: #737373;
+
+}
+
+
+
+
+// .re-inpt-ureson-file {
+//       height: 60px;
+//       width: calc(100% - 120px); /* Adjusting width to accommodate button */
+//       border: 1px solid #CDCDCD;
+//       margin-bottom: 20px;
+//       padding: 0 10px;
+//     }
+
+//     .upload-btn {
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       background-color: black;
+//       color: white;
+//       height: 60px;
+//       width: 100px;
+//       margin-right: 10px;
+//       cursor: pointer;
+//       font-size: 16px;
+//       border-radius: 5px;
+//     }
+
+//     .file-input {
+//       display: none; /* Hide the actual file input field */
+//     }
+
+
+.re-inpt-ureson-file {
+      height: 60px;
+      width: calc(100% - 120px);
+      /* Leave space for the button */
+      border: 1px solid #CDCDCD;
+      margin-bottom: 20px;
+      padding: 0 10px;
+      flex: 1;
+      cursor: pointer;
+      /* Indicate it's clickable */
+}
+
+.upload-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: black;
+      color: white;
+      height: 60px;
+      width: 120px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      margin-left: 10px;
+      // margin-bottom: 21px;
+}
+
+.file-input {
+      display: none;
+      /* Hide the actual file input field */
+}
+
+
+
+
+
+
+
+
+
+.re-sub-title {
+
+      font-size: 16px;
+      font-family: "Poppins";
+      font-weight: 600;
+}
+
+.re-address-form-main {
+      // width: 100%;
+      display: flex;
+      gap: 20px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      // background-color: red;
+}
+
+
+.re-address-input {
+
+      height: 60px;
+      width: 603px;
+      border: 1px solid #CDCDCD;
+      // margin-bottom: 20px;
+}
+
+
+@media(max-width:769px){
+
+      .re-address-input{
+
+            width: 734px;     
+            // width: 100%;
+      }
+}
+
+@media(max-width:500px){
+
+      .re-address-input{
+
+            width: 300px;     
+            // width: 100%;
+      }
+}
+
+
+
+// gpt 
+
+

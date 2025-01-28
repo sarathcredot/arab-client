@@ -45,6 +45,108 @@
     }
 }
 
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  .custom-line {
+    border: none;          
+    border-top: 1px solid #E2E2E2; 
+    width: 100%;          
+    margin: 20px 0;       
+  }
+
+  .popup-body-content{
+    color: #777777;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    font-family: "poppins";
+    
+  }
+
+  .popup-label-content{
+    color: #737373;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 30px;
+
+  }
+  
+  .popup-head-content{
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #1B1B1B;
+    font-family: "poppins";
+  }
+  .popup-content {
+    background: white;
+    padding: 30px;
+    margin: 10px;
+    text-align: start;
+    width:55%;
+  }
+  .popup-input {
+    width: 100%;             
+    height: 130px;           
+    border: 1px solid #CDCDCD;
+    padding: 8px;           
+    box-sizing: border-box; 
+    resize: none;            
+    font-size: 12px;       
+    line-height: 1.5;       
+  }
+
+  .popup-input:focus{
+     outline: none;
+  }
+
+  .popup-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .popup-actions button {
+     padding: 0px;
+     width: 200px !important;
+     height: 40px;   
+  }
+
+
+
+  @media (max-width: 768px) {
+    .popup-content{
+        width: 90%;
+        padding: 20px;
+    }
+  }
+
+  
+  @media (max-width: 480px) {
+    .popup-head-content{
+        font-size: 20px;
+      }
+      .popup-body-content{
+        font-size: 12px;
+      }
+    
+  }
+  
+
 .change-password {
     padding: 2.6rem 3rem 2.2rem;
     border: 2px solid #e7e7e7;

@@ -1,7 +1,128 @@
 .container {
   max-width: 600px;
   font-family: Arial, sans-serif;
+
+
 }
+
+.retuenTitle {
+
+  font-size: 26px;
+  font-family: "Poppins";
+  font-weight: 600;
+  //  line-height: 20;
+
+}
+
+.modalContent {
+
+  //  width: 1000px;
+  //  height: 400px;
+  //  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  //  padding: 25px;
+
+  width: 90%;
+  max-width: 1000px;
+  height: auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  margin: 20px auto;
+  background-color: #fff;
+  // border-radius: 8px;
+
+}
+
+.policyContent {
+
+  // font-size: 16px;
+  // font-weight: 400;
+  // font-family:"Poppins";
+  // color: #777777;
+  // margin-top: 20px;
+
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  color: #777777;
+  margin-top: 20px;
+  line-height: 1.6;
+
+}
+
+.bottomContent {
+
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Poppins";
+  color: #777777;
+  margin-top: 20px;
+}
+
+.bottomContentSpan {
+
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Poppins";
+  // color: #777777;
+  color: #222529;
+
+}
+
+
+@media (max-width: 768px) {
+  .modalContent {
+    padding: 15px;
+    width: 95%;
+  }
+
+  .retuenTitle {
+    font-size: 20px;
+  }
+
+  .policyContent,
+  .bottomContent {
+    font-size: 14px;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: none;
+  }
+
+  .flexactions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .bottomContentSpan{
+
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    padding: 10px;
+  }
+
+  .retuenTitle {
+    font-size: 18px;
+  }
+
+  .policyContent,
+  .bottomContent {
+    font-size: 12px;
+  }
+
+  .bottomContentSpan{
+
+    font-size: 12px;
+  }
+
+
+}
+
 
 .extraText {
   display: none;
@@ -26,9 +147,11 @@
 .error {
   border-color: red;
 }
+
 .error_message {
   color: red;
 }
+
 // .btn:hover {
 //   background-color: #0056b3;
 // }
@@ -40,8 +163,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
-  z-index: 9998; /* Ensure it appears beneath the modal */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Semi-transparent black background */
+  z-index: 9998;
+  /* Ensure it appears beneath the modal */
+  // background-color: #007bff;
 }
 
 /* Modal Content */
@@ -50,14 +176,22 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #fff; /* White background for modal */
-  z-index: 9999; /* Ensure it appears above the overlay */
-  max-height: 90vh; /* Limit modal height */
-  overflow-y: auto; /* Enable scrolling for modal content */
-  width: 90%; /* Responsive modal width */
-  max-width: 600px; /* Maximum width for modal */
-  border-radius: 8px; /* Optional: Rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Optional: Drop shadow */
+  background: #fff;
+  /* White background for modal */
+  z-index: 9999;
+  /* Ensure it appears above the overlay */
+  max-height: 90vh;
+  /* Limit modal height */
+  overflow-y: auto;
+  /* Enable scrolling for modal content */
+  width: 90%;
+  /* Responsive modal width */
+  max-width: 600px;
+  /* Maximum width for modal */
+  border-radius: 8px;
+  /* Optional: Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  /* Optional: Drop shadow */
 }
 
 /* Disable body scroll */
@@ -82,39 +216,49 @@ body.no-scroll {
 }
 
 .new_address_col {
-  max-width: 32%; /* Default width for larger screens */
+  max-width: 32%;
+  /* Default width for larger screens */
 }
 
 @media (max-width: 768px) {
+
   /* Adjust for smaller screens, e.g., tablets and mobile */
   .new_address_col {
-    min-width: 100%; /* Full width for mobile */
+    min-width: 100%;
+    /* Full width for mobile */
   }
 }
 
 @media (max-width: 576px) {
+
   /* Extra small devices like smartphones */
   .new_address_col {
-    min-width: 100%; /* Ensure full width for smaller screens */
+    min-width: 100%;
+    /* Ensure full width for smaller screens */
   }
 }
 
 .bank_details {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-  gap: 25px; /* Default gap for larger screens */
+  flex-wrap: wrap;
+  /* Allow wrapping on smaller screens */
+  gap: 25px;
+  /* Default gap for larger screens */
 }
 
 .bank_details_col {
-  width: 32%; /* Default width for larger screens */
+  width: 32%;
+  /* Default width for larger screens */
 }
 
 @media (max-width: 768px) {
   .d_flex {
-    gap: 0; /* Remove gap for smaller screens */
+    gap: 0;
+    /* Remove gap for smaller screens */
   }
 
   .bank_details_col {
-    width: 100%; /* Full width for smaller screens */
+    width: 100%;
+    /* Full width for smaller screens */
   }
 }

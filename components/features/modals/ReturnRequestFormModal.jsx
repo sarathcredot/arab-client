@@ -22,6 +22,8 @@ export default function ReturnRequestFormModal({
   handleSubmit,
   orderId,
 }) {
+
+  console.log("order id",orderId)
   //QUERIES
   const GET_ORDER_DETAILS = gql`
     query GetAdminOrderDetails($input: GetAdminOrderDetailsInput!) {
@@ -39,6 +41,23 @@ export default function ReturnRequestFormModal({
           apartment
           suite
           unit
+          governorateID
+          governorate
+          village
+          villageID
+        }
+      }
+    }
+  `;
+
+  const GET_LOCATION = gql`
+    query GetLocationsData {
+      getLocationsData {
+        name
+        _id
+        villages {
+          _id
+          name
         }
       }
     }
@@ -57,6 +76,12 @@ export default function ReturnRequestFormModal({
       },
     },
   });
+
+  const {
+    data: getLocation,
+    loading: getLocationLoading,
+    error: getLocationError,
+  } = useQuery(GET_LOCATION);
 
   const initialState = {
     data: {
@@ -78,6 +103,10 @@ export default function ReturnRequestFormModal({
       unit: { value: "", error: false },
       city: { value: "", error: false },
       postCode: { value: "", error: false },
+      governorate: { value: "", error: false },
+      village: { value: "", error: false },
+      governorateID: { value: "", error: false },
+      villageID: { value: "", error: false },
     },
     bankDetails: {
       accountHolderName: {
@@ -122,9 +151,59 @@ export default function ReturnRequestFormModal({
 
   const [formState, dispatch] = useReducer(reducer, initialState);
 
+  const [villages, setvillages] = useState([]);
+
   const handleChange = (form) => (field) => (e) => {
     const value = e.target.value;
     dispatch({ type: "SET_FIELD", form, field, value, error: false });
+  };
+  const handleGovernorateChange = (form) => (field) => (e) => {
+    let governorateId = e.target.value;
+    const selectedGovernorate = getLocation?.getLocationsData?.find(
+      (g) => g._id === governorateId
+    );
+    setvillages(selectedGovernorate?.villages || []);
+    dispatch({
+      type: "SET_FIELD",
+      form,
+      field: "villageID",
+      value: "",
+      error: false,
+    });
+    dispatch({
+      type: "SET_FIELD",
+      form,
+      field: "village",
+      value: "",
+      error: false,
+    });
+    dispatch({
+      type: "SET_FIELD",
+      form,
+      field,
+      value: governorateId,
+      error: false,
+    });
+    dispatch({
+      type: "SET_FIELD",
+      form,
+      field: "governorate",
+      value: selectedGovernorate?.name,
+      error: false,
+    });
+  };
+  const handleChangeVillage = (form) => (field) => (e) => {
+    const value = e.target.files;
+    dispatch({ type: "SET_FIELD", form, field, value, error: false });
+
+    const selectedVillage = villages?.find((v) => v._id === value);
+    dispatch({
+      type: "SET_FIELD",
+      form,
+      field: "village",
+      value: selectedVillage?.name,
+      error: false,
+    });
   };
   const handleChangeImage = (form) => (field) => (e) => {
     const value = e.target.files;
@@ -148,6 +227,8 @@ export default function ReturnRequestFormModal({
       unit: useRef(null),
       city: useRef(null),
       postCode: useRef(null),
+      governorateID: useRef(null),
+      villageID: useRef(null),
     },
     bankDetails: {
       accountHolderName: useRef(null),
@@ -253,6 +334,7 @@ export default function ReturnRequestFormModal({
       };
 
       handleSubmit(data);
+   
     } catch (error) {
       toast.error(error.message);
     }
@@ -260,6 +342,10 @@ export default function ReturnRequestFormModal({
 
   //USE EFFECT
   useEffect(() => {
+    console.log(
+      ordersDataResponse?.getAdminOrderDetails?.shippingAddress,
+      "= SHIPPING ADDRESS"
+    );
     if (
       !ordersLoading &&
       ordersDataResponse?.getAdminOrderDetails?.shippingAddress
@@ -293,16 +379,31 @@ export default function ReturnRequestFormModal({
     }
   }, [isShippingAddress, ordersLoading, ordersDataResponse]);
 
-  //test
+  //TEST
   useEffect(() => {
-    console.log({ formState });
-  }, [formState]);
+    const shippingAddress =
+      ordersDataResponse?.getAdminOrderDetails?.shippingAddress;
+    if (
+      isShippingAddress &&
+      getLocation?.getLocationsData?.length &&
+      shippingAddress?.villageID &&
+      shippingAddress?.governorateID
+    ) {
+      const governorate = getLocation?.getLocationsData?.find(
+        (loc) => loc._id === shippingAddress?.governorateID
+      );
+      if (governorate?.villages?.length) {
+        setvillages(governorate?.villages);
+      }
+    }
+  }, [getLocation, isShippingAddress, ordersDataResponse]);
 
   return (
     <>
       {isOpen && (
         <Modal
           isOpen={isOpen}
+          
           // onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles}
@@ -462,6 +563,144 @@ export default function ReturnRequestFormModal({
                             Country is required!
                           </div>
                         )}
+                        <label htmlFor="city">
+                          City<span className="required"> *</span>
+                        </label>
+                        <input
+                          type="text"
+                          className={`form-input form-wide ${
+                            formState?.returnAddress?.city?.error
+                              ? sytles.error
+                              : "mb-2"
+                          }`}
+                          id="city"
+                          value={formState?.returnAddress?.city?.value}
+                          onChange={handleChange("returnAddress")("city")}
+                          ref={fieldRefs.returnAddress.city}
+                        />
+                        {formState?.returnAddress?.city?.error && (
+                          <div className={`${sytles.error_message} mb-2`}>
+                            City is required!
+                          </div>
+                        )}
+                      </div>
+                      <div className={sytles.new_address_col}>
+                        <label htmlFor="suite">
+                          Suite<span className="required"> *</span>
+                        </label>
+                        <input
+                          type="text"
+                          className={`form-input form-wide  ${
+                            formState?.returnAddress?.suite?.error
+                              ? sytles.error
+                              : "mb-2"
+                          }`}
+                          id="suite"
+                          value={formState?.returnAddress?.suite?.value}
+                          onChange={handleChange("returnAddress")("suite")}
+                          ref={fieldRefs.returnAddress.suite}
+                        />
+                        {formState?.returnAddress?.suite?.error && (
+                          <div className={`${sytles.error_message} mb-2`}>
+                            Suite is required!
+                          </div>
+                        )}
+                        <label htmlFor="unit">
+                          Unit<span className="required"> *</span>
+                        </label>
+                        <input
+                          type="text"
+                          className={`form-input form-wide  ${
+                            formState?.returnAddress?.unit?.error
+                              ? sytles.error
+                              : "mb-2"
+                          }`}
+                          id="unit"
+                          value={formState?.returnAddress?.unit?.value}
+                          onChange={handleChange("returnAddress")("unit")}
+                          ref={fieldRefs.returnAddress.unit}
+                        />
+                        {formState?.returnAddress?.unit?.error && (
+                          <div className={`${sytles.error_message} mb-2`}>
+                            Unit is required!
+                          </div>
+                        )}
+                        <label htmlFor="postCode">
+                          Post Code<span className="required"> *</span>
+                        </label>
+                        <input
+                          type="text"
+                          className={`form-input form-wide ${
+                            formState?.returnAddress?.postCode?.error
+                              ? sytles.error
+                              : "mb-2 "
+                          }`}
+                          id="postCode"
+                          value={formState?.returnAddress?.postCode?.value}
+                          onChange={handleChange("returnAddress")("postCode")}
+                          ref={fieldRefs.returnAddress.postCode}
+                        />
+                        {formState?.returnAddress?.postCode?.error && (
+                          <div className={`${sytles.error_message} mb-2`}>
+                            Post Code is required!
+                          </div>
+                        )}
+                        <label>
+                          Governorate <span className="required">*</span>
+                        </label>
+                        <select
+                          className={`form-control form-control-md ${
+                            formState?.returnAddress?.postCode?.error
+                              ? sytles.error
+                              : "mb-2 "
+                          }`}
+                          value={formState?.returnAddress?.governorateID?.value}
+                          onChange={handleGovernorateChange("returnAddress")(
+                            "governorateID"
+                          )}
+                          ref={fieldRefs.returnAddress.governorateID}
+                        >
+                          <option value="">Select Governorate</option>
+                          {getLocation?.getLocationsData?.map((gov) => (
+                            <option key={gov._id} value={gov._id}>
+                              {gov.name}
+                            </option>
+                          ))}
+                        </select>
+
+                        {formState?.returnAddress?.governorateID?.error && (
+                          <div style={{ color: "red", fontWeight: "300" }}>
+                            Governate is required!
+                          </div>
+                        )}
+                        <label>
+                          Wilayat <span className="required">*</span>
+                        </label>
+                        <select
+                          className={`form-control form-control-md ${
+                            formState?.returnAddress?.postCode?.error
+                              ? sytles.error
+                              : "mb-2 "
+                          }`}
+                          value={formState?.returnAddress?.villageID?.value}
+                          onChange={handleChangeVillage("returnAddress")(
+                            "villageID"
+                          )}
+                          disabled={!villages.length}
+                          ref={fieldRefs.returnAddress.villageID}
+                        >
+                          <option value="">Select Wilayat</option>
+                          {villages.map((wil) => (
+                            <option key={wil._id} value={wil._id}>
+                              {wil.name}
+                            </option>
+                          ))}
+                        </select>
+                        {formState?.returnAddress?.villageID?.error && (
+                          <div style={{ color: "red", fontWeight: "300" }}>
+                            Wilayat is required!
+                          </div>
+                        )}
                       </div>
                       <div className={sytles.new_address_col}>
                         <label htmlFor="houseNumber">
@@ -524,88 +763,6 @@ export default function ReturnRequestFormModal({
                         {formState?.returnAddress?.apartment?.error && (
                           <div className={`${sytles.error_message} mb-2`}>
                             Apartment is required!
-                          </div>
-                        )}
-                        <label htmlFor="suite">
-                          Suite<span className="required"> *</span>
-                        </label>
-                        <input
-                          type="text"
-                          className={`form-input form-wide  ${
-                            formState?.returnAddress?.suite?.error
-                              ? sytles.error
-                              : "mb-2"
-                          }`}
-                          id="suite"
-                          value={formState?.returnAddress?.suite?.value}
-                          onChange={handleChange("returnAddress")("suite")}
-                          ref={fieldRefs.returnAddress.suite}
-                        />
-                        {formState?.returnAddress?.suite?.error && (
-                          <div className={`${sytles.error_message} mb-2`}>
-                            Suite is required!
-                          </div>
-                        )}
-                      </div>
-                      <div className={sytles.new_address_col}>
-                        <label htmlFor="unit">
-                          Unit<span className="required"> *</span>
-                        </label>
-                        <input
-                          type="text"
-                          className={`form-input form-wide  ${
-                            formState?.returnAddress?.unit?.error
-                              ? sytles.error
-                              : "mb-2"
-                          }`}
-                          id="unit"
-                          value={formState?.returnAddress?.unit?.value}
-                          onChange={handleChange("returnAddress")("unit")}
-                          ref={fieldRefs.returnAddress.unit}
-                        />
-                        {formState?.returnAddress?.unit?.error && (
-                          <div className={`${sytles.error_message} mb-2`}>
-                            Unit is required!
-                          </div>
-                        )}
-                        <label htmlFor="city">
-                          City<span className="required"> *</span>
-                        </label>
-                        <input
-                          type="text"
-                          className={`form-input form-wide ${
-                            formState?.returnAddress?.city?.error
-                              ? sytles.error
-                              : "mb-2"
-                          }`}
-                          id="city"
-                          value={formState?.returnAddress?.city?.value}
-                          onChange={handleChange("returnAddress")("city")}
-                          ref={fieldRefs.returnAddress.city}
-                        />
-                        {formState?.returnAddress?.city?.error && (
-                          <div className={`${sytles.error_message} mb-2`}>
-                            City is required!
-                          </div>
-                        )}
-                        <label htmlFor="postCode">
-                          Post Code<span className="required"> *</span>
-                        </label>
-                        <input
-                          type="text"
-                          className={`form-input form-wide ${
-                            formState?.returnAddress?.postCode?.error
-                              ? sytles.error
-                              : "mb-2 "
-                          }`}
-                          id="postCode"
-                          value={formState?.returnAddress?.postCode?.value}
-                          onChange={handleChange("returnAddress")("postCode")}
-                          ref={fieldRefs.returnAddress.postCode}
-                        />
-                        {formState?.returnAddress?.postCode?.error && (
-                          <div className={`${sytles.error_message} mb-2`}>
-                            Post Code is required!
                           </div>
                         )}
                       </div>
@@ -757,8 +914,8 @@ export default function ReturnRequestFormModal({
               ×
             </button>
           </div>
-        </Modal>
-      )}
+         </Modal>
+      )} 
     </>
   );
 }

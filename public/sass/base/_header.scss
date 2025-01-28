@@ -329,6 +329,21 @@ header {
 	text-align: center;
 }
 
+.badge-circle1 {
+	position: absolute;
+	// top: 1px;
+	// right: 0;
+	width: 1.6rem;
+	border-radius: 50%;
+	color: #fff;
+	background: #ff5b5b;
+	font-weight: 600;
+	font-size: 1.1rem;
+	line-height: 1.6rem;
+	font-family: $font-family;
+	text-align: center;
+}
+
 // 2.5) Social Icons
 header {
 	.social-icon {
@@ -516,6 +531,7 @@ header {
 @media (max-width: 600px) {
 	.header-bottom {
 	  background: white;
+	  margin-top: 50px;
 	}
 	// .homebannerpadding{
 	// 	padding-top: 117px;
