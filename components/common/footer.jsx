@@ -7,6 +7,7 @@ import { AiFillYoutube } from "react-icons/ai";
 import withApollo from "../../server/apollo";
 import { gql, useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
+import Link from "next/link";
 
 const GET_ALL_CATEGORY = gql`
   query GetAllChildCategories($input: GetAllChildLevelCategoriesInput!) {
@@ -108,7 +109,7 @@ function Footer() {
                   <div className="widget-content">
                     <ul style={{listStyleType:"none",paddingLeft:"0px"}} >
                       <li>
-                        <ALink href="#">Privacy& Policy</ALink>
+                        <ALink href="/pages/privacy-policy">Privacy& Policy</ALink>
                       </li>
                       {/* <li>
                         <ALink href={token ? "/pages/orders" : "#"}>Orders</ALink>
@@ -206,7 +207,7 @@ function Footer() {
             <div className="footer-flexcolumns">
               <div className="footer-sub">
                 <h6 style={{ letterSpacing: "0.75px" }}>IMPORTANT LINKS</h6>
-                <span>Privacy & Policy</span>
+                <Link href="/pages/privacy-policy"><span>Privacy & Policy</span></Link>
                 <span>Become a Seller</span>
                 {/* <span>Orders</span> */}
                 {/* <span>Orders History</span>

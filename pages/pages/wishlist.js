@@ -190,6 +190,7 @@ function Wishlist(props) {
             </div>
           </nav>
         </div>
+        
         <div className="page-header">
           <div className="container d-flex flex-column align-items-center">
             {/* <nav aria-label="breadcrumb" className="breadcrumb-nav">
