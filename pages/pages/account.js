@@ -108,6 +108,8 @@ function Account() {
     // setValue("firstName",userData?.getUserRecord?.record?.firstName)
   }, [id, userdetail, token]);
 
+
+  
   return (
     <div>
       <Helmet>
@@ -638,6 +640,8 @@ function Account() {
       </div>
     </div>
   );
+
+  
 }
 
 export default withApollo({ ssr: typeof window === "undefined" })(Account);
