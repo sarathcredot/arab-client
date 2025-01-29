@@ -86,23 +86,23 @@ const expectedDeliveryDate = getExpectedDeliveryDate(orderDate);
         </div>
 
     <hr/>
-    <div style={{ display: 'flex', justifyContent: 'space-around',  marginLeft:"20px" }}>
+    <div style={{ display: 'flex', justifyContent: 'space-around',marginBottom:"20px" }}>
         <div className='head-card'>
-        <h4>Delivery to</h4>
+        <h4 style={{fontWeight:"600"}}>Delivery to</h4>
         </div>
         <div className='head-card'>
-        <h4>Payment by</h4>
+        <h4 style={{fontWeight:"600"}}>Payment by</h4>
         </div>
       </div>
     <div class="cards-container" style={{marginBottom:"40px "}}>
    
         <div class="card">
        
-            <div style={{marginTop:"40px", marginBottom:"40px", marginLeft:"20px"}}>
+            <div style={{marginTop:"40px", marginBottom:"40px"}} className='payment_card_img'>
             <img src="/images/locationIcon.svg" alt="Card Image 1"/>
             </div>
              <div>
-            <p style={{fontWeight:"500",fontSize:"18px", color:"#000000"}}>{data?.getUserOrderDetails?.shippingAddress?.firstname}</p>
+            <p style={{fontWeight:"600",fontSize:"18px", color:"#000000"}}>{data?.getUserOrderDetails?.shippingAddress?.firstname}</p>
             <p style={{fontWeight:"400",fontSize:"11px", color:"#000000"}}>{data?.getUserOrderDetails?.shippingAddress?.houseNumber},{data?.getUserOrderDetails?.shippingAddress?.streetName} </p>
             <p style={{fontWeight:"400",fontSize:"11px", color:"#000000"}}>+971 {data?.getUserOrderDetails?.shippingAddress?.mobile}</p>
             </div>
@@ -112,12 +112,12 @@ const expectedDeliveryDate = getExpectedDeliveryDate(orderDate);
         
         <div class="card  payment_card">
         
-         <div style={{marginTop:"40px", marginBottom:"40px", marginLeft:"20px"}}>
+         <div style={{marginTop:"40px", marginBottom:"40px"}} className='payment_card_img'>
          <img src="/images/card.svg" alt="Card Image 1"/>
          </div>
 
          <div>
-         <p style={{fontWeight:"500",fontSize:"18px", color:"#000000"}}>{data?.getUserOrderDetails?.paymentMode}</p>
+         <p style={{fontWeight:"600",fontSize:"18px", color:"#000000"}}>{data?.getUserOrderDetails?.paymentMode}</p>
 
          <div  style={{display:"flex", flexDirection:"row", gap:"20px",}}>
          <p style={{fontWeight:"400",fontSize:"11px", color:"#000000"}}>Subtotal</p>
