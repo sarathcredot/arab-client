@@ -145,7 +145,7 @@ function Footer() {
                         <ALink href="/pages/cart">Cart</ALink>
                       </li>
                       <li>
-                        <ALink href="/pages/offers">Offerzone</ALink>
+                        <ALink href="/pages/offers">Offer Zone</ALink>
                       </li>
                     </ul>
                   </div>
@@ -219,7 +219,7 @@ function Footer() {
                 <ALink href={token ? "/pages/account" : "/pages/login"}><span>My Profile</span></ALink>
                 <ALink href={token ? "/pages/whislist" : "/pages/login"}><span>wishlist</span></ALink>
                 <ALink href= "/pages/cart"><span>Cart</span></ALink>
-                <ALink href="/pages/offers"><span>Offerzone</span></ALink>
+                <ALink href="/pages/offers"><span>Offer Zone</span></ALink>
               
 
               </div>
