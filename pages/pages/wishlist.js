@@ -252,7 +252,9 @@ function Wishlist(props) {
                       className="product-row"
                       style={{ borderBottom: "1px solid #e7e7e7" }}
                     >
-                      <td className="media-with-lazy">
+
+                      {/* product image */}
+                      <td className="media-with-lazy pl-0">
                         <figure className="product-image-container">
                           <ALink
                             href={`/product/default/${item?.productId}`}
@@ -276,8 +278,10 @@ function Wishlist(props) {
                           ></a>
                         </figure>
                       </td>
+
+                      {/* product name */}
                       <td>
-                        <h5 className="product-title" style={{fontWeight:"700"}}>
+                        <h5 className="product-title" style={{fontWeight:"600"}}>
                           <ALink href={`/product/default/${item.productId}`}>
                     
 
@@ -288,6 +292,8 @@ function Wishlist(props) {
                           </ALink>
                         </h5>
                       </td>
+
+                      {/* product price */}
                       <td style={{ color: "black" }}>
                         <div className="price-box">
                           <span className="product-price" style={{ color: "#000" }}>
@@ -295,6 +301,8 @@ function Wishlist(props) {
                           </span>
                         </div>
                       </td>
+
+                      {/* stock status */}
                       <td>
                         <span className="stock-status">
                           {item.stock <= 0 ? "Out of stock" : "In stock"}

@@ -413,7 +413,7 @@ function Orders(props) {
                       <tbody>
                         {orders.map((item, index) => (
                           <tr key={"wishlist-item" + index} className="product-row">
-                            <td className="media-with-lazy">
+                            <td className="media-with-lazy pl-0" >
                               <figure className="product-image-container">
                                 <ALink
                                   href={`/product/default/${item.productId}`}
@@ -438,7 +438,7 @@ function Orders(props) {
                         </h5> */}
                               <h5
                                 className="product-title"
-                                style={{ fontWeight: "700" }}
+                                style={{ fontWeight: "600" }}
                               >
                                 <ALink href={`/product/default/${item.productId}`}>
                                   {item.productName.split(" ").slice(0, 4).join(" ")}
