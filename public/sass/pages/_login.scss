@@ -183,10 +183,10 @@ gap: 20px
     .login_bg_image{
         position: absolute;
         width: 100vw;
-        top: 220px;
+        top: 270px;
     }
     .login_container{
-        height:600px;
+        height:700px;
     }
     .login_content{
         display: flex;
@@ -225,6 +225,13 @@ gap: 20px
     }
     100%{
         scale:1;
+    }
+}
+@media (min-width: 1600px){
+    .login_page{
+        .login_bg_image{
+            top: 100px;
+        }
     }
 }
 @media (max-width: 768px)
@@ -274,11 +281,16 @@ gap: 20px
                 height: 100%;
             }
             .login_content{
+                min-width: 100%;
                 justify-content: start;
                 align-items: center;
             }
             .login_bg_image{
-                top: 350px;
+                top: 200px;
+            }
+            .login_img_div{
+                display: none !important;
+                background: #000;
             }
         }
         
@@ -301,6 +313,22 @@ gap: 20px
         }
     }
 }
+@media(max-width:541px){
+    .login_page{
+        .login_bg_image{
+            top: 280px;
+        }
+
+    }
+}
+@media(max-width:440px){
+    .login_page{
+        .login_bg_image{
+            top: 340px;
+        }
+    }
+}
+
 @include mq(md) {
     .login-container {
         .col-md-6:first-child {
