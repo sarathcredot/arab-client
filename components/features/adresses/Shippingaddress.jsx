@@ -201,7 +201,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
       required: "City is required",
     },
     firstname: {
-      required: "First Name is required",
+      required: "Full Name is required",
     },
     houseNumber: {
       required: "HouseNumber is required",
@@ -278,7 +278,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                         lineHeight: "20px",
                       }}
                     >
-                      First name{" "}
+                      Full name{" "}
                       <ab className="required" title="required">
                         *
                       </ab>

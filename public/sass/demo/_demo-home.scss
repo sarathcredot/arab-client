@@ -1848,6 +1848,73 @@ display: none;
 .editbtn:hover{
 color:red
 }
+
+
+
+.address_container{
+    margin: 50px 0;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+
+    .address_box{
+        border:1px solid #CDCDCD;
+        padding: 10px 20px ;
+    }
+    .address_btns{
+        display: flex;
+        align-items:center;
+        justify-content: end;
+        gap: 10px;
+
+    }
+}
+
+@media(max-width:993px){
+    .address_container{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media(max-width:769px){
+    .address_container{
+        margin-top: 30px ;
+        grid-template-columns: repeat(1,1fr);
+        gap: 10px;
+        .address_box{
+            padding: 10px 20px ;
+        }
+        .address_btns{
+            gap: 10px;
+    
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 3. Responsive
 @media(min-width: 768px) {
     .deal-products-section {
