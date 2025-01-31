@@ -432,23 +432,39 @@ function CheckOut() {
                           <form onSubmit={handleApplyCoupon} ref={setCollapsibleElement}>
                             <div className=" apply_coupon_div">
                               {cartData?.getCart?.isCouponApplied && cartData?.getCart?.code?(
+                                // <input
+                                // type="text"
+                                // className=" "
+                                // value={cartData?.getCart?.code}
+                                // disabled={true}
+                                
+                                // />
                                 <input
                                 type="text"
-                                className=" "
+                                className="form-control"
                                 value={cartData?.getCart?.code}
                                 disabled={true}
-                                
-                                />
+                                style={{ marginTop: "10px" }}
+                              />
                               ):(
 
+                                // <input
+                                // type="text"
+                                // className=" "
+                                // placeholder="Coupon code"
+                                // required
+                                // value={coupon}
+                                // onChange={(e)=>setCoupon(e.target.value)}
+                                // />
                                 <input
                                 type="text"
-                                className=" "
+                                className="form-control"
                                 placeholder="Coupon code"
-                                required
                                 value={coupon}
                                 onChange={(e)=>setCoupon(e.target.value)}
-                                />
+                                required
+                                style={{ marginTop: "10px" }}
+                              />
                               )}
                               <div className="input-group-append apply_coupon_btn_div">
                                 {cartData?.getCart?.isCouponApplied?(
@@ -464,8 +480,9 @@ function CheckOut() {
                                 ):(
 
                                 <button
-                                  className="apply_coupon_btn btn btn-sm mt-0"
+                                  className="btn btn-dark btn-place-order hoverbtn"
                                   type="submit"
+                                  name="form-control"
                                 >
                                   Apply Coupon
                                 </button>

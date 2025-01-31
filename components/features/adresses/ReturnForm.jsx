@@ -39,6 +39,7 @@ const GET_ORDER_DETAILS = gql`
             governorate
             village
             villageID
+            address
           }
         }
       }
@@ -56,7 +57,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
     const {
         loading: ordersLoading,
         error: ordersError,
-        data: ordersDataResponse,
+        data:  ordersDataResponse,
         refetch: ordersRefetch,
     } = useQuery(GET_ORDER_DETAILS, {
         fetchPolicy: "network-only",
@@ -84,20 +85,23 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
             email: { value: "", error: false },
             mobile: { value: "", error: false },
             country: { value: "", error: false },
-            houseNumber: {
-                value: "",
-                error: false,
-            },
-            streetName: { value: "", error: false },
-            apartment: { value: "", error: false },
-            suite: { value: "", error: false },
-            unit: { value: "", error: false },
-            city: { value: "", error: false },
+            // houseNumber: {
+            //     value: "",
+            //     error: false,
+            // },
+            // streetName: { value: "", error: false },
+            // apartment: { value: "", error: false },
+            // suite: { value: "", error: false },
+            // unit: { value: "", error: false },
+            // city: { value: "", error: false },
+
             postCode: { value: "", error: false },
             governorate: { value: "", error: false },
             village: { value: "", error: false },
             governorateID: { value: "", error: false },
             villageID: { value: "", error: false },
+            address:{ value: "", error: false },
+            
         },
         bankDetails: {
             accountHolderName: {
@@ -467,16 +471,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                             {/* Upload button */}
                             <button
                                 className="upload-btn"
-                                onClick={() => {
-                                    const fileInput = document.getElementById('file-upload');
-                                    if (fileInput.files.length > 0) {
-                                        console.log('Uploading:', fileInput.files[0]);
-                                        // Add your upload logic here
-                                        alert(`File "${fileInput.files[0].name}" uploaded successfully!`);
-                                    } else {
-                                        alert('No file selected!');
-                                    }
-                                }}
+                                
                             >
                                 Upload
                             </button>
@@ -578,26 +573,26 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                         <div>
 
-                            <label className='re-input-label' htmlFor=""> House number   <span style={{ color: "red" }} >*</span></label><br />
+                            <label className='re-input-label' htmlFor=""> Address   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
 
-                                id="houseNumber"
-                                value={formState?.returnAddress?.houseNumber?.value}
+                                id="address"
+                                value={formState?.returnAddress?.address?.value}
                                 onChange={handleChange("returnAddress")(
-                                    "houseNumber"
+                                    "address"
                                 )}
-                                ref={fieldRefs.returnAddress.houseNumber}
+                                ref={fieldRefs.returnAddress.address}
 
                             /><br />
-                            {formState?.returnAddress?.houseNumber?.error && (
+                            {formState?.returnAddress?.address?.error && (
 
-                                <span style={{ color: "red" }} >   house number is required! </span>
+                                <span style={{ color: "red" }} >   Address is required! </span>
                             )}
 
                         </div>
 
 
-                        <div>
+                        {/* <div>
 
                             <label className='re-input-label' htmlFor=""> Apartment   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
@@ -617,9 +612,9 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                             )}
 
                         </div>
+ */}
 
-
-                        <div>
+                        {/* <div>
 
                             <label className='re-input-label' htmlFor=""> Suite   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
@@ -635,10 +630,10 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                             )}
 
-                        </div>
+                        </div> */}
 
 
-                        <div>
+                        {/* <div>
 
                             <label className='re-input-label' htmlFor=""> Unit   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
@@ -655,10 +650,10 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                             )}
 
-                        </div>
+                        </div> */}
 
 
-                        <div>
+                        {/* <div>
 
                             <label className='re-input-label' htmlFor=""> Street   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
@@ -675,7 +670,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                             )}
 
-                        </div>
+                        </div> */}
 
 
                         <div>
@@ -740,7 +735,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                         </div>
 
 
-                        <div>
+                        {/* <div>
 
                             <label className='re-input-label' htmlFor=""> City   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
@@ -757,7 +752,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                             )}
 
-                        </div>
+                        </div> */}
 
 
                         <div>

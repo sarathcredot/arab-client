@@ -376,7 +376,7 @@
 		.btn {
 			margin-top: 1.8rem;
 			letter-spacing: -.01em;
-			background-color: #f4f4f4;
+			background-color: #000;
 			font-size: 1.3rem;
 			font-family: $font-family;
 
@@ -465,8 +465,9 @@
 		}
 
 		.btn {
-			padding: 0 1rem 0 1.1rem;			
+			padding:1rem ;			
 			letter-spacing: -.015em;
+			height: 100%;
 		}
 	}
 }
@@ -481,6 +482,13 @@
 		max-width: 668px;
 		padding: 10px;
 		outline: none;
+	}
+	.apply_coupon_btn_div{
+
+		button{
+			min-width:100% !important;
+			
+		}
 	}
 }
 
@@ -805,13 +813,14 @@ input[type="radio"]{
 // 	padding-right: 10px;
 // }
 .apply_coupon_div{
-
+	input{
+		min-width: 100% !important;
+	}
 	.apply_coupon_btn_div{
 
 		min-width:100% !important;
 		button{
 			min-width:100% !important;
-			background: yellow;
 			
 		}
 	}

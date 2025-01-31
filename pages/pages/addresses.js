@@ -9,6 +9,9 @@ import { useQuery, gql, useMutation } from "@apollo/react-hooks";
 import { CgEditBlackPoint } from "react-icons/cg";
 import { toast } from 'react-toastify';
 import { IoMdHome } from "react-icons/io";
+import { FiEdit2 } from "react-icons/fi";
+import { MdDeleteOutline } from "react-icons/md";
+import { TRUE } from "sass";
 // import { gql, useMutation,useLazyQuery } from "@apollo/client";
 export const GET_ADDRESSES = gql`query GetUserShippingAddresses {
   getUserShippingAddresses {
@@ -68,7 +71,8 @@ function addresses() {
     refetch();
   };
   
-  
+  data && (console.log("ADDRESSES = ",data))
+
   const handleRemove = async (id) => {
     console.log("this is id",id)
     const response = await RemoveUserShippingAddress({
@@ -146,8 +150,13 @@ function addresses() {
               </ALink>
             </li>
 
+            <li className="breadcrumb-item">
+              <ALink className="" href="/pages/account">
+              my account
+              </ALink>
+            </li>
             <li className="breadcrumb-item active" aria-current="page">
-              <ALink className="activeitem" href="/">
+              <ALink className="activeitem" href="#">
               addresses
               </ALink>
             </li>
@@ -177,9 +186,23 @@ function addresses() {
           borderBottom: "1px solid",
           borderColor: "#E2E2E2",
           padding: "2px",
+          display:"flex",
+          alignItems:"end",
+          justifyContent:"space-between"
         }}
       >
         <h2 className="step-title addresstitle">Address</h2>
+        <button
+          type="button"
+          name="form-control"
+          className="btn btn-dark btn-place-order hoverinto "
+          style={{width:"20%",minWidth:"150px",marginRight:"10px"}}
+          onClick={()=> {
+            setIsshipping(true);
+          }}
+        >
+        Add Address
+        </button>
       </div>
 
       {isAddress ? (
@@ -189,10 +212,51 @@ function addresses() {
 
       ) : isShipping ? (<><Shipping isEdit={isEdit} addressId={selectedAddressId} onClose={handleCloseShipping} setIsshipping={setIsshipping} isShipping={isShipping} /></>) : (
         <>
-          <div
+
+        <div className="container ">
+          <div className="address_container">
+          {data && data?.getUserShippingAddresses?.address.length > 0 ? data?.getUserShippingAddresses?.address.map((address, index) =>(
+            <>
+            
+            <div className="address_box">
+              <div className="address_content">
+                <h2 style={{fontSize:"20px",fontWeight:"500",marginBottom:"24px"}}>Home</h2>
+                <p style={{fontWeight:"normal",color:"#737373",marginBottom:"48px"}}>You have not set up this type of address yet.</p>
+              </div>
+              <div className="address_btns">
+                <button
+                  type="button"
+                  name="form-control"
+                  className="btn btn-dark btn-place-order hoverinto"
+                  style={{width:"40px",height:"40px",padding:"0px"}}
+                  onClick={()=> {
+                    setSelectedAddressId(address?._id)
+                    setIsedit(true)
+                    setIsshipping(true);
+                  }}
+                >
+                <FiEdit2 />
+                </button>
+                <button
+                  type="button"
+                  name="form-control"
+                  className="btn btn-dark btn-place-order hoverbtn"
+                  style={{width:"40px",height:"40px",padding:"0px"}}
+                >
+                  <MdDeleteOutline />
+                </button>
+
+              </div>
+            </div>
+            </>
+          )):(<p>no addresses</p>)}
+          </div>
+        </div>
+
+          {/* <div
             className="container d-flex justify-content-between flex-column flex-sm-row w-sm-100"
             style={{ gap: "5rem", marginBottom: "75px" }}
-          >
+          > */}
             {/* <div
               className=""
               style={{
@@ -244,7 +308,7 @@ function addresses() {
               </div>
             </div> */}
             {/* shipping */}
-            <div
+            {/* <div
               className="custom-addressbox"
             // style={{
             //   width: "653.45px",
@@ -253,8 +317,8 @@ function addresses() {
             //   marginTop: "40px",
             //   borderColor: "#CDCDCD",
             // }}
-            >
-              <div className="p-5">
+            > */}
+              {/* <div className="p-5">
                 <h4
                   style={{
                     fontFamily: "Poppins",
@@ -321,7 +385,7 @@ function addresses() {
               </div>
             </div>
 
-          </div>
+          </div> */}
         </>
       )}
     </main>
