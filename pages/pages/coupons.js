@@ -147,7 +147,9 @@ function Account() {
   }, [cartData]);
   console.log("CODE = ",cartData?.getCart?.appliedCoupon)
 
-  const codeCopy = (index) => {
+  const codeCopy = async(index,code) => {
+
+   await navigator.clipboard.writeText(code)
 
     setcopycode(index)
 
@@ -249,7 +251,7 @@ function Account() {
                 {
                   copycode === index ? <span style={{ cursor: "pointer", }} ><IoIosCheckmark style={{ fontSize: "15px" }} /> copied </span>
 
-                    : <span onClick={() => { codeCopy(index) }} style={{ cursor: "pointer", }} > code: {data?.code}<IoIosCopy style={{ fontSize: "15px" }} /></span>
+                    : <span onClick={() => { codeCopy(index,data?.code) }} style={{ cursor: "pointer", }} > code: {data?.code}<IoIosCopy style={{ fontSize: "15px" }} /></span>
 
                 }
               </div>
