@@ -56,6 +56,7 @@ function accountdetails() {
   useEffect(() => {
     if (userData && userData.getUserRecord && userData.getUserRecord.record) {
       const { firstName } = userData.getUserRecord.record;
+      console.log("user data",userData)
       setValue("firstName", firstName);
       setValue("lastName", userData.getUserRecord.record?.lastName);
       setValue("email", userData.getUserRecord.record?.email);
