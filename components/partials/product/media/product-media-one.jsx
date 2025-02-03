@@ -115,9 +115,9 @@ export default function ProductMediaOne(props) {
                                                 <LazyLoadImage src={item.fileURL}
                                                     alt="Thumbnail"
                                                     width="100%"
-                                                    height="auto"
+                                                    height="100%"
                                                     className="d-block"
-                                                    style={{ height: "auto" }}
+                                                    style={{ height: "100%" }}
 
                                                 />
                                             </figure>

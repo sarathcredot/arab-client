@@ -25,7 +25,7 @@ import withApollo from "../../../../server/apollo.js";
 
 function ProductDetailOne(props) {
 
-  console.log("propdate",props)
+  console.log("propdata",props)
 
   console.log("prodata",props?.product?.attributes[1].attributeValue)
 
@@ -162,7 +162,14 @@ function ProductDetailOne(props) {
   };
 
   useEffect(() => {
-    setColor(props?.product?.attributes[1].attributeValue)
+    const filteredColor = props?.product?.attributes.filter(
+      (variant) => variant.attributeDescription === "Color"
+    );
+
+    // console.log("filteredColor",filteredColor? filteredColor[0].attributeValue : "null");
+    // console.log("filteredColor",filteredColor[0].attributeValue);
+
+    setColor(filteredColor? filteredColor[0].attributeValue : "null")
     if (variantError) {
       console.error("Error fetching variant data:", variantError);
     } else {
@@ -875,7 +882,7 @@ function ProductDetailOne(props) {
                       </label>
                     </>
                   ) : null}
-                  <div className=" d-flex " style={{ gap: "4px", marginBottom: "1rem" }}>
+                  <div className=" d-flex " style={{ gap: "4px", marginBottom: "2rem" }}>
                     {variantData
                       ?.filter(
                         (value) =>
@@ -971,7 +978,7 @@ function ProductDetailOne(props) {
                         .map((item) => item.attributeName.toLowerCase())
                     )
                   ).map((uniqueAttributeName, index) => (
-                    <div key={`attribute-group-${index}`} style={{ marginBottom: "1rem" }}>
+                    <div key={`attribute-group-${index}`} style={{ marginBottom: "2rem" }}>
                       <label
                         style={{
                           color: "#000",
