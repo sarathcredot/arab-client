@@ -22,19 +22,15 @@ export const GET_ADDRESSES = gql`
       firstname
       email
       mobile
-      streetName
-      city
-      apartment
-      suite
-      unit
       postCode
-      houseNumber
       country
       governorate
       village
       governorateID
       villageID
       isDefault
+      address
+      label
     }
   }
 `;
@@ -85,13 +81,15 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
   } = useForm({
     enableReinitialize: true,
     defaultValues: {
+      label: "",
       firstname: "",
       country: "",
-      streetName: "",
-      houseNumber: "",
-      city: "",
+      // streetName: "",
+      // houseNumber: "",
+      address: "",
+      // city: "",
       postCode: "",
-      apartment: "",
+      // apartment: "",
       email: "",
       mobile: "",
       governorate: "",
@@ -104,15 +102,17 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
   useEffect(() => {
     console.log(getAddress,' = GET ADDRESS')
     if (isEdit && getAddress && !getAddressLoading) {
+      setValue("label", getAddress?.getUserShippingAddress?.label);
       setValue("firstname", getAddress?.getUserShippingAddress?.firstname);
       setValue("country", getAddress?.getUserShippingAddress?.country);
-      setValue("houseNumber", getAddress?.getUserShippingAddress?.houseNumber);
-      setValue("streetName", getAddress?.getUserShippingAddress?.streetName);
-      setValue("city", getAddress?.getUserShippingAddress?.city);
+      setValue("address", getAddress?.getUserShippingAddress?.address);
+      // setValue("houseNumber", getAddress?.getUserShippingAddress?.houseNumber);
+      // setValue("streetName", getAddress?.getUserShippingAddress?.streetName);
+      // setValue("city", getAddress?.getUserShippingAddress?.city);
       setValue("postCode", getAddress?.getUserShippingAddress?.postCode);
       setValue("mobile", getAddress?.getUserShippingAddress?.mobile);
       setValue("email", getAddress?.getUserShippingAddress?.email);
-      setValue("apartment", getAddress?.getUserShippingAddress?.apartment);
+      // setValue("apartment", getAddress?.getUserShippingAddress?.apartment);
       setValue("governorate", getAddress?.getUserShippingAddress?.governorate);
       setValue("village", getAddress?.getUserShippingAddress?.village);
       setValue(
@@ -191,30 +191,36 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
   };
 
   const fieldRules = {
+    label: {
+      required: "Label is required",
+    },
     governorate: {
       required: "Governorate is required",
     },
     wilayat: {
       required: "wilayat is required",
     },
-    city: {
-      required: "City is required",
-    },
+    // city: {
+    //   required: "City is required",
+    // },
     firstname: {
       required: "Full Name is required",
     },
-    houseNumber: {
-      required: "HouseNumber is required",
+    address: {
+      required: "Address is required",
     },
+    // houseNumber: {
+    //   required: "HouseNumber is required",
+    // },
     mobile: {
       required: "Mobile is required",
     },
     postCode: {
       required: "postCode is required",
     },
-    streetName: {
-      required: "Street Name is required",
-    },
+    // streetName: {
+    //   required: "Street Name is required",
+    // },
     email: {
       pattern: {
         value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
@@ -278,6 +284,40 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                         lineHeight: "20px",
                       }}
                     >
+                      Label{" "}
+                      <ab className="required" title="required">
+                        *
+                      </ab>
+                    </label>
+                    <Controller
+                      control={control}
+                      name="label"
+                      render={({ field: { onChange, value } }) => (
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={value}
+                          placeholder="Home, Office"
+                          onChange={onChange}
+                          style={{ marginTop: "10px" }}
+                        />
+                      )}
+                      rules={fieldRules.label}
+                    />
+                    {errors?.label ? (
+                      <div style={{ color: "red", fontWeight: "300" }}>
+                        {errors?.label?.message}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div className="form-group">
+                    <label
+                      style={{
+                        fontFamily: "Poppins",
+                        fontWeight: "400px",
+                        lineHeight: "20px",
+                      }}
+                    >
                       Full name{" "}
                       <ab className="required" title="required">
                         *
@@ -291,6 +331,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                           type="text"
                           className="form-control"
                           value={value}
+                          placeholder="Enter Your Full Name"
                           onChange={onChange}
                           style={{ marginTop: "10px" }}
                         />
@@ -322,6 +363,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                           type="text"
                           className="form-control"
                           value={value}
+                          placeholder="Country / Region"
                           onChange={onChange}
                           style={{ marginTop: "10px" }}
                         />
@@ -398,29 +440,29 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
 
                   <div className="form-group">
                     <label>
-                      Street address <span className="required">*</span>
+                      Address <span className="required">*</span>
                     </label>
                     <Controller
                       control={control}
-                      name="houseNumber"
+                      name="address"
                       render={({ field: { onChange, value } }) => (
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="House number and street name"
+                          placeholder="Enter Your Address"
                           value={value}
                           onChange={onChange}
                           style={{ marginTop: "10px" }}
                         />
                       )}
-                      rules={fieldRules.houseNumber}
+                      rules={fieldRules.address}
                     />
-                    {errors?.houseNumber ? (
+                    {errors?.address ? (
                       <div style={{ color: "red", fontWeight: "300" }}>
-                        {errors?.houseNumber?.message}
+                        {errors?.address?.message}
                       </div>
                     ) : null}
-                    <Controller
+                    {/* <Controller
                       control={control}
                       name="streetName"
                       render={({ field: { onChange, value } }) => (
@@ -438,10 +480,10 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                       <div style={{ color: "red", fontWeight: "300" }}>
                         {errors?.streetName?.message}
                       </div>
-                    ) : null}
+                    ) : null} */}
                   </div>
 
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label>
                       Town/City <span className="required">*</span>
                     </label>
@@ -465,7 +507,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                         {errors?.city?.message}
                       </div>
                     ) : null}
-                  </div>
+                  </div> */}
 
                   <div className="form-group">
                     <label>
@@ -519,7 +561,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                           <input
                             type="tel"
                             className="form-control"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter Your Phone Number"
                             value={value}
                             onChange={onChange}
                           />
@@ -529,7 +571,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                     </div>
                     {errors?.mobile ? (
                       <div style={{ color: "red", fontWeight: "300" }}>
-                        {errors?.city?.mobile}
+                        {errors?.mobile?.message}
                       </div>
                     ) : null}
                   </div>
@@ -547,6 +589,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                           type="text"
                           className="form-control"
                           value={value}
+                          placeholder="Enter Your Email"
                           onChange={onChange}
                           style={{ marginTop: "10px" }}
                         />

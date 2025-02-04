@@ -96,12 +96,15 @@
 	}
 }
 .shipingBox{
-	border:1px solid #dfdfdf;
-	border-radius:4px;
-	padding:20px 10px 
+	// border:1px solid #dfdfdf;
+	// border-radius:4px;
+	// padding:10px ;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 .addaddressbtn{
-	font-size: 17px
+	font-size: 14px;
 }
 
 .step-title {
@@ -484,10 +487,13 @@
 		outline: none;
 	}
 	.apply_coupon_btn_div{
-
+		background: #0000001d;
 		button{
 			min-width:100% !important;
 			
+		}
+		.apply_coupon_btn{
+			width: 200px;
 		}
 	}
 }
@@ -813,12 +819,17 @@ input[type="radio"]{
 // 	padding-right: 10px;
 // }
 .apply_coupon_div{
+	grid-gap: 0;
+	gap: 0;
+	
 	input{
 		min-width: 100% !important;
 	}
 	.apply_coupon_btn_div{
 
 		min-width:100% !important;
+		min-height: 60px !important;
+
 		button{
 			min-width:100% !important;
 			

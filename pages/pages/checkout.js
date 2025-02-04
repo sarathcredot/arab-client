@@ -14,6 +14,8 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { Helmet } from "react-helmet";
 import { IoMdHome } from "react-icons/io";
+import { FiEdit2 } from "react-icons/fi";
+import { MdDeleteOutline } from "react-icons/md";
 
 const countryOptions = [
   { value: "uae", label: "+971", flag: "/images/uae.svg" },
@@ -70,30 +72,28 @@ const REMOVE_COUPON = gql`
 export const GET_ADDRESSES = gql`
   query GetUserShippingAddresses {
     getUserShippingAddresses {
-      address {
-        _id
-        apartment
-        city
-
-        country
-        email
-        firstname
-        houseNumber
-        mobile
-        postCode
-        streetName
-        suite
-        unit
-        isDefault
-      }
+    address {
+      _id
+      firstname
+      email
+      mobile
+      postCode
+      country
+      governorate
+      village
+      governorateID
+      villageID
+      isDefault
+      address
+      label
     }
+  }
   }
 `;
 
 export const REMOVE_ADDRESS = gql`
   mutation RemoveUserShippingAddress($input: UserRemoveShippingAddressInput!) {
     removeUserShippingAddress(input: $input) {
-      _id
       message
     }
   }
@@ -115,7 +115,7 @@ function CheckOut() {
   const [isEdit, setIsedit] = useState(false);
   const [defaultAddressId, setDefaultAddressId] = useState("");
   const [selectedAddressId, setSelectedAddressId] = useState(null);
-  const { data, loading, error, refetch } = useQuery(GET_ADDRESSES);
+  const { data, loading, error, refetch } = useQuery(GET_ADDRESSES,{fetchPolicy:"network-only"});
   const [RemoveUserShippingAddress] = useMutation(REMOVE_ADDRESS);
   const [CreateUserOrder] = useMutation(PLACE_ORDER);
   const [coupon,setCoupon] = useState("")
@@ -199,16 +199,29 @@ function CheckOut() {
     setIsshipping(false);
     refetch();
   };
-  const handleRemove = async (id) => {
-    const response = await RemoveUserShippingAddress({
-      variables: {
+   const handleRemove = async (id) => {
+    console.log("this is id",id)
+    try {
+      
+      const response = await RemoveUserShippingAddress({
+        variables: {
         input: {
-          _id: id,
-        },
-      },
-    });
-    refetch();
-  };
+          _id: id
+        }
+      }
+    })
+    console.log("RESPONSE = ",response)
+    if(response?.data?.removeUserShippingAddress){
+      toast.success(response?.data?.removeUserShippingAddress?.message);
+      console.log("address removed");
+      refetch();
+    }
+  } catch (error) {
+    console.log("ERROR = ",error);
+    toast.error(error?.msg);
+    
+  }
+}
 
   const handleAddressSelection = (addressId) => {
     setDefaultAddressId(addressId);
@@ -333,7 +346,7 @@ function CheckOut() {
               addressId={selectedAddressId}
               onClose={handleCloseShipping}
               isShipping={isShipping}
-              onIsShipping={setIsshipping}
+              setIsshipping={setIsshipping}
             />
           </>
         ) : (
@@ -412,6 +425,7 @@ function CheckOut() {
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
+                                cursor:"pointer"
                               }}
                               onClick={() => {
                                 onToggle();
@@ -425,20 +439,13 @@ function CheckOut() {
                               )}
                             </div>
                           </div>
-                          <p className="ls-0" style={{ color: "#737373" }}>
+                          <p className="ls-0" style={{ color: "#737373",fontWeight:"normal",fontSize:"14px" }}>
                             If you have a coupon code, please apply it below.
                           </p>
 
                           <form onSubmit={handleApplyCoupon} ref={setCollapsibleElement}>
                             <div className=" apply_coupon_div">
                               {cartData?.getCart?.isCouponApplied && cartData?.getCart?.code?(
-                                // <input
-                                // type="text"
-                                // className=" "
-                                // value={cartData?.getCart?.code}
-                                // disabled={true}
-                                
-                                // />
                                 <input
                                 type="text"
                                 className="form-control"
@@ -471,7 +478,7 @@ function CheckOut() {
                                   <button style={{
                                     background:"#f91926"
                                   }}
-                                  className="apply_coupon_btn btn btn-sm mt-0 "
+                                  className="apply_coupon_btn btn btn-sm mt-0 hoverredbtn "
                                   type="button"
                                   onClick={()=>handleRemoveCoupon()}
                                 >
@@ -479,13 +486,20 @@ function CheckOut() {
                                 </button>
                                 ):(
 
-                                <button
-                                  className="btn btn-dark btn-place-order hoverbtn"
-                                  type="submit"
-                                  name="form-control"
-                                >
-                                  Apply Coupon
-                                </button>
+                                // <button
+                                //   className="btn btn-dark btn-place-order hoverbtn"
+                                //   type="submit"
+                                //   name="form-control"
+                                // >
+                                //   Apply Coupon
+                                // </button>
+                                <button 
+                                className="apply_coupon_btn btn btn-sm mt-0 hoverbtn"
+                                type="submit"
+                                // onClick={()=>handleApplyCoupon()}
+                              >
+                                Apply Coupon
+                              </button>
                               )}
                                 </div>
                                 </div>
@@ -517,38 +531,47 @@ function CheckOut() {
                                   <div
                                     key={index}
                                     style={{
-                                      lineHeight: "19px",
-                                      alignItems: "baseline",
-                                      gap: "20px",
+                                      display:"flex",
+                                      flexDirection:"column",
+                                      gap:"10px",
                                       border: "1px solid #dfdfdf",
-                                      margin: "15px 0",
-                                      padding: "10px",
+                                      padding: "20px",
                                       borderRadius: "4px",
+                                      borderColor:address?._id===defaultAddressId?"red":"#dfdfdf",
+                                      cursor:"pointer"
                                     }}
+                                    onClick={() => handleAddressSelection(address._id)}
                                   >
                                     <div>
-                                      <div className="custom-control custom-radio d-flex">
-                                        <input
-                                          type="radio"
-                                          className="custom-control-input"
-                                          id={`shipaddress${index}`}
-                                          value={address._id}
-                                          checked={defaultAddressId === address._id}
-                                          onChange={() => handleAddressSelection(address._id)}
-                                        />
-
-                                        <label
-                                          className="custom-control-label"
-                                          style={{ paddingLeft: "10px", maxWidth: "575px" }}
-                                          htmlFor={`shipaddress${index}`}
-                                        >
-                                          {address?.firstname}, &nbsp;{address?.houseNumber},{" "}
-                                          {address?.streetName}, &nbsp;{address?.postCode},
-                                          {address?.city}, {address?.country}
-                                        </label>
-                                      </div>
+                                    <h2 style={{fontSize:"20px",fontWeight:"500",marginBottom:"14px",padding:0,lineHeight:"16px"}}>{address?.label||"Label"}</h2>
+                                      <p style={{fontWeight:"normal",color:"#737373"}}>{address?.firstname},&nbsp;{address?.address},&nbsp;{address?.postCode}, {address?.country}</p>
                                     </div>
-                                    <div
+                                    <div className="address_btns">
+                                      <button
+                                        type="button"
+                                        name="form-control"
+                                        className="btn btn-dark btn-place-order hoverinto m-0"
+                                        style={{width:"40px",height:"40px",padding:"0px"}}
+                                        onClick={()=> {
+                                          setSelectedAddressId(address?._id)
+                                          setIsedit(true)
+                                          setIsshipping(true);
+                                        }}
+                                      >
+                                      <FiEdit2 />
+                                      </button>
+                                      <button
+                                        type="button"
+                                        name="form-control"
+                                        className="btn btn-dark btn-place-order hoverbtn m-0"
+                                        style={{width:"40px",height:"40px",padding:"0px"}}
+                                        onClick={()=> handleRemove(address?._id)}
+                                      >
+                                        <MdDeleteOutline />
+                                      </button>
+
+                                    </div>
+                                    {/* <div
                                       style={{
                                         display: "flex",
                                         color: "black",
@@ -576,12 +599,12 @@ function CheckOut() {
                                               border: "none",
                                               color: "#E30613",
                                             }}
-                                            onClick={() => handleRemove(address?._id)}
+                                            // onClick={() => handleRemove(address?._id)}
                                           >
                                             Remove
                                           </button>
                                         )}
-                                    </div>
+                                    </div> */}
                                   </div>
                                 </>
                               );
@@ -591,9 +614,10 @@ function CheckOut() {
                         <div
                           style={{
                             display: "flex",
-                            gap: "15px",
+                            gap: "5px",
                             alignItems: "center",
                             cursor: "pointer",
+                            marginLeft:"auto"
                           }}
                           onClick={() => {
                             setIsshipping(true);

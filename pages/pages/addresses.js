@@ -13,31 +13,30 @@ import { FiEdit2 } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
 import { TRUE } from "sass";
 // import { gql, useMutation,useLazyQuery } from "@apollo/client";
-export const GET_ADDRESSES = gql`query GetUserShippingAddresses {
+export const GET_ADDRESSES = gql`
+query GetUserShippingAddresses {
   getUserShippingAddresses {
     address {
       _id
-      apartment
-      city
-     
-      country
-      email
       firstname
-      houseNumber
+      email
       mobile
       postCode
-      streetName
-      suite
-      unit
+      country
+      governorate
+      village
+      governorateID
+      villageID
       isDefault
-     
+      address
+      label
     }
   }
-}`
+}
+`;
 
 export const REMOVE_ADDRESS = gql`mutation RemoveUserShippingAddress($input: UserRemoveShippingAddressInput!) {
   removeUserShippingAddress(input: $input) {
-    _id
     message
   }
 }`
@@ -53,7 +52,7 @@ function addresses() {
   // const [catLevel2, { loading:level2loading, error:level2error, data:level2Data }] = useLazyQuery(GET_SHIPPING_ADDRESS);
   const [isAddress, setIsAddress] = useState(false);
   const [isShipping, setIsshipping] = useState(false)
-  const { data, loading, error, refetch } = useQuery(GET_ADDRESSES);
+  const { data, loading, error, refetch } = useQuery(GET_ADDRESSES,{fetchPolicy:"network-only"});
   const [isEdit, setIsedit] = useState(false)
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [isShippingOpen, setIsShippingOpen] = useState(false);
@@ -75,16 +74,26 @@ function addresses() {
 
   const handleRemove = async (id) => {
     console.log("this is id",id)
-    const response = await RemoveUserShippingAddress({
-      variables: {
+    try {
+      
+      const response = await RemoveUserShippingAddress({
+        variables: {
         input: {
           _id: id
         }
       }
     })
-
-    console.log("addres removed")
-    refetch()
+    console.log("RESPONSE = ",response)
+    if(response?.data?.removeUserShippingAddress){
+      toast.success(response?.data?.removeUserShippingAddress?.message);
+      console.log("addres removed");
+      refetch();
+    }
+  } catch (error) {
+    console.log("ERROR = ",error);
+    toast.error(error?.msg);
+    
+  }
     
   }
 
@@ -220,14 +229,14 @@ function addresses() {
             
             <div className="address_box">
               <div className="address_content">
-                <h2 style={{fontSize:"20px",fontWeight:"500",marginBottom:"24px"}}>Home</h2>
-                <p style={{fontWeight:"normal",color:"#737373",marginBottom:"48px"}}>You have not set up this type of address yet.</p>
+                <h2 style={{fontSize:"20px",fontWeight:"500",marginBottom:"24px",lineHeight:"15px"}}>{address?.label||"Label"}</h2>
+                <p style={{fontWeight:"normal",color:"#737373",marginBottom:"48px"}}>{address?.address||"You have not set up this type of address yet."}</p>
               </div>
               <div className="address_btns">
                 <button
                   type="button"
                   name="form-control"
-                  className="btn btn-dark btn-place-order hoverinto"
+                  className="btn btn-dark btn-place-order hoverinto m-0"
                   style={{width:"40px",height:"40px",padding:"0px"}}
                   onClick={()=> {
                     setSelectedAddressId(address?._id)
@@ -240,8 +249,9 @@ function addresses() {
                 <button
                   type="button"
                   name="form-control"
-                  className="btn btn-dark btn-place-order hoverbtn"
+                  className="btn btn-dark btn-place-order hoverbtn m-0"
                   style={{width:"40px",height:"40px",padding:"0px"}}
+                  onClick={()=> handleRemove(address?._id)}
                 >
                   <MdDeleteOutline />
                 </button>
