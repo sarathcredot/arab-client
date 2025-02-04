@@ -659,7 +659,7 @@ function Account() {
                               ></textarea>
                             <div className="popup-actions">
         
-                              <button onClick={() => setShowPopup(false)} className="btn btn-outline-dark">
+                              <button onClick={() => setShowPopup(false)} className="btn btn-outline-danger">
                                 CANCEL
                               </button>
                               <button onClick={handleDeleteAccount} className="btn btn-dark">

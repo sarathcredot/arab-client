@@ -632,7 +632,7 @@ function Orders(props) {
                                     setshowCancelPopup(false);
                                     setCancelId(null);
                                   }}
-                                  className="btn btn-outline-dark"
+                                  className="btn btn-outline-danger"
                                 >
                                   CANCEL
                                 </button>

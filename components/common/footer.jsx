@@ -288,7 +288,7 @@ function Footer() {
               <div className="col-md-12 col-lg-8 mb-3 mb-lg-0">
                 <ul style={{listStyleType:"none"}} className="footer-category-list mb-0">
                   <li>
-                    <h4 className="d-inline-block">Categories:</h4>{" "}
+                    <h4 className="d-inline-block" style={{ fontWeight: "500" }}>Categories:</h4>{" "}
                     {categories.map((value, index) => (
                       <React.Fragment key={index}>
                         <ALink
@@ -336,7 +336,7 @@ function Footer() {
                     </ALink>
                   </li>
                   <li>
-                    <h4 className="d-inline-block">Brands:</h4>{" "}
+                    <h4 className="d-inline-block" style={{ fontWeight: "500" }}>Brands:</h4>{" "}
                     {brands?.map((value, index) => (
                       <React.Fragment key={index}>
                         <ALink
@@ -613,7 +613,7 @@ function Footer() {
 
                 <img src="images/helpline.svg" style={{ width: "30px" }} />
                 <p className="dev-helpline-p"style={{ color: "rgba(27, 27, 27, 1)" }}>Helpline</p>
-                <h4 className="dev-helpline-h4">1800 456 84788</h4></div>
+                <h4 className="dev-helpline-h4" style={{fontWeight:"600"}}>1800 456 84788</h4></div>
               </div>
 
             </div>
