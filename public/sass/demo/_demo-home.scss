@@ -1859,16 +1859,25 @@ color:red
 
     .address_box{
         border:1px solid #CDCDCD;
-        padding: 10px 20px ;
+        padding:20px ;
     }
     .address_btns{
         display: flex;
         align-items:center;
         justify-content: end;
         gap: 10px;
-
+        height: 40px;
+        
     }
 }
+.address_btns{
+        display: flex;
+        align-items:center;
+        justify-content: end;
+        gap: 10px;
+        height: 40px;
+
+    }
 
 @media(max-width:993px){
     .address_container{
@@ -1881,7 +1890,7 @@ color:red
         grid-template-columns: repeat(1,1fr);
         gap: 10px;
         .address_box{
-            padding: 10px 20px ;
+            padding: 10px ;
         }
         .address_btns{
             gap: 10px;

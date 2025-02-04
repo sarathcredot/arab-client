@@ -94,7 +94,7 @@ function RecentCollection(props) {
         >
           <div
             className="heading shop-list d-flex align-items-center flex-wrap pb-4 mb-0 pl-0 pr-0"
-            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" }}
+            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE",justifyContent:"space-between"}}
           >
             <h4 className="section-title text-transform-none mb-0 mr-0">
               50% Off
@@ -191,7 +191,7 @@ function RecentCollection(props) {
         >
           <div
             className="heading shop-list d-flex align-items-center flex-wrap pb-4 mb-0 pl-0 pr-0"
-            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" }}
+            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE",justifyContent:"space-between" }}
           >
             <h4 className="section-title text-transform-none mb-0 mr-0">
               30% Off
@@ -286,7 +286,7 @@ function RecentCollection(props) {
         >
           <div
             className="heading shop-list d-flex align-items-center flex-wrap pb-4 mb-0 pl-0 pr-0"
-            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" }}
+            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" ,justifyContent:"space-between"}}
           >
             <h4 className="section-title text-transform-none mb-0 mr-0">
               10% Off

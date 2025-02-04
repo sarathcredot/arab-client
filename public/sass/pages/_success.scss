@@ -172,16 +172,36 @@
 
 .hoverbtn:hover {
 
-    background-color: #E30613;
+    background-color: #E30613 !important;
+    background: #E30613 !important;
     color: #ffffff;
     border-color: #E30613;
 }
+.hoverredbtn:hover {
 
-.hoverinto {
-    background-color: #ffffff;
-    color: black;
+    background-color: #000 !important;
+    background: #000 !important;
+    color: #ffffff;
+    border-color: #000;
 }
 
+.hoverinto {
+    background-color: #ffffff ;
+    background: #ffffff ;
+    color: black ;
+    cursor: pointer !important;
+}
+.cart_btn{
+    border: 1px solid #000 !important;
+    color: #000 !important;
+    font-weight: 500 !important;
+
+}
+.cart_btn:hover{
+    background: #E30613;
+    color: #ffffff !important;
+    border-color: #E30613 !important;
+}
 .hoverinto:hover {
     background-color: #E30613;
     color: #ffffff;
