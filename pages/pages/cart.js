@@ -317,7 +317,10 @@ function Cart(props) {
                           <td className="product-col">
                             <h5 className="product-title" style={{fontWeight:"600"}}>
                               <ALink href={`/product/default/${item?.productId}`}>
-                                {item.name}
+                                
+                            {item?.name.length> 10
+                        ? `${item?.name.slice(0, 15)}...`
+                        : item?.name}
                               </ALink>
                             </h5>
                           </td>

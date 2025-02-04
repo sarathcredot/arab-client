@@ -11,19 +11,38 @@ import { toast } from "react-toastify";
 
 
 
+// export const USER_DETAIL = gql`
+//   query GetUserRecord($input: userInput!) {
+//     getUserRecord(input: $input) {
+//       message
+//       record {
+//         _id
+//         firstName
+//         displayName
+//         email
+//         lastName
+//       }
+//     }
+//   }
+// `;
+
+
 export const USER_DETAIL = gql`
-  query GetUserRecord($input: userInput!) {
-    getUserRecord(input: $input) {
-      message
-      record {
-        _id
-        firstName
-        displayName
-        email
-        lastName
-      }
+  query GetUserRecord {
+  getUserRecord {
+    record {
+      _id
+      email
+      firstName
+      lastName
+      displayName
+      mobileNumber
+      isBlocked
+      isDeleted
     }
+    message
   }
+}
 `;
 
 const LOG_OUT_USER = gql`
@@ -46,7 +65,8 @@ const DELETE_USER = gql`
 function Account() {
   const id = localStorage?.getItem("userId");
   const token = localStorage.getItem("arabtoken");
-  const [userdetail, { loading: userloading, error: usererror, data: userData, refetch }] = useLazyQuery(USER_DETAIL);
+   const [userdetail, { loading: userloading, error: usererror, data: userData, refetch }] =
+      useLazyQuery(USER_DETAIL);
 
 
   const [showPopup, setShowPopup] = useState(false);
@@ -80,7 +100,7 @@ function Account() {
   const [logout, { loading, error }] = useMutation(LOG_OUT_USER);
 
 
-  // console.log("this is userdata",userData)
+ 
 
   const router = useRouter();
 
@@ -94,19 +114,39 @@ function Account() {
     }
   };
 
+  // useEffect(() => {
+  //   if (!token) {
+  //     router.push("/pages/login");
+  //   }
+
+  //   if (id) {
+  //     userdetail();
+  //   }
+    
+  // }, [id,userdetail, token]);
+
+
   useEffect(() => {
     if (!token) {
       router.push("/pages/login");
+    } else {
+      userdetail();
     }
+  }, [token, userdetail]);
 
-    if (id) {
-      userdetail({ variables: { input: { _id: id } } });
+  
+  useEffect(() => {
+    if (usererror) {
+      console.error("GraphQL Error:", usererror);
     }
+  }, [usererror]);
 
-
-    // userdetail({ variables: { input: { _id: id } } });
-    // setValue("firstName",userData?.getUserRecord?.record?.firstName)
-  }, [id, userdetail, token]);
+  
+  useEffect(() => {
+    console.log("User Data:", userData);
+    console.log("User Error:", usererror);
+  }, [userData, usererror]);
+  
 
 
   
