@@ -94,7 +94,7 @@ function accountdetails() {
         refetch();
         userdetail();
       }
-      SetIsOtp(true);
+      // SetIsOtp(true);
     } catch (error) {
       toast.error(error?.message);
       console.log("error", error);

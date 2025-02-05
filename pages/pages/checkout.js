@@ -371,7 +371,7 @@ function CheckOut() {
                 <div className="checkout-discount">
                 <SlideToggle
                   duration={200}
-                  collapsed
+                  // collapsed
                   onExpanded={() => {
                     setToggler(true);
                   }}
@@ -613,18 +613,13 @@ function CheckOut() {
                           : ""}
 
                         <div
-                          style={{
-                            display: "flex",
-                            gap: "5px",
-                            alignItems: "center",
-                            cursor: "pointer",
-                            marginLeft:"auto"
-                          }}
+                          
+                          className="add_address_btn"
                           onClick={() => {
                             setIsshipping(true);
                           }}
                         >
-                          <IoAddCircleOutline style={{ fontSize: "20px" }} />
+                          <IoAddCircleOutline className="add_address_icon" style={{ fontSize: "20px" }} />
                           <p className="addaddressbtn" style={{ margin: 0 }}>
                             {" "}
                             Add Address{" "}

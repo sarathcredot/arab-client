@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import ALink from "../../common/ALink";
 import { IoMdArrowBack } from "react-icons/io";
+import { USER_DETAIL } from "../../../pages/pages/account";
 
 export const SHIPPING_ADDRESS = gql`
   mutation CreateUserShippingAddress($input: UserCreateShippingAddressInput!) {
@@ -55,8 +56,10 @@ const GET_LOCATION = gql`
   }
 `;
 
+
 function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
   const router = useRouter();
+  const { loading: userloading, error: usererror, data: userData, refetch } = useQuery(USER_DETAIL,{fetchPolicy:"network-only"});
 
   const {
     data: getAddress,
@@ -228,6 +231,15 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
       },
     },
   };
+
+  useEffect(()=>{
+    if(!isEdit && userData){
+      setValue("firstname",userData?.getUserRecord?.record?.displayName)
+      console.log("NAME = ",userData?.getUserRecord?.record)
+      setValue("email",userData?.getUserRecord?.record?.email)
+      // setValue("mobile",userData?.getUserRecord?.record?.mobileNumber)
+    }
+  },[userData,isEdit])
   return (
     <div>
       <div className="container checkout-container">
@@ -551,7 +563,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                             width="24"
                             height="16"
                           />
-                          +971
+                          +968
                         </span>
                       </div>
                       <Controller
