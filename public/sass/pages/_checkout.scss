@@ -222,7 +222,7 @@
 		text-align: right;
 	}
 
-	thead, tfoot tr {
+	.border_bottom {
 		border-bottom: 1px solid #e7e7e7;
 	}
 
@@ -348,7 +348,24 @@
 	padding-top: 3px;
 	padding-bottom: 4px;
 }
-
+.payment_methods{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	.payment_method{
+		margin: 0 !important;
+		width: 100%;
+		padding: 20px;
+		background: #F7F9FC;
+		label{
+			margin: 0 !important;
+		}
+		div{
+			margin: 0 !important;
+			
+		}
+	}
+}
 .login-form-container, 
 .checkout-discount {
 	.feature-box {

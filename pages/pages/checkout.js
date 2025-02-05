@@ -516,10 +516,11 @@ function CheckOut() {
                   )}
                 </SlideToggle>
               </div>
+                  
+                      <h2 style={{fontSize:"22px",margin:0,marginTop:"40px"}}>Select a shipping address</h2>
                 <div className="row" >
                   <div className="col-lg-7">
                     <div>
-                      <h2 className="step-title">Select a shipping address</h2>
                       <div
                         className="shipingBox"
                         // style={{border:"1px solid #dfdfdf",borderRadius:"4px",padding:"10px"}}
@@ -1033,8 +1034,8 @@ function CheckOut() {
 
                         <table className="table table-mini-cart">
                           <thead>
-                            <tr>
-                              <th colSpan="2" style={{ fontSize: "1.4rem", fontWeight: "600" }}>
+                            <tr >
+                              <th className="border_bottom" colSpan="2" style={{ fontSize: "1.4rem", fontWeight: "600" }}>
                                 Product
                               </th>
                             </tr>
@@ -1055,7 +1056,7 @@ function CheckOut() {
                             ))}
                           </tbody>
                           <tfoot>
-                            <tr className="cart-subtotal">
+                            <tr className="cart-subtotal border_bottom">
                               <td>
                                 <h4>Subtotal</h4>
                               </td>
@@ -1117,30 +1118,32 @@ function CheckOut() {
                             </td>
                           </tr> */}
 
-                            <tr className="order-total">
+                            <tr className="order-total border_bottom">
                               <td>
                                 <h4>Total</h4>
                               </td>
                               <td>
                                 <b className="total-price">
-                                  <span>OMR {cartData?.getCart?.grandTotal}</span>
+                                  <span style={{fontWeight:"400"}}>OMR {cartData?.getCart?.grandTotal}</span>
                                 </b>
                               </td>
                             </tr>
                           </tfoot>
                         </table>
 
-                        <div className="payment-methods">
+                        <div className="payment-methods border-0">
                           <h4 className="">Payment methods</h4>
-                          <div className="info-box with-icon p-0">
-                            <div className="custom-control custom-radio d-flex">
-                              <input
-                                type="radio"
-                                className="custom-control-input"
-                                name="radio"
-                                defaultChecked
-                              />
-                              <label className="custom-control-label">Cash on Delivery</label>
+                          <div className="info-box with-icon p-0 payment_methods">
+                            <div className="payment_method">
+                              <div className="custom-control custom-radio d-flex  w-100 ">
+                                <input
+                                  type="radio"
+                                  className="custom-control-input "
+                                  name="radio"
+                                  defaultChecked
+                                  />
+                                <label className="custom-control-label">Cash on Delivery</label>
+                              </div>
                             </div>
                           </div>
                         </div>
