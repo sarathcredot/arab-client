@@ -201,17 +201,21 @@ function addresses() {
         }}
       >
         <h2 className="step-title addresstitle">Address</h2>
+        {!isEdit&&
         <button
-          type="button"
-          name="form-control"
-          className="btn btn-dark btn-place-order hoverinto "
-          style={{width:"20%",minWidth:"150px",marginRight:"10px"}}
-          onClick={()=> {
-            setIsshipping(true);
-          }}
-        >
-        Add Address
-        </button>
+        type="button"
+        name="form-control"
+        className="btn btn-dark btn-place-order hoverinto "
+        style={{width:"20%",minWidth:"150px",marginRight:"10px"}}
+        onClick={()=> {
+          setIsedit(false)
+          setSelectedAddressId(null)
+          setIsshipping(true);
+        }}
+      >
+      Add Address
+      </button>
+        }
       </div>
 
       {isAddress ? (
@@ -219,7 +223,7 @@ function addresses() {
           <Addresses />
         </>
 
-      ) : isShipping ? (<><Shipping isEdit={isEdit} addressId={selectedAddressId} onClose={handleCloseShipping} setIsshipping={setIsshipping} isShipping={isShipping} /></>) : (
+      ) : isShipping ? (<><Shipping isEdit={isEdit} setIsEdit={setIsedit} addressId={selectedAddressId} onClose={handleCloseShipping} setIsshipping={setIsshipping} isShipping={isShipping} /></>) : (
         <>
 
         <div className="container ">
@@ -229,8 +233,11 @@ function addresses() {
             
             <div className="address_box">
               <div className="address_content">
-                <h2 style={{fontSize:"20px",fontWeight:"500",marginBottom:"24px",lineHeight:"15px"}}>{address?.label||"Label"}</h2>
-                <p style={{fontWeight:"normal",color:"#737373",marginBottom:"48px"}}>{address?.address||"You have not set up this type of address yet."}</p>
+                <h2 style={{fontSize:"20px",fontWeight:"500",marginBottom:"20px",lineHeight:"15px"}}>{address?.label||"Label"}</h2>
+
+                <p style={{fontWeight:"normal",color:"#737373",margin:0}}>{address?.firstname||""}</p>
+                <p style={{fontWeight:"normal",color:"#737373",margin:0}}>{address?.address||"You have not set up this type of address yet."}</p>
+                <p style={{fontWeight:"normal",color:"#737373",marginBottom:"30px"}}>{address?.village},{address?.governorate}</p>
               </div>
               <div className="address_btns">
                 <button

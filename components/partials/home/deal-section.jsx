@@ -59,13 +59,14 @@ function DealSection() {
       variables: {
         input: {
           discount: 10,
-          size: 6
+          size: 8
         }
       }
     })
   }, [])
  
   const products = data?.getProducts?.records
+  console.log("products = ",products)
   return (
     <section className="deal-products-section">
 
@@ -112,14 +113,27 @@ function DealSection() {
       
       </div>
       <h4 className="recommendmob">Deals of the day</h4>
-      {/* <Reveal
+      <Reveal
         keyframes={fadeInUpShorter}
-        delay={100}
-        duration={1000}
-        triggerOnce
+        delay={50}
+        duration={800}
+        // triggerOnce
+
       // style={{ border: "1px solid rgba(185, 185, 185, 1)" }}
-      > */}
-        <div className="row">
+      >
+        <div className="row p-3">
+          {products && products?.map((item,index)=>(
+            <div className="col-lg-3 col-md-4 col-sm-6 col-6 p-0" key={index}>
+            <ProductOne
+              product={item}
+              // adClass="inner-quickview inner-icon"
+              // customStyle="65%"
+              
+              />
+            </div>
+            ))}
+        </div>
+        {/* <div className="row">
           <div style={{marginBottom:"-0.1rem"}} className="col-lg-4 col-md-5 ">
             {products
               ? products
@@ -179,8 +193,8 @@ function DealSection() {
               </div>
             </div>
           </div>
-        </div>
-      {/* </Reveal> */}
+        </div> */}
+      </Reveal>
     </section>
   );
 }

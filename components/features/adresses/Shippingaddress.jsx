@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import ALink from "../../common/ALink";
 import { IoMdArrowBack } from "react-icons/io";
+import { USER_DETAIL } from "../../../pages/pages/account";
 
 export const SHIPPING_ADDRESS = gql`
   mutation CreateUserShippingAddress($input: UserCreateShippingAddressInput!) {
@@ -55,8 +56,10 @@ const GET_LOCATION = gql`
   }
 `;
 
-function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
+
+function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsshipping }) {
   const router = useRouter();
+  const { loading: userloading, error: usererror, data: userData, refetch } = useQuery(USER_DETAIL,{fetchPolicy:"network-only"});
 
   const {
     data: getAddress,
@@ -185,6 +188,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
           reset();
         }
       }
+      setIsEdit?.(false)
     } catch (error) {
       toast(<div style={{ padding: "10px" }}>{error.message}</div>);
     }
@@ -228,6 +232,15 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
       },
     },
   };
+
+  useEffect(()=>{
+    if(!isEdit && userData){      
+      setValue("firstname",userData?.getUserRecord?.record?.displayName)
+      console.log("NAME = ",userData?.getUserRecord?.record)
+      setValue("email",userData?.getUserRecord?.record?.email)
+      // setValue("mobile",userData?.getUserRecord?.record?.mobileNumber)
+    }
+  },[userData,isEdit])
   return (
     <div>
       <div className="container checkout-container">
@@ -252,7 +265,9 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                     }}
                   >
                     <div
-                      onClick={() => setIsshipping(!isShipping)}
+                      onClick={() => {
+                        setIsEdit?.(false)
+                        setIsshipping(!isShipping)}}
                       className={{
                         width: "40px",
                         height: "40px",
@@ -260,10 +275,10 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                         borderRadius: "50%",
                         display: "flex",
                         justifyContent: "center",
-                        alignItems: "center",
+                        alignItems: "center"                        
                       }}
                     >
-                      <IoMdArrowBack style={{ fontSize: "20px" }} />
+                      <IoMdArrowBack style={{ fontSize: "20px",cursor:"pointer" }} />
                     </div>
                     Shipping address
                   </h4>
@@ -551,7 +566,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                             width="24"
                             height="16"
                           />
-                          +971
+                          +968
                         </span>
                       </div>
                       <Controller
