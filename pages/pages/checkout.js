@@ -616,6 +616,7 @@ function CheckOut() {
                           
                           className="add_address_btn"
                           onClick={() => {
+                            setIsedit(false)
                             setIsshipping(true);
                           }}
                         >

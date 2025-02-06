@@ -57,7 +57,7 @@ const GET_LOCATION = gql`
 `;
 
 
-function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
+function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsshipping }) {
   const router = useRouter();
   const { loading: userloading, error: usererror, data: userData, refetch } = useQuery(USER_DETAIL,{fetchPolicy:"network-only"});
 
@@ -188,6 +188,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
           reset();
         }
       }
+      setIsEdit?.(false)
     } catch (error) {
       toast(<div style={{ padding: "10px" }}>{error.message}</div>);
     }
@@ -233,7 +234,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
   };
 
   useEffect(()=>{
-    if(!isEdit && userData){
+    if(!isEdit && userData){      
       setValue("firstname",userData?.getUserRecord?.record?.displayName)
       console.log("NAME = ",userData?.getUserRecord?.record)
       setValue("email",userData?.getUserRecord?.record?.email)
@@ -264,7 +265,9 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                     }}
                   >
                     <div
-                      onClick={() => setIsshipping(!isShipping)}
+                      onClick={() => {
+                        setIsEdit?.(false)
+                        setIsshipping(!isShipping)}}
                       className={{
                         width: "40px",
                         height: "40px",
@@ -272,10 +275,10 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                         borderRadius: "50%",
                         display: "flex",
                         justifyContent: "center",
-                        alignItems: "center",
+                        alignItems: "center"                        
                       }}
                     >
-                      <IoMdArrowBack style={{ fontSize: "20px" }} />
+                      <IoMdArrowBack style={{ fontSize: "20px",cursor:"pointer" }} />
                     </div>
                     Shipping address
                   </h4>
