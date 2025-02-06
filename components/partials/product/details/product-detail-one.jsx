@@ -27,7 +27,6 @@ function ProductDetailOne(props) {
 
   console.log("propdata",props)
 
-  console.log("prodata",props?.product?.attributes[1].attributeValue)
 
   const router = useRouter();
   const {
@@ -169,7 +168,7 @@ function ProductDetailOne(props) {
     // console.log("filteredColor",filteredColor? filteredColor[0].attributeValue : "null");
     // console.log("filteredColor",filteredColor[0].attributeValue);
 
-    setColor(filteredColor? filteredColor[0].attributeValue : "null")
+    setColor(filteredColor? filteredColor[0]?.attributeValue : "null")
     if (variantError) {
       console.error("Error fetching variant data:", variantError);
     } else {

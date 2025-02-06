@@ -332,7 +332,11 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                           className="form-control"
                           value={value}
                           placeholder="Enter Your Full Name"
-                          onChange={onChange}
+                          // onChange={onChange}
+                          onChange={(e) => {
+                            const newValue = e.target.value.replace(/[0-9]/g, ""); // Remove numbers
+                            onChange({ target: { value: newValue } }); // Call onChange with filtered value
+                          }}
                           style={{ marginTop: "10px" }}
                         />
                       )}
