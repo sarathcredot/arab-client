@@ -521,11 +521,12 @@ function ProductDetailOne(props) {
 
     setSelectedAttributes({});
     router.push({
-      pathname: "/product/default/[...slug]",
+      pathname:router.pathname,
       query: { slug: [selected ? selected : item.productId] },
-    });
-
-
+      },
+      undefined,
+      { shallow: true }
+    );
   }
 
 
@@ -537,9 +538,13 @@ function ProductDetailOne(props) {
     setSelectedAttributes({});
     const productId = attributeType; // Replace with your dynamic value
     router.push({
-      pathname: "/product/default/[...slug]",
+      pathname:router.pathname,
       query: { slug: [productId] },
-    });
+      },
+      undefined,
+      { shallow: true }
+  );
+    
   }
 
   // ...

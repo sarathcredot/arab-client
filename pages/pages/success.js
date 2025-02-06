@@ -24,6 +24,8 @@ const GET_ORDER_DETAILS=gql`query GetUserOrderDetails($input: GetUserOrderDetail
       houseNumber
       streetName
       mobile
+      address
+      label
     }
   }
 }`;
@@ -103,8 +105,9 @@ const expectedDeliveryDate = getExpectedDeliveryDate(orderDate);
             </div>
              <div>
             <p style={{fontWeight:"600",fontSize:"18px", color:"#000000"}}>{data?.getUserOrderDetails?.shippingAddress?.firstname}</p>
-            <p style={{fontWeight:"400",fontSize:"11px", color:"#000000"}}>{data?.getUserOrderDetails?.shippingAddress?.houseNumber},{data?.getUserOrderDetails?.shippingAddress?.streetName} </p>
-            <p style={{fontWeight:"400",fontSize:"11px", color:"#000000"}}>+971 {data?.getUserOrderDetails?.shippingAddress?.mobile}</p>
+            {/* <p style={{fontWeight:"400",fontSize:"11px", color:"#000000"}}>{data?.getUserOrderDetails?.shippingAddress?.houseNumber},{data?.getUserOrderDetails?.shippingAddress?.streetName} </p> */}
+            <p style={{fontWeight:"400",fontSize:"11px", color:"#000000"}}>{data?.getUserOrderDetails?.shippingAddress?.address} </p>
+            <p style={{fontWeight:"400",fontSize:"11px", color:"#000000"}}>+968 {data?.getUserOrderDetails?.shippingAddress?.mobile}</p>
             </div>
            
            

@@ -129,9 +129,9 @@ function Orders(props) {
     switch (status) {
       case "PENDING":
         return "#FFA500";
-      case "IN_PROGRESS":
-        return "#FFA500";
-      case "COMPLETED":
+      case "PACKAGE_IN_PROGRESS":
+        return "#000000";
+      case "DELIVERED":
         return "#44961D";
       default:
         return "#000000";
@@ -453,7 +453,9 @@ function Orders(props) {
                             <td
                               style={{ color: item?.returnStatus !== "NA" ? getReturnStatusColor(item?.returnStatus) : getStatusColor(item?.shippingStatus) }}
                             >
-                              {item?.returnStatus !== "NA" ? `${item?.returnStatus}-(Return)` : item?.shippingStatus}
+                              {item?.returnStatus !== "NA"
+                              ? `${item?.returnStatus}-(Return)`
+                              : item?.shippingStatus.replace(/_/g, " ")}
                             </td>
                             <td style={{ color: "black" }}>
                               <div className="price-box">
