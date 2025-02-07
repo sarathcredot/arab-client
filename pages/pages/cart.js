@@ -202,6 +202,7 @@ function Cart(props) {
         <title>Cart | Arab Deals</title>
       </Helmet>
       <main className="main">
+
         <nav aria-label="breadcrumb" className="breadcrumb-nav">
           <div className="container">
             <ol className="breadcrumb">
@@ -220,6 +221,7 @@ function Cart(props) {
             </ol>
           </div>
         </nav>
+
         <div className=" d-flex flex-column align-items-center">
           {/* <h1>orders</h1>*/}
 
@@ -238,6 +240,7 @@ function Cart(props) {
             </li>
           </ul>
         </div>
+
         <div className=" cart-container container" >
           {cartList?.length === 0 ? (
             <div className="cart-table-container">
@@ -312,9 +315,12 @@ function Cart(props) {
                             </figure>
                           </td>
                           <td className="product-col">
-                            <h5 className="product-title" style={{fontWeight:"700"}}>
+                            <h5 className="product-title" style={{fontWeight:"600"}}>
                               <ALink href={`/product/default/${item?.productId}`}>
-                                {item.name}
+                                
+                            {item?.name.length> 10
+                        ? `${item?.name.slice(0, 15)}...`
+                        : item?.name}
                               </ALink>
                             </h5>
                           </td>

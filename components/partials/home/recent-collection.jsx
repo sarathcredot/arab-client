@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Reveal from "react-awesome-reveal";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { IoIosArrowForward  } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
+import Link from "next/link";
 
 
 // Import Custom Component
@@ -62,22 +63,22 @@ function RecentCollection(props) {
 `;
 
 
-const { data: tenPercentData } = useQuery(GET_PRODUCTS, {
-  variables: { input:{ discount: 10 }},
-});
-const tenPercentProducts = tenPercentData?.getProducts?.records;
+  const { data: tenPercentData } = useQuery(GET_PRODUCTS, {
+    variables: { input: { discount: 10 } },
+  });
+  const tenPercentProducts = tenPercentData?.getProducts?.records;
 
-// Query products with 30% discount
-const { data: thirtyPercentData } = useQuery(GET_PRODUCTS, {
-  variables: { input:{discount: 30} },
-});
-const thirtyPercentProducts = thirtyPercentData?.getProducts?.records;
+  // Query products with 30% discount
+  const { data: thirtyPercentData } = useQuery(GET_PRODUCTS, {
+    variables: { input: { discount: 30 } },
+  });
+  const thirtyPercentProducts = thirtyPercentData?.getProducts?.records;
 
-// Query products with 50% discount
-const { data: fiftyPercentData } = useQuery(GET_PRODUCTS, {
-  variables: { input:{discount: 50} },
-});
-const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
+  // Query products with 50% discount
+  const { data: fiftyPercentData } = useQuery(GET_PRODUCTS, {
+    variables: { input: { discount: 50 } },
+  });
+  const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
 
 
 
@@ -91,20 +92,44 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
           triggerOnce
           style={{ marginTop: "30px" }}
         >
-          <div  
+          <div
             className="heading shop-list d-flex align-items-center flex-wrap pb-4 mb-0 pl-0 pr-0"
-            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" }}
+            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE",justifyContent:"space-between"}}
           >
             <h4 className="section-title text-transform-none mb-0 mr-0">
-             50% Off
+              50% Off
             </h4>
-            {/* <ALink className="view-all ml-auto" href='/shop?discount=10'>
-              View All <IoIosArrowForward style={{fontSize:"20px"}}/>
-            </ALink> */}
-             <ALink href="/shop?discount=10" className="ml-auto offer-view view-all-text"> 
-            <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
-              View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/>
-              </p></ALink>
+            <Link href="/shop?discount=10">
+      <a
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          textDecoration: "none",
+        }}
+      >
+        <span
+          style={{
+            display: "inline-block",
+            color: "rgba(0, 0, 0, 1)",
+            fontWeight: "500",
+            transition: "transform 0.3s ease",
+          }}
+          className="view-all-text"
+        >
+          View All
+        </span>
+        <IoIosArrowForward
+          style={{
+            color:"black",
+            fontSize: "20px",
+            marginLeft: "5px",
+            transition: "transform 0.3s ease",
+          }}
+          className="arrow-icon"
+        />
+      </a>
+     </Link>
+          
           </div>
 
           <OwlCarousel
@@ -116,43 +141,43 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
                 0: {
                   items: 2,
                   nav: false
-              },
-              576: {
+                },
+                576: {
                   items: 2,
                   nav: false
-              },
-              768: {
+                },
+                768: {
                   items: 3,
                   nav: true
-              },
-              992: {
+                },
+                992: {
                   items: 4,
                   nav: true
-              },
-              1200: {
+                },
+                1200: {
                   items: 5,
                   nav: true
-              }
+                }
               },
             }}
           >
             {fiftyPercentProducts
               ? fiftyPercentProducts
-                 
-                  .map((item, index) => (
-                    <ProductOne
-                      adClass="inner-quickview inner-icon"
-                      product={item}
-                      key={"product-one" + index}
-                      customStyle="20%"
-                    />
-                  ))
-              : [0, 1].map((item, index) => (
-                  <div
-                    className="skel-pro skel-pro-grid"
+
+                .map((item, index) => (
+                  <ProductOne
+                    adClass="inner-quickview inner-icon"
+                    product={item}
                     key={"product-one" + index}
-                  ></div>
-                ))}
+                    customStyle="20%"
+                  />
+                ))
+              : [0, 1].map((item, index) => (
+                <div
+                  className="skel-pro skel-pro-grid"
+                  key={"product-one" + index}
+                ></div>
+              ))}
           </OwlCarousel>
         </Reveal>
       </section>
@@ -166,15 +191,41 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
         >
           <div
             className="heading shop-list d-flex align-items-center flex-wrap pb-4 mb-0 pl-0 pr-0"
-            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" }}
+            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE",justifyContent:"space-between" }}
           >
             <h4 className="section-title text-transform-none mb-0 mr-0">
-            30% Off
+              30% Off
             </h4>
-            <ALink href="/shop?discount=10" className="ml-auto offer-view text-transform-none"> 
-            <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
-              View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/>
-              </p></ALink>
+            <Link href="/shop?discount=10">
+              <a
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                }}
+              >
+                <span
+                  style={{
+                    display: "inline-block",
+                    color: "rgba(0, 0, 0, 1)",
+                    fontWeight: "500",
+                    transition: "transform 0.3s ease",
+                  }}
+                  className="view-all-text"
+                >
+                  View All
+                </span>
+                <IoIosArrowForward
+                  style={{
+                    color: "black",
+                    fontSize: "20px",
+                    marginLeft: "5px",
+                    transition: "transform 0.3s ease",
+                  }}
+                  className="arrow-icon"
+                />
+              </a>
+            </Link>
           </div>
 
           <OwlCarousel
@@ -187,41 +238,41 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
                 0: {
                   items: 2,
                   nav: false
-              },
-              576: {
+                },
+                576: {
                   items: 2,
                   nav: false
-              },
-              768: {
+                },
+                768: {
                   items: 3,
                   nav: true
-              },
-              992: {
+                },
+                992: {
                   items: 4,
                   nav: true
-              },
-              1200: {
+                },
+                1200: {
                   items: 5,
                   nav: true
-              }
+                }
               },
             }}
           >
-            {thirtyPercentProducts?
-               thirtyPercentProducts.map((item, index) => (
-                    <ProductOne
-                      adClass="inner-quickview inner-icon"
-                      product={item}
-                      key={"product-one" + index}
-                      customStyle="20%"
-                    />
-                  ))
+            {thirtyPercentProducts ?
+              thirtyPercentProducts.map((item, index) => (
+                <ProductOne
+                  adClass="inner-quickview inner-icon"
+                  product={item}
+                  key={"product-one" + index}
+                  customStyle="20%"
+                />
+              ))
               : [0, 1].map((item, index) => (
-                  <div
-                    className="skel-pro skel-pro-grid"
-                    key={"product-one" + index}
-                  ></div>
-                ))}
+                <div
+                  className="skel-pro skel-pro-grid"
+                  key={"product-one" + index}
+                ></div>
+              ))}
           </OwlCarousel>
         </Reveal>
       </section>
@@ -235,57 +286,83 @@ const fiftyPercentProducts = fiftyPercentData?.getProducts?.records;
         >
           <div
             className="heading shop-list d-flex align-items-center flex-wrap pb-4 mb-0 pl-0 pr-0"
-            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" }}
+            style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE" ,justifyContent:"space-between"}}
           >
             <h4 className="section-title text-transform-none mb-0 mr-0">
               10% Off
             </h4>
-            <ALink href="/shop?discount=10" className="ml-auto offer-view"> 
-            <p style={{ color: "rgba(0, 0, 0, 1)", fontWeight: "500" }}>
-              View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/>
-              </p></ALink>
+            <Link href="/shop?discount=10">
+              <a
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                }}
+              >
+                <span
+                  style={{
+                    display: "inline-block",
+                    color: "rgba(0, 0, 0, 1)",
+                    fontWeight: "500",
+                    transition: "transform 0.3s ease",
+                  }}
+                  className="view-all-text"
+                >
+                  View All
+                </span>
+                <IoIosArrowForward
+                  style={{
+                    color: "black",
+                    fontSize: "20px",
+                    marginLeft: "5px",
+                    transition: "transform 0.3s ease",
+                  }}
+                  className="arrow-icon"
+                />
+              </a>
+            </Link>
           </div>
 
           <OwlCarousel
             adClass="products-slider carousel-with-bg nav-blackcircle pb-0"
             // options={productSlider}
-             options={{
+            options={{
               ...productSlider,
               responsive: {
                 ...productSlider.responsive,
                 0: {
                   items: 2,
                   nav: false
-              },
-              576: {
+                },
+                576: {
                   items: 2,
                   nav: false
-              },
-              768: {
+                },
+                768: {
                   items: 3,
                   nav: true
-              },
-              992: {
+                },
+                992: {
                   items: 4,
                   nav: true
-              },
-              1200: {
+                },
+                1200: {
                   items: 5,
                   nav: true
-              }
+                }
               },
             }}
           >
             {
               tenPercentProducts?.map((item, index) => (
-                    <ProductOne
-                      adClass="inner-quickview inner-icon"
-                      product={item}
-                      key={"product-one" + index}
-                      customStyle="20%"
-                    />
-                  ))
-             }
+                <ProductOne
+                  adClass="inner-quickview inner-icon"
+                  product={item}
+                  key={"product-one" + index}
+                  customStyle="20%"
+                />
+              ))
+            }
           </OwlCarousel>
         </Reveal>
       </section>

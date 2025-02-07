@@ -344,8 +344,8 @@ function CartMenu({ props }) {
               <div className="dropdown-cart-action">
                 <ALink
                   href="/pages/cart"
-                  className="btn btn-block view-cart hoverbtn"
-                  style={{ border: "1px solid #000", background: "white" }}
+                  className="btn btn-block cart_btn"
+                  // style={{ border: "1px solid #000", background: "white" }}
                 >
                   View Cart
                 </ALink>

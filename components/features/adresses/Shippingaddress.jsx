@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import ALink from "../../common/ALink";
 import { IoMdArrowBack } from "react-icons/io";
+import { USER_DETAIL } from "../../../pages/pages/account";
 
 export const SHIPPING_ADDRESS = gql`
   mutation CreateUserShippingAddress($input: UserCreateShippingAddressInput!) {
@@ -22,19 +23,15 @@ export const GET_ADDRESSES = gql`
       firstname
       email
       mobile
-      streetName
-      city
-      apartment
-      suite
-      unit
       postCode
-      houseNumber
       country
       governorate
       village
       governorateID
       villageID
       isDefault
+      address
+      label
     }
   }
 `;
@@ -59,8 +56,10 @@ const GET_LOCATION = gql`
   }
 `;
 
-function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
+
+function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsshipping }) {
   const router = useRouter();
+  const { loading: userloading, error: usererror, data: userData, refetch } = useQuery(USER_DETAIL,{fetchPolicy:"network-only"});
 
   const {
     data: getAddress,
@@ -85,13 +84,15 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
   } = useForm({
     enableReinitialize: true,
     defaultValues: {
+      label: "",
       firstname: "",
       country: "",
-      streetName: "",
-      houseNumber: "",
-      city: "",
+      // streetName: "",
+      // houseNumber: "",
+      address: "",
+      // city: "",
       postCode: "",
-      apartment: "",
+      // apartment: "",
       email: "",
       mobile: "",
       governorate: "",
@@ -104,15 +105,17 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
   useEffect(() => {
     console.log(getAddress,' = GET ADDRESS')
     if (isEdit && getAddress && !getAddressLoading) {
+      setValue("label", getAddress?.getUserShippingAddress?.label);
       setValue("firstname", getAddress?.getUserShippingAddress?.firstname);
       setValue("country", getAddress?.getUserShippingAddress?.country);
-      setValue("houseNumber", getAddress?.getUserShippingAddress?.houseNumber);
-      setValue("streetName", getAddress?.getUserShippingAddress?.streetName);
-      setValue("city", getAddress?.getUserShippingAddress?.city);
+      setValue("address", getAddress?.getUserShippingAddress?.address);
+      // setValue("houseNumber", getAddress?.getUserShippingAddress?.houseNumber);
+      // setValue("streetName", getAddress?.getUserShippingAddress?.streetName);
+      // setValue("city", getAddress?.getUserShippingAddress?.city);
       setValue("postCode", getAddress?.getUserShippingAddress?.postCode);
       setValue("mobile", getAddress?.getUserShippingAddress?.mobile);
       setValue("email", getAddress?.getUserShippingAddress?.email);
-      setValue("apartment", getAddress?.getUserShippingAddress?.apartment);
+      // setValue("apartment", getAddress?.getUserShippingAddress?.apartment);
       setValue("governorate", getAddress?.getUserShippingAddress?.governorate);
       setValue("village", getAddress?.getUserShippingAddress?.village);
       setValue(
@@ -185,36 +188,43 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
           reset();
         }
       }
+      setIsEdit?.(false)
     } catch (error) {
       toast(<div style={{ padding: "10px" }}>{error.message}</div>);
     }
   };
 
   const fieldRules = {
+    label: {
+      required: "Label is required",
+    },
     governorate: {
       required: "Governorate is required",
     },
     wilayat: {
       required: "wilayat is required",
     },
-    city: {
-      required: "City is required",
-    },
+    // city: {
+    //   required: "City is required",
+    // },
     firstname: {
-      required: "First Name is required",
+      required: "Full Name is required",
     },
-    houseNumber: {
-      required: "HouseNumber is required",
+    address: {
+      required: "Address is required",
     },
+    // houseNumber: {
+    //   required: "HouseNumber is required",
+    // },
     mobile: {
       required: "Mobile is required",
     },
     postCode: {
       required: "postCode is required",
     },
-    streetName: {
-      required: "Street Name is required",
-    },
+    // streetName: {
+    //   required: "Street Name is required",
+    // },
     email: {
       pattern: {
         value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
@@ -222,6 +232,15 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
       },
     },
   };
+
+  useEffect(()=>{
+    if(!isEdit && userData){      
+      setValue("firstname",userData?.getUserRecord?.record?.displayName)
+      console.log("NAME = ",userData?.getUserRecord?.record)
+      setValue("email",userData?.getUserRecord?.record?.email)
+      // setValue("mobile",userData?.getUserRecord?.record?.mobileNumber)
+    }
+  },[userData,isEdit])
   return (
     <div>
       <div className="container checkout-container">
@@ -246,7 +265,9 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                     }}
                   >
                     <div
-                      onClick={() => setIsshipping(!isShipping)}
+                      onClick={() => {
+                        setIsEdit?.(false)
+                        setIsshipping(!isShipping)}}
                       className={{
                         width: "40px",
                         height: "40px",
@@ -254,10 +275,10 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                         borderRadius: "50%",
                         display: "flex",
                         justifyContent: "center",
-                        alignItems: "center",
+                        alignItems: "center"                        
                       }}
                     >
-                      <IoMdArrowBack style={{ fontSize: "20px" }} />
+                      <IoMdArrowBack style={{ fontSize: "20px",cursor:"pointer" }} />
                     </div>
                     Shipping address
                   </h4>
@@ -278,7 +299,41 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                         lineHeight: "20px",
                       }}
                     >
-                      First name{" "}
+                      Label{" "}
+                      <ab className="required" title="required">
+                        *
+                      </ab>
+                    </label>
+                    <Controller
+                      control={control}
+                      name="label"
+                      render={({ field: { onChange, value } }) => (
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={value}
+                          placeholder="Home, Office"
+                          onChange={onChange}
+                          style={{ marginTop: "10px" }}
+                        />
+                      )}
+                      rules={fieldRules.label}
+                    />
+                    {errors?.label ? (
+                      <div style={{ color: "red", fontWeight: "300" }}>
+                        {errors?.label?.message}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div className="form-group">
+                    <label
+                      style={{
+                        fontFamily: "Poppins",
+                        fontWeight: "400px",
+                        lineHeight: "20px",
+                      }}
+                    >
+                      Full name{" "}
                       <ab className="required" title="required">
                         *
                       </ab>
@@ -291,7 +346,12 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                           type="text"
                           className="form-control"
                           value={value}
-                          onChange={onChange}
+                          placeholder="Enter Your Full Name"
+                          // onChange={onChange}
+                          onChange={(e) => {
+                            const newValue = e.target.value.replace(/[0-9]/g, ""); // Remove numbers
+                            onChange({ target: { value: newValue } }); // Call onChange with filtered value
+                          }}
                           style={{ marginTop: "10px" }}
                         />
                       )}
@@ -322,6 +382,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                           type="text"
                           className="form-control"
                           value={value}
+                          placeholder="Country / Region"
                           onChange={onChange}
                           style={{ marginTop: "10px" }}
                         />
@@ -398,29 +459,29 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
 
                   <div className="form-group">
                     <label>
-                      Street address <span className="required">*</span>
+                      Address <span className="required">*</span>
                     </label>
                     <Controller
                       control={control}
-                      name="houseNumber"
+                      name="address"
                       render={({ field: { onChange, value } }) => (
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="House number and street name"
+                          placeholder="Enter Your Address"
                           value={value}
                           onChange={onChange}
                           style={{ marginTop: "10px" }}
                         />
                       )}
-                      rules={fieldRules.houseNumber}
+                      rules={fieldRules.address}
                     />
-                    {errors?.houseNumber ? (
+                    {errors?.address ? (
                       <div style={{ color: "red", fontWeight: "300" }}>
-                        {errors?.houseNumber?.message}
+                        {errors?.address?.message}
                       </div>
                     ) : null}
-                    <Controller
+                    {/* <Controller
                       control={control}
                       name="streetName"
                       render={({ field: { onChange, value } }) => (
@@ -438,10 +499,10 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                       <div style={{ color: "red", fontWeight: "300" }}>
                         {errors?.streetName?.message}
                       </div>
-                    ) : null}
+                    ) : null} */}
                   </div>
 
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label>
                       Town/City <span className="required">*</span>
                     </label>
@@ -465,7 +526,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                         {errors?.city?.message}
                       </div>
                     ) : null}
-                  </div>
+                  </div> */}
 
                   <div className="form-group">
                     <label>
@@ -509,7 +570,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                             width="24"
                             height="16"
                           />
-                          +971
+                          +968
                         </span>
                       </div>
                       <Controller
@@ -519,7 +580,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                           <input
                             type="tel"
                             className="form-control"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter Your Phone Number"
                             value={value}
                             onChange={onChange}
                           />
@@ -529,7 +590,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                     </div>
                     {errors?.mobile ? (
                       <div style={{ color: "red", fontWeight: "300" }}>
-                        {errors?.city?.mobile}
+                        {errors?.mobile?.message}
                       </div>
                     ) : null}
                   </div>
@@ -547,6 +608,7 @@ function Addresses({ isEdit, addressId, onClose, isShipping, setIsshipping }) {
                           type="text"
                           className="form-control"
                           value={value}
+                          placeholder="Enter Your Email"
                           onChange={onChange}
                           style={{ marginTop: "10px" }}
                         />

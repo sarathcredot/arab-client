@@ -7,6 +7,7 @@ import { AiFillYoutube } from "react-icons/ai";
 import withApollo from "../../server/apollo";
 import { gql, useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
+import Link from "next/link";
 
 const GET_ALL_CATEGORY = gql`
   query GetAllChildCategories($input: GetAllChildLevelCategoriesInput!) {
@@ -108,7 +109,7 @@ function Footer() {
                   <div className="widget-content">
                     <ul style={{listStyleType:"none",paddingLeft:"0px"}} >
                       <li>
-                        <ALink href="#">Privacy& Policy</ALink>
+                        <ALink href="/pages/privacy-policy">Privacy& Policy</ALink>
                       </li>
                       {/* <li>
                         <ALink href={token ? "/pages/orders" : "#"}>Orders</ALink>
@@ -206,7 +207,7 @@ function Footer() {
             <div className="footer-flexcolumns">
               <div className="footer-sub">
                 <h6 style={{ letterSpacing: "0.75px" }}>IMPORTANT LINKS</h6>
-                <span>Privacy & Policy</span>
+                <Link href="/pages/privacy-policy"><span>Privacy & Policy</span></Link>
                 <span>Become a Seller</span>
                 {/* <span>Orders</span> */}
                 {/* <span>Orders History</span>
@@ -287,7 +288,7 @@ function Footer() {
               <div className="col-md-12 col-lg-8 mb-3 mb-lg-0">
                 <ul style={{listStyleType:"none"}} className="footer-category-list mb-0">
                   <li>
-                    <h4 className="d-inline-block">Categories:</h4>{" "}
+                    <h4 className="d-inline-block" style={{ fontWeight: "500" }}>Categories:</h4>{" "}
                     {categories.map((value, index) => (
                       <React.Fragment key={index}>
                         <ALink
@@ -335,7 +336,7 @@ function Footer() {
                     </ALink>
                   </li>
                   <li>
-                    <h4 className="d-inline-block">Brands:</h4>{" "}
+                    <h4 className="d-inline-block" style={{ fontWeight: "500" }}>Brands:</h4>{" "}
                     {brands?.map((value, index) => (
                       <React.Fragment key={index}>
                         <ALink
@@ -612,7 +613,7 @@ function Footer() {
 
                 <img src="images/helpline.svg" style={{ width: "30px" }} />
                 <p className="dev-helpline-p"style={{ color: "rgba(27, 27, 27, 1)" }}>Helpline</p>
-                <h4 className="dev-helpline-h4">1800 456 84788</h4></div>
+                <h4 className="dev-helpline-h4" style={{fontWeight:"600"}}>1800 456 84788</h4></div>
               </div>
 
             </div>

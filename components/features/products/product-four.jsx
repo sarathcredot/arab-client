@@ -179,7 +179,7 @@ function ProductFour(props) {
       style={{ border: "1px solid rgba(185, 185, 185, 1)" }}
     >
       {/* <figure> */}
-      <ALink href={`product/default/${product?._id}`}>
+      <ALink href={`/product/default/${product?._id}`}>
         <span style={{ display: "flex", justifyContent: "center", maxHeight: "383px" }}>
           {/* <img src={"images/iphone.svg"} style={{ marginTop: "74px" }} /> */}
           <img className="home-one-pro-img" src={product?.images[0]?.fileURL} style={{ marginTop: "74px", objectFit: "contain" }} />

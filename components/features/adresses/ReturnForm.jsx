@@ -39,6 +39,7 @@ const GET_ORDER_DETAILS = gql`
             governorate
             village
             villageID
+            address
           }
         }
       }
@@ -46,7 +47,7 @@ const GET_ORDER_DETAILS = gql`
 
 
 
-function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
+function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
 
     const [addinput, setaddinput] = useState([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
 
@@ -84,20 +85,23 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
             email: { value: "", error: false },
             mobile: { value: "", error: false },
             country: { value: "", error: false },
-            houseNumber: {
-                value: "",
-                error: false,
-            },
-            streetName: { value: "", error: false },
-            apartment: { value: "", error: false },
-            suite: { value: "", error: false },
-            unit: { value: "", error: false },
-            city: { value: "", error: false },
+            // houseNumber: {
+            //     value: "",
+            //     error: false,
+            // },
+            // streetName: { value: "", error: false },
+            // apartment: { value: "", error: false },
+            // suite: { value: "", error: false },
+            // unit: { value: "", error: false },
+            // city: { value: "", error: false },
+
             postCode: { value: "", error: false },
             governorate: { value: "", error: false },
             village: { value: "", error: false },
             governorateID: { value: "", error: false },
             villageID: { value: "", error: false },
+            address: { value: "", error: false },
+
         },
         bankDetails: {
             accountHolderName: {
@@ -198,14 +202,19 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
         });
     };
     const handleChangeImage = (form) => (field) => (e) => {
-        const value = e.target.files;
-        dispatch({ type: "SET_FIELD", form, field, value, error: false });
+        const files = e.target.files;
+        const fileNames = files ? Array.from(files).map(file => file.name).join(', ') : '';
+        dispatch({ type: "SET_FIELD", form, field: "imageFileName", value: fileNames, error: false });
+
+        dispatch({ type: "SET_FIELD", form, field, files, error: false });
     };
 
     const fieldRefs = {
         data: {
             returnUserReason: useRef(null),
             image: useRef(null),
+            imageFileName: { value: "", error: false }, 
+
         },
         returnAddress: {
             firstname: useRef(null),
@@ -438,7 +447,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                         </div> */}
 
 
-                        <div style={{ display: 'flex', alignItems: 'center', marginTop: "20px",  }}>
+                        <div style={{ display: 'flex', alignItems: 'center', marginTop: "20px", position: "relative" }}>
                             {/* Hidden file input */}
                             <input
                                 className="file-input"
@@ -446,8 +455,10 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                                 id="image"
                                 accept="image/*"
                                 multiple
+                               
                                 onChange={handleChangeImage("data")("image")}
                                 ref={fieldRefs.data.image}
+                                // onClick={(e) => e.preventDefault()}
                             />
 
                             {/* Input box for displaying file name */}
@@ -461,25 +472,18 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                                 multiple
                                 onChange={handleChangeImage("data")("image")}
                                 ref={fieldRefs.data.image}
+                                value={formState?.data?.imageFileName?.value}
                                 style={{ marginBottom: "0px" }}
                             />
 
-                            {/* Upload button */}
-                            <button
-                                className="upload-btn"
-                                onClick={() => {
-                                    const fileInput = document.getElementById('file-upload');
-                                    if (fileInput.files.length > 0) {
-                                        console.log('Uploading:', fileInput.files[0]);
-                                        // Add your upload logic here
-                                        alert(`File "${fileInput.files[0].name}" uploaded successfully!`);
-                                    } else {
-                                        alert('No file selected!');
-                                    }
-                                }}
-                            >
-                                Upload
-                            </button>
+                            
+
+
+
+
+                            
+
+
                         </div>
                         {formState?.data?.image?.error && (
 
@@ -491,7 +495,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                     </form>
 
-                    <div style={{marginTop:'20px'}} >
+                    <div style={{ marginTop: '20px' }} >
 
                         <h2 className='re-sub-title' > Return Address  </h2>
 
@@ -505,12 +509,12 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                                 }}
 
                             />
-                            <label style={{ marginTop: "10px" }} className='re-input-label' htmlFor=""> Reason for returning the order *</label>
+                            <label style={{ marginTop: "10px" }} className='re-input-label' htmlFor="">  Use shipping address as return address *</label>
 
                         </div>
                     </div>
 
-                    <div   className='re-address-form-main' >
+                    <div className='re-address-form-main' >
 
 
 
@@ -578,26 +582,26 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                         <div>
 
-                            <label className='re-input-label' htmlFor=""> House number   <span style={{ color: "red" }} >*</span></label><br />
+                            <label className='re-input-label' htmlFor=""> Address   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
 
-                                id="houseNumber"
-                                value={formState?.returnAddress?.houseNumber?.value}
+                                id="address"
+                                value={formState?.returnAddress?.address?.value}
                                 onChange={handleChange("returnAddress")(
-                                    "houseNumber"
+                                    "address"
                                 )}
-                                ref={fieldRefs.returnAddress.houseNumber}
+                                ref={fieldRefs.returnAddress.address}
 
                             /><br />
-                            {formState?.returnAddress?.houseNumber?.error && (
+                            {formState?.returnAddress?.address?.error && (
 
-                                <span style={{ color: "red" }} >   house number is required! </span>
+                                <span style={{ color: "red" }} >   Address is required! </span>
                             )}
 
                         </div>
 
 
-                        <div>
+                        {/* <div>
 
                             <label className='re-input-label' htmlFor=""> Apartment   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
@@ -617,9 +621,9 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                             )}
 
                         </div>
+ */}
 
-
-                        <div>
+                        {/* <div>
 
                             <label className='re-input-label' htmlFor=""> Suite   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
@@ -635,10 +639,10 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                             )}
 
-                        </div>
+                        </div> */}
 
 
-                        <div>
+                        {/* <div>
 
                             <label className='re-input-label' htmlFor=""> Unit   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
@@ -655,10 +659,10 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                             )}
 
-                        </div>
+                        </div> */}
 
 
-                        <div>
+                        {/* <div>
 
                             <label className='re-input-label' htmlFor=""> Street   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
@@ -675,7 +679,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                             )}
 
-                        </div>
+                        </div> */}
 
 
                         <div>
@@ -740,7 +744,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                         </div>
 
 
-                        <div>
+                        {/* <div>
 
                             <label className='re-input-label' htmlFor=""> City   <span style={{ color: "red" }} >*</span></label><br />
                             <input className='re-address-input' type="text"
@@ -757,7 +761,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
 
                             )}
 
-                        </div>
+                        </div> */}
 
 
                         <div>
@@ -951,7 +955,7 @@ function ReturnForm({ orderId , setIsOpen,handleSubmit}) {
                         href="/pages/cart"
                         className="btn btn-block view-cart "
                         style={{ border: "1px solid #000", background: "white", width: "231px", height: "52px" }}
-                        onClick={()=>{setIsOpen(false)}}
+                        onClick={() => { setIsOpen(false) }}
 
                     >
                         Cancel

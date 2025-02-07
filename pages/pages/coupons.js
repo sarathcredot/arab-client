@@ -147,7 +147,9 @@ function Account() {
   }, [cartData]);
   console.log("CODE = ",cartData?.getCart?.appliedCoupon)
 
-  const codeCopy = (index) => {
+  const codeCopy = async(index,code) => {
+
+   await navigator.clipboard.writeText(code)
 
     setcopycode(index)
 
@@ -249,14 +251,14 @@ function Account() {
                 {
                   copycode === index ? <span style={{ cursor: "pointer", }} ><IoIosCheckmark style={{ fontSize: "15px" }} /> copied </span>
 
-                    : <span onClick={() => { codeCopy(index) }} style={{ cursor: "pointer", }} > code: {data?.code}<IoIosCopy style={{ fontSize: "15px" }} /></span>
+                    : <span onClick={() => { codeCopy(index,data?.code) }} style={{ cursor: "pointer", }} > code: {data?.code}<IoIosCopy style={{ fontSize: "15px" }} /></span>
 
                 }
               </div>
             <div style={{display:"flex",justifyContent:"space-between"}} >
               <p>{data?.description}  </p>
                   {cartData&&cartData?.getCart?.isCouponApplied &&cartData?.getCart?.appliedCoupon===data?._id?(
-                    <button onClick={()=>handleRemoveCoupon()}  className="coupon-btn-red"  > Remove </button>
+                    <button onClick={()=>handleRemoveCoupon()} style={{width: "70px",height: "30px", display:"flex",marginLeft:"5px", justifyContent:"center", alignItems:"center", background:"#E30613",color:"#fff"}}  className="coupon-btn-red btn btn-block hoverredbtn"  > Remove </button>
                   ):(
 
               // <p>{data.description}  </p>

@@ -129,9 +129,9 @@ function Orders(props) {
     switch (status) {
       case "PENDING":
         return "#FFA500";
-      case "IN_PROGRESS":
-        return "#FFA500";
-      case "COMPLETED":
+      case "PACKAGE_IN_PROGRESS":
+        return "#000000";
+      case "DELIVERED":
         return "#44961D";
       default:
         return "#000000";
@@ -413,7 +413,7 @@ function Orders(props) {
                       <tbody>
                         {orders.map((item, index) => (
                           <tr key={"wishlist-item" + index} className="product-row">
-                            <td className="media-with-lazy">
+                            <td className="media-with-lazy pl-0" >
                               <figure className="product-image-container">
                                 <ALink
                                   href={`/product/default/${item.productId}`}
@@ -438,7 +438,7 @@ function Orders(props) {
                         </h5> */}
                               <h5
                                 className="product-title"
-                                style={{ fontWeight: "700" }}
+                                style={{ fontWeight: "600" }}
                               >
                                 <ALink href={`/product/default/${item.productId}`}>
                                   {item.productName.split(" ").slice(0, 4).join(" ")}
@@ -453,7 +453,9 @@ function Orders(props) {
                             <td
                               style={{ color: item?.returnStatus !== "NA" ? getReturnStatusColor(item?.returnStatus) : getStatusColor(item?.shippingStatus) }}
                             >
-                              {item?.returnStatus !== "NA" ? `${item?.returnStatus}-(Return)` : item?.shippingStatus}
+                              {item?.returnStatus !== "NA"
+                              ? `${item?.returnStatus}-(Return)`
+                              : item?.shippingStatus.replace(/_/g, " ")}
                             </td>
                             <td style={{ color: "black" }}>
                               <div className="price-box">
@@ -632,7 +634,7 @@ function Orders(props) {
                                     setshowCancelPopup(false);
                                     setCancelId(null);
                                   }}
-                                  className="btn btn-outline-dark"
+                                  className="btn btn-outline-danger"
                                 >
                                   CANCEL
                                 </button>

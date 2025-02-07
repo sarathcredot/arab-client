@@ -25,9 +25,8 @@ import withApollo from "../../../../server/apollo.js";
 
 function ProductDetailOne(props) {
 
-  console.log("propdate",props)
+  console.log("propdata",props)
 
-  console.log("prodata",props?.product?.attributes[1].attributeValue)
 
   const router = useRouter();
   const {
@@ -162,7 +161,14 @@ function ProductDetailOne(props) {
   };
 
   useEffect(() => {
-    setColor(props?.product?.attributes[1].attributeValue)
+    const filteredColor = props?.product?.attributes.filter(
+      (variant) => variant.attributeDescription === "Color"
+    );
+
+    // console.log("filteredColor",filteredColor? filteredColor[0].attributeValue : "null");
+    // console.log("filteredColor",filteredColor[0].attributeValue);
+
+    setColor(filteredColor? filteredColor[0]?.attributeValue : "null")
     if (variantError) {
       console.error("Error fetching variant data:", variantError);
     } else {
@@ -515,11 +521,12 @@ function ProductDetailOne(props) {
 
     setSelectedAttributes({});
     router.push({
-      pathname: "/product/default/[...slug]",
+      pathname:router.pathname,
       query: { slug: [selected ? selected : item.productId] },
-    });
-
-
+      },
+      undefined,
+      { shallow: true }
+    );
   }
 
 
@@ -531,9 +538,13 @@ function ProductDetailOne(props) {
     setSelectedAttributes({});
     const productId = attributeType; // Replace with your dynamic value
     router.push({
-      pathname: "/product/default/[...slug]",
+      pathname:router.pathname,
       query: { slug: [productId] },
-    });
+      },
+      undefined,
+      { shallow: true }
+  );
+    
   }
 
   // ...
@@ -875,7 +886,7 @@ function ProductDetailOne(props) {
                       </label>
                     </>
                   ) : null}
-                  <div className=" d-flex " style={{ gap: "4px", marginBottom: "1rem" }}>
+                  <div className=" d-flex " style={{ gap: "4px", marginBottom: "2rem" }}>
                     {variantData
                       ?.filter(
                         (value) =>
@@ -971,7 +982,7 @@ function ProductDetailOne(props) {
                         .map((item) => item.attributeName.toLowerCase())
                     )
                   ).map((uniqueAttributeName, index) => (
-                    <div key={`attribute-group-${index}`} style={{ marginBottom: "1rem" }}>
+                    <div key={`attribute-group-${index}`} style={{ marginBottom: "2rem" }}>
                       <label
                         style={{
                           color: "#000",

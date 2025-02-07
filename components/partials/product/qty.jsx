@@ -48,7 +48,7 @@ function Qty({ max = Infinity, onChangeQty, value = 1, disabled = false }) {
                 <span className="input-group-btn input-group-prepend">
                     <button className="btn btn-outline btn-down-icon bootstrap-touchspin-down" onClick={decrease} type="button" disabled={count === 1}></button>
                 </span>
-                <input className="horizontal-quantity form-control" type="number" min="1" max={max} value={count} style={{ fontFamily: "Jakarta sans-serif;", fontWeight: "normal" }} />
+                <input className="horizontal-quantity form-control" readOnly  type="number" min="1" max={max} value={count} style={{ fontFamily: "Jakarta sans-serif;", fontWeight: "normal",backgroundColor:"white" }} />
                 <span className="input-group-btn input-group-append">
                     <button className="btn btn-outline btn-up-icon bootstrap-touchspin-up" onClick={increase} type="button" disabled={count === max}></button>
                 </span>

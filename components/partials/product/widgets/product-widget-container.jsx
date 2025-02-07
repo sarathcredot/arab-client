@@ -40,7 +40,7 @@ function ProductWidgetContainer ( props ) {
                                     <h4 className="section-sub-title ls-n-25 pb-2 mb-1">Featured Products</h4>
                                     {
                                         featured.slice( 0, 3 ).map( ( product, index ) => (
-                                            <ProductThree product={ product } key={ `ProductThree`, index } />
+                                            <ProductThree product={ product } key={ `ProductThree${index}` } />
                                         ) )
                                     }
                                 </>
@@ -60,7 +60,7 @@ function ProductWidgetContainer ( props ) {
                                     <h4 className="section-sub-title ls-n-25 pb-2 mb-1">Best Selling Products</h4>
                                     {
                                         bestSelling.slice( 0, 3 ).map( ( product, index ) => (
-                                            <ProductThree product={ product } key={ `ProductThree`, index } />
+                                            <ProductThree product={ product } key={ `ProductThree${index}` } />
                                         ) )
                                     }
                                 </>
@@ -80,7 +80,7 @@ function ProductWidgetContainer ( props ) {
                                     <h4 className="section-sub-title ls-n-25 pb-2 mb-1">Latest Products</h4>
                                     {
                                         latest.slice( 0, 3 ).map( ( product, index ) => (
-                                            <ProductThree product={ product } key={ `ProductThree`, index } />
+                                            <ProductThree product={ product } key={ `ProductThree${index}` } />
                                         ) )
                                     }
                                 </>
@@ -100,7 +100,7 @@ function ProductWidgetContainer ( props ) {
 
                                     {
                                         topRated.slice( 0, 3 ).map( ( product, index ) => (
-                                            <ProductThree product={ product } key={ `ProductThree`, index } />
+                                            <ProductThree product={ product } key={ `ProductThree${index}` } />
                                         ) )
                                     }
                                 </>

@@ -96,12 +96,35 @@
 	}
 }
 .shipingBox{
-	border:1px solid #dfdfdf;
-	border-radius:4px;
-	padding:20px 10px 
+	// border:1px solid #dfdfdf;
+	// border-radius:4px;
+	// padding:10px ;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 .addaddressbtn{
-	font-size: 17px
+	font-size: 14px;
+}
+.add_address_btn{
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+	transition: .1s ease-in-out;
+	margin-right: auto;
+	
+	.add_address_icon{
+		transition: .1s ease-in-out;
+		color: #000;
+	}
+
+}
+.add_address_btn:hover{
+	color:red;
+	.add_address_icon{
+		color:red;
+	}
 }
 
 .step-title {
@@ -219,7 +242,7 @@
 		text-align: right;
 	}
 
-	thead, tfoot tr {
+	.border_bottom {
 		border-bottom: 1px solid #e7e7e7;
 	}
 
@@ -345,7 +368,24 @@
 	padding-top: 3px;
 	padding-bottom: 4px;
 }
-
+.payment_methods{
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	.payment_method{
+		margin: 0 !important;
+		width: 100%;
+		padding: 20px;
+		background: #F7F9FC;
+		label{
+			margin: 0 !important;
+		}
+		div{
+			margin: 0 !important;
+			
+		}
+	}
+}
 .login-form-container, 
 .checkout-discount {
 	.feature-box {
@@ -376,7 +416,7 @@
 		.btn {
 			margin-top: 1.8rem;
 			letter-spacing: -.01em;
-			background-color: #f4f4f4;
+			background-color: #000;
 			font-size: 1.3rem;
 			font-family: $font-family;
 
@@ -465,8 +505,9 @@
 		}
 
 		.btn {
-			padding: 0 1rem 0 1.1rem;			
+			padding:1rem ;			
 			letter-spacing: -.015em;
+			height: 100%;
 		}
 	}
 }
@@ -481,6 +522,16 @@
 		max-width: 668px;
 		padding: 10px;
 		outline: none;
+	}
+	.apply_coupon_btn_div{
+		background: #0000001d;
+		button{
+			min-width:100% !important;
+			
+		}
+		.apply_coupon_btn{
+			width: 200px;
+		}
 	}
 }
 
@@ -805,13 +856,19 @@ input[type="radio"]{
 // 	padding-right: 10px;
 // }
 .apply_coupon_div{
-
+	grid-gap: 0;
+	gap: 0;
+	
+	input{
+		min-width: 100% !important;
+	}
 	.apply_coupon_btn_div{
 
 		min-width:100% !important;
+		min-height: 60px !important;
+
 		button{
 			min-width:100% !important;
-			background: yellow;
 			
 		}
 	}

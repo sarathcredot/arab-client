@@ -183,6 +183,7 @@ function Header({ adClass = "", wishlist }) {
     <>
       <header
         className={`header ${adClass} sticky-header mobile-sticky desktop-sticky`}
+        style={{position:"relative",zIndex:1}}
       >
         <div className="header-middle" style={{ paddingTop: "2rem", paddingBottom: "1rem" }}>
           <div className="container innercontainer">

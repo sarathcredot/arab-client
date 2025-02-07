@@ -5,6 +5,17 @@
       // background-color: red;
 }
 
+.re-form-main input{
+
+        padding-left: 20px;
+}
+
+.re-form-main input:focus{
+
+      outline: none;
+}
+
+
 .re-form-title {
 
       font-size: 26px;
@@ -62,14 +73,12 @@
 
 .re-inpt-ureson-file {
       height: 60px;
-      width: calc(100% - 120px);
-      /* Leave space for the button */
-      border: 1px solid #CDCDCD;
-      margin-bottom: 20px;
-      padding: 0 10px;
-      flex: 1;
-      cursor: pointer;
-      /* Indicate it's clickable */
+    width: calc(100% - 120px); /* Leave space for button */
+    border: 1px solid #CDCDCD;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    flex: 1;
+    cursor: pointer;
 }
 
 .upload-btn {
@@ -88,7 +97,15 @@
 }
 
 .file-input {
-      display: none;
+     
+      // display: none;
+     width: calc(100% - 120px);
+     height: 60px;
+     opacity: 0;    
+     position: absolute;
+//      background-color: antiquewhite;
+
+    
       /* Hide the actual file input field */
 }
 

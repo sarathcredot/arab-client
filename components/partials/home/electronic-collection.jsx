@@ -9,7 +9,8 @@ import { IoIosArrowForward  } from "react-icons/io";
 
 
 // Import Settigns
-import { fadeIn } from "../../../utils/data/keyframes";
+// import { fadeIn } from "../../../utils/data/keyframes";
+import { fadeInUpShorter } from "../../../utils/data/keyframes";
 import { productSlider } from "../../../utils/data/slider";
 import GardenCollection from "./garden-collection";
 import BestSelling from "./recent-collection";
@@ -83,10 +84,10 @@ function ElectronicCollection() {
     <div className="container container-elctro" >
       <section className="recent-products-section" >
         <Reveal
-          keyframes={fadeIn}
-          delay={100}
-          duration={1000}
-          triggerOnce
+          keyframes={fadeInUpShorter}
+          delay={50}
+          duration={800}
+          // triggerOnce
         >
           <div
             className="heading shop-list   mb-0 pl-0 pr-0 "
