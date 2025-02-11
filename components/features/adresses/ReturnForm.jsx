@@ -3,6 +3,7 @@
 import React from 'react'
 import { useState, useEffect, useReducer, useRef } from 'react'
 import { gql, useQuery } from "@apollo/client";
+import { toast } from "react-toastify";
 
 
 
@@ -155,6 +156,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
     };
     const handleGovernorateChange = (form) => (field) => (e) => {
         let governorateId = e.target.value;
+        console.log("govt",governorateId)
         const selectedGovernorate = getLocation?.getLocationsData?.find(
             (g) => g._id === governorateId
         );
@@ -189,7 +191,8 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
         });
     };
     const handleChangeVillage = (form) => (field) => (e) => {
-        const value = e.target.files;
+        const value = e.target.value;
+        console.log("")
         dispatch({ type: "SET_FIELD", form, field, value, error: false });
 
         const selectedVillage = villages?.find((v) => v._id === value);
@@ -202,11 +205,15 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
         });
     };
     const handleChangeImage = (form) => (field) => (e) => {
+       
         const files = e.target.files;
+        console.log("file filed",files)
         const fileNames = files ? Array.from(files).map(file => file.name).join(', ') : '';
         dispatch({ type: "SET_FIELD", form, field: "imageFileName", value: fileNames, error: false });
 
-        dispatch({ type: "SET_FIELD", form, field, files, error: false });
+        // dispatch({ type: "SET_FIELD", form, field, files, error: false });
+
+        dispatch({ type: "SET_FIELD", form, field,value:files, error: false });
     };
 
     const fieldRefs = {
@@ -297,6 +304,8 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
     // }
 
     const handleOnSubmit = (e) => {
+
+        console.log("form data",formState)
         try {
             e.preventDefault();
 
@@ -335,7 +344,12 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
             };
 
             handleSubmit(data);
+
+            console.log("return form data",data)
+
+
         } catch (error) {
+
             toast.error(error.message);
         }
     };
