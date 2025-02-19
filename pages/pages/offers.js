@@ -152,7 +152,7 @@ function offers() {
       <Helmet>
         <title>Offers | Arab Deals</title>
       </Helmet>
-      <main className="home" style={{ marginTop: "-20" }}>
+      <main className="home" style={{ marginTop: "-20", position:"relative",zIndex:0 }}>
         <div className="header-bottom d-flex">
           <div className="container">
             <MainMenu />
