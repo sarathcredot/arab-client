@@ -171,6 +171,7 @@ function Orders(props) {
       console.error("Error fetching orders:", error);
     } else if (data) {
       setOrders(data.getUserOrderProducts.records || []);
+      console.log("all orders",data)
     }
   }, [data, error]);
 
@@ -239,6 +240,7 @@ function Orders(props) {
   const [showReturnFormModal, setShowReturnFormModal] = useState(false);
   const [orderProductIdForReturn, setOrderProductIdForReturn] = useState("");
   const [orderIdForReturn, setOrderIdForReturn] = useState("");
+  
 
   //return policy
   const [isAcceptPolicy, setIsAcceptPolicy] = useState(false);
@@ -531,6 +533,7 @@ function Orders(props) {
                                             e.preventDefault();
                                             setShowPolicyModal(true);
                                             setOrderProductIdForReturn(item?._id);
+
                                             setOrderIdForReturn(item?.orderId);
                                             setIsOpen(false);
                                           }}
@@ -689,6 +692,7 @@ function Orders(props) {
           isOpen={showPolicyModal}
           setIsOpen={setShowPolicyModal}
           orderId={orderIdForReturn}
+          orderObjId={orderProductIdForReturn}
           handleSubmit={() => {
             setIsAcceptPolicy(true);
             setShowReturnFormModal(true);
