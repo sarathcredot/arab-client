@@ -274,7 +274,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                         error: true,
                     });
                 }
-            } else if (!value.value.trim()) {
+            } else if (!value.value?.trim()) {
                 if (!hasError) {
                     focusField(formName, key);
                 }
