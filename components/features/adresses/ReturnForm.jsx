@@ -3,6 +3,7 @@
 import React from 'react'
 import { useState, useEffect, useReducer, useRef } from 'react'
 import { gql, useQuery } from "@apollo/client";
+import { toast } from 'react-toastify';
 
 
 
@@ -267,7 +268,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                         error: true,
                     });
                 }
-            } else if (!value.value.trim()) {
+            } else if (!value.value?.trim()) {
                 if (!hasError) {
                     focusField(formName, key);
                 }
