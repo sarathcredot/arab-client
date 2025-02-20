@@ -299,6 +299,7 @@ function Account() {
                   <li
                     key={index}
                     className={`page-item ${currentPage === index ? "active" : ""}`}
+                    style={{zIndex: 0}}
                   >
                     <button
                       className="page-link"
@@ -309,7 +310,8 @@ function Account() {
                   </li>
                 ))}
                 {currentPage < totalPages - 1 && (
-                  <li className={`page-item ${currentPage === totalPages - 1 ? "disabled" : ""}`}>
+                  <li className={`page-item ${currentPage === totalPages - 1 ? "disabled" : ""}`}
+                  style={{zIndex: 0}}>
                     <button
                       className="page-link"
                       onClick={() => setCurrentPage(currentPage + 1)}

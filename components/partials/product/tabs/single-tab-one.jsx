@@ -33,6 +33,9 @@ export default function SingleTabOne(props) {
                             <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>Specifications</ALink>
                         </Tab>
 
+                        <Tab className="nav-item">
+                            <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>Return Policy</ALink>
+                        </Tab>
 
                         {/* <Tab className="nav-item">
                             <ALink href="#" className="nav-link">Additional Information</ALink>
@@ -108,6 +111,37 @@ export default function SingleTabOne(props) {
                             </div>
 
                         </div> */}
+                    </TabPanel>
+
+                    <TabPanel className="tab-pane fade">
+                        <h1
+                        style={{
+                            letterSpacing: 0,
+                            color: "#000",
+                            fontFamily: "Poppins",
+                            fontSize: "1.8rem",
+                            fontStyle: "normal",
+                            fontWeight: "500",
+                            
+                        }}
+                        >{product?.returnPolicyData.name}</h1>
+
+                    <p style={{
+                            marginBottom: "9px",
+                            marginTop:"20px",
+                            letterSpacing: 0,
+                            listStyleType: "disc",
+                            color: "#000",
+                            fontFamily: "Poppins",
+                            fontSize: "1.4rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "2.375rem",
+                        }}>
+                            {product?.returnPolicyData.description}
+                        </p>
+
+                    
                     </TabPanel>
 
 
