@@ -119,8 +119,9 @@ export default function SingleTabOne(props) {
                             letterSpacing: 0,
                             color: "#000",
                             fontFamily: "Poppins",
-                            fontSize: "2.4rem",
+                            fontSize: "1.8rem",
                             fontStyle: "normal",
+                            fontWeight: "500",
                             
                         }}
                         >{product?.returnPolicyData.name}</h1>
