@@ -57,6 +57,15 @@ const GET_PRODUCT = gql`
         stock
         status
         offerPrice
+        returnPolicyData {
+        _id
+        name
+        description
+        duration
+        isEnable
+        returnCharge
+        isDeleted
+      }
         attributes {
           attributeId
           attributeName
@@ -106,7 +115,9 @@ function ProductDefault() {
   useEffect(() => {
     if (productData && productData.getProduct) {
       setProduct(productData.getProduct.product);
+      console.log("prod",productData.getProduct.product)
     } else if (productError) {
+      console.log("productError", productError);
       router.push("/pages/404");
     }
   }, [productData, productError]);
