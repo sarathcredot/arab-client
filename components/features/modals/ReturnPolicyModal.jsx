@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import styles from "./ReturnModal.module.scss";
 import { useRouter } from "next/router";
+import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
+
 
 
 
@@ -46,18 +48,54 @@ const customStyles = {
   },
 };
 
-export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit ,orderId}) {
+
+
+
+
+
+
+export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit ,orderId,orderObjId}) {
   function closeModal() {
     setIsOpen(false);
     setIsExpanded(false);
   }
 
   const [isExpanded, setIsExpanded] = useState(false);
-  console.log("modal page order is ",orderId)
+  const [returnPolicy,setreturnPolicy]=useState()
+  console.log("modal page order is ",orderObjId)
 
   const toggleViewMore = () => {
     setIsExpanded(!isExpanded);
   };
+
+
+  const GET_RETURNPOLICY=gql`
+
+
+query GetReturnPolicyOfOrderProduct($input: getReturnPolicyOfOrderProductInput!) {
+  getReturnPolicyOfOrderProduct(input: $input) {
+    returnPolicyName
+    returnCharge
+    returnPolicyDescription
+    returnPeriod
+  }
+}
+
+`
+
+const {data,error,refetch}=useQuery(GET_RETURNPOLICY,{
+
+    variables:{input:{orderProductId:orderObjId}}
+})
+
+
+
+   
+
+
+
+
+
 
   useEffect(() => {
     if (isOpen) {
@@ -66,13 +104,34 @@ export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit ,ord
       document.body.classList.remove("no-scroll");
     }
 
+    if(error){
+      console.error("Error fetching orders:", error);
+     }
+
+     if(data){
+
+        console.log("return policy data",data?.getReturnPolicyOfOrderProduct)
+        setreturnPolicy(data?.getReturnPolicyOfOrderProduct)
+     }
+
+
+
     return () => {
       document.body.classList.remove("no-scroll");
     };
-  }, [isOpen]);
+  }, [isOpen ,data,error,refetch  ]);
 
   if (!isOpen) return null;
   const router=useRouter()
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -93,14 +152,10 @@ export default function ReturnPolicyModal({ isOpen, setIsOpen, handleSubmit ,ord
                   <h1 className={styles.retuenTitle} > Return Policy  </h1>
                   <div style={{ borderTop: '1px solid #E2E2E2', marginTop: '10px' }} > </div>
 
+                  <p className={styles.policyName} > {returnPolicy?.returnPolicyName } </p>
 
-                  <p className={styles.policyContent} > Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace.
-                    Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor
-                    sit amet consectetur. Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor sit amet consectetur.
-                    Sapien ut libero sed lacinia egestas pace.  Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed
-                    lacinia egestas pace. Lorem ipsum dolor sit amet consectetur. Sapien ut libero sed lacinia egestas pace.
-                    Lorem ipsum dolor sit amet consectetur.
-                    Sapien ut libero sed lacinia egestas pace. Lorem ipsum dolor sit amet consectetur. </p>
+
+                  <p className={styles.policyContent} > {returnPolicy?.returnPolicyDescription} </p>
 
                   <p className={styles.bottomContent} > Know more about <span className={styles.bottomContentSpan} > Privacy & Policy  </span> </p>
 
