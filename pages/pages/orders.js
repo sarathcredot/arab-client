@@ -19,6 +19,7 @@ import ReturnRequestFormModal from "../../components/features/modals/ReturnReque
 import CustomModal from "../../components/features/modals/CustomModal";
 import ReturnPolicyModal from "../../components/features/modals/ReturnPolicyModal";
 import ReturnForm from "../../components/features/adresses/ReturnForm";
+import WarrantyForm from "../../components/features/adresses/WarrantyReqForm"
 
 const GET_ORDERS = gql`
   query GetUserOrderProducts($input: GetUserOrderProductsInput!) {
@@ -91,6 +92,22 @@ const RETURN_ORDER = gql`
   }
 `;
 
+const WARRANTY_REQ = gql`
+
+mutation CreateWarrantyClaimRequestByUSer($input: createWarrantyClaimRequestByUSerInput!, $image: [Upload]) {
+  createWarrantyClaimRequestByUSer(input: $input, image: $image) {
+    success
+    message
+  }
+}
+
+
+
+`
+
+
+
+
 const DOWNLOAD_INVOICE = gql`
   mutation GetUserIvoiceSignedUrl($input: GetUserIvoiceUrlInput!) {
     getUserIvoiceSignedUrl(input: $input) {
@@ -103,6 +120,7 @@ function Orders(props) {
   const { wishlist, addToCart, removeFromWishlist, showQuickView } = props;
   const [flag, setFlag] = useState(0);
   const [orders, setOrders] = useState([]);
+  const [warrantyClaimType, setwarrantyClaimType] = useState([])
   const router = useRouter();
   const page = router.query.page ? parseInt(router.query.page) : 0;
   const [perPage, setPerPage] = useState(5);
@@ -156,6 +174,7 @@ function Orders(props) {
   const [cancelUserOrderProduct] = useMutation(CANCEL_ORDER);
   const [downloadInvoice] = useMutation(DOWNLOAD_INVOICE);
   const [returnOrder] = useMutation(RETURN_ORDER);
+  const [warrantyReq] = useMutation(WARRANTY_REQ)
 
   const { data, loading, error, refetch } = useQuery(GET_ORDERS, {
     variables: { input: { page: page || 0, size: perPage } },
@@ -171,7 +190,7 @@ function Orders(props) {
       console.error("Error fetching orders:", error);
     } else if (data) {
       setOrders(data.getUserOrderProducts.records || []);
-      console.log("all orders",data)
+      console.log("all orders", data)
     }
   }, [data, error]);
 
@@ -240,11 +259,13 @@ function Orders(props) {
   const [showReturnFormModal, setShowReturnFormModal] = useState(false);
   const [orderProductIdForReturn, setOrderProductIdForReturn] = useState("");
   const [orderIdForReturn, setOrderIdForReturn] = useState("");
-  
+  const [deliveryDate, setdeliveryDate] = useState()
+
 
   //return policy
   const [isAcceptPolicy, setIsAcceptPolicy] = useState(false);
   const [showPolicyModal, setShowPolicyModal] = useState(false);
+  const [modalType, setmodalType] = useState("")
 
   function closeModal() {
     setShowReturnFormModal(false);
@@ -285,9 +306,19 @@ function Orders(props) {
         variables,
       });
 
-      if (errors) console.log(errors, "ERRORS");
+
+
+      if (errors) {
+
+        toast.success(
+          "error"
+        );
+
+        console.log(errors, "ERRORS");
+      }
 
       console.log(data, 'RESPONSE RETURN SUBMIT')
+
 
       if (data?.returnUserOrderProduct?._id) {
         setShowReturnFormModal(false);
@@ -301,6 +332,54 @@ function Orders(props) {
       toast.error(error.message);
     }
   };
+
+  const handleWarrantyReq = async (formData) => {
+
+    try {
+
+      console.log("warranty req", formData)
+      const { image, orderProductId, returnAddress, returnUserReason, claimType } = formData
+
+      const variables = {
+        input: {
+          claimType: claimType.value,
+          issueDescription: returnUserReason,
+          productId: orderProductId,
+          warrantyAddress: returnAddress
+
+
+        },
+        image,
+      };
+
+      const { errors, data } = await warrantyReq({
+
+        variables
+      })
+
+      if (errors) {
+
+        toast.error("error", error)
+      }
+
+
+      if (data) {
+
+        setShowReturnFormModal(false);
+        refetch();
+        toast.success(
+          "Your warranty request has been submitted successfully."
+        );
+      }
+
+
+
+    } catch (error) {
+
+    }
+
+
+  }
 
   return (
     <>
@@ -349,12 +428,27 @@ function Orders(props) {
         {
           showReturnFormModal ?
 
-            <ReturnForm
-              orderId={orderIdForReturn}
-              setIsOpen={setShowReturnFormModal}
-              handleSubmit={handleOrderReturn}
+            modalType === "return" ?
 
-            />
+              <ReturnForm
+                orderId={orderIdForReturn}
+                setIsOpen={setShowReturnFormModal}
+                handleSubmit={handleOrderReturn}
+
+              />
+              :
+              <WarrantyForm
+                orderId={orderIdForReturn}
+                setIsOpen={setShowReturnFormModal}
+                handleSubmit={handleWarrantyReq}
+                claimType={warrantyClaimType}
+                orderObjId={orderProductIdForReturn}
+
+
+
+
+
+              />
             :
 
             <>
@@ -456,8 +550,8 @@ function Orders(props) {
                               style={{ color: item?.returnStatus !== "NA" ? getReturnStatusColor(item?.returnStatus) : getStatusColor(item?.shippingStatus) }}
                             >
                               {item?.returnStatus !== "NA"
-                              ? `${item?.returnStatus}-(Return)`
-                              : item?.shippingStatus.replace(/_/g, " ")}
+                                ? `${item?.returnStatus}-(Return)`
+                                : item?.shippingStatus.replace(/_/g, " ")}
                             </td>
                             <td style={{ color: "black" }}>
                               <div className="price-box">
@@ -536,11 +630,33 @@ function Orders(props) {
 
                                             setOrderIdForReturn(item?.orderId);
                                             setIsOpen(false);
+                                            setmodalType("return")
+                                            setdeliveryDate(item?.deliveryDate)
                                           }}
                                         >
                                           Return
                                         </div>
                                       )}
+
+                                      {item?.shippingStatus === "DELIVERED" && (
+                                        <div
+                                          className="order_update_menu_item"
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            setShowPolicyModal(true);
+                                            setOrderProductIdForReturn(item?._id);
+
+                                            setOrderIdForReturn(item?.orderId);
+                                            setIsOpen(false);
+                                            setmodalType("complaint")
+                                            setdeliveryDate(item?.deliveryDate)
+                                          }}
+                                        >
+                                          Complaint
+                                        </div>
+                                      )}
+
+
                                       {/* {!item?.invoice ? (
                                   <div
                                     className="order_update_menu_item"
@@ -693,6 +809,9 @@ function Orders(props) {
           setIsOpen={setShowPolicyModal}
           orderId={orderIdForReturn}
           orderObjId={orderProductIdForReturn}
+          modalType={modalType}
+          deliveryDate={deliveryDate}
+          cliamType={setwarrantyClaimType}
           handleSubmit={() => {
             setIsAcceptPolicy(true);
             setShowReturnFormModal(true);

@@ -79,7 +79,8 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
     const initialState = {
         data: {
             returnUserReason: { value: "", error: false },
-            image: { value: "", error: false },
+            image: { value: [], error: false },
+            imageFileName: { value: "", error: false },
         },
         returnAddress: {
             firstname: { value: "", error: false },
@@ -156,7 +157,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
     };
     const handleGovernorateChange = (form) => (field) => (e) => {
         let governorateId = e.target.value;
-        console.log("govt",governorateId)
+        console.log("govt", governorateId)
         const selectedGovernorate = getLocation?.getLocationsData?.find(
             (g) => g._id === governorateId
         );
@@ -205,22 +206,32 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
         });
     };
     const handleChangeImage = (form) => (field) => (e) => {
-       
+
         const files = e.target.files;
-        console.log("file filed",files)
-        const fileNames = files ? Array.from(files).map(file => file.name).join(', ') : '';
-        dispatch({ type: "SET_FIELD", form, field: "imageFileName", value: fileNames, error: false });
+        console.log("file filed", files)
+        const fileArray = Array.from(files);
+
+        const existingImages = formState[form][field].value || [];
+
+        const updatedImages = [...existingImages, ...fileArray];
+
+        const fileNamesCombined = updatedImages
+            .map((file) => file.name)
+            .join(", ");
+
+
+        dispatch({ type: "SET_FIELD", form, field: "imageFileName", value: fileNamesCombined, error: false });
 
         // dispatch({ type: "SET_FIELD", form, field, files, error: false });
 
-        dispatch({ type: "SET_FIELD", form, field,value:files, error: false });
+        dispatch({ type: "SET_FIELD", form, field, value: [...existingImages, ...fileArray], error: false });
     };
 
     const fieldRefs = {
         data: {
             returnUserReason: useRef(null),
             image: useRef(null),
-            imageFileName: { value: "", error: false }, 
+            imageFileName: { value: "", error: false },
 
         },
         returnAddress: {
@@ -305,7 +316,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
 
     const handleOnSubmit = (e) => {
 
-        console.log("form data",formState)
+        console.log("form data", formState)
         try {
             e.preventDefault();
 
@@ -345,7 +356,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
 
             handleSubmit(data);
 
-            console.log("return form data",data)
+            console.log("return form data", data)
 
 
         } catch (error) {
@@ -469,10 +480,10 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                                 id="image"
                                 accept="image/*"
                                 multiple
-                               
+
                                 onChange={handleChangeImage("data")("image")}
                                 ref={fieldRefs.data.image}
-                                // onClick={(e) => e.preventDefault()}
+                            // onClick={(e) => e.preventDefault()}
                             />
 
                             {/* Input box for displaying file name */}
@@ -490,12 +501,12 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                                 style={{ marginBottom: "0px" }}
                             />
 
-                            
 
 
 
 
-                            
+
+
 
 
                         </div>
@@ -794,6 +805,26 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                             )}
 
                         </div>
+
+                        <div>
+
+                            <label className='re-input-label' htmlFor=""> Country   <span style={{ color: "red" }} >*</span></label><br />
+                            <input className='re-address-input' type="text"
+
+                                id="country"
+                                value={formState?.returnAddress?.country?.value}
+                                onChange={handleChange("returnAddress")("postCode")}
+                                ref={fieldRefs.returnAddress.country}
+                            /><br />
+                            {formState?.returnAddress?.country?.error && (
+                                <span style={{ color: "red" }} >  country is required! </span>
+
+                            )}
+
+                        </div>
+
+
+
 
 
 
