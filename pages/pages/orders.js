@@ -638,7 +638,7 @@ function Orders(props) {
                                         </div>
                                       )}
 
-                                      {item?.shippingStatus === "DELIVERED" && (
+                                      {item?.shippingStatus === "DELIVERED" && item?.warranty?.warrantyRegister === true &&  (
                                         <div
                                           className="order_update_menu_item"
                                           onClick={(e) => {
