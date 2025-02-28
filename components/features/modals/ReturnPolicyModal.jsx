@@ -482,11 +482,11 @@ query GetWarrantyPolicyOfOrderProduct($input: getWarrantyPolicyOfOrderProductInp
                             <div
                               href="/pages/cart"
                               className="btn btn-block view-cart "
-                              style={{ border: "1px solid #000", background: "white", width: "231px", height: "52px" }}
+                              style={{ border: "1px solid #000",display:"flex" , justifyContent:"end", background: "white", width: "300px", height: "52px" }}
                               onClick={closeModal}
                             >
 
-                              This product is underwarranty
+                           This product is out of warranty
 
                             </div>
 
