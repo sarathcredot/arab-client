@@ -66,6 +66,15 @@ const GET_PRODUCT = gql`
         returnCharge
         isDeleted
       }
+      warrantyPolicyData {
+        _id
+        name
+        description
+        duration
+        isEnable
+        isDeleted
+        warrantyType
+      }
         attributes {
           attributeId
           attributeName

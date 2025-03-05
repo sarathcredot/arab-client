@@ -36,6 +36,12 @@ export default function SingleTabOne(props) {
                         <Tab className="nav-item">
                             <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>Return Policy</ALink>
                         </Tab>
+                        {product?.warrantyPolicyData && 
+                            <Tab className="nav-item">
+                            <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>Warranty Policy</ALink>
+                           </Tab>
+                        }
+                        
 
                         {/* <Tab className="nav-item">
                             <ALink href="#" className="nav-link">Additional Information</ALink>
@@ -143,6 +149,38 @@ export default function SingleTabOne(props) {
 
                     
                     </TabPanel>
+
+                    <TabPanel className="tab-pane fade">
+                        <h1
+                        style={{
+                            letterSpacing: 0,
+                            color: "#000",
+                            fontFamily: "Poppins",
+                            fontSize: "1.8rem",
+                            fontStyle: "normal",
+                            fontWeight: "500",
+                            
+                        }}
+                        >{product?.warrantyPolicyData?.name}</h1>
+
+                    <p style={{
+                            marginBottom: "9px",
+                            marginTop:"20px",
+                            letterSpacing: 0,
+                            listStyleType: "disc",
+                            color: "#000",
+                            fontFamily: "Poppins",
+                            fontSize: "1.4rem",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "2.375rem",
+                        }}>
+                            {product?.warrantyPolicyData?.description}
+                        </p>
+
+                    
+                    </TabPanel>
+
 
 
                     {/* <TabPanel className="tab-pane fade">
