@@ -429,6 +429,8 @@ function Orders(props) {
 
       if (errors) {
 
+        console.log("error1",error)
+
         toast.error("error", error)
       }
 
@@ -446,6 +448,8 @@ function Orders(props) {
 
     } catch (error) {
 
+      console.log("error2",error)
+      toast.error("error", error)
     }
 
 
