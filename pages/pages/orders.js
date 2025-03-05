@@ -431,7 +431,7 @@ function Orders(props) {
 
         console.log("error1",error)
 
-        toast.error("error", error)
+        toast.error("error", error.message)
       }
 
 
@@ -449,11 +449,14 @@ function Orders(props) {
     } catch (error) {
 
       console.log("error2",error)
-      toast.error("error", error)
+      toast.error("error", error?.message)
     }
 
 
   }
+
+
+
 
   return (
     <>
@@ -712,7 +715,12 @@ function Orders(props) {
                                         </div>
                                       )}
 
-                                      {item?.shippingStatus === "DELIVERED" && item?.warranty?.warrantyRegister === true && (
+                                      {
+
+                                      
+                                      
+                                      item?.shippingStatus === "DELIVERED" && item?.warranty?.warrantyRegister === true && 
+                                     (
 
 
                                         <div
@@ -730,7 +738,9 @@ function Orders(props) {
                                         >
                                           Complaint
                                         </div>
-                                      )}
+                                      )
+                                      
+                                      }
 
 
                                       {/* {!item?.invoice ? (
