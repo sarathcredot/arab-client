@@ -22,56 +22,126 @@ import ReturnForm from "../../components/features/adresses/ReturnForm";
 import WarrantyForm from "../../components/features/adresses/WarrantyReqForm"
 
 const GET_ORDERS = gql`
-  query GetUserOrderProducts($input: GetUserOrderProductsInput!) {
-    getUserOrderProducts(input: $input) {
-      maxRecords
-      records {
-        _id
-        productId
-        vendorId
-        orderId
-        itemId
-        productName
-        shortDescription
-        skuId
-        image {
-          fileType
-          fileURL
-          mimeType
-          originalName
-        }
-        returnPeriod
-        mrp
-        sellingPrice
-        shippingCharge
-        paymentMode
-        paymentStatus
-        orderDate
-        shippingStatus
-        shippedDate
-        deliveryDate
-        returnStatus
-        returnDate
-        returnRequestDate
-        returnRejectedDate
-        returnUserReason
-        refundStatus
-        refundAmount
-        refundDate
-        cancelledDate
-        cancelUserReason
-        courierId
-        invoiceNumber
-        invoice {
-          fileType
-          fileURL
-          mimeType
-          originalName
-        }
+   query GetUserOrderProducts($input: GetUserOrderProductsInput!) {
+  getUserOrderProducts(input: $input) {
+    maxRecords
+    records {
+      _id
+      productId
+      orderId
+      vendorId
+      itemId
+      productName
+      shortDescription
+      skuId
+      image {
+        fileType
+        fileURL
+        mimeType
+        originalName
+      }
+      returnPeriod
+      mrp
+      sellingPrice
+      shippingCharge
+      paymentMode
+      paymentStatus
+      orderDate
+      shippingStatus
+      shippedDate
+      deliveryDate
+      returnStatus
+      returnDate
+      returnRequestDate
+      returnRejectedDate
+      returnUserReason
+      refundStatus
+      refundAmount
+      refundDate
+      cancelledDate
+      cancelUserReason
+      courierId
+      invoiceNumber
+      invoice {
+        fileType
+        fileURL
+        mimeType
+        originalName
+      }
+      warranty {
+       
+        name
+        description
+        duration
+        warrantyType
+        warrantyRegister
       }
     }
   }
+}
 `;
+
+// const GET_ORDERS = gql`
+//  query GetUserOrderProducts($input: GetUserOrderProductsInput!) {
+//   getUserOrderProducts(input: $input) {
+//     maxRecords
+//     records {
+//       _id
+//       productId
+//       orderId
+//       vendorId
+//       itemId
+//       productName
+//       shortDescription
+//       skuId
+//       image {
+//         fileType
+//         fileURL
+//         mimeType
+//         originalName
+//       }
+//       returnPeriod
+//       mrp
+//       sellingPrice
+//       shippingCharge
+//       paymentMode
+//       paymentStatus
+//       orderDate
+//       shippingStatus
+//       shippedDate
+//       deliveryDate
+//       returnStatus
+//       returnDate
+//       returnRequestDate
+//       returnRejectedDate
+//       returnUserReason
+//       refundStatus
+//       refundAmount
+//       refundDate
+//       cancelledDate
+//       cancelUserReason
+//       courierId
+//       invoiceNumber
+//       invoice {
+//         fileType
+//         fileURL
+//         mimeType
+//         originalName
+//       }
+//       warranty {
+//         _id
+//         name
+//         description
+//         duration
+//         isEnable
+//         isDeleted
+//         warrantyType
+//       }
+//     }
+//   }
+// }
+
+// `;
 
 const CANCEL_ORDER = gql`
   mutation CancelUserOrderProduct($input: CancelUserOrderProductInput!) {
@@ -359,6 +429,8 @@ function Orders(props) {
 
       if (errors) {
 
+        console.log("error1",error)
+
         toast.error("error", error)
       }
 
@@ -376,6 +448,8 @@ function Orders(props) {
 
     } catch (error) {
 
+      console.log("error2",error)
+      toast.error("error", error)
     }
 
 
@@ -638,7 +712,9 @@ function Orders(props) {
                                         </div>
                                       )}
 
-                                      {item?.shippingStatus === "DELIVERED" && item?.warranty?.warrantyRegister === true &&  (
+                                      {item?.shippingStatus === "DELIVERED" && item?.warranty?.warrantyRegister === true && (
+
+
                                         <div
                                           className="order_update_menu_item"
                                           onClick={(e) => {
