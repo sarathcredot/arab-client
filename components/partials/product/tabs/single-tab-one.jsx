@@ -36,7 +36,7 @@ export default function SingleTabOne(props) {
                         <Tab className="nav-item">
                             <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>Return Policy</ALink>
                         </Tab>
-                        {product?.warrantyPolicyData && 
+                        {product?.warrantyPolicyData.name !==null && 
                             <Tab className="nav-item">
                             <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>Warranty Policy</ALink>
                            </Tab>
