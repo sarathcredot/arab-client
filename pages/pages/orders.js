@@ -431,7 +431,7 @@ function Orders(props) {
 
         console.log("error1",error)
 
-        toast.error("error", error.message)
+        toast.error(errors.message)
       }
 
 
@@ -449,7 +449,7 @@ function Orders(props) {
     } catch (error) {
 
       console.log("error2",error)
-      toast.error("error", error?.message)
+      toast.error(error.message)
     }
 
 
