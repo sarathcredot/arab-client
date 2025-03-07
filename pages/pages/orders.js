@@ -20,6 +20,7 @@ import CustomModal from "../../components/features/modals/CustomModal";
 import ReturnPolicyModal from "../../components/features/modals/ReturnPolicyModal";
 import ReturnForm from "../../components/features/adresses/ReturnForm";
 import WarrantyForm from "../../components/features/adresses/WarrantyReqForm"
+import { Controller } from "react-hook-form";
 
 const GET_ORDERS = gql`
    query GetUserOrderProducts($input: GetUserOrderProductsInput!) {
@@ -191,6 +192,8 @@ function Orders(props) {
   const [flag, setFlag] = useState(0);
   const [orders, setOrders] = useState([]);
   const [warrantyClaimType, setwarrantyClaimType] = useState([])
+  const [cancelUserReason,setCancelUserReason] = useState("");
+  const [termsAgreed,setTermsAgreed] = useState(false)
   const router = useRouter();
   const page = router.query.page ? parseInt(router.query.page) : 0;
   const [perPage, setPerPage] = useState(5);
@@ -278,6 +281,7 @@ function Orders(props) {
         variables: {
           input: {
             _id: cancelId,
+            cancelUserReason:cancelUserReason,
           },
         },
       });
@@ -288,6 +292,8 @@ function Orders(props) {
       toast.success(
         <div style={{ padding: "10px" }}>Your order has been canceled. </div>
       );
+      setCancelUserReason("")
+      setTermsAgreed(false)
     } catch (error) {
       console.log(error);
       toast.error(<div style={{ padding: "10px" }}>{error?.message}</div>);
@@ -627,7 +633,7 @@ function Orders(props) {
                               style={{ color: item?.returnStatus !== "NA" ? getReturnStatusColor(item?.returnStatus) : getStatusColor(item?.shippingStatus) }}
                             >
                               {item?.returnStatus !== "NA"
-                                ? `${item?.returnStatus}-(Return)`
+                                ? `RETURN - ${item?.returnStatus}`
                                 : item?.shippingStatus.replace(/_/g, " ")}
                             </td>
                             <td style={{ color: "black" }}>
@@ -830,9 +836,64 @@ function Orders(props) {
                             <div className="popup-content">
                               <h4 className="popup-head-content">Cancel Order</h4>
                               <hr class="custom-line" />
-                              <p className="popup-body-content" style={{ lineHeight: "18px" }}>Canceling this order means it will no longer be processed or delivered.
+                              <div className="form-group">
+                              <label
+                                style={{
+                                  fontFamily: "Poppins",
+                                  fontWeight: "400px",
+                                  lineHeight: "20px",
+                                }}
+                              >
+                                Are you sure you want to cancel the order ?{" "}
+                                {/* <ab className="required" title="required">
+                                  *
+                                </ab> */}
+                              </label>
+                              <input
+                                name="cancelUserReason"
+                                type="text"
+                                className="form-control"
+                                value={cancelUserReason}
+                                placeholder="Reason for canceling the order"
+                                onChange={(e)=>setCancelUserReason(e.target.value)}
+                                style={{ marginTop: "10px" }}
+                              />
+                              {/* {errors?.label ? (
+                                <div style={{ color: "red", fontWeight: "300" }}>
+                                  {errors?.label?.message} 
+                                </div>
+                              ) : null}*/}
+                            </div>
+                              <p className="popup-body-content" style={{ lineHeight: "18px",fontSize:"12px" }}>Canceling this order means it will no longer be processed or delivered.
                                 If this was unintentional, you can close this popup and continue shopping.<br />
                                 Please note that refunds, if applicable, will be processed as per our refund policy</p>
+                                <div className="form-group d-flex align-items-center" >
+                                  <input
+                                    name="termsAgreed"
+                                    type="checkbox"
+                                    className="form-control"
+                                    value={termsAgreed}
+                                    onChange={(e)=> setTermsAgreed(e.target.checked)}
+                                    style={{marginRight:10, width:"15px" }}
+                                  />
+                                  <label
+                                    htmlFor="termsAgreed"
+                                    style={{
+                                      fontFamily: "Poppins",
+                                      fontWeight: "400px",
+                                      fontSize:"12px",
+                                      // lineHeight: "20px",
+                                      padding:0,
+                                      margin:0,
+                                    }}
+                                  >
+                                    I accept and confirm that canceling this order{" "}
+                                    {/* <ab className="required" title="required">
+                                      *
+                                    </ab> */}
+                                  </label>
+                              
+                            </div>
                               <div className="popup-actions">
                                 <button
                                   onClick={() => {
@@ -846,6 +907,7 @@ function Orders(props) {
                                 <button
                                   className="btn btn-dark"
                                   onClick={() => orderCancel(cancelId)}
+                                  disabled={!termsAgreed}
                                 >
                                   CONFIRM
                                 </button>

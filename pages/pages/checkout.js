@@ -228,6 +228,10 @@ function CheckOut() {
   };
 
   const handlePlaceOrder = async () => {
+    if(!defaultAddressId){
+      toast.error(<p style={{margin:"10px 10px 10px 0"}}>Please select a shipping address</p>)
+      return
+    }
     try {
       const response = await CreateUserOrder({
         variables: {
