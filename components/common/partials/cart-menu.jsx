@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useRouter } from "next/router";
 import { BsFillHandbagFill } from "react-icons/bs";
+import { HiMiniShoppingBag } from "react-icons/hi2";
+
 // Import Actions
 import { actions as CartAction } from "../../../store/cart";
 import styles from "../../common/header.module.css";
@@ -202,7 +204,9 @@ function CartMenu({ props }) {
         onClick={toggleCart}
       >
         <div className={styles.circle}>
-          <img src="/images/icon/cart.svg" alt="cart" />
+          {/* <img src="/images/icon/cart.svg" alt="cart" /> */}
+          <HiMiniShoppingBag size={20} />
+
         </div>
         {/* <i className="icon-cart-thick"></i> */}
         {cartItems?.length > 0 && <span className="cart-count badge-circle1">

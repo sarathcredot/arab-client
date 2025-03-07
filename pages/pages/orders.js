@@ -251,6 +251,7 @@ function Orders(props) {
 
   const { data, loading, error, refetch } = useQuery(GET_ORDERS, {
     variables: { input: { page: page || 0, size: perPage } },
+    fetchPolicy:"network-only"
   });
 
   const totalPage = data

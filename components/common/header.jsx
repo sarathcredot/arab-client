@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import withApollo from "../../server/apollo.js";
 import { gql, useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/react-hooks";
+import Link from "next/link.js";
 
 const GET_WISH_LIST = gql`query Products {
   getWishListProducts {
@@ -364,18 +365,27 @@ function Header({ adClass = "", wishlist }) {
 
 
               {token &&
+
                 <ALink
                   href="/pages/wishlist"
                   className="header-icon position-relative"
                   title="wishlist"
+                  
                 >
+              <a href="#"
+              title="wishlist"
+
+              >
                   <div className={styles.circle}>
                     <AiFillHeart style={{ fontSize: "20px" }} />
                   </div>
                   {/* <i className="icon-wishlist-2"></i> */}
+                  {/* {wishListData?.getWishListProducts.products.length&& */}
                   <span className="wishlist-count badge-circle">
                     {wishListData?.getWishListProducts.products.length}
                   </span>
+                  {/* } */}
+                  </a>
                 </ALink>
               }
               <CartMenu />
