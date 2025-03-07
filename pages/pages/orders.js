@@ -77,6 +77,7 @@ const GET_ORDERS = gql`
         warrantyType
         warrantyRegister
       }
+      warrantyClaimStatus
     }
   }
 }
@@ -176,7 +177,16 @@ mutation CreateWarrantyClaimRequestByUSer($input: createWarrantyClaimRequestByUS
 
 `
 
+const WARRANTY_CLIAM_STATUS = gql`
 
+query GetOrderProductWarrantyClaim($input: getOrderProductWarrantyClaimInput) {
+  getOrderProductWarrantyClaim(input: $input) {
+    _id
+    claimStatus
+  }
+}
+
+`
 
 
 const DOWNLOAD_INVOICE = gql`
@@ -192,11 +202,12 @@ function Orders(props) {
   const [flag, setFlag] = useState(0);
   const [orders, setOrders] = useState([]);
   const [warrantyClaimType, setwarrantyClaimType] = useState([])
-  const [cancelUserReason,setCancelUserReason] = useState("");
-  const [termsAgreed,setTermsAgreed] = useState(false)
+  const [cancelUserReason, setCancelUserReason] = useState("");
+  const [termsAgreed, setTermsAgreed] = useState(false)
   const router = useRouter();
   const page = router.query.page ? parseInt(router.query.page) : 0;
   const [perPage, setPerPage] = useState(5);
+  const [orderId, setorderId] = useState()
 
   const onMoveFromToWishlit = (e, item) => {
     setFlag(2);
@@ -253,6 +264,14 @@ function Orders(props) {
     variables: { input: { page: page || 0, size: perPage } },
   });
 
+
+
+
+
+
+
+
+
   const totalPage = data
     ? parseInt(data?.getUserOrderProducts?.maxRecords / perPage) +
     (data?.getUserOrderProducts?.maxRecords % perPage ? 1 : 0)
@@ -281,7 +300,7 @@ function Orders(props) {
         variables: {
           input: {
             _id: cancelId,
-            cancelUserReason:cancelUserReason,
+            cancelUserReason: cancelUserReason,
           },
         },
       });
@@ -435,7 +454,7 @@ function Orders(props) {
 
       if (errors) {
 
-        console.log("error1",error)
+        console.log("error1", error)
 
         toast.error(errors.message)
       }
@@ -454,7 +473,7 @@ function Orders(props) {
 
     } catch (error) {
 
-      console.log("error2",error)
+      console.log("error2", error)
       toast.error(error.message)
     }
 
@@ -723,29 +742,42 @@ function Orders(props) {
 
                                       {
 
-                                      
-                                      
-                                      item?.shippingStatus === "DELIVERED" && item?.warranty?.warrantyRegister === true && 
-                                     (
 
 
-                                        <div
-                                          className="order_update_menu_item"
-                                          onClick={(e) => {
-                                            e.preventDefault();
-                                            setShowPolicyModal(true);
-                                            setOrderProductIdForReturn(item?._id);
+                                        item?.shippingStatus === "DELIVERED" && item?.warranty?.warrantyRegister === true &&
+                                        (
 
-                                            setOrderIdForReturn(item?.orderId);
-                                            setIsOpen(false);
-                                            setmodalType("complaint")
-                                            setdeliveryDate(item?.deliveryDate)
-                                          }}
-                                        >
-                                          Complaint
-                                        </div>
-                                      )
-                                      
+
+                                          <div
+                                            className="order_update_menu_item"
+                                            style={{
+
+                                              cursor:
+                                                item.warrantyClaimStatus === null ||
+                                                  item.warrantyClaimStatus === "REJECTED" ||
+                                                  item.warrantyClaimStatus === "REPLACEMENT_COMPLETED"
+                                                  ? "pointer"
+                                                  : "not-allowed",
+
+                                            }}
+
+                                            onClick={(e) => {
+                                              e.preventDefault();
+                                              setShowPolicyModal(true);
+                                              setOrderProductIdForReturn(item?._id);
+
+                                              setOrderIdForReturn(item?.orderId);
+                                              setIsOpen(false);
+                                              setmodalType("complaint")
+                                              setdeliveryDate(item?.deliveryDate)
+                                            }}
+
+
+                                          >
+                                            Complaint
+                                          </div>
+                                        )
+
                                       }
 
 
@@ -837,63 +869,63 @@ function Orders(props) {
                               <h4 className="popup-head-content">Cancel Order</h4>
                               <hr class="custom-line" />
                               <div className="form-group">
-                              <label
-                                style={{
-                                  fontFamily: "Poppins",
-                                  fontWeight: "400px",
-                                  lineHeight: "20px",
-                                }}
-                              >
-                                Are you sure you want to cancel the order ?{" "}
-                                {/* <ab className="required" title="required">
+                                <label
+                                  style={{
+                                    fontFamily: "Poppins",
+                                    fontWeight: "400px",
+                                    lineHeight: "20px",
+                                  }}
+                                >
+                                  Are you sure you want to cancel the order ?{" "}
+                                  {/* <ab className="required" title="required">
                                   *
                                 </ab> */}
-                              </label>
-                              <input
-                                name="cancelUserReason"
-                                type="text"
-                                className="form-control"
-                                value={cancelUserReason}
-                                placeholder="Reason for canceling the order"
-                                onChange={(e)=>setCancelUserReason(e.target.value)}
-                                style={{ marginTop: "10px" }}
-                              />
-                              {/* {errors?.label ? (
+                                </label>
+                                <input
+                                  name="cancelUserReason"
+                                  type="text"
+                                  className="form-control"
+                                  value={cancelUserReason}
+                                  placeholder="Reason for canceling the order"
+                                  onChange={(e) => setCancelUserReason(e.target.value)}
+                                  style={{ marginTop: "10px" }}
+                                />
+                                {/* {errors?.label ? (
                                 <div style={{ color: "red", fontWeight: "300" }}>
                                   {errors?.label?.message} 
                                 </div>
                               ) : null}*/}
-                            </div>
-                              <p className="popup-body-content" style={{ lineHeight: "18px",fontSize:"12px" }}>Canceling this order means it will no longer be processed or delivered.
+                              </div>
+                              <p className="popup-body-content" style={{ lineHeight: "18px", fontSize: "12px" }}>Canceling this order means it will no longer be processed or delivered.
                                 If this was unintentional, you can close this popup and continue shopping.<br />
                                 Please note that refunds, if applicable, will be processed as per our refund policy</p>
-                                <div className="form-group d-flex align-items-center" >
-                                  <input
-                                    name="termsAgreed"
-                                    type="checkbox"
-                                    className="form-control"
-                                    value={termsAgreed}
-                                    onChange={(e)=> setTermsAgreed(e.target.checked)}
-                                    style={{marginRight:10, width:"15px" }}
-                                  />
-                                  <label
-                                    htmlFor="termsAgreed"
-                                    style={{
-                                      fontFamily: "Poppins",
-                                      fontWeight: "400px",
-                                      fontSize:"12px",
-                                      // lineHeight: "20px",
-                                      padding:0,
-                                      margin:0,
-                                    }}
-                                  >
-                                    I accept and confirm that canceling this order{" "}
-                                    {/* <ab className="required" title="required">
+                              <div className="form-group d-flex align-items-center" >
+                                <input
+                                  name="termsAgreed"
+                                  type="checkbox"
+                                  className="form-control"
+                                  value={termsAgreed}
+                                  onChange={(e) => setTermsAgreed(e.target.checked)}
+                                  style={{ marginRight: 10, width: "15px" }}
+                                />
+                                <label
+                                  htmlFor="termsAgreed"
+                                  style={{
+                                    fontFamily: "Poppins",
+                                    fontWeight: "400px",
+                                    fontSize: "12px",
+                                    // lineHeight: "20px",
+                                    padding: 0,
+                                    margin: 0,
+                                  }}
+                                >
+                                  I accept and confirm that canceling this order{" "}
+                                  {/* <ab className="required" title="required">
                                       *
                                     </ab> */}
-                                  </label>
-                              
-                            </div>
+                                </label>
+
+                              </div>
                               <div className="popup-actions">
                                 <button
                                   onClick={() => {
