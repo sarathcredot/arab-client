@@ -262,7 +262,7 @@ function Orders(props) {
 
   const { data, loading, error, refetch } = useQuery(GET_ORDERS, {
     variables: { input: { page: page || 0, size: perPage } },
-    fetchPolicy:"network-only"
+    fetchPolicy: "network-only"
   });
 
 
@@ -763,17 +763,37 @@ function Orders(props) {
                                             }}
 
                                             onClick={(e) => {
-                                              e.preventDefault();
-                                              setShowPolicyModal(true);
-                                              setOrderProductIdForReturn(item?._id);
+                                              // Prevent click when not allowed
+                                              if (
+                                                item.warrantyClaimStatus === null ||
+                                                item.warrantyClaimStatus === "REJECTED" ||
+                                                item.warrantyClaimStatus === "REPLACEMENT_COMPLETED"
+                                              ) {
+                                                e.preventDefault();
+                                                setShowPolicyModal(true);
+                                                setOrderProductIdForReturn(item?._id);
+                                                setOrderIdForReturn(item?.orderId);
+                                                setIsOpen(false);
+                                                setmodalType("complaint");
+                                                setdeliveryDate(item?.deliveryDate);
+                                              }
+                                              return;
 
-                                              setOrderIdForReturn(item?.orderId);
-                                              setIsOpen(false);
-                                              setmodalType("complaint")
-                                              setdeliveryDate(item?.deliveryDate)
                                             }}
 
 
+                                          // onClick={(e) => {
+
+                                          //   e.preventDefault();
+                                          //   setShowPolicyModal(true);
+                                          //   setOrderProductIdForReturn(item?._id);
+
+                                          //   setOrderIdForReturn(item?.orderId);
+                                          //   setIsOpen(false);
+                                          //   setmodalType("complaint")
+                                          //   setdeliveryDate(item?.deliveryDate)
+
+                                          // }}
                                           >
                                             Complaint
                                           </div>
