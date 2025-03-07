@@ -46,13 +46,23 @@ function Login({ mutate }) {
 
   const handleOtpChange = async (event) => {
     event.preventDefault();
+    console.log({mobileNumber})
     try {
       if (!mobileNumber.trim()) {
         setError("Mobile number is required");
         return;
       }
+       if(mobileNumber.length!==8){
+        setError("Mobile number must be exactly 8 digits");
+        return;
+      }
       const response = await userLoginOtp({
-        variables: { input: { mobileNumber: `+968 ${mobileNumber}` } },
+        variables: { 
+          input: {
+            mobileNumber: mobileNumber,
+            countryCode: "+968" 
+          } 
+        },
       });
       setOtpTd(response.data.userLoginOtp._id);
       toast.success(<div style={{ padding: "10px" }}>OTP sent successfully</div>);
@@ -349,7 +359,7 @@ function Login({ mutate }) {
                         </div>
                       </div>
 
-                      {error && <div style={{ color: "red" }}>{error}</div>}
+                      {error && <div style={{ color: "red",marginTop:"-10px",fontWeight:"normal" }}>{error}</div>}
 
                       {/* <div
                       className="orcontainer"
