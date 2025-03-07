@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { FiSearch } from "react-icons/fi";
 
 // Import Custom Component
 import ALink from "../ALink";
@@ -213,7 +214,7 @@ function SearchForm(props) {
               </div> */}
 
             <button className="btn" title="search" type="submit">
-              <svg
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="17"
                 height="16"
@@ -232,7 +233,8 @@ function SearchForm(props) {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 />
-              </svg>
+              </svg> */}
+              <FiSearch size={20} color="#fff" />
             </button>
 
             <div className="live-search-list bg-white">
@@ -243,7 +245,7 @@ function SearchForm(props) {
                     // href={`/shop?page=0&category=${product.categoryId}`}
                     className="autocomplete-suggestion"
                     key={`search-result-${index}`}
-                    style={{ borderBottom: "0px", cursor: "pointer" }}
+                    style={{ borderBottom: "0px", cursor: "pointer",display:"flex",alignItems:"center",gap:"5px" }}
                     // use onCLick instead of href and setSearch null
                     onClick={() => {
                       setSearch("");
@@ -257,14 +259,21 @@ function SearchForm(props) {
                       });
                     }}
                   >
-                    <LazyLoadImage
+                    {/* <LazyLoadImage
                       src={
                         product.image ? product.image : "images/icon/search.svg"
                       }
                       width={40}
                       height={40}
                       alt=""
-                    />
+                    /> */}
+                    <span>
+                    
+                    {/* {product?.image ? 
+                      <img src={product?.image} alt="" />
+                    :<IoIosSearch size={20} color="#000" />} */}
+                    <FiSearch size={18} color="#000" />
+                    </span>
                     <div
                       className="search-name"
                       dangerouslySetInnerHTML={removeXSSAttacks(
