@@ -380,11 +380,11 @@ function Header({ adClass = "", wishlist }) {
                     <AiFillHeart style={{ fontSize: "20px" }} />
                   </div>
                   {/* <i className="icon-wishlist-2"></i> */}
-                  {/* {wishListData?.getWishListProducts.products.length&& */}
+                  {wishListData?.getWishListProducts.products.length>0&&
                   <span className="wishlist-count badge-circle">
                     {wishListData?.getWishListProducts.products.length}
                   </span>
-                  {/* } */}
+                  }
                   </a>
                 </ALink>
               }

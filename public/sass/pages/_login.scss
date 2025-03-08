@@ -194,11 +194,15 @@ gap: 20px
         align-items: end;
         justify-content: center;
         // margin-top: 12%;
+        padding-left: 170px;
     }
-    .login_content:first-child{
+    .login_content_otp{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
-
     }
+    
     .login_img_div{
         display: flex;
         // margin-top: 8%;
@@ -284,6 +288,12 @@ gap: 20px
                 min-width: 100%;
                 justify-content: start;
                 align-items: center;
+                padding-left: 0;
+            }
+            .login_content_otp{
+                min-width: 100%;
+                margin-top: 10px;
+
             }
             .login_bg_image{
                 top: 200px;
@@ -332,7 +342,7 @@ gap: 20px
 @include mq(md) {
     .login-container {
         .col-md-6:first-child {
-            padding-right: 3.4rem;
+            // padding-right: 3.4rem;
         }
 
         .col-md-6:last-child {

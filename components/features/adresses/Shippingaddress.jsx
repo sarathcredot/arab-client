@@ -238,7 +238,7 @@ function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsship
       setValue("firstname",userData?.getUserRecord?.record?.displayName)
       console.log("NAME = ",userData?.getUserRecord?.record)
       setValue("email",userData?.getUserRecord?.record?.email)
-      // setValue("mobile",userData?.getUserRecord?.record?.mobileNumber)
+      setValue("mobile",userData?.getUserRecord?.record?.mobileNumber)
     }
   },[userData,isEdit])
   return (
@@ -622,7 +622,7 @@ function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsship
                   >
                     <div className="mt-3">
                       <button type="submit" className="btn btn-dark mr-0">
-                        Save changes
+                        {isEdit?"Save changes":"Submit"}
                       </button>
                     </div>
                   </div>

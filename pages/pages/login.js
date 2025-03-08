@@ -75,7 +75,7 @@ function Login({ mutate }) {
   const handleResentotp = async () => {
     try {
       const response = await userLoginOtp({
-        variables: { input: { mobileNumber: `+968 ${mobileNumber}` } },
+        variables: { input: { mobileNumber: mobileNumber,countryCode: "+968"} },
       });
       if (response) {
         toast.success(<div style={{ padding: "10px" }}>OTP sent successfully</div>);
@@ -198,7 +198,7 @@ function Login({ mutate }) {
             <div className="col-lg-12 mx-auto login_container custom_headlog">
               {isOtp ? (
                 <div className="row h-100 custom-loginleft">
-                <div className="col login_content">
+                <div className="col-md-6 login_content_otp">
                   <div>
 
                   <div className="heading">
