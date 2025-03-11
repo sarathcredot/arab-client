@@ -185,10 +185,10 @@ function Account() {
             className="checkout-progress-bar d-flex justify-content-center flex-wrap"
             style={{ backgroundColor: "#F9F9F9", width: "100%" }}
           >
-            <li className="">
+            {/* <li className="">
               <ALink href="/pages/account">My Account</ALink>
-            </li>
-            <li className="active">
+            </li> */}
+            <li className="">
               <ALink href="/pages/account">Dashboard</ALink>
             </li>
           </ul>
@@ -659,12 +659,12 @@ function Account() {
                               ></textarea>
                             <div className="popup-actions">
         
-                              <button onClick={() => setShowPopup(false)} className="btn btn-outline-danger">
+                              <div style={{height:"50px",margin:"0",padding:13}} onClick={() => setShowPopup(false)} className="btn w-25 btn-block cart_btn">
                                 CANCEL
-                              </button>
-                              <button onClick={handleDeleteAccount} className="btn btn-dark">
+                              </div>
+                              <div style={{height:"50px",margin:"0",padding:13,fontWeight:"400"}} onClick={handleDeleteAccount} className="btn w-25 btn-dark btn-block text-white hoverbtn">
                                 CONFIRM
-                              </button>
+                              </div>
                             </div>
                           </div>
                         </div>

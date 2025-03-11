@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { IoMdHome } from "react-icons/io";
 import MainMenu from "../../components/common/partials/main-menu";
 import { Helmet } from "react-helmet";
+// import Flag from "/images/brands/oman_flag.svg"
 // import { useForm, Controller } from "react-hook-form";
 export const LOGIN = gql`
   mutation UserLoginOtp($input: userLoginOtpInput!) {
@@ -156,7 +157,7 @@ function Login({ mutate }) {
           className=" login-container container"
           style={{ marginTop: "0", position: "relative" }}
         >
-          <div
+          {/* <div
             style={{
               zIndex: "99",
               position: "absolute",
@@ -170,7 +171,7 @@ function Login({ mutate }) {
             <div>
               <MainMenu />
             </div>
-          </div>
+          </div> */}
           <div className="container custom_login_space ">
             <nav
               aria-label="breadcrumb"
@@ -218,7 +219,7 @@ function Login({ mutate }) {
                       </div>
                     </div>
 
-                    <form style={{ marginTop: "30px" }}>
+                    <form style={{ marginTop: "20px" }}>
                       <div className="login_otp_section">
                         <div className="otp_boxes">
 
@@ -233,7 +234,7 @@ function Login({ mutate }) {
                             textAlign: "center",
                             width: "60px",
                             height: "60px",
-                            gap: "24px",
+                            gap: "20px",
                           }}
                           renderInput={(props) => (
                             <input
@@ -324,42 +325,50 @@ function Login({ mutate }) {
 
                     <form style={{ marginTop: "30px" }}>
                       <div className="container">
-                        <div className="input-group" style={{ position: "relative" }}>
-                          <div className="input-group-prepend" style={{ position: "absolute" }}>
-                            <span
+                        <div className="input-group" style={{ position: "relative",border:"1px solid #CDCDCD" }}>
+                          <div className="input-group-prepend h-100" style={{ position: "absolute" }}>
+                            {/* <span
                               className=""
                               style={{display:"block", padding: "17px",margin:"auto 0",fontWeight:"normal" }}
                             >
+
+                              <img src="/images/brands/oman_flag.svg" alt="Oman Flag" width={30}  />
                               +968
-                            </span>
-                            {/* <span
-                              className="input-group-text countrycodeinput"
+                            </span> */}
+                            <span
+                              className="input-group-text countrycodeinput border-0 h-100"
                               style={{ padding: "10px" }}
                             >
                               <img
-                                src="images/brands/flag1.svg"
+                                src="/images/brands/oman_flag.svg"
                                 alt="Flag"
                                 width="24"
                                 height="20"
                               />
+                              {/* +968 */}
+                            </span>
+                            <span
+                              className="input-group-text countrycodeinput border-0 h-100"
+                              style={{ padding: "10px",background:"#fff",borderRight:"none",borderLeft:"none",fontSize:"12px" }}
+                            >
                               +968
-                            </span> */}
+                            </span>
                           </div>
                           <input
                             type="number"
-                            placeholder="Enter Mobile Number"
+                            placeholder="Mobile Number"
                             className="form-input form-wide"
                             value={mobileNumber}
                             onChange={(e) => {
                               setMobileNumber(e.target.value);
                               setError("");
                             }}
-                            style={{ outline: "none", paddingLeft: "53px" }}
+                            style={{ outline: "none", paddingLeft: "95px",border:"none",margin:0 }}
                             />
                         </div>
                       </div>
 
-                      {error && <div style={{ color: "red",marginTop:"-10px",fontWeight:"normal" }}>{error}</div>}
+                      {error && <div style={{ color: "red",marginTop:"10px",fontWeight:"normal" }}>{error}</div>}
 
                       {/* <div
                       className="orcontainer"
@@ -443,8 +452,8 @@ function Login({ mutate }) {
 
                       <button
                         type="submit"
-                        className="btn btn-dark btn-md"
-                        style={{ marginTop: "10px", fontWeight: "400",paddingInline:"50px" }}
+                        className="btn btn-dark btn-md hoverbtn"
+                        style={{ marginTop: "20px", fontWeight: "400",paddingInline:"50px" }}
                         onClick={handleOtpChange}
                       >
                         GET OTP

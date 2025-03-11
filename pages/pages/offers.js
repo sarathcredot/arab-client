@@ -158,7 +158,7 @@ function offers() {
             <MainMenu />
           </div>
         </div>
-        <div className="bg-gray">
+        <div className="bg-gray mb-0">
           <HomeSection data={cmsOfferData} offer={false} />
         </div>
 
@@ -172,7 +172,9 @@ function offers() {
         {/* </div> */}
 
         {/* <CategoryFilterSection />  */}
-        <div className={`container skeleton-body skel-shop-products  ${false ? "" : "loaded"}`}>
+        <div className={`container skeleton-body skel-shop-products  ${false ? "" : "loaded"}`}
+          style={{marginTop:"-20px"}}
+        >
           {/* <BannerSection  data={data}/> */}
 
           <DealSection

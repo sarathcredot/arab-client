@@ -230,10 +230,10 @@ function Account() {
             className="checkout-progress-bar d-flex justify-content-center flex-wrap"
             style={{ backgroundColor: "#F9F9F9", width: "100%" }}
           >
-            <li className="">
+            {/* <li className="">
               <ALink href="/pages/account">My Account</ALink>
-            </li>
-            <li className="active">
+            </li> */}
+            <li className="">
               <ALink href="/pages/account">Coupons</ALink>
             </li>
           </ul>

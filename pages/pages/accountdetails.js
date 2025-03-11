@@ -4,6 +4,7 @@ import ALink from "../../components/common/ALink";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { gql, useMutation, useLazyQuery } from "@apollo/client";
 import withApollo from "../../server/apollo";
+import { IoMdHome } from "react-icons/io";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 export const ACCOUNT_DETAIL = gql`
@@ -118,12 +119,33 @@ function accountdetails() {
 
   return (
     <main className="main main-test">
-        <div style={{marginTop:"50px"}}></div>
+      <nav aria-label="breadcrumb" className="breadcrumb-nav">
+        <div className="container">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <ALink href="/">
+                <IoMdHome style={{ fontSize: "16px" }} />
+              </ALink>
+            </li>
+            <li className="breadcrumb-item">
+              <ALink className="" href="/pages/account">
+              my account
+              </ALink>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              <ALink className="activeitem" href="#">
+                account details
+              </ALink>
+            </li>
+          </ol>
+        </div>
+      </nav>
+        {/* <div style={{marginTop:"50px"}}></div> */}
         <ul className="checkout-progress-bar d-flex justify-content-center flex-wrap" style={{marginBottom:"0px"}}>
-          <li>
+          {/* <li>
             <ALink href="/pages/account">My Account</ALink>
-          </li>
-          <li className="active">
+          </li> */}
+          <li className="">
             <ALink href="/pages/accountdetails">Account Details</ALink>
           </li>
         </ul>

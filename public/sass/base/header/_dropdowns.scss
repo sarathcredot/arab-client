@@ -188,7 +188,7 @@
 
 	// Top Anchor
 	> a {
-		padding: 0 5px;
+		padding: 20px 5px;
 
 		&:after {
 			content: '\e81c';
@@ -552,8 +552,9 @@
 			visibility: visible;
 
 			a {
-				padding: 0;
+				padding: 20;
 				color: inherit;
+
 
 				&:hover {
 					background-color: transparent;

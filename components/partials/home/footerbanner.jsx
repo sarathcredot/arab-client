@@ -25,8 +25,8 @@ function FooterBannerSection({ data }) {
     nav:true
   };
   return (
-    <div className="mt-4">
-      <OwlCarousel adClass="home-slider nav-circle mb-2" options={options}>
+    <div className="mt-4 mb-0">
+      <OwlCarousel adClass="home-slider nav-circle mb-0" options={options}>
         {data?.images?.map((item, imgIndex) => {
           return (
             <div key={imgIndex} style={{ maxHeight: "550px" ,cursor: "pointer"}} className="bannerheight"  onClick={() => {

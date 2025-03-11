@@ -21,6 +21,7 @@ import ReturnPolicyModal from "../../components/features/modals/ReturnPolicyModa
 import ReturnForm from "../../components/features/adresses/ReturnForm";
 import WarrantyForm from "../../components/features/adresses/WarrantyReqForm"
 import { Controller } from "react-hook-form";
+import Link from "next/link";
 
 const GET_ORDERS = gql`
    query GetUserOrderProducts($input: GetUserOrderProductsInput!) {
@@ -331,13 +332,17 @@ function Orders(props) {
       });
 
       const url = invoice.data.getUserIvoiceSignedUrl.url;
-      // console.log("invoice", url);
-      // const link = document.createElement('a');
-      // link.href = url;
-      // link.setAttribute('download', 'invoice.pdf');
-      // document.body.appendChild(link);
-      // link.click();
-      // document.body.removeChild(link);
+      console.log("invoice", url);
+      if(url){
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'invoice.pdf');
+      // link.setAttribute("target", "_blank");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      }
       window.open(url, "_blank");
     } catch (error) {
       toast.error(error.message);
@@ -519,10 +524,10 @@ function Orders(props) {
             className="checkout-progress-bar d-flex justify-content-center flex-wrap"
             style={{ backgroundColor: "#F9F9F9", width: "100%" }}
           >
-            <li className="">
+            {/* <li className="active">
               <ALink href="/pages/account">My Account</ALink>
-            </li>
-            <li className="active">
+            </li> */}
+            <li className="">
               <ALink href="/pages/orders">Orders</ALink>
             </li>
           </ul>
@@ -583,7 +588,7 @@ function Orders(props) {
                         <p>No products Ordered</p>
                         <ALink
                           href="/shop"
-                          className="btn btn-dark btn-add-cart product-type-simple btn-shop font1 w-auto"
+                          className="btn btn-dark btn-add-cart product-type-simple btn-shop font1 w-auto hoverbtn"
                         >
                           go shop{" "}
                         </ALink>
@@ -874,6 +879,7 @@ function Orders(props) {
                                     </svg>
                                     Invoice
                                   </button>
+
                                   {/* <div className="order_update_menu_item">Cancel</div>
                             <div className="order_update_menu_item">Return</div>
                             <div className="order_update_menu_item">

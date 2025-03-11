@@ -245,7 +245,7 @@ function SearchForm(props) {
                     // href={`/shop?page=0&category=${product.categoryId}`}
                     className="autocomplete-suggestion"
                     key={`search-result-${index}`}
-                    style={{ borderBottom: "0px", cursor: "pointer",display:"flex",alignItems:"center",gap:"5px" }}
+                    style={{ borderBottom: "0px", cursor: "pointer",display:"flex",alignItems:"center",gap:"10px",padding:20  }}
                     // use onCLick instead of href and setSearch null
                     onClick={() => {
                       setSearch("");

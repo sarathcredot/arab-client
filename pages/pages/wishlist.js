@@ -222,7 +222,7 @@ function Wishlist(props) {
                   <p>No products added to the wishlist</p>
                   <ALink
                     href="/shop"
-                    className="btn btn-dark btn-add-cart product-type-simple btn-shop font1 w-auto"
+                    className="btn btn-dark btn-add-cart product-type-simple btn-shop font1 w-auto btn-dark btn-block text-white hoverbtn"
                   >
                     go shop{" "}
                   </ALink>
