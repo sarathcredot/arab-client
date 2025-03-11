@@ -179,10 +179,10 @@ function addresses() {
         {/* <h1>orders</h1>*/}
 
         <ul className="checkout-progress-bar d-flex justify-content-center flex-wrap mb-0">
-          <li className="">
+          {/* <li className="">
             <ALink href="/pages/account">My Account</ALink>
-          </li>
-          <li className="active">
+          </li> */}
+          <li className="">
             <ALink href="/pages/orders">Addresses</ALink>
           </li>
         </ul>

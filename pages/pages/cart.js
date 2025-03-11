@@ -250,7 +250,7 @@ function Cart(props) {
                   <p>No products added to the cart</p>
                   <ALink
                     href="/shop"
-                    className="btn btn-dark btn-add-cart product-type-simple btn-shop font1"
+                    className="btn btn-dark product-type-simple btn-shop text-white hoverbtn"
                   >
                     return to shop
                   </ALink>

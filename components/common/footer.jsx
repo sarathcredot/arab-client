@@ -75,8 +75,8 @@ function Footer() {
 
   return (
     <>
-      <footer className="footer font2">
-        <div className="container">
+      <footer className="footer font2 " style={{borderTop:"1px solid #f0f0f0"}} >
+        <div className="container" >
           {/* <div className="widget-newsletter d-flex align-items-center align-items-sm-start flex-column flex-lg-row  justify-content-lg-between">
                     <div className="widget-newsletter-info text-center text-sm-left d-flex flex-column flex-sm-row align-items-center mb-1 mb-xl-0">
                         <i className="icon-envolope"></i>

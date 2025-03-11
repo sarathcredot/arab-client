@@ -331,15 +331,15 @@ function CheckOut() {
           </nav>
         </div>
       <ul className="checkout-progress-bar d-flex justify-content-center flex-wrap">
-        <li>
+        {/* <li>
           <ALink href="/pages/cart">Shopping Cart</ALink>
-        </li>
-        <li className="active">
+        </li> */}
+        <li className="">
           <ALink href="/pages/checkout">Checkout</ALink>
         </li>
-        <li className="disabled">
+        {/* <li className="disabled">
           <ALink href="#">Order Complete</ALink>
-        </li>
+        </li> */}
       </ul>
 
       <main className="main main-test">
@@ -455,7 +455,7 @@ function CheckOut() {
                                 className="form-control"
                                 value={cartData?.getCart?.code}
                                 disabled={true}
-                                style={{ marginTop: "10px" }}
+                                style={{ marginTop: "10px",paddingLeft:"20px" }}
                               />
                               ):(
 
@@ -474,7 +474,7 @@ function CheckOut() {
                                 value={coupon}
                                 onChange={(e)=>setCoupon(e.target.value)}
                                 required
-                                style={{ marginTop: "10px" }}
+                                style={{ marginTop: "10px",paddingLeft:"20px" }}
                               />
                               )}
                               <div className="input-group-append apply_coupon_btn_div">
@@ -482,7 +482,7 @@ function CheckOut() {
                                   <button style={{
                                     background:"#f91926"
                                   }}
-                                  className="apply_coupon_btn btn btn-sm mt-0 hoverredbtn "
+                                  className="apply_coupon_btn btn btn-sm mt-0 hoverbtn "
                                   type="button"
                                   onClick={()=>handleRemoveCoupon()}
                                 >
@@ -490,13 +490,6 @@ function CheckOut() {
                                 </button>
                                 ):(
 
-                                // <button
-                                //   className="btn btn-dark btn-place-order hoverbtn"
-                                //   type="submit"
-                                //   name="form-control"
-                                // >
-                                //   Apply Coupon
-                                // </button>
                                 <button 
                                 className="apply_coupon_btn btn btn-sm mt-0 hoverbtn"
                                 type="submit"
@@ -539,11 +532,13 @@ function CheckOut() {
                                       display:"flex",
                                       flexDirection:"column",
                                       gap:"10px",
-                                      border: "1px solid #dfdfdf",
+                                      border:address?._id===defaultAddressId?"1px solid #000": "1px solid #dfdfdf",
                                       padding: "20px",
                                       borderRadius: "4px",
-                                      borderColor:address?._id===defaultAddressId?"red":"#dfdfdf",
-                                      cursor:"pointer"
+                                      // borderColor:address?._id===defaultAddressId?"#000":"#dfdfdf",
+                                      cursor:"pointer",
+                                      transition:"0.3s ease-in-out"
+                                      
                                     }}
                                     onClick={() => handleAddressSelection(address._id)}
                                   >
@@ -625,7 +620,7 @@ function CheckOut() {
                           }}
                         >
                           <IoAddCircleOutline className="add_address_icon" style={{ fontSize: "20px" }} />
-                          <p className="addaddressbtn" style={{ margin: 0 }}>
+                          <p className="addaddressbtn" style={{ marginTop: 10 }}>
                             {" "}
                             Add Address{" "}
                           </p>

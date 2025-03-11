@@ -83,19 +83,14 @@ function ElectronicCollection() {
   return (
     <div className="container container-elctro" >
       <section className="recent-products-section" >
-        <Reveal
-          keyframes={fadeInUpShorter}
-          delay={50}
-          duration={800}
-          // triggerOnce
-        >
+        
           <div
             className="heading shop-list   mb-0 pl-0 pr-0 "
            
           >
-            <div className="pt-3  d-flex align-items-center justify-content-between flex-wrap" style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE",marginBottom:"43px",paddingBottom:"12px" }}>
+            <div className="  d-flex align-items-center justify-content-between flex-wrap" style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE",marginBottom:"43px",paddingBottom:"20px" ,paddingTop:"50px"}}>
               <h4 className="section-title text-transform-none mb-0 mr-0 " >
-                Best Selling
+                Best Selling 
               </h4>
               {/* <ALink href="/shop?bestSeller=true" style={{ color: "black", fontWeight: "600" }}>
               View All <IoIosArrowForward style={{fontSize:"20px"}}/> 
@@ -147,6 +142,12 @@ function ElectronicCollection() {
               View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/> 
               </ALink>
           </div>
+          <Reveal
+          keyframes={fadeInUpShorter}
+          delay={50}
+          duration={800}
+          // triggerOnce
+        >
 
           <OwlCarousel
             adClass="products-slider best-selling-slider nav-blackcircle pb-0 m-0"

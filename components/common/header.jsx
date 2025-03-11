@@ -186,7 +186,7 @@ function Header({ adClass = "", wishlist }) {
         className={`header ${adClass} sticky-header mobile-sticky desktop-sticky`}
         style={{position:"relative",zIndex:1}}
       >
-        <div className="header-middle" style={{ paddingTop: "2rem", paddingBottom: "1rem" }}>
+        <div className="header-middle" style={{ paddingTop: "1rem", paddingBottom: "1rem" }}>
           <div className="container innercontainer">
             {/* <div className={styles.innercontainer}> */}
             <div className="header-left col-lg-2 w-auto pl-0">
@@ -325,14 +325,14 @@ function Header({ adClass = "", wishlist }) {
                     <BiSolidUser style={{ fontSize: "20px" }} />
                   </div>
                   <div className="header-menu">
-                    <ul style={{listStyle:"none"}}>
+                    <ul style={{listStyle:"none",margin:0,width:"200px",height:76}}>
                       <li>
                         <ALink href="/pages/account">
                           <img src="images/icon/vuesax/bold/frame.svg" style={{ width: "25px", height: "25px" }}></img>My Account
                         </ALink>
                       </li>
                       <li onClick={handleLogout}>
-                        <ALink href="#" >
+                        <ALink href="#">
                           {/* <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
                         <div style={{width:"35px",height:"35px",borderRadius:"50%",overflow:"hidden"}}> */}
 

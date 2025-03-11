@@ -37,6 +37,7 @@
     font-size: 14px;
     border: none;
     cursor: pointer;
+    transition: .3s ease-in-out;
 }
 
 .container>.centered-content>.buttons>button:first-child {
@@ -49,7 +50,12 @@
     background-color: #000000;
     color: #FFFFFF;
 }
+.container>.centered-content>.buttons>button:hover{
+    background-color: #E30613;
+    color: #FFFFFF;
+    border-color: #E30613;
 
+}
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
     .container>.centered-content>span {
@@ -169,7 +175,9 @@
         margin-bottom: 90px;
     }
 }
-
+.hoverbtn{
+    background: #000 !important;
+}
 .hoverbtn:hover {
 
     background-color: #E30613 !important;

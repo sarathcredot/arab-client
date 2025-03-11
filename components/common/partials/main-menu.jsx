@@ -312,13 +312,14 @@ function MainMenu({ router }) {
   return (
     <>
       <nav
-        className={`w-100 skeleton-body skel-shop-products ${
+        className={`navbar_carousel w-100 mb-0 skeleton-body skel-shop-products ${
           // !loading ? "loaded" : ""
           false ? "loaded" : ""
           }`}
       >
         <ul className="custom__menu w-100" >
           <Carousel options={options}  style={{display:"grid",placeObject:"center" }}>
+            
           {mainNav?.map((item) => (
             <li
               key={item._id}
@@ -326,6 +327,12 @@ function MainMenu({ router }) {
                 }`}
               onClick={() => {
                 console.log("click",showhide)
+                if(selectedcategory===item?._id){
+                  setshowhide(!showhide)
+
+                }else{
+                  setshowhide(true)
+                }
                 setSelectedCategory(item?._id);
                 setParentcategory((e) => ({
                   cat1: item._id,
@@ -335,7 +342,7 @@ function MainMenu({ router }) {
                   cat5: "",
                 }));
                 setIsLeaf(item.isLeaf ? item?._id : "");
-                setshowhide(!showhide)
+                
                 if (item.isLeaf) {
                   handleBrandList(item?._id);
                 } else {
@@ -405,15 +412,21 @@ function MainMenu({ router }) {
           <BackArrow movebackward={movebackward} />
         ) : null}
 
-        {parentcategory?.cat1 && parentcategory?.cat1 !== isLeaf && showhide ? (
+        {parentcategory?.cat1 && parentcategory?.cat1 !== isLeaf && showhide ? (<>
+            <p
+              className={`customheading mb-0 ${parentcategory.cat1 ? "active_container_hidden" : ""
+                }`}
+            >
+              SELECT CATEGORY
+            </p>
           <ul
-            className={`custom__menufirstchild w-100 ${parentcategory.cat2 ? "active_container_hidden" : ""
+            className={`custom__menufirstchild ${parentcategory?.cat2 && parentcategory?.cat2 !== isLeaf && showhide&&"bottom_border"}  ${isLeaf && showhide &&"bottom_border"}  w-100 ${parentcategory.cat2 ? "active_container_hidden" : ""
               }`}
           >
             {child1?.map((item) => (
               <li
                 key={item._id}
-                className={`custom__menufirstchild__item px-2 ${(item._id === parentcategory.cat2 || item?._id === selectedcategory) ? "customactive" : ""
+                className={`custom__menufirstchild__item  ${(item._id === parentcategory.cat2 || item?._id === selectedcategory) ? "customactive" : ""
                   }`}
                 onClick={() => {
                   setIsLeaf(item.isLeaf ? item?._id : "");
@@ -443,26 +456,27 @@ function MainMenu({ router }) {
               </li>
             ))}
             {
-              !!!child1?.length && <p className="custom__menufirstchild__item px-2">No Sub Category</p>
+              !!!child1?.length && <p className="custom__menufirstchild__item ">No Sub Category</p>
             }
           </ul>
+          </>
         ) : null}
         {parentcategory?.cat2 && parentcategory?.cat2 !== isLeaf && showhide ? (
           (<>
             <p
-              className={`customheading ${parentcategory.cat3 ? "active_container_hidden" : ""
+              className={`customheading mb-0  ${parentcategory.cat3 ? "active_container_hidden" : ""
                 }`}
             >
               SELECT SUB CATEGORY
             </p>
             <ul
-              className={`custom__menusecondchild w-100 ${parentcategory?.cat3 ? "active_container_hidden" : ""
+              className={`custom__menufirstchild ${parentcategory?.cat3 && parentcategory?.cat3 !== isLeaf && showhide &&"bottom_border"} ${isLeaf && showhide &&"bottom_border"}  w-100 ${parentcategory?.cat3 ? "active_container_hidden" : ""
                 }`}
             >
               {child2?.map((item) => (
                 <li
                   key={item._id}
-                  className={`custom__menusecondchild__item px-4 ${item._id === parentcategory.cat3 ? "customactive" : ""
+                  className={`custom__menufirstchild__item  ${item._id === parentcategory.cat3 ? "customactive" : ""
                     }`}
                   onClick={() => {
                     setSelectedCategory(item?._id);
@@ -492,7 +506,7 @@ function MainMenu({ router }) {
                   </p>
                 </li>
               ))}
-              {!!!child2?.length && <p className="custom__menufirstchild__item px-2">No Sub Category</p>}
+              {!!!child2?.length && <p className="custom__menufirstchild__item">No Sub Category</p>}
             </ul>
           </>)
         ) : null}
@@ -507,13 +521,13 @@ function MainMenu({ router }) {
                 SELECT SUB CATEGORY
               </p>
               <ul
-                className={`custom__menusecondchild w-100 ${parentcategory?.cat4 ? "active_container_hidden" : ""
+                className={`custom__menufirstchild  ${isLeaf && showhide &&"bottom_border"}  ${parentcategory?.cat4 && parentcategory?.cat4 !== isLeaf && showhide&&"bottom_border"} w-100 ${parentcategory?.cat4 ? "active_container_hidden" : ""
                   }`}
               >
                 {child3?.map((item) => (
                   <li
                     key={item._id}
-                    className={`custom__menusecondchild__item px-4 ${(item._id === parentcategory.cat4 || item?._id === selectedcategory) ? "customactive" : ""
+                    className={`custom__menufirstchild__item ${(item._id === parentcategory.cat4 || item?._id === selectedcategory) ? "customactive" : ""
                       }`}
                     onClick={() => {
                       setSelectedCategory(item?._id);
@@ -541,7 +555,7 @@ function MainMenu({ router }) {
                     </p>
                   </li>
                 ))}
-                {!!!child3?.length && <p className="custom__menufirstchild__item px-2">No Sub Category</p>}
+                {!!!child3?.length && <p className="custom__menufirstchild__item">No Sub Category</p>}
               </ul>
             </>
           ) : null
@@ -556,13 +570,13 @@ function MainMenu({ router }) {
                 SELECT SUB CATEGORY
               </p>
               <ul
-                className={`custom__menusecondchild w-100 ${parentcategory?.cat5 ? "active_container_hidden" : ""
+                className={`custom__menufirstchild w-100  ${isLeaf && showhide &&"bottom_border"} ${parentcategory?.cat5 && parentcategory?.cat5 !== isLeaf && showhide&&"bottom_border"} ${parentcategory?.cat5 ? "active_container_hidden" : ""
                   }`}
               >
                 {child4?.map((item) => (
                   <li
                     key={item._id}
-                    className={`custom__menusecondchild__item px-4 ${(item._id === parentcategory.cat5 || item?._id === selectedcategory) ? "customactive" : ""
+                    className={`custom__menufirstchild__item ${(item._id === parentcategory.cat5 || item?._id === selectedcategory) ? "customactive" : ""
                       }`}
                     onClick={() => {
                       setSelectedCategory(item?._id);
@@ -590,7 +604,7 @@ function MainMenu({ router }) {
                     </p>
                   </li>
                 ))}
-                {!!!child4?.length && <p className="custom__menufirstchild__item px-2">No Sub Category</p>}
+                {!!!child4?.length && <p className="custom__menufirstchild__item">No Sub Category</p>}
               </ul>
             </>
           ) : null
@@ -606,13 +620,13 @@ function MainMenu({ router }) {
                 SELECT SUB CATEGORY
               </p>
               <ul
-                className={`custom__menusecondchild w-100 ${parentcategory?.cat6 ? "active_container_hidden" : ""
+                className={`custom__menufirstchild  ${isLeaf && showhide &&"bottom_border"} ${parentcategory?.cat6 && parentcategory?.cat6 !== isLeaf && showhide&&"bottom_border"} w-100 ${parentcategory?.cat6 ? "active_container_hidden" : ""
                   }`}
               >
                 {child5?.map((item) => (
                   <li
                     key={item._id}
-                    className={`custom__menusecondchild__item px-4 ${(item._id === parentcategory.cat6 || item?._id === selectedcategory) ? "customactive" : ""
+                    className={`custom__menufirstchild__item ${(item._id === parentcategory.cat6 || item?._id === selectedcategory) ? "customactive" : ""
                       }`}
                     onClick={() => {
                       setSelectedCategory(item?._id);
@@ -638,7 +652,7 @@ function MainMenu({ router }) {
                     </p>
                   </li>
                 ))}
-                {!!!child5?.length && <p className="custom__menufirstchild__item px-2">No Sub Category</p>}
+                {!!!child5?.length && <p className="custom__menufirstchild__item">No Sub Category</p>}
               </ul>
             </>
           ) : null
@@ -654,13 +668,13 @@ function MainMenu({ router }) {
                 SELECT SUB CATEGORY
               </p>
               <ul
-                className={`custom__menusecondchild w-100 ${parentcategory?.cat7 ? "active_container_hidden" : ""
+                className={`custom__menufirstchild ${isLeaf && showhide?"bottom_border":""} w-100 ${parentcategory?.cat7 ? "active_container_hidden" : ""
                   }`}
               >
                 {child6?.map((item) => (
                   <li
                     key={item._id}
-                    className={`custom__menusecondchild__item px-4 ${(item._id === parentcategory.cat7 || item?._id === selectedcategory) ? "customactive" : ""
+                    className={`custom__menufirstchild__item ${(item._id === parentcategory.cat7 || item?._id === selectedcategory) ? "customactive" : ""
                       }`}
                     onClick={() => {
                       setSelectedCategory(item?._id);
@@ -683,7 +697,7 @@ function MainMenu({ router }) {
                     </p>
                   </li>
                 ))}
-                {!!!child6?.length && <p className="custom__menufirstchild__item px-2">No Sub Category</p>}
+                {!!!child6?.length && <p className="custom__menufirstchild__item">No Sub Category</p>}
               </ul>
             </>
           ) : null
