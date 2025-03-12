@@ -1780,6 +1780,11 @@ line-height: 2.375rem;
 		}
 	}
 }
+.product_detail_tab{
+	text-transform: capitalize !important;
+	transition:.3s ease-in-out;
+	font-weight: normal !important;
+}
 
 .product-left-sidebar {
 	.product-single-details {

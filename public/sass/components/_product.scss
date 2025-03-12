@@ -128,17 +128,24 @@
 		}
 	}
 }
+.custom-addcart-div{
+	position: absolute;
+	top: -30px;
+	right:10px;
+}
 .custom-addcart{
+	background: #FFF;
 	width: 43px;
 	height: 43px;
 	border-radius: 50%;
-                border: 1px solid #DDD;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+	border: 1px solid #DDD;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .custom-addcart:hover{
 	background-color: #E30613;
+	border: 1px solid #E30613;
 }
 .custom-addcart:hover .plusbtn{
 fill: white;

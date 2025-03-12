@@ -278,7 +278,9 @@ function ShopSidebarOne(props) {
                           borderColor: "#DDDDDD",
                           marginLeft: "0px",
                           paddingBottom: "20px",
-                          display: "flex"
+                          display: "flex",
+                          alignItems:"center",
+                          justifyContent:"space-between",
                         }}
                       >
                         <a
@@ -300,7 +302,7 @@ function ShopSidebarOne(props) {
                           query.min_price ||
                           query.max_price ||
                           query.discount ? (
-                          <div className="widget" style={{ paddingTop: "2.5rem" , paddingLeft:"1rem", color:"white"  }}>
+                          <div className="widget" style={{fontSize:"10px", paddingTop: "2.5rem", color:"white"  }}>
                             <ALink
                            
                               href={{ query: { cat_id: query.cat_id } }}

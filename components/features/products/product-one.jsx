@@ -54,6 +54,7 @@ function ProductOne(props) {
   const router = useRouter();
   const { adClass = "", link = "default", product } = props;
 
+  console.log("PRODUCT = ",product)
   const [addToCart] = useMutation(POST_CART);
 
   const token = localStorage.getItem("arabtoken");
@@ -176,12 +177,14 @@ function ProductOne(props) {
     <div className={`product-default media-with-lazy ${adClass}`}>
       <figure style={props.customStyle && { paddingTop: props.customStyle }}>
         <ALink href={`/product/default/${product?._id}`}>
-          <div className="lazy-overlay"></div>
-          <span
+          {/* <div className="lazy-overlay"></div> */}
+          <div
             style={{
               display: "flex",
               justifyContent: "center",
-
+              background:"red",
+              width:"100%",
+              height:"100%",
               // width: "130px",
               // height: "180px",
             }}
@@ -196,7 +199,7 @@ function ProductOne(props) {
                 mixBlendMode:'multiply'
               }}
             />
-          </span>
+          </div>
         </ALink>
 
         <div className="label-group">
@@ -222,7 +225,7 @@ function ProductOne(props) {
             display: "flex",
             marginTop: "0",
             alignItems: "end",
-            justifyContent: "center",
+            justifyContent: "start",
           }}
         >
           <div className="category-list" style={{ width: "50%", fontWeight: 600 }}>
@@ -230,7 +233,7 @@ function ProductOne(props) {
               ? product.categories.map((item, index) => (
                   <React.Fragment key={item.slug + "-" + index}> */}
             <ALink
-              href="#"
+              href={`/shop?cat_id=${product?.categoryId}`}
               // href={{
               //   pathname: "/shop",
               //   query: { category: item.slug },
@@ -249,7 +252,7 @@ function ProductOne(props) {
           </div>
 
           {/* <div style={{width:"70px",height:"70px",display:"flex",borderRadius:"50%",border:"1px solid red"}}>tt</div> */}
-          <div style={{ width: "50%", display: "flex", justifyContent: "end" }}>
+          <div className="custom-addcart-div" style={{ width: "50%", display: "flex", justifyContent: "end" }}>
             {product?.stock > 0 && <div className="custom-addcart" onClick={(e) => {
               if (product.stock > 0) {
                 onAddCartClick(e, product);

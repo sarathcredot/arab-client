@@ -115,7 +115,7 @@ function Footer() {
                         <ALink href={token ? "/pages/orders" : "#"}>Orders</ALink>
                       </li> */}
                       <li>
-                        <ALink href="#">Become a Seller</ALink>
+                        <ALink href={`${process.env.NEXT_PUBLIC_VENDOR_URI}/become-a-seller`} target="_blank" rel="noopener noreferrer" >Become a Seller</ALink>
                       </li>
                       {/* <li>
                       <ALink href="#">Orders History</ALink>

@@ -323,13 +323,21 @@ function MainMenu({ router }) {
           {mainNav?.map((item) => (
             <li
               key={item._id}
-              className={`custom__menu__item px-2 ${item._id === parentcategory.cat1 ? "activate" : ""
+              className={`custom__menu__item px-3 ${item._id === parentcategory.cat1 ? "activate" : ""
                 }`}
               onClick={() => {
                 console.log("click",showhide)
                 if(selectedcategory===item?._id){
-                  setshowhide(!showhide)
-
+                  setshowhide(false)
+                  setSelectedCategory("")
+                  setParentcategory((e) => ({
+                    cat1: "",
+                    cat2: "",
+                    cat3: "",
+                    cat4: "",
+                    cat5: "",
+                  }));
+                  return
                 }else{
                   setshowhide(true)
                 }

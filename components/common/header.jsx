@@ -325,7 +325,7 @@ function Header({ adClass = "", wishlist }) {
                     <BiSolidUser style={{ fontSize: "20px" }} />
                   </div>
                   <div className="header-menu">
-                    <ul style={{listStyle:"none",margin:0,width:"200px",height:76}}>
+                    <ul style={{listStyle:"none",margin:0,width:"170px",height:76}}>
                       <li>
                         <ALink href="/pages/account">
                           <img src="images/icon/vuesax/bold/frame.svg" style={{ width: "25px", height: "25px" }}></img>My Account

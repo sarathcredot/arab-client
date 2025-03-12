@@ -26,19 +26,19 @@ export default function SingleTabOne(props) {
                 <Tabs   className={`product-single-tabs  ${adClass}`} selectedTabClassName="active" selectedTabPanelClassName="show" >
                     <TabList  className="nav nav-tabs">
                         <Tab className="nav-item">
-                            <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>OverView</ALink>
+                            <ALink href="#" className="nav-link product_detail_tab" style={{ fontFamily: "Poppines"}}>Overview</ALink>
                         </Tab>
 
                         <Tab className="nav-item">
-                            <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>Specifications</ALink>
+                            <ALink href="#" className="nav-link product_detail_tab" style={{ fontFamily: "Poppines" }}>Specifications</ALink>
                         </Tab>
 
                         <Tab className="nav-item">
-                            <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>Return Policy</ALink>
+                            <ALink href="#" className="nav-link product_detail_tab" style={{ fontFamily: "Poppines" }}>Return Policy</ALink>
                         </Tab>
                         {product?.warrantyPolicyData.name !==null && 
                             <Tab className="nav-item">
-                            <ALink href="#" className="nav-link" style={{ fontFamily: "Poppines" }}>Warranty Policy</ALink>
+                            <ALink href="#" className="nav-link product_detail_tab" style={{ fontFamily: "Poppines" }}>Warranty Policy</ALink>
                            </Tab>
                         }
                         

@@ -758,16 +758,16 @@ function ProductDetailOne(props) {
               lineHeight: "26px",
             }}
           >
-            <p style={{ fontWeight: "400" }}>{product?.shortDescription}</p>
+            <p style={{ fontWeight: "400",marginTop:"10px" }}>{product?.shortDescription}</p>
           </div>
 
           {variantData?.length > 0 ? (
             <div className="product-filters-container">
               {colorVariants?.length > 0 ? (
                 <>
-                  <label>
-                    COLOR:&nbsp;<span style={{ fontWeight: "500" }} > {color} </span>
-                    <span style={{ fontWeight: "500" }}>
+                  <label style={{marginBottom:"10px" }}>
+                    Color:&nbsp;<span style={{ fontWeight: "500" }} > {color} </span>
+                    <span style={{ fontWeight: "500"}}>
                       {selectedAttributes &&
                         // selectedAttributes.charAt(0).toUpperCase() +
                         selectedAttributes?.color
@@ -987,7 +987,8 @@ function ProductDetailOne(props) {
                         style={{
                           color: "#000",
                           fontWeight: "500",
-                          marginBottom: "10px"
+                          marginBottom: "10px",
+                          textTransform:"capitalize"
                         }}
                       >
                         {uniqueAttributeName} &nbsp;

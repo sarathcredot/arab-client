@@ -80,7 +80,7 @@ function DealSection() {
           View All <IoIosArrowForward className="arrow-icon" style={{fontSize:"20px"}}/>
           </p></ALink> */}
 
-<Link href="/shop?discount=10">
+    <Link href="/shop?discount=10">
       <a
         style={{
           display: "inline-flex",
