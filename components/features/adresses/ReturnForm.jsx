@@ -472,44 +472,69 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                         </div> */}
 
 
-                        <div style={{ display: 'flex', alignItems: 'center', marginTop: "20px", position: "relative" }}>
+
+                        <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
                             {/* Hidden file input */}
                             <input
-                                className="file-input"
                                 type="file"
-                                id="image"
+                                id="fileInput"
                                 accept="image/*"
                                 multiple
-
                                 onChange={handleChangeImage("data")("image")}
                                 ref={fieldRefs.data.image}
-                            // onClick={(e) => e.preventDefault()}
+                                style={{ display: "none" }} // Hide the input
                             />
 
-                            {/* Input box for displaying file name */}
+                            {/* Input box for displaying selected file name */}
                             <input
                                 className="re-inpt-ureson-file"
                                 type="text"
                                 placeholder="No file selected"
                                 readOnly
-                                id="image"
-                                accept="image/*"
-                                multiple
-                                onChange={handleChangeImage("data")("image")}
-                                ref={fieldRefs.data.image}
-                                value={formState?.data?.imageFileName?.value}
-                                style={{ marginBottom: "0px" }}
+                                value={formState?.data?.imageFileName?.value || ""}
+                                style={{ flex: 1, padding: "8px" }}
                             />
 
+                            {/* Upload button triggers file input */}
 
+                            <div
+                                onClick={(e) => {
+                                    e.preventDefault(); // Prevents any form submission
+                                    document.getElementById("fileInput").click();
+                                }}
+                                style={{ display: 'flex', alignItems: 'center' }}>
+                                <label htmlFor="file-upload" className="upload-btn">
+                                    Upload
+                                </label>
+                                <input
+                                    className="re-inpt-ureson-file file-input"
+                                    type="file"
+                                    id="file-upload"
+                                />
+                            </div>
 
-
-
-
-
-
-
+                            {/* <button
+                                onClick={(e) => {
+                                    e.preventDefault(); // Prevents any form submission
+                                    document.getElementById("fileInput").click();
+                                }}
+                                style={{
+                                    padding: "8px 12px",
+                                    backgroundColor: "#007bff",
+                                    color: "#fff",
+                                    border: "none",
+                                    borderRadius: "4px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Upload
+                            </button> */}
                         </div>
+
+
+
+
+
                         {formState?.data?.image?.error && (
 
                             <span style={{ color: "red" }} >  image is required! </span>
@@ -560,7 +585,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                             /><br />
                             {formState?.returnAddress?.firstname?.error && (
 
-                                <span>  first name is required! </span>
+                                <span style={{ color: "red" }}  >  first name is required! </span>
                             )}
 
                         </div>

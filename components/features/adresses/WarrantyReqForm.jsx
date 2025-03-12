@@ -42,7 +42,7 @@ const GET_ORDER_DETAILS = gql`
   }
 `;
 
-function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType ,orderObjId}) {
+function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType, orderObjId }) {
   const [addinput, setaddinput] = useState([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
   const [bank, setbank] = useState([1, 1, 1, 1, 1]);
 
@@ -198,7 +198,7 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType ,orderObj
       value: fileNamesCombined,
       error: false,
     });
-    dispatch({ type: "SET_FIELD", form, field,  value: [...existingImages, ...fileArray] , error: false });
+    dispatch({ type: "SET_FIELD", form, field, value: [...existingImages, ...fileArray], error: false });
   };
 
   const fieldRefs = {
@@ -297,8 +297,8 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType ,orderObj
       );
 
       const data = {
-        claimType:formState?.data?.cliamType,
-        orderProductId:orderObjId,
+        claimType: formState?.data?.cliamType,
+        orderProductId: orderObjId,
         returnAddress,
         returnUserReason: formState?.data?.returnUserReason?.value,
         image: formState?.data?.image?.value,
@@ -306,7 +306,7 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType ,orderObj
 
       handleSubmit(data);
 
-     
+
     } catch (error) {
       toast.error(error.message);
     }
@@ -397,7 +397,7 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType ,orderObj
               <span style={{ color: "red" }}>Reason is required!</span>
             )}
 
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -423,7 +423,71 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType ,orderObj
                 
                 style={{ marginBottom: "0px" }}
               />
+            </div> */}
+
+            <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+              {/* Hidden file input */}
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                multiple
+                onChange={handleChangeImage("data")("image")}
+                ref={fieldRefs.data.image}
+                style={{ display: "none" }} // Hide the input
+              />
+
+              {/* Input box for displaying selected file name */}
+              <input
+                className="re-inpt-ureson-file"
+                type="text"
+                placeholder="No file selected"
+                readOnly
+                value={formState?.data?.imageFileName?.value || ""}
+                style={{ flex: 1, padding: "8px" }}
+              />
+
+              {/* Upload button triggers file input */}
+
+              <div
+                onClick={(e) => {
+                  e.preventDefault(); // Prevents any form submission
+                  document.getElementById("fileInput").click();
+                }}
+                style={{ display: 'flex', alignItems: 'center' }}>
+                <label htmlFor="file-upload" className="upload-btn">
+                  Upload
+                </label>
+                <input
+                  className="re-inpt-ureson-file file-input"
+                  type="file"
+                  id="file-upload"
+                />
+              </div>
+
+              {/* <button
+                                onClick={(e) => {
+                                    e.preventDefault(); // Prevents any form submission
+                                    document.getElementById("fileInput").click();
+                                }}
+                                style={{
+                                    padding: "8px 12px",
+                                    backgroundColor: "#007bff",
+                                    color: "#fff",
+                                    border: "none",
+                                    borderRadius: "4px",
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Upload
+                            </button> */}
             </div>
+
+
+
+
+
+
             {formState?.data?.image?.error && (
               <span style={{ color: "red" }}>Image is required!</span>
             )}
