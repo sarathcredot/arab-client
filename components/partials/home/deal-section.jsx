@@ -70,8 +70,8 @@ function DealSection() {
   return (
     <section className="deal-products-section">
 
-      <div className="deal-section-head">
-        <h2 className="section-title d-flex align-items-center text-transform-none">
+      <div className="deal-section-head pb-0">
+        <h2 className="section-title d-flex align-items-center text-transform-none" style={{marginBottom:"0px",paddingBottom:"13px"}}>
           Deals of the day
         </h2>
         

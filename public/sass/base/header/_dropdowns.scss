@@ -124,6 +124,7 @@
 		}
 		.btn-close:hover{
 			background-color:#E30613; 
+			box-shadow: 0 0 5px #E30613;
     color: #ffffff; 
     border-color: #E30613; 
 		}
@@ -565,6 +566,70 @@
 
 		.header-menu ul {
 			transform: none;
+		}
+	}
+}
+.account_dropdown{
+	margin: 0;
+	padding: 0;
+	transition: .2s ease-in-out;
+
+	li{
+		height: 50px;
+		margin: 0;
+		padding-top: 7px;
+		background: #FFF;
+		transition: .2s ease-in-out;
+		a{
+			margin: 0;
+			height: 100% !important;
+			&:hover{
+				background: transparent;
+			}
+		}
+		&:hover{
+			background: #f4f4f4;
+		}
+	}
+}
+
+.order_dropDown{
+	position: relative;
+	transition: .2s ease-in-out;
+	button{
+		background: #f8f8f8;
+		transition: .2s ease-in-out;
+		&:hover{
+		background: #f0f0f0;
+
+		}
+	}
+	.header-menu{
+		width:100px;
+		position: absolute;
+		top: 40px;
+		z-index: 999;
+		background: #fff;
+		box-shadow: 0 0 5px #f4f4f4;
+		border-radius: 5px;
+		overflow: hidden;
+		color: #000;
+
+
+		ul{
+			list-style: none;
+			padding: 0;
+			li{
+				height: 40px;
+				display: flex;
+				align-items: center;
+				justify-content: start;
+				padding: 0 10px;
+				cursor: pointer;
+				&:hover{
+					background: #f4f4f4;
+					}
+			}
 		}
 	}
 }

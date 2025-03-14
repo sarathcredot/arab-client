@@ -66,7 +66,7 @@ function Account() {
   const id = localStorage?.getItem("userId");
   const token = localStorage.getItem("arabtoken");
    const [userdetail, { loading: userloading, error: usererror, data: userData, refetch }] =
-      useLazyQuery(USER_DETAIL);
+      useLazyQuery(USER_DETAIL,{fetchPolicy:"network-only"});
 
 
   const [showPopup, setShowPopup] = useState(false);
@@ -182,7 +182,7 @@ function Account() {
           {/* <h1>orders</h1>*/}
 
           <ul
-            className="checkout-progress-bar d-flex justify-content-center flex-wrap"
+            className="checkout-progress-bar d-flex justify-content-center flex-wrap mb-1"
             style={{ backgroundColor: "#F9F9F9", width: "100%" }}
           >
             {/* <li className="">
@@ -192,7 +192,9 @@ function Account() {
               <ALink href="/pages/account">Dashboard</ALink>
             </li>
           </ul>
+          {/* saldfsldklkklk */}
         </div>
+
       </main>
 
       <div className="container  custom-account-container account-container " style={{ marginBottom: "0px" }} >

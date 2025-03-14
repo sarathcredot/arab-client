@@ -133,7 +133,7 @@ export default function SingleTabOne(props) {
                         >{product?.returnPolicyData.name}</h1>
 
                     <p style={{
-                            marginBottom: "9px",
+                            marginBottom: "25px",
                             marginTop:"20px",
                             letterSpacing: 0,
                             listStyleType: "disc",
@@ -164,7 +164,7 @@ export default function SingleTabOne(props) {
                         >{product?.warrantyPolicyData?.name}</h1>
 
                     <p style={{
-                            marginBottom: "9px",
+                            marginBottom: "25px",
                             marginTop:"20px",
                             letterSpacing: 0,
                             listStyleType: "disc",

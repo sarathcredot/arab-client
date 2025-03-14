@@ -273,7 +273,7 @@ function Wishlist(props) {
                           </ALink>
                           <a
                             className="btn-remove icon-cancel"
-                            title="Remove Products"
+                            title="Remove Product"
                             onClick={(e) => removeProduct(e, item)}
                           ></a>
                         </figure>

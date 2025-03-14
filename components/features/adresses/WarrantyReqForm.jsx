@@ -370,7 +370,7 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType, orderObj
 
   return (
     <div>
-      <div className="container re-form-main">
+      <div className="container re-form-main mt-5">
         <h1 className="re-form-title">Complaint Registration</h1>
         <div
           style={{
@@ -723,15 +723,13 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType, orderObj
             justifyContent: "end",
             alignItems: "center",
             gap: "10px",
-            marginTop: "20px",
+            margin: "40px 0 ",
           }}
         >
           <div
             href="/pages/cart"
-            className="btn btn-block view-cart"
+            className="btn btn-block view-cart btn-outline-red"
             style={{
-              border: "1px solid #000",
-              background: "white",
               width: "231px",
               height: "52px",
             }}
@@ -743,9 +741,8 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType, orderObj
           </div>
 
           <div
-            className="btn btn-block view-cart"
+            className="btn btn-block view-cart hoverbtn"
             style={{
-              border: "1px solid #000",
               background: "black",
               color: "white",
               width: "231px",
@@ -753,7 +750,7 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType, orderObj
             }}
             onClick={handleOnSubmit}
           >
-            Accept
+            Submit
           </div>
         </div>
       </div>

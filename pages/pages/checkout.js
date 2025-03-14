@@ -477,7 +477,7 @@ function CheckOut() {
                                 style={{ marginTop: "10px",paddingLeft:"20px" }}
                               />
                               )}
-                              <div className="input-group-append apply_coupon_btn_div">
+                              <div className=" apply_coupon_btn_div">
                                 {cartData?.getCart?.isCouponApplied?(
                                   <button style={{
                                     background:"#f91926"
@@ -493,7 +493,6 @@ function CheckOut() {
                                 <button 
                                 className="apply_coupon_btn btn btn-sm mt-0 hoverbtn"
                                 type="submit"
-                                // onClick={()=>handleApplyCoupon()}
                               >
                                 Apply Coupon
                               </button>
@@ -1071,8 +1070,8 @@ function CheckOut() {
                               </td>
                             </tr>
                             }
-                            <tr className="cart-subtotal">
-                              <td>
+                            <tr className="cart-subtotal mt-0">
+                              <td className="">
                                 <h4>Shipping Charge</h4>
                               </td>
 
@@ -1114,19 +1113,19 @@ function CheckOut() {
                           </tr> */}
 
                             <tr className="order-total border_bottom">
-                              <td>
+                              <td className="pt-5 pb-3">
                                 <h4>Total</h4>
                               </td>
-                              <td>
+                              <td className="pb-0">
                                 <b className="total-price">
-                                  <span style={{fontWeight:"400"}}>OMR {cartData?.getCart?.grandTotal}</span>
+                                  <span style={{fontWeight:"600"}}>OMR {cartData?.getCart?.grandTotal}</span>
                                 </b>
                               </td>
                             </tr>
                           </tfoot>
                         </table>
 
-                        <div className="payment-methods border-0">
+                        <div className="payment-methods border-0 pt-4">
                           <h4 className="">Payment methods</h4>
                           <div className="info-box with-icon p-0 payment_methods">
                             <div className="payment_method">

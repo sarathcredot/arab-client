@@ -88,7 +88,7 @@ function ElectronicCollection() {
             className="heading shop-list   mb-0 pl-0 pr-0 "
            
           >
-            <div className="  d-flex align-items-center justify-content-between flex-wrap" style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE",marginBottom:"43px",paddingBottom:"20px" ,paddingTop:"50px"}}>
+            <div className="  d-flex align-items-center justify-content-between flex-wrap" style={{ borderBottom: "1px solid ", borderColor: "#EEEEEE",marginBottom:"40px",paddingBottom:"13px" ,paddingTop:"50px"}}>
               <h4 className="section-title text-transform-none mb-0 mr-0 " >
                 Best Selling 
               </h4>

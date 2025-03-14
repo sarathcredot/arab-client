@@ -266,7 +266,7 @@ function addresses() {
               </div>
             </div>
             </>
-          )):(<p>no addresses</p>)}
+          )):(<p>No addresses</p>)}
           </div>
         </div>
 

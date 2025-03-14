@@ -44,7 +44,8 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     maxHeight: "90vh", // Allow modal to take up 90% of viewport height
     overflowY: "auto",
-    border: "none"
+    border: "none",
+    
   },
 };
 
@@ -153,9 +154,9 @@ query GetWarrantyPolicyOfOrderProduct($input: getWarrantyPolicyOfOrderProductInp
 
 
 
-      return () => {
-        document.body.classList.remove("no-scroll");
-      };
+      // return () => {
+      //   document.body.classList.remove("no-scroll");
+      // };
     }, [isOpen, data, error, refetch]);
 
 
@@ -253,6 +254,7 @@ query GetWarrantyPolicyOfOrderProduct($input: getWarrantyPolicyOfOrderProductInp
           // onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           style={customStyles}
+          
         // contentLabel="Return Order"
         >
           {/* <div className={styles.modalOverlay  } onClick={closeModal}></div> */}
@@ -282,8 +284,8 @@ query GetWarrantyPolicyOfOrderProduct($input: getWarrantyPolicyOfOrderProductInp
                             <>
                               <div
                                 href="/pages/cart"
-                                className="btn btn-block view-cart "
-                                style={{ border: "1px solid #000", background: "white", width: "231px", height: "52px" }}
+                                className="btn btn-block  btn-outline-red view-cart "
+                                style={{ width: "231px", height: "52px" }}
                                 onClick={closeModal}
                               >
                                 Cancel
@@ -292,8 +294,8 @@ query GetWarrantyPolicyOfOrderProduct($input: getWarrantyPolicyOfOrderProductInp
 
                               <div
 
-                                className="btn btn-block view-cart "
-                                style={{ border: "1px solid #000", background: "black", color: "white", width: "231px", height: "52px" }}
+                                className="btn btn-block view-cart hoverbtn"
+                                style={{ background: "black", color: "white", width: "231px", height: "52px" }}
                                 // onClick={()=>{router.push({pathname:"/pages/orderReturnForm",query:{id:orderId}})}}
                                 onClick={handleSubmit}
                               >
@@ -457,8 +459,8 @@ query GetWarrantyPolicyOfOrderProduct($input: getWarrantyPolicyOfOrderProductInp
 
                               <div
                                 href="/pages/cart"
-                                className="btn btn-block view-cart "
-                                style={{ border: "1px solid #000", background: "white", width: "231px", height: "52px" }}
+                                className="btn btn-block view-cart btn-outline-red"
+                                style={{  width: "231px", height: "52px" }}
                                 onClick={closeModal}
                               >
                                 Cancel
@@ -466,9 +468,8 @@ query GetWarrantyPolicyOfOrderProduct($input: getWarrantyPolicyOfOrderProductInp
 
 
                               <div
-
-                                className="btn btn-block view-cart "
-                                style={{ border: "1px solid #000", background: "black", color: "white", width: "231px", height: "52px" }}
+                                className="btn btn-block view-cart hoverbtn"
+                                style={{ background: "black", color: "white", width: "231px", height: "52px" }}
                                 // onClick={()=>{router.push({pathname:"/pages/orderReturnForm",query:{id:orderId}})}}
                                 onClick={handleSubmit}
                               >

@@ -86,10 +86,13 @@
 	justify-content: center;
 	align-items: center;
 	background-color: #E9E9E9;
+	cursor: pointer;
 			
 }
 .twitter-cus-icon:hover{
 	background-color: #e30613;
+	box-shadow: 0 0 5px #e30613;
+	border-color: #e30613;
 }
 .twitter-cus-icon:hover .twitter-color{
 	color: white;
