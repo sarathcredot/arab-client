@@ -978,12 +978,12 @@ function Orders(props) {
                                     setshowCancelPopup(false);
                                     setCancelId(null);
                                   }}
-                                  className="btn btn-outline-dark"
+                                  className="btn btn-outline-red "
                                 >
                                   CANCEL
                                 </button>
                                 <button
-                                  className="btn btn-dark"
+                                  className={`btn btn-dark ${termsAgreed&&"hoverbtn"}`}
                                   onClick={() => orderCancel(cancelId)}
                                   disabled={!termsAgreed}
                                 >
