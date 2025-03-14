@@ -487,12 +487,12 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
 
                             {/* Input box for displaying selected file name */}
                             <input
-                                className="re-inpt-ureson-file"
+                                className="re-inpt-ureson-file "
                                 type="text"
                                 placeholder="No file selected"
                                 readOnly
                                 value={formState?.data?.imageFileName?.value || ""}
-                                style={{ flex: 1, padding: "8px",cursor:"default" }}
+                                style={{ flex: 1, padding: "8px 18px",cursor:"default" }}
                             />
 
                             {/* Upload button triggers file input */}
@@ -503,7 +503,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                                     document.getElementById("fileInput").click();
                                 }}
                                 style={{ display: 'flex', alignItems: 'center' }}>
-                                <label htmlFor="file-upload" className="upload-btn">
+                                <label htmlFor="file-upload" className="upload-btn hoverbtn">
                                     Upload
                                 </label>
                                 <input
@@ -559,7 +559,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                                 }}
 
                             />
-                            <label style={{ marginTop: "10px" }} className='re-input-label' htmlFor="">  Use shipping address as return address *</label>
+                            <label style={{ marginTop: "10px",cursor:"pointer" }} className='re-input-label' htmlFor="lost-password">  Use shipping address as return address</label>
 
                         </div>
                     </div>
@@ -742,6 +742,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                                     "governorateID"
                                 )}
                                 ref={fieldRefs.returnAddress.governorateID}
+                                style={{outline:"none",padding:"10px"}}
                             >
 
                                 <option value="">Select Governorate</option>
@@ -774,6 +775,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                                 )}
                                 disabled={!villages.length}
                                 ref={fieldRefs.returnAddress.villageID}
+                                style={{outline:"none",padding:"10px"}}
                             >
 
                                 <option value="">Select Wilayat</option>

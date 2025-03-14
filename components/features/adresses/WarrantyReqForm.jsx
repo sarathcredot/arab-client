@@ -455,7 +455,7 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType, orderObj
                   document.getElementById("fileInput").click();
                 }}
                 style={{ display: 'flex', alignItems: 'center' }}>
-                <label htmlFor="file-upload" className="upload-btn">
+                <label htmlFor="file-upload" className="upload-btn hoverbtn">
                   Upload
                 </label>
                 <input
@@ -512,11 +512,12 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType, orderObj
                 }}
               />
               <label
-                style={{ marginTop: "10px" }}
+                style={{ marginTop: "10px",cursor:"pointer" }}
                 className="re-input-label"
-                htmlFor=""
+                htmlFor="lost-password"
               >
-                Use shipping address <span style={{ color: "red" }}>*</span>
+                Use shipping address 
+                {/* <span style={{ color: "red" }}>*</span> */}
               </label>
             </div>
           </div>
@@ -612,6 +613,7 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType, orderObj
                   "governorateID"
                 )}
                 ref={fieldRefs.returnAddress.governorateID}
+                style={{outline:"none",padding:"10px"}}
               >
                 <option value="">Select Governorate</option>
                 {getLocation?.getLocationsData?.map((gov) => (
@@ -639,6 +641,7 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType, orderObj
                 onChange={handleChangeVillage("returnAddress")("villageID")}
                 disabled={!villages.length}
                 ref={fieldRefs.returnAddress.villageID}
+                style={{outline:"none",padding:"10px"}}
               >
                 <option value="">Select Wilayat</option>
                 {villages.map((wil) => (

@@ -28,6 +28,7 @@ function BannerSection({ offer, sectionTwoData, sectionThreeData }) {
               src={sectionTwoData?.images && sectionTwoData?.images[0]?.fileURL}
               onClick={() => {
                 if (sectionTwoData?.buttons && sectionTwoData?.buttons.length > 0 && sectionTwoData?.buttons[0]?.redirectionURL) {
+                  console.log("SECTIONNNNN",sectionTwoData)
                   router.push(sectionTwoData?.buttons[0]?.redirectionURL);
                 }
               }}

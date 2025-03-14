@@ -217,7 +217,7 @@ function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsship
     //   required: "HouseNumber is required",
     // },
     mobile: {
-      required: "Mobile is required",
+      required: "Phone number is required",
     },
     postCode: {
       required: "postCode is required",
@@ -312,7 +312,7 @@ function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsship
                           type="text"
                           className="form-control"
                           value={value}
-                          placeholder="Home, Office"
+                          placeholder="Label"
                           onChange={onChange}
                           style={{ marginTop: "10px" }}
                         />
@@ -539,7 +539,7 @@ function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsship
                         <input
                           type="number"
                           className="form-control"
-                          placeholder="6730016"
+                          placeholder="Pincode/Zip"
                           value={value}
                           onChange={onChange}
                           style={{ marginTop: "10px" }}
@@ -565,12 +565,13 @@ function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsship
                           style={{ padding: "10px" }}
                         >
                           <img
-                            src="images\brands\flag1.svg"
+                            // src="images\brands\flag1.svg"
+                            src="/images/brands/oman_flag.svg"
                             alt="Flag"
                             width="24"
                             height="16"
                           />
-                          +968
+                          {/* +968 */}
                         </span>
                       </div>
                       <Controller
@@ -581,7 +582,7 @@ function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsship
                             type="tel"
                             className="form-control"
                             placeholder="Enter Your Phone Number"
-                            value={value}
+                            value={`+ 968 ${value}`}
                             onChange={onChange}
                           />
                         )}
@@ -621,7 +622,7 @@ function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsship
                     style={{ display: "flex", justifyContent: "flex-end" }}
                   >
                     <div className="mt-3">
-                      <button type="submit" className="btn btn-dark mr-0">
+                      <button type="submit" className="btn btn-dark mr-0 hoverbtn">
                         {isEdit?"Save changes":"Submit"}
                       </button>
                     </div>

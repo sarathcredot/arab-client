@@ -96,7 +96,7 @@ const expectedDeliveryDate = getExpectedDeliveryDate(orderDate);
         <h4 style={{fontWeight:"600"}}>Payment by</h4>
         </div>
       </div>
-    <div class="cards-container" style={{marginBottom:"40px "}}>
+    <div class="cards-container" style={{marginBottom:"50px "}}>
    
         <div class="card">
        
@@ -139,7 +139,7 @@ const expectedDeliveryDate = getExpectedDeliveryDate(orderDate);
     </div>
 
 
-    <hr/>
+    {/* <hr/> */}
 
 
 

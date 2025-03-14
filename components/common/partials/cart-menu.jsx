@@ -357,7 +357,7 @@ function CartMenu({ props }) {
                   localStorage.getItem("arabtoken") &&
                   <div
                     href="/pages/checkout"
-                    className="btn btn-dark btn-block text-white  mt-1"
+                    className="btn btn-dark btn-block text-white  mt-1 hoverbtn"
                     onClick={() => router.push("/pages/checkout")}
                   >
                     Checkout
