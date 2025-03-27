@@ -223,7 +223,7 @@ query GetWarrantyPolicyOfOrderProduct($input: getWarrantyPolicyOfOrderProductInp
         const warrantyMonths = data?.getWarrantyPolicyOfOrderProduct?.duration || 0;
         const warrantyDays = warrantyMonths * 30; // Approximate month to days conversion
 
-        console.log("data gap",warrantyMonths, warrantyDays);
+        console.log("data gap", warrantyMonths, warrantyDays);
 
         if (differenceInDays > warrantyDays) {
           setflag(false);
