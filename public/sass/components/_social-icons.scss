@@ -38,49 +38,55 @@
 
 	&.social-facebook {
 		background-color: #e30613;
-
+		
 		&:hover {
 			border-color: #e30613;
+			box-shadow: 0 0 5px #e30613;
 		}
 	}
-
+	
 	&.social-twitter {
 		background-color: #e30613;
-
+		
 		&:hover {
 			border-color: #e30613;
+			box-shadow: 0 0 5px #e30613;
 		}
 	}
-
+	
 	&.social-instagram {
 		background-color: #e30613;
-
+		
 		&:hover {
 			border-color: #e30613;
+			box-shadow: 0 0 5px #e30613;
 		}
 	}
 
 	&.social-linkedin {
 		background-color: #e30613;
-
+		
 		&:hover {
 			border-color: #e30613;
+			box-shadow: 0 0 5px #e30613;
 		}
 	}
 
 	&.social-gplus {
 		background-color: #dd4b39;
-
+		
 		&:hover {
 			border-color: rgba(221,75,57, .85);
+			box-shadow: 0 0 5px #dd4b39;
 		}
 	}
-
+	
 	&.social-mail {
 		background-color: #dd4b39;
-
+		
 		&:hover {
 			border-color: rgba(221,75,57, .85);
+			box-shadow: 0 0 5px #dd4b39;
 		}
 	}
 }

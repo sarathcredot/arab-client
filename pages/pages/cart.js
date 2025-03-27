@@ -229,15 +229,15 @@ function Cart(props) {
             className="checkout-progress-bar d-flex justify-content-center flex-wrap"
             style={{ backgroundColor: "#F9F9F9", width: "100%" }}
           >
-            <li className="active">
+            <li className="">
               <ALink href="/pages/cart">Shopping cart</ALink>
             </li>
-            <li className="">
+            {/* <li className="">
               <ALink href="/pages/checkout">checkout</ALink>
             </li>
             <li className="">
               <ALink href="/pages/checkout">Order Complete</ALink>
-            </li>
+            </li> */}
           </ul>
         </div>
 

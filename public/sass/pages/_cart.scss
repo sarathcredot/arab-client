@@ -94,7 +94,13 @@
 	.btn-remove {
 		right: -10px;
 		font-size: 1.1rem;
+		&:hover{
+
+			color: #fff;
+			box-shadow: 0 0 5px #E30613;
+		}
 	}
+
 
 	tfoot {
 		td {
@@ -120,7 +126,9 @@
 		margin-left: auto;
 	}
 }
-
+.badge_hover:hover{
+	box-shadow: 0 0 5px #E30613;
+}
 @media (max-width:480px) {
 	.table.table-cart, .table.table-wishlist {
 		

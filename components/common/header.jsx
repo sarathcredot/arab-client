@@ -325,21 +325,16 @@ function Header({ adClass = "", wishlist }) {
                     <BiSolidUser style={{ fontSize: "20px" }} />
                   </div>
                   <div className="header-menu">
-                    <ul style={{listStyle:"none",margin:0,width:"170px",height:76}}>
+                    <ul className="account_dropdown" style={{listStyle:"none",margin:0,width:"150px"}}>
                       <li>
                         <ALink href="/pages/account">
                           <img src="images/icon/vuesax/bold/frame.svg" style={{ width: "25px", height: "25px" }}></img>My Account
                         </ALink>
                       </li>
                       <li onClick={handleLogout}>
-                        <ALink href="#">
-                          {/* <div style={{display:"flex",alignItems:"center",gap:"8px"}}>
-                        <div style={{width:"35px",height:"35px",borderRadius:"50%",overflow:"hidden"}}> */}
-
+                          <ALink href="#">
                           <img src="images/icon/vuesax/bold/key.svg" className={styles.flagimg}></img>
-                          {/* </div> */}
                           Log Out
-                          {/* </div> */}
                         </ALink>
                       </li>
                     

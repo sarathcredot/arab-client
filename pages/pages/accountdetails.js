@@ -158,7 +158,7 @@ function accountdetails() {
                 <div
                   className=""
                   style={{
-                    marginTop: "3rem",
+                    marginTop: "1rem",
                     borderBottom: "1px solid",
                     borderColor: "#E2E2E2",
                     padding: "2px",
@@ -168,9 +168,9 @@ function accountdetails() {
                 </div>
 
                 <div className="">
-                  <form onSubmit={handleSubmit(onSubmit)} id="checkout-form" style={{marginTop:"6.5rem"}}>
+                  <form onSubmit={handleSubmit(onSubmit)} id="checkout-form" style={{marginTop:"5rem"}}>
                     <div className="row">
-                      <div className="col-md-6 mb-2">
+                      <div className="col-md-6 mb-0">
                         <div className="form-group mr-5 mb-0">
                           <label
                             style={{
@@ -369,9 +369,9 @@ function accountdetails() {
                       className="container"
                       style={{ display: "flex", justifyContent: "flex-end" }}
                     >
-                      <div className="mt-3">
+                      <div className="mt-3 mb-5">
                         {" "}
-                        <button type="submit" className="btn btn-dark btn-acc mr-0">
+                        <button type="submit" className="btn btn-dark btn-acc mr-0 hoverbtn">
                           Save changes
                         </button>
                       </div>

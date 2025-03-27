@@ -122,7 +122,7 @@ function Home() {
       <main className="home" style={{position:"relative",zIndex:0}} >
         <div style={{ position: "relative"}}>
           <div
-            className="header-bottom d-flex"
+            className="header-bottom d-flex pt-0"
             style={{ position: "relative", width: "100%",marginBottom:"-50px",}}
           >
             <div className="container" >  

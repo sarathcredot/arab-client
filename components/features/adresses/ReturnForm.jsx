@@ -436,10 +436,10 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
     return (
         <div>
 
-            <div className="container re-form-main " >
+            <div className="container re-form-main mt-5" >
 
                 <h1 className='re-form-title' > Return Order  </h1>
-                <div style={{ borderTop: '1px solid #E2E2E2', marginTop: '10px', marginBottom: "20px" }} > </div>
+                <div style={{ borderTop: '1px solid #E2E2E2', marginTop: '10px', marginBottom: "40px" }} > </div>
 
                 <div>
 
@@ -487,12 +487,12 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
 
                             {/* Input box for displaying selected file name */}
                             <input
-                                className="re-inpt-ureson-file"
+                                className="re-inpt-ureson-file "
                                 type="text"
                                 placeholder="No file selected"
                                 readOnly
                                 value={formState?.data?.imageFileName?.value || ""}
-                                style={{ flex: 1, padding: "8px" }}
+                                style={{ flex: 1, padding: "8px 18px",cursor:"default" }}
                             />
 
                             {/* Upload button triggers file input */}
@@ -503,7 +503,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                                     document.getElementById("fileInput").click();
                                 }}
                                 style={{ display: 'flex', alignItems: 'center' }}>
-                                <label htmlFor="file-upload" className="upload-btn">
+                                <label htmlFor="file-upload" className="upload-btn hoverbtn">
                                     Upload
                                 </label>
                                 <input
@@ -559,7 +559,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                                 }}
 
                             />
-                            <label style={{ marginTop: "10px" }} className='re-input-label' htmlFor="">  Use shipping address as return address *</label>
+                            <label style={{ marginTop: "10px",cursor:"pointer" }} className='re-input-label' htmlFor="lost-password">  Use shipping address as return address</label>
 
                         </div>
                     </div>
@@ -742,6 +742,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                                     "governorateID"
                                 )}
                                 ref={fieldRefs.returnAddress.governorateID}
+                                style={{outline:"none",padding:"10px"}}
                             >
 
                                 <option value="">Select Governorate</option>
@@ -774,6 +775,7 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                                 )}
                                 disabled={!villages.length}
                                 ref={fieldRefs.returnAddress.villageID}
+                                style={{outline:"none",padding:"10px"}}
                             >
 
                                 <option value="">Select Wilayat</option>
@@ -1019,12 +1021,12 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
                 </div>
 
 
-                <div style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "10px" }} >
+                <div style={{ display: "flex", justifyContent: "end", alignItems: "center", gap: "10px",margin:"40px 0 " }} >
 
                     <div
                         href="/pages/cart"
-                        className="btn btn-block view-cart "
-                        style={{ border: "1px solid #000", background: "white", width: "231px", height: "52px" }}
+                        className="btn btn-block view-cart btn-outline-red "
+                        style={{  width: "231px", height: "52px" }}
                         onClick={() => { setIsOpen(false) }}
 
                     >
@@ -1034,12 +1036,11 @@ function ReturnForm({ orderId, setIsOpen, handleSubmit }) {
 
                     <div
 
-                        className="btn btn-block view-cart "
-                        style={{ border: "1px solid #000", background: "black", color: "white", width: "231px", height: "52px" }}
+                        className="btn btn-block view-cart hoverbtn"
+                        style={{ background: "black", color: "white", width: "231px", height: "52px" }}
                         onClick={handleOnSubmit}
-
                     >
-                        Accept
+                        Submit
                     </div>
 
                 </div>

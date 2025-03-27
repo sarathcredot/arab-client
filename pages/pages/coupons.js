@@ -138,7 +138,7 @@ function Account() {
     loading: cartLoading,
     error: cartError,
     refetch: cartRefetch,
-  } = useQuery(GET_CART, { skip: !token });
+  } = useQuery(GET_CART, { fetchPolicy:"network-only",skip: !token });
 
   useEffect(() => {
     if (cartError) {
@@ -263,7 +263,7 @@ function Account() {
 
               // <p>{data.description}  </p>
 
-              <button onClick={()=>handleApplyCoupon(data?.code)}  style={{width: "70px",height: "30px", display:"flex",marginLeft:"5px", justifyContent:"center", alignItems:"center"}} className="btn btn-block btn-dark "  > Apply </button>
+              <button onClick={()=>handleApplyCoupon(data?.code)}  style={{width: "70px",height: "30px", display:"flex",marginLeft:"5px", justifyContent:"center", alignItems:"center"}} className="btn btn-block btn-dark hoverbtn "  > Apply </button>
 
 
                     // <button onClick={()=>handleApplyCoupon(data?.code)}  className="coupon-btn btn btn-sm m-0"  > Apply </button>
@@ -284,7 +284,7 @@ function Account() {
         }
         </div>
         <div className="container pagination-container " >
-        <div className="d-flex justify-content-end mt-0 ">
+        <div className="d-flex justify-content-end mt-2 mb-5 ">
               <ul className="pagination">
                 <li className={`page-item ${currentPage === 0 ? "disabled" : ""}`}>
                   <button

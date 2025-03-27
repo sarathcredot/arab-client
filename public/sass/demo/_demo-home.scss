@@ -275,7 +275,10 @@ hr {
     i:before {
         font-weight: 800;
     }
-
+    [class*='owl-']:not(.disabled){
+        background: #F8F8F8;
+        color: #000;
+    }
     [class*='owl-']:not(.disabled):hover {
         background: black;
         color: white;
@@ -1859,6 +1862,9 @@ color:red
 
     .address_box{
         border:1px solid #CDCDCD;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         padding:20px ;
     }
     .address_btns{
@@ -1871,8 +1877,9 @@ color:red
     }
 }
 .address_btns{
+    margin-top: auto;
         display: flex;
-        align-items:center;
+        align-items:end;
         justify-content: end;
         gap: 10px;
         height: 40px;

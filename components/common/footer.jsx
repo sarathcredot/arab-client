@@ -208,7 +208,7 @@ function Footer() {
               <div className="footer-sub">
                 <h6 style={{ letterSpacing: "0.75px" }}>IMPORTANT LINKS</h6>
                 <Link href="/pages/privacy-policy"><span>Privacy & Policy</span></Link>
-                <span>Become a Seller</span>
+                <Link target="_blank" href={`${process.env.NEXT_PUBLIC_VENDOR_URI}/become-a-seller`}><span>Become a Seller</span></Link>
                 {/* <span>Orders</span> */}
                 {/* <span>Orders History</span>
   <span>Rhoncus</span> */}

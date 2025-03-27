@@ -196,7 +196,7 @@ function CartMenu({ props }) {
 
 
   return (
-    <div className="dropdown cart-dropdown">
+    <div className="dropdown cart-dropdown" style={{zIndex:999}}>
       <a
         href="#"
         title="Cart"
@@ -316,7 +316,7 @@ function CartMenu({ props }) {
                           filter:
                             "drop-shadow(1px 1px 6px rgba(0, 0, 0, 0.11))",
                         }}
-                        className="hoverinto"
+                        className="hoverinto badge_hover"
                         onClick={(e) => {
                           e.preventDefault();
                           removeCart(cart.productId, index);
@@ -357,7 +357,7 @@ function CartMenu({ props }) {
                   localStorage.getItem("arabtoken") &&
                   <div
                     href="/pages/checkout"
-                    className="btn btn-dark btn-block text-white hoverbtn"
+                    className="btn btn-dark btn-block text-white  mt-1 hoverbtn"
                     onClick={() => router.push("/pages/checkout")}
                   >
                     Checkout

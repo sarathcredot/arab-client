@@ -92,7 +92,7 @@ const options = {
   startPosition: 0,
   URLhashListener: false,
   nav: true,
-  rewind: false, 
+  rewind: true, 
   navText: [
       '<button style="background-color: white; border: 2px solid rgb(240, 240, 240);   margin: 10px -12px; padding:2.8px  5px; outline: none; cursor: pointer; position:relative; left:-50px;" ><i class="icon-angle-left" style="color: black;   margin: 12px ;"></i></button>',
       '<button style="background-color: white; border: 2px solid rgb(240, 240, 240);  margin: 10px -12px; padding:2.8px  5px; outline: none; cursor: pointer;position:relative; right:-50px;" ><i class="icon-angle-right" style="color: black;   margin: 12px ;"></i></button>'

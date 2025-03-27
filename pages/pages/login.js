@@ -259,7 +259,7 @@ function Login({ mutate }) {
                           {otperror && <div style={{ color: "red",marginTop:10 }}>{otperror}</div>}
                         <button
                           type="submit"
-                          className="btn btn-dark btn-md "
+                          className="btn btn-dark btn-md hoverbtn"
                           style={{ marginTop: "20px", fontWeight: "normal" }}
                           onClick={handleVerifyOTP}
                         >

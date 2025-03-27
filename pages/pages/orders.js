@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { MdMoreVert } from "react-icons/md";
+import { MdDownload } from "react-icons/md";
 
 import ALink from "../../components/common/ALink";
 import { toast } from "react-toastify";
@@ -22,6 +24,7 @@ import ReturnForm from "../../components/features/adresses/ReturnForm";
 import WarrantyForm from "../../components/features/adresses/WarrantyReqForm"
 import { Controller } from "react-hook-form";
 import Link from "next/link";
+import styles from "../../components/features/dropdown/Dropdown.module.scss";
 
 const GET_ORDERS = gql`
    query GetUserOrderProducts($input: GetUserOrderProductsInput!) {
@@ -207,7 +210,7 @@ function Orders(props) {
   const [termsAgreed, setTermsAgreed] = useState(false)
   const router = useRouter();
   const page = router.query.page ? parseInt(router.query.page) : 0;
-  const [perPage, setPerPage] = useState(5);
+  const [perPage, setPerPage] = useState(10);
   const [orderId, setorderId] = useState()
 
   const onMoveFromToWishlit = (e, item) => {
@@ -338,12 +341,11 @@ function Orders(props) {
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', 'invoice.pdf');
-      // link.setAttribute("target", "_blank");
+      link.setAttribute("target", "_blank");
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       }
-      window.open(url, "_blank");
     } catch (error) {
       toast.error(error.message);
     }
@@ -351,7 +353,20 @@ function Orders(props) {
 
   //=========================RETURN ORDER============================\\
   //Drop Down
+  const [openDropDown,setOpenDropDown] = useState(false)
+  const [openDropDownID,setOpenDropDownID] = useState("")
+  const toggleOpenDropDown = (open,itemID)=>{
+    if(open){
+      setOpenDropDown(true)
+      setOpenDropDownID(itemID)
+    }else{
+      setOpenDropDown(false)
+      setOpenDropDownID("")
+
+    }
+  }
   const [isOpen, setIsOpen] = useState("");
+
   const toggleDropdown = (e, itemId) => {
     setIsOpen((prev) => (itemId === prev ? "" : itemId));
   };
@@ -521,7 +536,7 @@ function Orders(props) {
 
         <div className=" d-flex flex-column align-items-center">
           <ul
-            className="checkout-progress-bar d-flex justify-content-center flex-wrap"
+            className="checkout-progress-bar d-flex justify-content-center flex-wrap mb-0"
             style={{ backgroundColor: "#F9F9F9", width: "100%" }}
           >
             {/* <li className="active">
@@ -561,7 +576,7 @@ function Orders(props) {
 
             <>
 
-              <div
+              {/* <div
                 className="container"
                 style={{
                   marginTop: "2rem",
@@ -570,7 +585,7 @@ function Orders(props) {
                 }}
               >
                 <h4>Orders</h4>
-              </div>
+              </div> */}
               <div className="container">
                 <div className="success-alert">
                   {flag === 1 ? <p>Product successfully removed.</p> : ""}
@@ -581,7 +596,7 @@ function Orders(props) {
                     <h2>My wishlist on Porto Shop 36</h2>
                 </div> */}
                 {orders.length === 0 ? (
-                  <div className="wishlist-table-container">
+                  <div className="wishlist-table-container mb-0">
                     <div className="table table-wishlist mb-0">
                       <div className="wishlist-empty-page text-center">
                         <i class="fa fa-shopping-bag" aria-hidden="true"></i>
@@ -600,18 +615,18 @@ function Orders(props) {
                     <table className="table table-wishlist mb-0">
                       <thead>
                         <tr>
-                          <th
+                          <th style={{color:"#000"}}
                             className="thumbnail-col"
-                            style={{ paddingLeft: "0px" }}
+                            // style={{ paddingLeft: "0px" }}
                           >
                             Product
                           </th>
-                          <th className="status-col"></th>
-                          <th className="status-col">Order Id</th>
-                          <th className="status-col">Date</th>
-                          <th className="status-col">Status</th>
-                          <th className="price-col">Total Price</th>
-                          <th className="action-col"></th>
+                          <th style={{color:"#000"}} className="status-col"></th>
+                          <th style={{color:"#000"}} className="status-col">Order Id</th>
+                          <th style={{color:"#000"}} className="status-col">Date</th>
+                          <th style={{color:"#000"}} className="status-col">Status</th>
+                          <th style={{color:"#000"}} className="price-col">Total Price</th>
+                          <th style={{color:"#000",width:"100px"}} className="action-col"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -645,8 +660,8 @@ function Orders(props) {
                                 style={{ fontWeight: "600" }}
                               >
                                 <ALink href={`/product/default/${item.productId}`}>
-                                  {item.productName.split(" ").slice(0, 4).join(" ")}
-                                  ...
+                                  {item.productName.length>20?item.productName.slice(0, 20)+"...":item.productName}
+                                  
                                 </ALink>
                               </h5>
                             </td>
@@ -665,7 +680,7 @@ function Orders(props) {
                               <div className="price-box">
                                 <>
                                   {/* <span className="old-price">{'OMR ' + item.price[ 1 ].toFixed( 2 ) }</span> */}
-                                  <span className="product-price">
+                                  <span className="product-price" style={{color:"#000"}}>
                                     OMR{" "}
                                     {parseFloat(
                                       Number(item.sellingPrice) +
@@ -676,7 +691,82 @@ function Orders(props) {
                               </div>
                             </td>
                             <td>
-                              <Dropdown
+                              <div className="order_dropDown">
+
+                            <button
+                              // className={`${styles.dropdownButton} dropdown_button`}
+                              onClick={() => toggleOpenDropDown(openDropDownID===item?.itemId?false:true,item?.itemId)}
+                              style={{border:"none",height:"37px",width:"37px",borderRadius:"5px",cursor:"pointer"}}
+                            >
+                              <MdMoreVert  size={24} />
+                            </button>
+                            {openDropDown&& openDropDownID===item?.itemId ?
+                            <div className="header-menu">
+                              <ul className="" style={{listStyle:"none",margin:0}}>
+                                {item?.shippingStatus !== "DELIVERED" && item?.shippingStatus !== "CANCELED"&&
+                                  <li 
+                                    onClick={()=>{
+                                      setCancelId(item._id);
+                                        setshowCancelPopup(true);
+                                        setOpenDropDown(false)
+                                        setOpenDropDownID("")
+                                    }}
+                                  >
+                                    Cancel
+                                  </li>
+                                }
+                                {item?.shippingStatus === "DELIVERED" && item?.returnStatus === "NA" &&
+                                  <li 
+                                    onClick={()=>{
+                                      setShowPolicyModal(true);
+                                      setOrderProductIdForReturn(item?._id);
+                                      setOrderIdForReturn(item?.orderId);
+                                      setmodalType("return");
+                                      setdeliveryDate(item?.deliveryDate);
+                                      setOpenDropDown(false)
+                                      setOpenDropDownID("")
+                                    }}
+                                  >
+                                    Return
+                                  </li>
+                                }
+                                {item?.shippingStatus === "DELIVERED" && item?.warranty?.warrantyRegister === true&&
+                                  <li onClick={()=>{
+                                    if (
+                                      item.warrantyClaimStatus === null ||
+                                      item.warrantyClaimStatus === "REJECTED" ||
+                                      item.warrantyClaimStatus === "REPLACEMENT_COMPLETED"
+                                    ) {
+                                      setShowPolicyModal(true);
+                                      setOrderProductIdForReturn(item?._id);
+                                      setOrderIdForReturn(item?.orderId);
+                                      setmodalType("complaint");
+                                      setdeliveryDate(item?.deliveryDate);
+                                      setOpenDropDown(false)
+                                      setOpenDropDownID("")
+                                    }
+                                    return;
+                                  }}>
+                                    Complaint
+                                  </li>
+                                }
+                                <li onClick={()=> {
+                                  if (item?.invoice) {
+                                    handleDownload(item._id);
+                                    setOpenDropDown(false)
+                                    setOpenDropDownID("")
+                                  }
+                                }} style={item?.invoice ? {} : { pointerEvents: "none", opacity: 0.5, color: "gray" }}>
+                                  <MdDownload size={20} />
+                                  Invoice
+                                </li>
+                              
+
+                              </ul>
+                            </div>:null
+                            }
+                                </div>
+                              {/* <Dropdown
                                 toggleDropdown={toggleDropdown}
                                 itemId={item?.itemId}
                                 isOpen={isOpen}
@@ -687,47 +777,18 @@ function Orders(props) {
                                     item?.shippingStatus !== "CANCELED" ? (
                                     <div
                                       className="order_update_menu_item"
-                                      title="Quick View"
+                                      title="Cancel the product"
                                       onClick={(e) => {
                                         console.log("Item ID:", item._id);
                                         e.preventDefault();
-                                        setshowCancelPopup(true);
                                         setCancelId(item._id);
+                                        setshowCancelPopup(true);
                                       }}
                                     >
                                       Cancel
                                     </div>
                                   ) : (
                                     <>
-                                      {/* {item?.shippingStatus !== "PENDING" &&
-                                  item?.invoice && (
-                                    <div
-                                      className="order_update_menu_item "
-                                      title="Quick View"
-                                      style={{ border: "1px solid" }}
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                        handleDownload(item._id);
-                                        setIsOpen(false)
-                                      }}
-                                    >
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="1em"
-                                        height="1em"
-                                        viewBox="0 0 24 24"
-                                        style={{
-                                          marginRight: "5px",
-                                        }}
-                                      >
-                                        <path
-                                          fill="white"
-                                          d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z"
-                                        />
-                                      </svg>
-                                      Invoice
-                                    </div>
-                                  )} */}
                                       {item?.shippingStatus === "DELIVERED" && item?.returnStatus === "NA" && (
                                         <div
                                           className="order_update_menu_item"
@@ -805,42 +866,6 @@ function Orders(props) {
                                         )
 
                                       }
-
-
-                                      {/* {!item?.invoice ? (
-                                  <div
-                                    className="order_update_menu_item"
-                                    disabled
-                                  >
-                                    Cancel
-                                  </div>
-                                ) : (
-                                  <div
-                                    className="order_update_menu_item "
-                                    title="Quick View"
-                                    style={{ border: "1px solid" }}
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      handleDownload(item._id);
-                                    }}
-                                  >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="1em"
-                                      height="1em"
-                                      viewBox="0 0 24 24"
-                                      style={{
-                                        marginRight: "5px",
-                                      }}
-                                    >
-                                      <path
-                                        fill="white"
-                                        d="M5 20h14v-2H5zM19 9h-4V3H9v6H5l7 7z"
-                                      />
-                                    </svg>
-                                    Invoice
-                                  </div>
-                                )} */}
                                     </>
                                   )}
                                   <button
@@ -879,14 +904,8 @@ function Orders(props) {
                                     </svg>
                                     Invoice
                                   </button>
-
-                                  {/* <div className="order_update_menu_item">Cancel</div>
-                            <div className="order_update_menu_item">Return</div>
-                            <div className="order_update_menu_item">
-                              Invoice
-                            </div> */}
                                 </div>
-                              </Dropdown>
+                              </Dropdown> */}
                             </td>
                           </tr>
                         ))}
@@ -959,12 +978,12 @@ function Orders(props) {
                                     setshowCancelPopup(false);
                                     setCancelId(null);
                                   }}
-                                  className="btn btn-outline-danger"
+                                  className="btn btn-outline-red "
                                 >
                                   CANCEL
                                 </button>
                                 <button
-                                  className="btn btn-dark"
+                                  className={`btn btn-dark ${termsAgreed&&"hoverbtn"}`}
                                   onClick={() => orderCancel(cancelId)}
                                   disabled={!termsAgreed}
                                 >
