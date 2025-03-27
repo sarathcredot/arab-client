@@ -324,35 +324,66 @@ function Orders(props) {
     }
   };
 
-  const handleDownload = async (_id) => {
-    try {
-      const invoice = await downloadInvoice({
-        variables: {
-          input: {
-            _id,
-          },
-        },
-      });
+  // const handleDownload = async (_id) => {
+  //   try {
+  //     const invoice = await downloadInvoice({
+  //       variables: {
+  //         input: {
+  //           _id,
+  //         },
+  //       },
+  //     });
 
-      const url = invoice.data.getUserIvoiceSignedUrl.url;
-      console.log("invoice", url);
-      if (url) {
+  //     const url = invoice.data.getUserIvoiceSignedUrl.url;
+  //     console.log("invoice", url);
+  //     // if (url) {
 
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'invoice.pdf');
-        link.setAttribute("target", "_blank");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+  //     //   const link = document.createElement('a');
+  //     //   link.href = url;
+  //     //   link.setAttribute('download', 'invoice.pdf');
+  //     //   link.setAttribute("target", "_blank");
+  //     //   document.body.appendChild(link);
+  //     //   link.click();
+  //     //   document.body.removeChild(link);
+  //     // }
+  //   } catch (error) {
+  //     toast.error(error.message);
+  //   }
+  // };
 
   //=========================RETURN ORDER============================\\
   //Drop Down
+
+
+  const handleDownload = async (_id) => {
+    try {
+      const invoice = await downloadInvoice({
+        variables: { input: { _id } },
+      });
+
+      const url = invoice.data.getUserIvoiceSignedUrl.url;
+      console.log("Fetching invoice from:", url);
+
+      const response = await fetch(url, { method: "GET", mode: "cors" }); // Add CORS mode
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.setAttribute("download", "invoice.png"); // Ensure correct file extension
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Download failed:", error);
+      toast.error("Failed to download invoice: " + error.message);
+    }
+  };
+
+
   const [openDropDown, setOpenDropDown] = useState(false)
   const [openDropDownID, setOpenDropDownID] = useState("")
   const toggleOpenDropDown = (open, itemID) => {
