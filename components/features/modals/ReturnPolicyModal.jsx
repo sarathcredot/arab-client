@@ -186,26 +186,47 @@ query GetWarrantyPolicyOfOrderProduct($input: getWarrantyPolicyOfOrderProductInp
 
       if (data) {
 
-        console.log("return policy data", data?.getWarrantyPolicyOfOrderProduct)
+        console.log("warranty policy data", data?.getWarrantyPolicyOfOrderProduct)
         console.log("product delivery data", deliveryDate)
         setreturnPolicy(data?.getWarrantyPolicyOfOrderProduct)
         cliamType(data?.getWarrantyPolicyOfOrderProduct?.warrantyType)
 
 
-        const convertData = new Date(deliveryDate)
+        // const convertData = new Date(deliveryDate)
+        // const today = new Date();
+        // today.setHours(0, 0, 0, 0);
+        // convertData.setHours(0, 0, 0, 0);
+        // const differenceInTime = today - convertData;
+        // const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
+
+        // console.log("data gap", flag)
+
+
+
+        // if (differenceInDays > data?.getWarrantyPolicyOfOrderProduct?.duration) {
+
+        //   setflag(false)
+        // }
+
+        const convertData = new Date(deliveryDate);
         const today = new Date();
+
+        // Reset hours to ignore time differences
         today.setHours(0, 0, 0, 0);
         convertData.setHours(0, 0, 0, 0);
+
+        // Calculate the difference in days
         const differenceInTime = today - convertData;
         const differenceInDays = differenceInTime / (1000 * 60 * 60 * 24);
 
-        console.log("data gap", flag)
+        // Convert warranty period from months to days (assuming 30 days per month)
+        const warrantyMonths = data?.getWarrantyPolicyOfOrderProduct?.duration || 0;
+        const warrantyDays = warrantyMonths * 30; // Approximate month to days conversion
 
+        console.log("data gap",warrantyMonths, warrantyDays);
 
-
-        if (differenceInDays > data?.getWarrantyPolicyOfOrderProduct?.duration) {
-
-          setflag(false)
+        if (differenceInDays > warrantyDays) {
+          setflag(false);
         }
 
 
@@ -482,11 +503,11 @@ query GetWarrantyPolicyOfOrderProduct($input: getWarrantyPolicyOfOrderProductInp
                             <div
                               href="/pages/cart"
                               className="btn btn-block view-cart "
-                              style={{ border: "1px solid #000",display:"flex" , justifyContent:"end", background: "white", width: "300px", height: "52px" }}
+                              style={{ border: "1px solid #000", display: "flex", justifyContent: "end", background: "white", width: "300px", height: "52px" }}
                               onClick={closeModal}
                             >
 
-                           This product is out of warranty
+                              This product is out of warranty
 
                             </div>
 

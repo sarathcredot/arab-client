@@ -181,7 +181,7 @@ function ProductDefault() {
         >
           <div className="product-single-container product-single-default">
             <div className="row product-detail-row">
-              <ProductMediaOne product={product} />
+              {/* <ProductMediaOne product={product} /> */}
 
               <ProductDetailOne
                 product={product}

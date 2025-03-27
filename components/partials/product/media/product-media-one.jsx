@@ -111,7 +111,7 @@ export default function ProductMediaOne(props) {
                                 {
                                     product.images.map((item, index) => (
                                         <div className="owl-dot media-with-lazy" key={`owl-dot-${index}`} onClick={(e) => changeMediaIndex(index, e)} >
-                                            <figure className="product-image-container mb-0" style={{ paddingTop: "0px"}}>
+                                            <figure className="product-image-container mb-0" style={{ paddingTop: "0px" }}>
                                                 <LazyLoadImage src={item.fileURL}
                                                     alt="Thumbnail"
                                                     width="100%"
