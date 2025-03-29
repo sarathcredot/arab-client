@@ -197,7 +197,7 @@ function Account() {
 
       </main>
 
-      <div className="container  custom-account-container account-container " style={{ marginBottom: "0px" }} >
+      <div className="container  custom-account-container account-container " style={{ marginBottom: "10px" }} >
         <Tabs
           selectedTabClassName="active"
           selectedTabPanelClassName="active show"
@@ -205,11 +205,6 @@ function Account() {
           className="tab"
         >
           <div className="row" style={{ marginLeft: "0px", marginRight: "0px" }}>
-            <div className="col-12 order-0">
-              {/* StickyBox and Tab navigation code */}
-              {/* Uncomment and use this code if needed */}
-            </div>
-
             <div className="col-12 container order-1 tab-content mb-2">
               <TabPanel className="tab-pane fade" id="dashboard">
                 <div className="dashboard-content">

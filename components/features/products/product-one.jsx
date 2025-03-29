@@ -178,6 +178,10 @@ function ProductOne(props) {
       <figure style={props.customStyle && { paddingTop: props.customStyle }}>
         <ALink href={`/product/default/${product?._id}`}>
           {/* <div className="lazy-overlay"></div> */}
+          {product?.stock < 1&&
+          <p className="badge-danger p-1 px-2 " style={{position:"absolute",top:0,left:0,fontWeight:"normal"}}>out of stock</p>
+          }
+
           <div
             style={{
               display: "flex",

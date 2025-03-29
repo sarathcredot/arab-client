@@ -36,7 +36,7 @@ function BrandSection() {
             <Reveal  keyframes={fadeIn} delay={200} duration={500} triggerOnce>
                 <h4 className="section-title text-transform-none"style={{ borderBottom: "1px solid #EEE", paddingBottom: "15px" }}>Top Brands</h4>
 
-                <OwlCarousel  adClass="nav-circle mt-2" options={brandSlider} >
+                <OwlCarousel  adClass="nav-circle mt-3 mb-4" options={brandSlider} >
                     {brndData && brndData.getAllTopBrandRecords.records.map((brand, index) => (
                         <figure key={index} className="circular-image" style={{
                             justifyContent: "center", display: "flex", alignItems: "center", cursor: "pointer"

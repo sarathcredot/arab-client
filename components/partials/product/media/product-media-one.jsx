@@ -85,10 +85,10 @@ export default function ProductMediaOne(props) {
                                 {isSale() ? <div className="product-label label-sale">{isSale()}</div> : ''}
                             </div>
 
-                            <OwlCarousel adClass="product-single-carousel owl-carousel owl-theme show-nav-hover" options={productSingleSlider} events={events} onChangeRef={setMediaRef} redraw={redraw} >
+                            <OwlCarousel adClass="product-single-carousel owl-carousel owl-theme show-nav-hover p-0" options={productSingleSlider} events={events} onChangeRef={setMediaRef} redraw={redraw} >
                                 {
                                     product.images.map((item, index) => (
-                                        <div className="product-item" key={`product-item-${index}`}>
+                                        <div className="product-item " key={`product-item-${index}`}>
                                             <Magnifier
                                                 style={{ paddingTop: "100%", position: "relative", height: "auto !important" }}
                                                 imageSrc={item.fileURL}
@@ -96,7 +96,7 @@ export default function ProductMediaOne(props) {
                                                 mouseActivation="hover"
                                                 cursorStyleActive="crosshair"
                                                 dragToMove={false}
-                                                className="product-single-image"
+                                                className="product-single-image "
 
                                             />
                                         </div>
@@ -110,13 +110,13 @@ export default function ProductMediaOne(props) {
                             <OwlCarousel adClass="prod-thumbnail owl-theme owl-dots" options={prodThumbSlider} >
                                 {
                                     product.images.map((item, index) => (
-                                        <div className="owl-dot media-with-lazy" key={`owl-dot-${index}`} onClick={(e) => changeMediaIndex(index, e)} >
-                                            <figure className="product-image-container mb-0" style={{ paddingTop: "0px" }}>
+                                        <div className="owl-dot media-with-lazy p-0" key={`owl-dot-${index}`} onClick={(e) => changeMediaIndex(index, e)} >
+                                            <figure className="product-image-container mb-0" style={{ padding: "0px" }}>
                                                 <LazyLoadImage src={item.fileURL}
                                                     alt="Thumbnail"
                                                     width="100%"
                                                     height="100%"
-                                                    className="d-block"
+                                                    className="d-block p-0"
                                                     style={{ height: "100%" }}
 
                                                 />

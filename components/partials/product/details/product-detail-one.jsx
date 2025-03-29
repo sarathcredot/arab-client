@@ -991,7 +991,7 @@ function ProductDetailOne(props) {
                           textTransform:"capitalize"
                         }}
                       >
-                        {uniqueAttributeName} &nbsp;
+                        {uniqueAttributeName} &nbsp; 
                       </label>
                       <ul className="config-size-list " style={{ marginTop: "5px" }}>
                         {variantData
@@ -1010,7 +1010,7 @@ function ProductDetailOne(props) {
                                 : ""
                                 } ${!isDisabled(
 
-                                  item?.attributeValue
+                                  item?.attributeValue 
                                 )
                                   // ? "strikethrough"
                                   ? ""
@@ -1050,11 +1050,13 @@ function ProductDetailOne(props) {
 
                                   }
                                   style={{
-                                    fontWeight: "600",
+                                    fontWeight: "normal",
                                     fontSize: "12px",
                                     lineHeight: "15px",
                                     // color: "#292D32",
-                                    marginRight: "5px",
+                                    marginRight: "10px",
+                                    padding:"0 15px",
+                                    minWidth:"80px"
                                     // color:`${  isDisabled(item.attributeDescription, item.attributeValue)? "blue":"black"}`
                                   }}
                                 >

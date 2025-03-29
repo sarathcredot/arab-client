@@ -205,7 +205,7 @@ function CartMenu({ props }) {
       >
         <div className={styles.circle}>
           {/* <img src="/images/icon/cart.svg" alt="cart" /> */}
-          <HiMiniShoppingBag size={20} />
+          <HiMiniShoppingBag size={19} />
 
         </div>
         {/* <i className="icon-cart-thick"></i> */}
@@ -366,7 +366,21 @@ function CartMenu({ props }) {
               </div>
             </>
           ) : (
-            <p className="pt-3 mt-2">No products in the cart.</p>
+            // <p className="pt-3 mt-2">No products in the cart.</p>
+            // <div className="cart-table-container ">
+            //   <div className="table table-cart">
+                <div className="cart-empty-page text-center d-flex flex-column align-items-center justify-content-center" style={{minHeight:"80%"}}>
+                  <i className="icon-bag-2"></i>
+                  <p>No products added to the cart</p>
+                  <ALink
+                    href="/shop"
+                    className="btn btn-dark product-type-simple btn-shop text-white hoverbtn"
+                  >
+                    go to shop
+                  </ALink>
+                </div>
+            //   </div>
+            // </div>
           )}
         </div>
       </div>

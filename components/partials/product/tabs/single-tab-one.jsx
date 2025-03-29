@@ -1,111 +1,131 @@
-import React, { useState } from 'react';
-import ALink from '../../../common/ALink';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import React, { useState } from "react";
+import ALink from "../../../common/ALink";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 export default function SingleTabOne(props) {
-    const { adClass = "", product } = props;
+  const { adClass = "", product } = props;
 
-    function activeHandler(e) {
-        e.preventDefault();
-        document.querySelector('.add-product-review .active') && document.querySelector('.add-product-review .active').classList.remove('active');
-        e.currentTarget.classList.add('active');
-    }
+  function activeHandler(e) {
+    e.preventDefault();
+    document.querySelector(".add-product-review .active") &&
+      document.querySelector(".add-product-review .active").classList.remove("active");
+    e.currentTarget.classList.add("active");
+  }
 
-    const [activeTab, setActiveTab] = useState(0); // Initialize the active tab
+  const [activeTab, setActiveTab] = useState(0); // Initialize the active tab
 
-    function activeHandler(e, tabIndex) {
-        e.preventDefault();
-        setActiveTab(tabIndex); // Update the active tab when a tab is clicked
-    }
+  function activeHandler(e, tabIndex) {
+    e.preventDefault();
+    setActiveTab(tabIndex); // Update the active tab when a tab is clicked
+  }
 
-    return (
-        <>
-            <div className="skel-pro-tabs"></div>
-            {
-                product &&
-                <Tabs   className={`product-single-tabs  ${adClass}`} selectedTabClassName="active" selectedTabPanelClassName="show" >
-                    <TabList  className="nav nav-tabs">
-                        <Tab className="nav-item">
-                            <ALink href="#" className="nav-link product_detail_tab" style={{ fontFamily: "Poppines"}}>Overview</ALink>
-                        </Tab>
+  return (
+    <>
+      <div className="skel-pro-tabs"></div>
+      {product && (
+        <Tabs
+          className={`product-single-tabs  ${adClass} mb-9`}
+          selectedTabClassName="active"
+          selectedTabPanelClassName="show"
+        >
+          <TabList className="nav nav-tabs">
+            <Tab className="nav-item">
+              <ALink
+                href="#"
+                className="nav-link product_detail_tab"
+                style={{ fontFamily: "Poppines" }}
+              >
+                Overview
+              </ALink>
+            </Tab>
 
-                        <Tab className="nav-item">
-                            <ALink href="#" className="nav-link product_detail_tab" style={{ fontFamily: "Poppines" }}>Specifications</ALink>
-                        </Tab>
+            <Tab className="nav-item">
+              <ALink
+                href="#"
+                className="nav-link product_detail_tab"
+                style={{ fontFamily: "Poppines" }}
+              >
+                Specifications
+              </ALink>
+            </Tab>
 
-                        <Tab className="nav-item">
-                            <ALink href="#" className="nav-link product_detail_tab" style={{ fontFamily: "Poppines" }}>Return Policy</ALink>
-                        </Tab>
-                        {product?.warrantyPolicyData.name !==null && 
-                            <Tab className="nav-item">
-                            <ALink href="#" className="nav-link product_detail_tab" style={{ fontFamily: "Poppines" }}>Warranty Policy</ALink>
-                           </Tab>
-                        }
-                        
+            <Tab className="nav-item">
+              <ALink
+                href="#"
+                className="nav-link product_detail_tab"
+                style={{ fontFamily: "Poppines" }}
+              >
+                Return Policy
+              </ALink>
+            </Tab>
+            {product?.warrantyPolicyData.name !== null && (
+              <Tab className="nav-item">
+                <ALink
+                  href="#"
+                  className="nav-link product_detail_tab"
+                  style={{ fontFamily: "Poppines" }}
+                >
+                  Warranty Policy
+                </ALink>
+              </Tab>
+            )}
 
-                        {/* <Tab className="nav-item">
+            {/* <Tab className="nav-item">
                             <ALink href="#" className="nav-link">Additional Information</ALink>
                         </Tab>
 
                         <Tab className="nav-item">
                             <ALink href="#" className="nav-link">Reviews ({ product.reviews })</ALink>
                         </Tab> */}
-                    </TabList>
+          </TabList>
 
+          <TabPanel className="tab-pane fade">
+            <p
+              style={{
+                marginBottom: "9px",
+                letterSpacing: 0,
+                listStyleType: "disc",
+                color: "#000",
+                fontFamily: "Poppins",
+                fontSize: "1.4rem",
+                fontStyle: "normal",
+                fontWeight: "400",
+                lineHeight: "2.375rem",
+              }}
+            >
+              {product?.description}
+            </p>
 
+            {product&& product?.productDetailImages.length>0 && (
+              <div
+                className="container"
+                style={{ marginTop: "79px" }}
+              >
+                {product?.productDetailImages.length &&
+                  product?.productDetailImages?.map((image, index) => (
+                    <div key={index}>
+                      <img
+                        src={image.fileURL}
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                    </div>
+                  ))}
+              </div>
+            )}
+          </TabPanel>
 
-                    <TabPanel className="tab-pane fade">
+          <TabPanel className="tab-pane fade">
+            <div className="product-desc-content">
+              {/* <p>{product.short_description}</p> */}
+              <ul>
+                {product?.productInfo?.map((item, index) => {
+                  return <li key={index}>{item}</li>;
+                })}
+              </ul>
+              {/* <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p> */}
+            </div>
 
-                        <p style={{
-                            marginBottom: "9px",
-                            letterSpacing: 0,
-                            listStyleType: "disc",
-                            color: "#000",
-                            fontFamily: "Poppins",
-                            fontSize: "1.4rem",
-                            fontStyle: "normal",
-                            fontWeight: "400",
-                            lineHeight: "2.375rem",
-                        }}>
-                            {product?.description}
-                        </p>
-
-                        <div className="container" style={{ marginTop: "79px" }} >
-
-                            {product && product?.productDetailImages?.map((image, index) => (
-                                <div key={index}>
-                                    <img
-                                        src={image.fileURL}
-                                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                                    />
-                                </div>
-                            ))}
-
-
-
-
-
-
-                        </div>
-                    </TabPanel>
-
-
-                    <TabPanel className="tab-pane fade">
-
-
-                        <div className="product-desc-content">
-                            {/* <p>{product.short_description}</p> */}
-                            <ul>
-                                {product?.productInfo?.map((item, index) => {
-                                    return <li key={index}>{item}</li>;
-                                })}
-
-
-                            </ul>
-                            {/* <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p> */}
-                        </div>
-
-                        {/* <div className='container' style={{ padding: "15px" }}>
+            {/* <div className='container' style={{ padding: "15px" }}>
                             <div
 
                             >
@@ -117,73 +137,71 @@ export default function SingleTabOne(props) {
                             </div>
 
                         </div> */}
-                    </TabPanel>
+          </TabPanel>
 
-                    <TabPanel className="tab-pane fade">
-                        <h1
-                        style={{
-                            letterSpacing: 0,
-                            color: "#000",
-                            fontFamily: "Poppins",
-                            fontSize: "1.8rem",
-                            fontStyle: "normal",
-                            fontWeight: "500",
-                            
-                        }}
-                        >{product?.returnPolicyData.name}</h1>
+          <TabPanel className="tab-pane fade">
+            <h1
+              style={{
+                letterSpacing: 0,
+                color: "#000",
+                fontFamily: "Poppins",
+                fontSize: "1.8rem",
+                fontStyle: "normal",
+                fontWeight: "500",
+              }}
+            >
+              {product?.returnPolicyData.name}
+            </h1>
 
-                    <p style={{
-                            marginBottom: "25px",
-                            marginTop:"20px",
-                            letterSpacing: 0,
-                            listStyleType: "disc",
-                            color: "#000",
-                            fontFamily: "Poppins",
-                            fontSize: "1.4rem",
-                            fontStyle: "normal",
-                            fontWeight: "400",
-                            lineHeight: "2.375rem",
-                        }}>
-                            {product?.returnPolicyData.description}
-                        </p>
+            <p
+              style={{
+                marginTop: "20px",
+                letterSpacing: 0,
+                listStyleType: "disc",
+                color: "#000",
+                fontFamily: "Poppins",
+                fontSize: "1.4rem",
+                fontStyle: "normal",
+                fontWeight: "400",
+                lineHeight: "2.375rem",
+              }}
+            >
+              {product?.returnPolicyData.description}
+            </p>
+          </TabPanel>
 
-                    
-                    </TabPanel>
+          <TabPanel className="tab-pane fade">
+            <h1
+              style={{
+                letterSpacing: 0,
+                color: "#000",
+                fontFamily: "Poppins",
+                fontSize: "1.8rem",
+                fontStyle: "normal",
+                fontWeight: "500",
+              }}
+            >
+              {product?.warrantyPolicyData?.name}
+            </h1>
 
-                    <TabPanel className="tab-pane fade">
-                        <h1
-                        style={{
-                            letterSpacing: 0,
-                            color: "#000",
-                            fontFamily: "Poppins",
-                            fontSize: "1.8rem",
-                            fontStyle: "normal",
-                            fontWeight: "500",
-                            
-                        }}
-                        >{product?.warrantyPolicyData?.name}</h1>
+            <p
+              style={{
+                marginTop: "20px",
+                letterSpacing: 0,
+                listStyleType: "disc",
+                color: "#000",
+                fontFamily: "Poppins",
+                fontSize: "1.4rem",
+                fontStyle: "normal",
+                fontWeight: "400",
+                lineHeight: "2.375rem",
+              }}
+            >
+              {product?.warrantyPolicyData?.description}
+            </p>
+          </TabPanel>
 
-                    <p style={{
-                            marginBottom: "25px",
-                            marginTop:"20px",
-                            letterSpacing: 0,
-                            listStyleType: "disc",
-                            color: "#000",
-                            fontFamily: "Poppins",
-                            fontSize: "1.4rem",
-                            fontStyle: "normal",
-                            fontWeight: "400",
-                            lineHeight: "2.375rem",
-                        }}>
-                            {product?.warrantyPolicyData?.description}
-                        </p>
-
-                    
-                    </TabPanel>
-
-
-
-                    {/* <TabPanel className="tab-pane fade">
+          {/* <TabPanel className="tab-pane fade">
                         <div className="product-size-content">
                             <div className="row">
                                 <div className="col-md-4">
@@ -244,8 +262,7 @@ export default function SingleTabOne(props) {
                         </div>
                     </TabPanel> */}
 
-
-                    {/* <TabPanel className="tab-pane fade">
+          {/* <TabPanel className="tab-pane fade">
                         <table className="table table-striped mt-2">
                             <tbody>
                                 <tr>
@@ -271,7 +288,7 @@ export default function SingleTabOne(props) {
                         </table>
                     </TabPanel> */}
 
-                    {/* <TabPanel className="tab-pane fade">
+          {/* <TabPanel className="tab-pane fade">
                         <div className="product-reviews-content">
                             {
                                 product.reviews !== 0 ?
@@ -371,9 +388,8 @@ export default function SingleTabOne(props) {
                             </div>
                         </div>
                     </TabPanel> */}
-                </Tabs >
-            }
-        </>
-    );
+        </Tabs>
+      )}
+    </>
+  );
 }
-

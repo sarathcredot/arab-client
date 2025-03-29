@@ -213,7 +213,7 @@ function Header({ adClass = "", wishlist }) {
             <div className="header-right w-lg-max">
               <SearchForm />
               <div
-                className={`d-flex justify-content-center align-items-center ${styles.offerdiv}`}
+                className={`mr-4 d-flex justify-content-center align-items-center ${styles.offerdiv} `}
               >
                 <ALink href="/pages/offers" className="logo">
                   <img
@@ -304,9 +304,10 @@ function Header({ adClass = "", wishlist }) {
 
               {/* <ALink href="/pages/account" className="d-lg-block d-none"style={{borderLeft:"1px solid #EBEBEB",marginLeft: "20px"}}> */}
               {!token ?
-                <div className="header-user custom_userborder header-icon">
+                <div className="pl-5 header-user custom_userborder header-icon">
                   <div className={styles.circle} onClick={handleLog} >
-                    <BiSolidUser style={{ fontSize: "20px" }} />
+                    {/* <BiSolidUser style={{ fontSize: "20px" }} /> */}
+                    <img src="images/icon/vuesax/bold/frame.svg" style={{ width: "23px", height: "23px",margin:0 }}/>
                   </div>
 
                   {/* <div className="header-userinfo">
@@ -315,20 +316,21 @@ function Header({ adClass = "", wishlist }) {
                 </div> */}
                 </div> :
                 <div
-                  className="header-dropdown  custom_userborder header-icon"
+                  className="ml-5 header-dropdown  custom_userborder header-icon"
                 // style={{ marginLeft:"20px"}}
                 >
                   {/* <ALink href="#">
                   <img src="/images/british.svg"style={{width:"25px",height:"25px"}}></img>English
                 </ALink> */}
                   <div className={styles.circle} >
-                    <BiSolidUser style={{ fontSize: "20px" }} />
+                    {/* <BiSolidUser style={{ fontSize: "20px" }} /> */}
+                    <img src="images/icon/vuesax/bold/frame.svg" style={{ width: "23px", height: "23px",margin:0 }}/>
                   </div>
                   <div className="header-menu">
                     <ul className="account_dropdown" style={{listStyle:"none",margin:0,width:"150px"}}>
                       <li>
                         <ALink href="/pages/account">
-                          <img src="images/icon/vuesax/bold/frame.svg" style={{ width: "25px", height: "25px" }}></img>My Account
+                          <img src="images/icon/vuesax/bold/frame.svg" style={{ width: "25px", height: "25px" }}/>My Account
                         </ALink>
                       </li>
                       <li onClick={handleLogout}>
@@ -372,12 +374,12 @@ function Header({ adClass = "", wishlist }) {
 
               >
                   <div className={styles.circle}>
-                    <AiFillHeart style={{ fontSize: "20px" }} />
+                    <AiFillHeart style={{ fontSize: "19px" }} />
                   </div>
                   {/* <i className="icon-wishlist-2"></i> */}
                   {wishListData?.getWishListProducts.products.length>0&&
                   <span className="wishlist-count badge-circle">
-                    {wishListData?.getWishListProducts.products.length}
+                    {`${wishListData?.getWishListProducts.products.length>9?"9+":wishListData?.getWishListProducts.products.length}`}
                   </span>
                   }
                   </a>

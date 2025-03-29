@@ -726,7 +726,7 @@ function WarrantyReqForm({ orderId, setIsOpen, handleSubmit, claimType, orderObj
             justifyContent: "end",
             alignItems: "center",
             gap: "10px",
-            margin: "40px 0 ",
+            margin: "40px 0 85px",
           }}
         >
           <div

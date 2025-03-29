@@ -1181,7 +1181,7 @@ margin-bottom: -119px;
 		.nav-item.active {
 			.nav-link {
 				color: $primary-color-dark;
-				font-weight: 600;
+				font-weight: 900;
 			}
 		}
 	}
@@ -1194,6 +1194,7 @@ margin-bottom: -119px;
 		&:hover,
 		&.active {
 			border-bottom-color: $primary-color-dark;
+			font-weight: 900;
 		}
 	}
 

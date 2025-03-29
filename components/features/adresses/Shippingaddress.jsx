@@ -183,7 +183,9 @@ function Addresses({ isEdit,setIsEdit, addressId, onClose, isShipping, setIsship
             "shippingId",
             response?.data?.createUserShippingAddress?._id
           );
-          toast(<div style={{ padding: "10px" }}>Shipping address added</div>);
+          toast.success(
+            <div style={{ padding: "10px" }}>Shipping address added</div>
+          );
           onClose();
           reset();
         }

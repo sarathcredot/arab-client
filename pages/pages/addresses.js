@@ -197,7 +197,7 @@ function addresses() {
           padding: "2px",
           display:"flex",
           alignItems:"end",
-          justifyContent:"space-between"
+          justifyContent:"space-between",
         }}
       >
         <h2 className="step-title addresstitle">Address</h2>
@@ -226,7 +226,7 @@ function addresses() {
       ) : isShipping ? (<><Shipping isEdit={isEdit} setIsEdit={setIsedit} addressId={selectedAddressId} onClose={handleCloseShipping} setIsshipping={setIsshipping} isShipping={isShipping} /></>) : (
         <>
 
-        <div className="container ">
+        <div className="container " style={{marginBottom:"90px"}}>
           <div className="address_container">
           {data && data?.getUserShippingAddresses?.address.length > 0 ? data?.getUserShippingAddresses?.address.map((address, index) =>(
             <>
